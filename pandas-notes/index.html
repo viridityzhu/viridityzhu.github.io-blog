@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘： 0. 创建df： 1234567&gt;&gt;&gt; df &#x3D; pd.DataFrame(np.arange(16).reshape(4, 4), columns&#x3D;list(&amp;#x27;ABCD&amp;#x27;), index&#x3D;list(&amp;#x27">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pandas最基础的操作">
+<meta property="og:url" content="https://jyzhu.top/pandas-notes/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘： 0. 创建df： 1234567&gt;&gt;&gt; df &#x3D; pd.DataFrame(np.arange(16).reshape(4, 4), columns&#x3D;list(&amp;#x27;ABCD&amp;#x27;), index&#x3D;list(&amp;#x27">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-12T16:18:53.000Z">
+<meta property="article:modified_time" content="2021-07-30T16:20:40.586Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pandas">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jyzhu.top/pandas-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/pandas-notes/","path":"pandas-notes/","title":"Pandas最基础的操作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Pandas最基础的操作 | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-top"><a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>排行榜</a></li>
+        <li class="menu-item menu-item-notes"><a href="/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">69</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">152</span></a></li>
+        <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdf"><span class="nav-number">1.</span> <span class="nav-text">0. 创建df：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%8C%E5%88%97"><span class="nav-number"></span> <span class="nav-text">1. 删除行列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#drop%E5%88%A0%E9%99%A4%E8%A1%8C%E5%88%97"><span class="nav-number">0.1.</span> <span class="nav-text">1.1. drop删除行列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D"><span class="nav-number">0.2.</span> <span class="nav-text">1.2. 去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#del%E5%88%A0%E9%99%A4%E5%88%97"><span class="nav-number">0.3.</span> <span class="nav-text">1.3. del删除列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%A1%8C"><span class="nav-number"></span> <span class="nav-text">2. 增加行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#loc-at-set_value"><span class="nav-number">0.1.</span> <span class="nav-text">2.1. loc &#x2F; at &#x2F; set_value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#append"><span class="nav-number">0.2.</span> <span class="nav-text">2.2. append</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df.loc%E8%A1%8C%E5%8F%B7-xxx"><span class="nav-number">0.3.</span> <span class="nav-text">2.3. df.loc[行号] &#x3D; [x,x,x]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%A1%8C"><span class="nav-number">0.4.</span> <span class="nav-text">2.4. 插入行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%88%97"><span class="nav-number"></span> <span class="nav-text">3. 增加列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#df%E6%88%96%E8%80%85df.loc"><span class="nav-number">0.1.</span> <span class="nav-text">3.1. df[]或者df.loc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df.insert"><span class="nav-number">0.2.</span> <span class="nav-text">3.2. df.insert()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pd.concat"><span class="nav-number">0.3.</span> <span class="nav-text">3.3. pd.concat()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iloc%E5%92%8Cloc%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%BB%99%E5%88%97%E8%B5%8B%E5%80%BC"><span class="nav-number">0.4.</span> <span class="nav-text">3.4. iloc和loc遍历过程中给列赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df%E5%88%97%E5%8F%B7-xxx"><span class="nav-number">0.5.</span> <span class="nav-text">3.5. df[列号] &#x3D; [x,x,x]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-number">0.6.</span> <span class="nav-text">3.6. 其他方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%8C%E5%88%97"><span class="nav-number"></span> <span class="nav-text">4. 修改行列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataframe%E6%8B%BC%E6%8E%A5"><span class="nav-number"></span> <span class="nav-text">5. dataFrame拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E5%88%97%E5%90%8D"><span class="nav-number"></span> <span class="nav-text">6. 改列名</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">152</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/kayzhuep" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;kayzhuep" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/pandas-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Pandas最基础的操作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-05-13 00:18:53" itemprop="dateCreated datePublished" datetime="2021-05-13T00:18:53+08:00">2021-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/pandas-notes/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/pandas-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>4.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘：</p>
+<h3 id="创建df">0. 创建df：</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>df = pd.DataFrame(np.arange(<span class="number">16</span>).reshape(<span class="number">4</span>, <span class="number">4</span>), columns=<span class="built_in">list</span>(<span class="string">&#x27;ABCD&#x27;</span>), index=<span class="built_in">list</span>(<span class="string">&#x27;1234&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>df</span><br><span class="line">    A   B   C   D</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">3</span>   <span class="number">8</span>   <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<h2 id="删除行列">1. 删除行列</h2>
+<h4 id="drop删除行列">1.1. drop删除行列</h4>
+<p><code>inplace=True</code> 表示就地修改，如果不设置，则会创建副本返回</p>
+<p>通过行名删除：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df =df.drop([<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])      <span class="comment"># 不指定axis默认为0, 即“行”</span></span><br><span class="line">df.drop([<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>], inplace=<span class="literal">True</span>) <span class="comment"># inplace=True 就地修改</span></span><br></pre></td></tr></table></figure>
+<p>通过行号删除，传入参数是int、列表或切片：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.drop(df.index[<span class="number">0</span>], inplace=<span class="literal">True</span>)    <span class="comment"># 删除第1行</span></span><br><span class="line">df.drop(df.index[<span class="number">0</span>:<span class="number">3</span>], inplace=<span class="literal">True</span>)   <span class="comment"># 删除前3行</span></span><br><span class="line">df.drop(df.index[[<span class="number">0</span>, <span class="number">2</span>]], inplace=<span class="literal">True</span>) <span class="comment"># 删除第1第3行</span></span><br></pre></td></tr></table></figure>
+<p>通过列名删除：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.drop([<span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>], axis=<span class="number">1</span>)               <span class="comment"># drop不会就地修改，创建副本返回</span></span><br><span class="line">df.drop([<span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)      </span><br></pre></td></tr></table></figure>
+<p>通过列号删除：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.drop(df.columns[<span class="number">0</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)       <span class="comment"># 删除第1列</span></span><br><span class="line">df.drop(df.columns[<span class="number">0</span>:<span class="number">3</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)     <span class="comment"># 删除前3列</span></span><br><span class="line">df.drop(df.columns[[<span class="number">0</span>, <span class="number">2</span>]], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)  <span class="comment"># 删除第1第3列</span></span><br></pre></td></tr></table></figure>
+<h4 id="去重">1.2. 去重</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>df.loc[<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;B&#x27;</span>]=<span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>df</span><br><span class="line">    A   B   C   D</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">9</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">3</span>   <span class="number">8</span>   <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chooses = df[<span class="string">&#x27;B&#x27;</span>].drop_duplicates().index <span class="comment"># B列删除重复行后的索引</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>df.loc[chooses] <span class="comment"># 删除B列重复的行</span></span><br><span class="line">    A   B   C   D</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">9</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<h4 id="del删除列">1.3. del删除列</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> df[<span class="string">&#x27;A&#x27;</span>]  <span class="comment"># 删除A列，会就地修改</span></span><br></pre></td></tr></table></figure>
+<h2 id="增加行">2. 增加行</h2>
+<h4 id="loc-at-set_value">2.1. loc / at / set_value</h4>
+<p>想增加一行，行名为'5'，内容为[16, 17, 18, 19]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.loc[<span class="string">&#x27;5&#x27;</span>] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]    <span class="comment"># 后面的序列是Iterable就行</span></span><br><span class="line">df.at[<span class="string">&#x27;5&#x27;</span>] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br><span class="line">df.set_value(<span class="string">&#x27;5&#x27;</span>, df.columns, [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], takeable=<span class="literal">False</span>)    <span class="comment"># 过时</span></span><br></pre></td></tr></table></figure>
+<h4 id="append">2.2. append</h4>
+<p>添加有name的Series：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], index=df.columns, name=<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">df = df.append(s)</span><br></pre></td></tr></table></figure>
+<p>添加没有name的Series，必须<strong>ignore_index</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], index=df.columns)</span><br><span class="line">df = df.append(s, ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>可以 append字典列表，同样需要必须ignore_index：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls = [&#123;<span class="string">&#x27;A&#x27;</span>: <span class="number">16</span>, <span class="string">&#x27;B&#x27;</span>: <span class="number">17</span>, <span class="string">&#x27;C&#x27;</span>: <span class="number">18</span>, <span class="string">&#x27;D&#x27;</span>: <span class="number">19</span>&#125;, &#123;<span class="string">&#x27;A&#x27;</span>: <span class="number">20</span>, <span class="string">&#x27;B&#x27;</span>: <span class="number">21</span>, <span class="string">&#x27;C&#x27;</span>: <span class="number">22</span>, <span class="string">&#x27;D&#x27;</span>: <span class="number">23</span>&#125;]</span><br><span class="line">df = df.append(ls, ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="df.loc行号-xxx">2.3. df.loc[行号] = [x,x,x]</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.loc[<span class="built_in">len</span>(df)] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<p>len(df)生成的是最后一行行数，正好表示在最后一行增加。如果选择已经存在的行，会覆盖该行数据</p>
+<h4 id="插入行">2.4. 插入行</h4>
+<p>没有类似insert的方法，暂时替代方法可以先用reindex在行索引中增加一个索引，再给该索引对应的行赋值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.reindex(index=df.index.insert(<span class="number">2</span>, <span class="string">&#x27;5&#x27;</span>))</span><br><span class="line">df.loc[<span class="string">&#x27;5&#x27;</span>] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="增加列">3. 增加列</h2>
+<p>序列s = 列A+列C的5种方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = [a + c <span class="keyword">for</span> a, c <span class="keyword">in</span> <span class="built_in">zip</span>(df[<span class="string">&#x27;A&#x27;</span>], df[<span class="string">&#x27;C&#x27;</span>])]          </span><br><span class="line">s = [row[<span class="string">&#x27;A&#x27;</span>] + row[<span class="string">&#x27;C&#x27;</span>] <span class="keyword">for</span> i, row <span class="keyword">in</span> df.iterrows()]  <span class="comment"># 通过iterrows()获取序列，s为list</span></span><br><span class="line">s = df.apply(<span class="keyword">lambda</span> row: row[<span class="string">&#x27;A&#x27;</span>] + row[<span class="string">&#x27;C&#x27;</span>], axis=<span class="number">1</span>)  <span class="comment"># 通过apply获取序列，s为Series</span></span><br><span class="line">s = df[<span class="string">&#x27;A&#x27;</span>] + df[<span class="string">&#x27;C&#x27;</span>]                                  <span class="comment"># 通过Series矢量相加获取序列</span></span><br><span class="line">s = df[<span class="string">&#x27;A&#x27;</span>].values + df[<span class="string">&#x27;C&#x27;</span>].values                    <span class="comment"># 通过Numpy矢量相加获取序列</span></span><br></pre></td></tr></table></figure>
+<h4 id="df或者df.loc">3.1. df[]或者df.loc</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.loc[:, <span class="string">&#x27;E&#x27;</span>] = s</span><br><span class="line">df[<span class="string">&#x27;E&#x27;</span>] = s</span><br></pre></td></tr></table></figure>
+<h4 id="df.insert">3.2. df.insert()</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.insert(<span class="number">0</span>, <span class="string">&#x27;E&#x27;</span>, s) </span><br></pre></td></tr></table></figure>
+<h4 id="pd.concat">3.3. pd.concat()</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], name=<span class="string">&#x27;E&#x27;</span>, index=df.index)</span><br><span class="line">df = pd.concat([df, s], axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="iloc和loc遍历过程中给列赋值">3.4. iloc和loc遍历过程中给列赋值</h4>
+<p><strong>效率比较低</strong></p>
+<p>df['E']是DataFrame的一个Series，是引用，对其修改也能改变DataFrame，但运行时报了Warning</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;E&#x27;</span>] = <span class="literal">None</span>  <span class="comment"># 需事先创建e列，否则iloc遍历会报错，loc遍历无需事先创建</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(df)):</span><br><span class="line">    df[<span class="string">&#x27;E&#x27;</span>].iloc[i] = df[<span class="string">&#x27;A&#x27;</span>].iloc[i] + df[<span class="string">&#x27;C&#x27;</span>].iloc[i] </span><br><span class="line"><span class="comment"># SettingWithCopyWarning:　A value is trying to be set on a copy of a slice from a DataFrame</span></span><br></pre></td></tr></table></figure>
+<p>不用Series不会报Warning：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;E&#x27;</span>] = <span class="literal">None</span></span><br><span class="line">col_no = [i <span class="keyword">for</span> i <span class="keyword">in</span> df.columns].index(<span class="string">&#x27;E&#x27;</span>) </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(df)):</span><br><span class="line">    df.iloc[i, col_no] = df[<span class="string">&#x27;A&#x27;</span>].iloc[i] + df[<span class="string">&#x27;C&#x27;</span>].iloc[i]</span><br></pre></td></tr></table></figure>
+<p>用loc无需先给E列赋空值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df.index:</span><br><span class="line">    df.loc[i, <span class="string">&#x27;E&#x27;</span>] = df.loc[i, <span class="string">&#x27;A&#x27;</span>] + df.loc[i, <span class="string">&#x27;C&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="df列号-xxx">3.5. df[列号] = [x,x,x]</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="built_in">len</span>(df)] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="其他方法">3.6. 其他方法</h4>
+<p>增加3列，EFG，value默认为np.NaN</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.concat([df, pd.DataFrame(columns=<span class="built_in">list</span>(<span class="string">&#x27;EFG&#x27;</span>))])   <span class="comment"># 列的次序无法指定，并且fillna时会对整个df做出调整</span></span><br><span class="line">df = df.reindex(columns=<span class="built_in">list</span>(<span class="string">&#x27;ABCDEFG&#x27;</span>),  fill_value=<span class="number">0</span>)   <span class="comment"># 列的次序按照list指定，并且fill_value只对新增列做出调整，推荐！</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改行列">4. 修改行列</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># loc和iloc 可以更换单行、单列、多行、多列的值</span></span><br><span class="line">df1.loc[<span class="number">0</span>,<span class="string">&#x27;age&#x27;</span>]=<span class="number">25</span>      <span class="comment"># 思路：先用loc找到要更改的值，再用赋值（=）的方法实现更换值</span></span><br><span class="line">df1.iloc[<span class="number">0</span>,<span class="number">2</span>]=<span class="number">25</span>         <span class="comment"># iloc：用索引位置来查找</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># at 、iat只能更换单个值</span></span><br><span class="line">df1.at[<span class="number">0</span>,<span class="string">&#x27;age&#x27;</span>]=<span class="number">25</span>      <span class="comment"># iat 用来取某个单值,参数只能用数字索引</span></span><br><span class="line">df1.iat[<span class="number">0</span>,<span class="number">2</span>]=<span class="number">25</span>         <span class="comment"># at 用来取某个单值,参数只能用index和columns索引名称</span></span><br></pre></td></tr></table></figure>
+<h2 id="dataframe拼接">5. dataFrame拼接</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([data1, data2], axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>第一个参数放入的是我们要拼接的数据，记住当有多组数据时，必须要用[]括起来，让其变为一个整体（因为这个参数只占一个位置，不加会抛出错误）</p>
+<p>axis参数：用来设置拼接方式（0-从下方纵向增加记录；1-从右侧增加字段），其中axis=0为默认值</p>
+<h2 id="改列名">6. 改列名</h2>
+<p>1、修改列名a，b为A、B。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.columns = [<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>2、只修改列名a为A</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.rename(columns=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;A&#x27;</span>&#125;, inplace = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/A-Little-Django-Notes/" rel="bookmark">A Little Django Notes</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Function-Decorator-Map-Filter-Reduce-in-Python/" rel="bookmark">Function Decorator, Map/Filter/Reduce in Python</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Iterable-Sequences-in-Python/" rel="bookmark">Iterable/Sequences in Python</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Pytorch-Notes/" rel="bookmark">Pytorch Quick Notes</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Rubiks-Cube-Recover-Bot-魔方复原机器人/" rel="bookmark">Rubiks-Cube-Recover-Bot 魔方复原机器人</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020%E9%9A%8F%E6%83%B3/" rel="prev" title="2020随想">
+                  <i class="fa fa-chevron-left"></i> 2020随想
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/" rel="next" title="一篇论文发表了--Using machine learning to examine street green space types at a high spatial resolution- Application in Los Angeles County on socioeconomic disparities in exposure">
+                  一篇论文发表了--Using machine learning to examine street green space types at a high spatial resolution- Application in Los Angeles County on socioeconomic disparities in exposure <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">216k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:17</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/pandas-notes/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>

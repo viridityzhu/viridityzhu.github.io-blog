@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="sql grammar  SQL 对大小写不敏感：SELECT 与 select 是相同的。 某些数据库系统要求在每条 SQL 语句的末端使用分号。 SQL 使用单引号来环绕文本值（大部分数据库系统也接受双引号）。  Most important command  SELECT - 从数据库中提取数据 UPDATE - 更新数据库中的数据 DELETE - 从数据库中删除数据 INSERT INT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Notebook">
+<meta property="og:url" content="https://jyzhu.top/SQL-Notebook/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="sql grammar  SQL 对大小写不敏感：SELECT 与 select 是相同的。 某些数据库系统要求在每条 SQL 语句的末端使用分号。 SQL 使用单引号来环绕文本值（大部分数据库系统也接受双引号）。  Most important command  SELECT - 从数据库中提取数据 UPDATE - 更新数据库中的数据 DELETE - 从数据库中删除数据 INSERT INT">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-01-30T17:09:23.000Z">
+<meta property="article:modified_time" content="2021-07-30T17:11:03.508Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Notebook">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jyzhu.top/SQL-Notebook/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/SQL-Notebook/","path":"SQL-Notebook/","title":"SQL Notebook"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SQL Notebook | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-top"><a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>排行榜</a></li>
+        <li class="menu-item menu-item-notes"><a href="/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">69</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">152</span></a></li>
+        <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql-grammar"><span class="nav-number">1.</span> <span class="nav-text">sql grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#most-important-command"><span class="nav-number">1.1.</span> <span class="nav-text">Most important command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-select-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">SQL SELECT 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select-distinct-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.2.1.</span> <span class="nav-text">SELECT DISTINCT 语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-where-%E5%AD%90%E5%8F%A5"><span class="nav-number">1.3.</span> <span class="nav-text">SQL WHERE 子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#where-%E5%AD%90%E5%8F%A5%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.3.2.</span> <span class="nav-text">WHERE 子句中的运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-order-by-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.4.</span> <span class="nav-text">SQL ORDER BY 关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-insert-into-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.5.</span> <span class="nav-text">SQL INSERT INTO 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-insert-into-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.5.1.</span> <span class="nav-text">SQL INSERT INTO 语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-update-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.6.</span> <span class="nav-text">SQL UPDATE 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-update-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.6.1.</span> <span class="nav-text">SQL UPDATE 语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-delete-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.7.</span> <span class="nav-text">SQL DELETE 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-select-top-%E5%AD%90%E5%8F%A5"><span class="nav-number">1.8.</span> <span class="nav-text">SQL SELECT TOP 子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-server-ms-access-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.8.1.</span> <span class="nav-text">SQL Server &#x2F; MS Access 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.8.2.</span> <span class="nav-text">MySQL 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.8.3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.8.4.</span> <span class="nav-text">Oracle 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">1.8.5.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-like-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.9.</span> <span class="nav-text">SQL LIKE 操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-like-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.9.1.</span> <span class="nav-text">SQL LIKE 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">1.9.2.</span> <span class="nav-text">SQL 通配符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#in-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.10.</span> <span class="nav-text">IN 操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-in-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.10.1.</span> <span class="nav-text">SQL IN 语法</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">152</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/kayzhuep" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;kayzhuep" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/SQL-Notebook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL Notebook
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2019-01-31 01:09:23" itemprop="dateCreated datePublished" datetime="2019-01-31T01:09:23+08:00">2019-01-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/SQL-Notebook/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/SQL-Notebook/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>2.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="sql-grammar">sql grammar</h1>
+<ul>
+<li>SQL 对大小写不敏感：SELECT 与 select 是相同的。</li>
+<li>某些数据库系统要求在每条 SQL 语句的末端使用分号。</li>
+<li>SQL 使用单引号来环绕文本值（大部分数据库系统也接受双引号）。</li>
+</ul>
+<h2 id="most-important-command">Most important command</h2>
+<ul>
+<li><strong>SELECT</strong> - 从数据库中提取数据</li>
+<li><strong>UPDATE</strong> - 更新数据库中的数据</li>
+<li><strong>DELETE</strong> - 从数据库中删除数据</li>
+<li><strong>INSERT INTO</strong> - 向数据库中插入新数据</li>
+<li><strong>CREATE DATABASE</strong> - 创建新数据库</li>
+<li><strong>ALTER DATABASE</strong> - 修改数据库</li>
+<li><strong>CREATE TABLE</strong> - 创建新表</li>
+<li><strong>ALTER TABLE</strong> - 变更（改变）数据库表</li>
+<li><strong>DROP TABLE</strong> - 删除表</li>
+<li><strong>CREATE INDEX</strong> - 创建索引（搜索键）</li>
+<li><strong>DROP INDEX</strong> - 删除索引</li>
+</ul>
+<h2 id="sql-select-语句">SQL SELECT 语句</h2>
+<p>SELECT 语句用于从数据库中选取数据。</p>
+<p>结果被存储在一个结果表中，称为结果集。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name,column_name</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+<h3 id="select-distinct-语句">SELECT DISTINCT 语句</h3>
+<p>在表中，一个列可能会包含多个重复值，有时您也许希望仅仅列出不同（distinct）的值。</p>
+<p>DISTINCT 关键词用于返回唯一不同的值。</p>
+<h2 id="sql-where-子句">SQL WHERE 子句</h2>
+<p>WHERE 子句用于提取那些满足指定标准的记录。</p>
+<h3 id="语法">语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name,column_name</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> column_name operator <span class="keyword">value</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites <span class="keyword">WHERE</span> country<span class="operator">=</span><span class="string">&#x27;CN&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="where-子句中的运算符">WHERE 子句中的运算符</h3>
+<p>下面的运算符可以在 WHERE 子句中使用：</p>
+<table>
+<thead>
+<tr class="header">
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr class="even">
+<td>&lt;&gt;</td>
+<td>不等于。<strong>注释：</strong>在 SQL 的一些版本中，该操作符可被写成 !=</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr class="even">
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr class="odd">
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr class="odd">
+<td>BETWEEN</td>
+<td>在某个范围内</td>
+</tr>
+<tr class="even">
+<td>LIKE</td>
+<td>搜索某种模式</td>
+</tr>
+<tr class="odd">
+<td>IN</td>
+<td>指定针对某个列的多个可能值</td>
+</tr>
+</tbody>
+</table>
+<p>##AND &amp; OR 运算符</p>
+<p>AND &amp; OR 运算符用于基于一个以上的条件对记录进行过滤。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites</span><br><span class="line"><span class="keyword">WHERE</span> alexa <span class="operator">&gt;</span> <span class="number">15</span></span><br><span class="line"><span class="keyword">AND</span> (country<span class="operator">=</span><span class="string">&#x27;CN&#x27;</span> <span class="keyword">OR</span> country<span class="operator">=</span><span class="string">&#x27;USA&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="sql-order-by-关键字">SQL ORDER BY 关键字</h2>
+<p>ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序。</p>
+<p>ORDER BY 关键字默认按照升序对记录进行排序。如果需要按照降序对记录进行排序，您可以使用 DESC 关键字。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name,column_name</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> column_name,column_name <span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<p>例如 按多列排序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> country,alexa;</span><br></pre></td></tr></table></figure>
+<h2 id="sql-insert-into-语句">SQL INSERT INTO 语句</h2>
+<p>INSERT INTO 语句用于向表中插入新记录。</p>
+<h3 id="sql-insert-into-语法">SQL INSERT INTO 语法</h3>
+<p>INSERT INTO 语句可以有两种编写形式。</p>
+<p>第一种形式无需指定要插入数据的列名，只需提供被插入的值即可：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br></pre></td></tr></table></figure>
+<p>第二种形式需要指定列名及被插入的值：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br></pre></td></tr></table></figure>
+<h2 id="sql-update-语句">SQL UPDATE 语句</h2>
+<p>UPDATE 语句用于更新表中已存在的记录。</p>
+<h3 id="sql-update-语法">SQL UPDATE 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE Websites</span><br><span class="line"><span class="keyword">SET</span> alexa<span class="operator">=</span><span class="string">&#x27;5000&#x27;</span>, country<span class="operator">=</span><span class="string">&#x27;USA&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> name<span class="operator">=</span><span class="string">&#x27;菜鸟教程&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>==WHERE 子句规定哪条记录或者哪些记录需要更新。如果您省略了 WHERE 子句，所有的记录都将被更新！==</p>
+<p><em>在 MySQL 中可以通过设置<code>sql_safe_updates</code> 这个自带的参数来解决，当该参数开启的情况下，你必须在update 语句后携带 where 条件，否则就会报错。</em></p>
+<p><em><code>set sql_safe_updates=1;</code> 表示开启该参数</em></p>
+<h2 id="sql-delete-语句">SQL DELETE 语句</h2>
+<p>DELETE 语句用于删除表中的行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> some_column<span class="operator">=</span>some_value;</span><br></pre></td></tr></table></figure>
+<p>您可以在不删除表的情况下，删除表中所有的行。这意味着表结构、属性、索引将保持不变：</p>
+<p><code>DELETE FROM *table_name*;</code></p>
+<p>或</p>
+<p><code>DELETE * FROM *table_name*;</code></p>
+<h2 id="sql-select-top-子句">SQL SELECT TOP 子句</h2>
+<p>SELECT TOP 子句用于规定要返回的记录的数目。</p>
+<p>SELECT TOP 子句对于拥有数千条记录的大型表来说，是非常有用的。</p>
+<blockquote>
+<p><strong>注意:</strong>并非所有的数据库系统都支持 SELECT TOP 语句。 MySQL 支持 LIMIT 语句来选取指定的条数数据， Oracle 可以使用 ROWNUM 来选取。</p>
+</blockquote>
+<h3 id="sql-server-ms-access-语法">SQL Server / MS Access 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP number<span class="operator">|</span><span class="keyword">percent</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+<h3 id="mysql-语法">MySQL 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line">LIMIT number;</span><br></pre></td></tr></table></figure>
+<h3 id="实例">实例</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Persons</span><br><span class="line">LIMIT <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="oracle-语法">Oracle 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> ROWNUM <span class="operator">&lt;=</span> number;</span><br></pre></td></tr></table></figure>
+<h3 id="实例-1">实例</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Persons</span><br><span class="line"><span class="keyword">WHERE</span> ROWNUM <span class="operator">&lt;=</span><span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="sql-like-操作符">SQL LIKE 操作符</h2>
+<p>LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式。</p>
+<h3 id="sql-like-语法">SQL LIKE 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">LIKE</span> <span class="keyword">pattern</span>;</span><br></pre></td></tr></table></figure>
+<p>下面的 SQL 语句选取 name 以字母 &quot;G&quot; 开始的所有客户：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;G%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>下面的 SQL 语句选取 name 不包含模式 &quot;oo&quot; 的所有客户：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;%oo%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="sql-通配符">SQL 通配符</h3>
+<p>在 SQL 中，通配符与 SQL LIKE 操作符一起使用。</p>
+<p>SQL 通配符用于搜索表中的数据。</p>
+<p>在 SQL 中，可使用以下通配符：</p>
+<table>
+<thead>
+<tr class="header">
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>%</td>
+<td>替代 0 个或多个字符</td>
+</tr>
+<tr class="even">
+<td>_</td>
+<td>替代一个字符</td>
+</tr>
+<tr class="odd">
+<td>[<em>charlist</em>]</td>
+<td>字符列中的任何单一字符</td>
+</tr>
+<tr class="even">
+<td>[^*charlist*] 或 [!<em>charlist</em>]</td>
+<td>不在字符列中的任何单一字符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="in-操作符">IN 操作符</h2>
+<p>IN 操作符允许您在 WHERE 子句中规定多个值。</p>
+<h3 id="sql-in-语法">SQL IN 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1,value2,...);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/git-notebook/" rel="bookmark">Everything I should know about Git</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Quick-Notes-About-Data-Structures/" rel="bookmark">Data Structures and Their ADTs</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/计算机组成与体系结构/" rel="bookmark">计算机组成与体系结构</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/C-Language-Notebook/" rel="bookmark">C Language Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Java-Notebook/" rel="bookmark">Java Notebook</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/Notebook/" rel="tag"># Notebook</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Java-Notebook/" rel="prev" title="Java Notebook">
+                  <i class="fa fa-chevron-left"></i> Java Notebook
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Python%20Notebook/" rel="next" title="Python Notebook">
+                  Python Notebook <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">216k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:17</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/SQL-Notebook/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>

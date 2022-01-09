@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="1. Charles抓包知乎app 一、配置http代理并连接 手动将charles端口设置为8887（8888已有其他程序使用）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Charles抓包知乎app&amp;尝试tcpdump抓包微信">
+<meta property="og:url" content="https://jyzhu.top/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="1. Charles抓包知乎app 一、配置http代理并连接 手动将charles端口设置为8887（8888已有其他程序使用）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418202227829.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418202326968.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418203302486.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418202628755.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418204227530.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418204655402.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418205452977.jpg">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418205537380.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418210744247.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418210211496.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418210405745.png">
+<meta property="article:published_time" content="2020-04-19T14:41:25.000Z">
+<meta property="article:modified_time" content="2021-08-05T07:37:06.091Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Charles">
+<meta property="article:tag" content="tcpdump">
+<meta property="article:tag" content="抓包">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jyzhu.top/mydocs/2020/05/image-20200418202227829.png">
+
+
+<link rel="canonical" href="https://jyzhu.top/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/","path":"charles抓包知乎app尝试tcpdump抓包微信/","title":"Charles抓包知乎app&尝试tcpdump抓包微信"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Charles抓包知乎app&尝试tcpdump抓包微信 | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-top"><a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>排行榜</a></li>
+        <li class="menu-item menu-item-notes"><a href="/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">69</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">152</span></a></li>
+        <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp"><span class="nav-number">1.</span> <span class="nav-text">1. Charles抓包知乎app</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%85%8D%E7%BD%AEhttp%E4%BB%A3%E7%90%86%E5%B9%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text">一、配置http代理并连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ssl%E8%AF%81%E4%B9%A6%E8%A7%A3%E5%BC%80https"><span class="nav-number">1.2.</span> <span class="nav-text">二、下载并安装SSL证书，解开https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp"><span class="nav-number">1.3.</span> <span class="nav-text">三、抓包知乎app</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1"><span class="nav-number">2.</span> <span class="nav-text">2. 尝试tcpdump抓包微信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%B7%B1%E6%89%8B%E6%9C%BA%E7%9A%84udid"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.获取自己手机的udid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80mac%E7%BB%88%E7%AB%AF%E5%B0%86udid%E6%B7%BB%E5%8A%A0%E5%88%B0rvictl%E5%91%BD%E4%BB%A4%E4%B8%AD"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.打开mac终端，将udid添加到rvictl命令中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcpdump%E8%BF%90%E8%A1%8C%E6%8A%93%E5%8C%85%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%96%BD%E7%9B%91%E6%8E%A7"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.tcpdump运行抓包命令实施监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%BE%E5%A4%87%E4%BB%8Ervictl%E7%A7%BB%E9%99%A4"><span class="nav-number">2.0.4.</span> <span class="nav-text">4.将自己的设备从rvictl移除</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">152</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/kayzhuep" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;kayzhuep" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Charles抓包知乎app&尝试tcpdump抓包微信
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2020-04-19 22:41:25" itemprop="dateCreated datePublished" datetime="2020-04-19T22:41:25+08:00">2020-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="charles抓包知乎app">1. Charles抓包知乎app</h1>
+<h2 id="一配置http代理并连接">一、配置http代理并连接</h2>
+<p>手动将charles端口设置为8887（8888已有其他程序使用）</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418202227829.png" /></p>
+<p>查看Mac ip地址</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418202326968.png" /></p>
+<p>将上述ip地址和端口填入手机http代理</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418203302486.png" /></p>
+<p>charles收到连接请求，点击allow</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418202628755.png" /></p>
+<p>手机访问baidu，charles抓到，表示成功连接</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418204227530.png" /></p>
+<h2 id="二下载并安装ssl证书解开https">二、下载并安装SSL证书，解开https</h2>
+<p>在设置中打开SSL proxying，并添加*:*，表示抓包所有https请求</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418204655402.png" /></p>
+<p>在手机中访问<code>chls.pro/ssl</code>，下载并安装证书</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418205452977.jpg" /></p>
+<p>在通用-关于中打开证书信任</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418205537380.png" /></p>
+<h2 id="三抓包知乎app">三、抓包知乎app</h2>
+<p>使用手机浏览知乎</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418210744247.png" /></p>
+<p>charles抓到许多相关请求：</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418210211496.png" /></p>
+<p>在<code>https://api.zhihu.com/answers</code>中发现的json内容，即为刚刚所浏览的知乎回答及相关的许多信息，例如回答id、内容、问题id、作者id、作者名等等，如下：</p>
+<p><img src="https://jyzhu.top/mydocs/2020/05/image-20200418210405745.png" /></p>
+<p>抓到json内容如下：</p>
+<p> {<br />
+  &quot;id&quot;: 1162030612,<br />
+  &quot;type&quot;: &quot;answer&quot;,<br />
+  &quot;answer_type&quot;: &quot;normal&quot;,<br />
+  &quot;question&quot;: {<br />
+  &quot;type&quot;: &quot;question&quot;,<br />
+  &quot;id&quot;: 388669115,<br />
+  &quot;title&quot;: &quot;4月18号美国新冠肺炎确诊病例达70万，死亡人数到达36721人，美国还会坚持复工么？&quot;,<br />
+  &quot;question_type&quot;: &quot;normal&quot;,<br />
+  &quot;created&quot;: 1587163853,<br />
+  &quot;updated_time&quot;: 1587184466,<br />
+  &quot;url&quot;: &quot;https://api.zhihu.com/questions/388669115&quot;,<br />
+  &quot;admin_closed_comment&quot;: false,<br />
+  &quot;relationship&quot;: {},<br />
+  &quot;mute_info&quot;: {<br />
+  &quot;type&quot;: &quot;&quot;<br />
+  }<br />
+  },<br />
+  &quot;author&quot;: {<br />
+  &quot;id&quot;: &quot;e4a0b00c8c04bc16c0fed1563f1a0444&quot;,<br />
+  &quot;url_token&quot;: &quot;liu-xue-sheng-ri-bao&quot;,<br />
+  &quot;name&quot;: &quot;留学生日报&quot;,<br />
+  &quot;avatar_url&quot;: &quot;https://pic2.zhimg.com/v2-825f782641b2bda1317f444f9fa09691_s.jpg&quot;,<br />
+  &quot;avatar_url_template&quot;: &quot;https://pic2.zhimg.com/v2-825f782641b2bda1317f444f9fa09691_{size}.jpg&quot;,<br />
+  &quot;is_org&quot;: true,<br />
+  &quot;type&quot;: &quot;people&quot;,<br />
+  &quot;url&quot;: &quot;https://api.zhihu.com/people/e4a0b00c8c04bc16c0fed1563f1a0444&quot;,<br />
+  &quot;user_type&quot;: &quot;organization&quot;,<br />
+  &quot;headline&quot;: &quot;百万中国留学生都在关注&quot;,<br />
+  &quot;badge&quot;: [{<br />
+  &quot;type&quot;: &quot;identity&quot;,<br />
+  &quot;description&quot;: &quot;已认证的官方帐号&quot;,<br />
+  &quot;topics&quot;: []<br />
+  }],<br />
+  &quot;gender&quot;: -1,<br />
+  &quot;is_advertiser&quot;: false,<br />
+  &quot;is_followed&quot;: false,<br />
+  &quot;is_privacy&quot;: false<br />
+  },<br />
+  &quot;url&quot;: &quot;https://api.zhihu.com/answers/1162030612&quot;,<br />
+  &quot;thumbnail&quot;: &quot;https://pic1.zhimg.com/50/v2-a43e1cad6d10fb88bc31af266b018783_xl.jpg&quot;,<br />
+  &quot;is_collapsed&quot;: false,<br />
+  &quot;is_copyable&quot;: false,<br />
+  &quot;voteup_count&quot;: 5879,<br />
+  &quot;comment_count&quot;: 424,<br />
+  &quot;thanks_count&quot;: 480,<br />
+  &quot;is_mine&quot;: false,<br />
+  &quot;admin_closed_comment&quot;: false,<br />
+  &quot;comment_permission&quot;: &quot;all&quot;,<br />
+  &quot;can_comment&quot;: {<br />
+  &quot;reason&quot;: &quot;&quot;,<br />
+  &quot;status&quot;: true<br />
+  },<br />
+  &quot;has_publishing_draft&quot;: false,<br />
+  &quot;editable_content&quot;: &quot;&quot;,<br />
+  &quot;excerpt&quot;: &quot;我来了。我是芳芳·菲克纽斯 。 这是我的美国疫情日记 第十七篇 《特朗普带血的复工，各州长反水，美国民众持枪上街抗议》 看日记全集的在这里芳芳美国疫情日记汇总 目前更新到第十六篇 ——— 当雪崩发生时，每一篇雪花都在勇闯天涯。 在过去的四周中，一共有2200万美国人失业 越来越多的美国城市，很多手停口停的普通白人民众不戴任何防护措施持枪走上街头，举着声援特朗普的口号，开始示威游行，要求复工。 [图片] [图片] [图片] [图片] 4月30日，特…&quot;,<br />
+  &quot;relevant_info&quot;: {<br />
+  &quot;is_relevant&quot;: false,<br />
+  &quot;relevant_type&quot;: &quot;&quot;,<br />
+  &quot;relevant_text&quot;: &quot;&quot;<br />
+  },<br />
+  &quot;suggest_edit&quot;: {<br />
+  &quot;reason&quot;: &quot;&quot;,<br />
+  &quot;status&quot;: false,<br />
+  &quot;tip&quot;: &quot;&quot;,<br />
+  &quot;title&quot;: &quot;&quot;,<br />
+  &quot;unnormal_details&quot;: {<br />
+  &quot;status&quot;: &quot;&quot;,<br />
+  &quot;description&quot;: &quot;&quot;,<br />
+  &quot;reason&quot;: &quot;&quot;,<br />
+  &quot;reason_id&quot;: 0,<br />
+  &quot;note&quot;: &quot;&quot;<br />
+  },<br />
+  &quot;url&quot;: &quot;&quot;<br />
+  },<br />
+  &quot;attached_info&quot;: &quot;ogEQCAQQAxiU3IyqBCC7vaq5AQ==&quot;,<br />
+  &quot;mcn_fp_show&quot;: -1,<br />
+  &quot;reward_info&quot;: {<br />
+  &quot;can_open_reward&quot;: false,<br />
+  &quot;is_rewardable&quot;: false,<br />
+  &quot;reward_member_count&quot;: 0,<br />
+  &quot;reward_total_money&quot;: 0,<br />
+  &quot;tagline&quot;: &quot;&quot;<br />
+  },<br />
+  &quot;relationship&quot;: {<br />
+  &quot;is_thanked&quot;: false,<br />
+  &quot;upvoted_followees&quot;: []<br />
+  },<br />
+  &quot;ad_answer&quot;: null<br />
+ }</p>
+<p>抓包知乎app成功！</p>
+<h1 id="尝试tcpdump抓包微信">2. 尝试tcpdump抓包微信</h1>
+<h3 id="获取自己手机的udid">1.获取自己手机的udid</h3>
+<p>使用数据线将iPhone与Mac连接，找到iPhone的UDID</p>
+<h3 id="打开mac终端将udid添加到rvictl命令中">2.打开mac终端，将udid添加到rvictl命令中</h3>
+<p><code>rvictl -s udid</code></p>
+<h3 id="tcpdump运行抓包命令实施监控">3.tcpdump运行抓包命令实施监控</h3>
+<p><code>sudo tcpdump -i rvi0 -AAl</code></p>
+<p>找到微信相关的包含weixin WeChat等等关键字</p>
+<p>看不懂了……</p>
+<h3 id="将自己的设备从rvictl移除">4.将自己的设备从rvictl移除</h3>
+<p> rvictl -x UUID</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/jupyter-notebook会导致charles无法用/" rel="bookmark">Jupyter notebook会导致Charles无法用</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Charles/" rel="tag"># Charles</a>
+              <a href="/tags/tcpdump/" rel="tag"># tcpdump</a>
+              <a href="/tags/%E6%8A%93%E5%8C%85/" rel="tag"># 抓包</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/why-isnt-there-automatic-crawler/" rel="prev" title="Why isn't there automatic crawler?">
+                  <i class="fa fa-chevron-left"></i> Why isn't there automatic crawler?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/shodan%E5%88%9D%E4%BD%93%E9%AA%8C/" rel="next" title="Shodan初体验">
+                  Shodan初体验 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">216k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:17</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/charles%E6%8A%93%E5%8C%85%E7%9F%A5%E4%B9%8Eapp%E5%B0%9D%E8%AF%95tcpdump%E6%8A%93%E5%8C%85%E5%BE%AE%E4%BF%A1/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>
