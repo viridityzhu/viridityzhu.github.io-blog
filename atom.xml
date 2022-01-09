@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/"/>
-  <updated>2022-01-05T12:10:49.164Z</updated>
+  <updated>2022-01-09T20:21:35.424Z</updated>
   <id>https://jyzhu.top/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rebellious-person</title>
+    <link href="https://jyzhu.top/rebellious-person/"/>
+    <id>https://jyzhu.top/rebellious-person/</id>
+    <published>2022-01-09T20:21:06.000Z</published>
+    <updated>2022-01-09T20:21:35.424Z</updated>
+    
+    <content type="html"><![CDATA[<p>有的时候我觉得叛逆和听话并不是矛盾的特质。有一种本质的叛逆其实是想清楚了想要什么，然后选择了听话这一个行动模式。为什么说这是叛逆呢，因为这不是真的听话，是某种最极端的不听话。我已经见过了很多的乖乖人，许多一眼就能分辨出来，是真乖乖听话，还是叛逆人所伪装。这种伪装听话的叛逆人大概还有另一个特质，就是有多面性。很多人误把其特异的那些面当作真实面目，觉得听话一面是伪装；其实不然，全都是真实的样貌，没有必要分明。学习一个人要学会容忍他的复杂性。</p><p>我有想过用一些色彩更容易辨明的词来代替「叛逆」：自主，自知，清醒，成熟，明白自己想要什么……可是这都差了点意思。还是叛逆好，因为这毕竟有一种孤勇感在里面；也不贴切，大概是虫子蠕动的guyong感。想象这样一个画面：在肠道一样的世界里，大家都乖乖顺滑着逐渐化为某种排泄物，但是其中有一些guyong者，就是叛逆人。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;有的时候我觉得叛逆和听话并不是矛盾的特质。有一种本质的叛逆其实是想清楚了想要什么，然后选择了听话这一个行动模式。为什么说这是叛逆呢，因为这不是真的听话，是某种最极端的不听话。我已经见过了很多的乖乖人，许多一眼就能分辨出来，是真乖乖听话，还是叛逆人所伪装。这种伪装听话的叛逆人</summary>
+      
+    
+    
+    
+    <category term="thoughts" scheme="https://jyzhu.top/categories/thoughts/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>obj format debugging -- vertices order determines face orientation and faces are invisible from back</title>
@@ -551,38 +573,6 @@
     <category term="Paper Reading" scheme="https://jyzhu.top/tags/Paper-Reading/"/>
     
     <category term="Computer Vision" scheme="https://jyzhu.top/tags/Computer-Vision/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Coding Problem about Least Common Multiple and Greatest Common Divisor</title>
-    <link href="https://jyzhu.top/LCM-GCD/"/>
-    <id>https://jyzhu.top/LCM-GCD/</id>
-    <published>2021-10-15T14:26:29.000Z</published>
-    <updated>2021-10-15T14:52:56.961Z</updated>
-    
-    <content type="html"><![CDATA[<p>在复习期末考试，被计算最小公倍数的一道题卡了两次了……怪我数学基础忘光了。在此整理一下最小公倍数和最大公约数相关的概念和定理。然后整理一下这道题：</p><blockquote><p>Write a function to take in a tuple of integers, and it will return the smallest integer that is a multiple of every number in the tuple. Sample run:</p><p>&gt;&gt;&gt; print(smallestMultiple((2, 3, 5,)))</p><p>30</p><p>&gt;&gt;&gt; print(smallestMultiple((1, 2, 3, 4)))</p><p>12</p><p>&gt;&gt;&gt; print(smallestMultiple((399, 772, 163, 959, 242)))</p><p>832307365428</p></blockquote><h3 id="概念和定理">概念和定理</h3><p><strong>最大公约数</strong>：如果一个数可以分别被a和b整除，那它就是a和b的公约数。最大的那个就是最大公约数。</p><p><strong>最小公倍数</strong>：如果一个数既是a的整数倍，也是b的整数倍，那它就是a和b的公倍数。最小的那个就是最小公倍数。</p><p><a href="https://zh.wikipedia.org/wiki/%E8%BC%BE%E8%BD%89%E7%9B%B8%E9%99%A4%E6%B3%95"><strong>辗转相除法</strong></a>：一个计算最大公约数的方法，如下：</p><blockquote><p>辗转相除法基于如下原理：两个整数的最大公约数等于其中较小的数和两数相除余数的最大公约数。例如，252和105的最大公约数是21（<span class="math inline">\({\displaystyle 252=21\times 12;105=21\times 5}\)</span> ）；因为 252 − 105 = 21 × (12 − 5) = 147 ，所以147和105的最大公约数也是21。在这个过程中，较大的数缩小了，所以继续进行同样的计算可以不断缩小这两个数直至余数为零。这时，所剩下的还没有变成零的数就是两数的最大公约数。</p></blockquote><p><strong>利用GCD直接计算LCM</strong>：任何两个整数的最大公约数与最小公倍数存在如下关系： <span class="math display">\[LCM(a, b) = |a * b| / GCD(a, b)\]</span></p><h3 id="题解">题解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">smallestMultiple</span>(<span class="params">tp</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GCD</span>(<span class="params">a, b</span>):</span></span><br><span class="line">        <span class="keyword">while</span> b &gt; <span class="number">0</span>: <span class="comment"># need a&gt;b</span></span><br><span class="line">            a, b = b, a%b</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    res = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tp:</span><br><span class="line">        a, b = <span class="built_in">max</span>(res, i), <span class="built_in">min</span>(res, i)</span><br><span class="line">        res = <span class="built_in">abs</span>(res * i) / GCD(a, b)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(res)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(smallestMultiple((<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>,)))</span><br><span class="line"><span class="built_in">print</span>(smallestMultiple((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)))</span><br><span class="line"><span class="built_in">print</span>(smallestMultiple((<span class="number">399</span>, <span class="number">772</span>, <span class="number">163</span>, <span class="number">959</span>, <span class="number">242</span>)))</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;在复习期末考试，被计算最小公倍数的一道题卡了两次了……怪我数学基础忘光了。在此整理一下最小公倍数和最大公约数相关的概念和定理。然后整理一下这道题：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Write a function to take in a tuple of integers, and it will return the smallest integer that is a multiple of every number in the tuple. Sample run:&lt;/p&gt;
-&lt;p&gt;&amp;gt;&amp;gt;&amp;gt; print(smallestMultiple((2, 3, 5,)))&lt;/p&gt;
-&lt;p&gt;30&lt;/p&gt;
-&lt;p&gt;&amp;gt;&amp;gt;&amp;gt; print(smallestMultiple((1, 2, 3, 4)))&lt;/p&gt;
-&lt;p&gt;12&lt;/p&gt;
-&lt;p&gt;&amp;gt;&amp;gt;&amp;gt; print(smallestMultiple((399, 772, 163, 959, 242)))&lt;/p&gt;
-&lt;p&gt;832307365428&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;概念和定理&quot;&gt;概念和定理&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;最大公约数&lt;/strong&gt;：如果一个数可以分别被a和b整除，那它就是a和b的公约数。最大的那个就是最大公约数。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
-    
-    
-    <category term="Code" scheme="https://jyzhu.top/tags/Code/"/>
     
   </entry>
   
