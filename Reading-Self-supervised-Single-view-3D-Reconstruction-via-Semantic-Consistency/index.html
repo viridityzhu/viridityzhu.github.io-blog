@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="论文地址：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2003.06473 作者：Xueting Li, Sifei Liu, Kihwan Kim, Shalini De Mello, Varun Jampani, Ming-Hsuan Yang, and Jan Kautz 发表： ECCV 2020 链接： https:&#x2F;&#x2F;github.com&#x2F;NVlabs&#x2F;UMR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reading Self-supervised Single-view 3D Reconstruction via Semantic Consistency">
+<meta property="og:url" content="https://jyzhu.top/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="论文地址：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2003.06473 作者：Xueting Li, Sifei Liu, Kihwan Kim, Shalini De Mello, Varun Jampani, Ming-Hsuan Yang, and Jan Kautz 发表： ECCV 2020 链接： https:&#x2F;&#x2F;github.com&#x2F;NVlabs&#x2F;UMR">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220122145159190.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220122160143711.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220124121618081.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220124114332065.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220124182432533.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220127171646865.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220124121618081.png">
+<meta property="article:published_time" content="2022-01-22T06:49:01.000Z">
+<meta property="article:modified_time" content="2022-01-27T10:27:36.114Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="3D Reconstruction">
+<meta property="article:tag" content="Computer Vision">
+<meta property="article:tag" content="Self-supervised">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/image-20220122145159190.png">
+
+
+<link rel="canonical" href="https://jyzhu.top/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/","path":"Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/","title":"Reading Self-supervised Single-view 3D Reconstruction via Semantic Consistency"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Reading Self-supervised Single-view 3D Reconstruction via Semantic Consistency | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-top"><a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>排行榜</a></li>
+        <li class="menu-item menu-item-notes"><a href="/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">70</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">154</span></a></li>
+        <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#why"><span class="nav-number">1.</span> <span class="nav-text">Why：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what"><span class="nav-number">2.</span> <span class="nav-text">What：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how"><span class="nav-number">3.</span> <span class="nav-text">How：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">具体方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cmr%E6%98%AFbaseline"><span class="nav-number">3.2.1.</span> <span class="nav-text">CMR是baseline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E4%B8%80%E8%87%B4%E6%80%A7%E8%A7%A3%E5%86%B3%E7%9B%B8%E6%9C%BA%E5%BD%A2%E7%8A%B6%E5%90%8C%E6%97%B6%E9%A2%84%E6%B5%8B%E6%97%B6%E7%9A%84ambiguity"><span class="nav-number">3.2.2.</span> <span class="nav-text">语义一致性：解决相机+形状同时预测时的Ambiguity</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87scops%E5%AE%9E%E7%8E%B02d%E5%9B%BE%E5%83%8F%E4%B8%AD%E9%83%A8%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">通过SCOPS实现2D图像中部件的分割</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A0%87%E5%87%86%E8%AF%AD%E4%B9%89uv-map%E5%AE%9E%E7%8E%B03d%E6%A8%A1%E5%9E%8B%E4%B8%AD%E9%83%A8%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">通过标准语义uv map实现3D模型中部件的分割</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#d-%E5%92%8C-3d-%E9%97%B4%E7%9A%84%E8%AF%AD%E4%B9%89%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">2D 和 3D 间的语义一致性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%90%E8%BF%9B%E7%9A%84%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95em"><span class="nav-number">3.3.</span> <span class="nav-text">渐进的训练方法EM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.4.</span> <span class="nav-text">实验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#questions"><span class="nav-number"></span> <span class="nav-text">Questions</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/kayzhuep" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;kayzhuep" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Reading Self-supervised Single-view 3D Reconstruction via Semantic Consistency
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2022-01-22 14:49:01" itemprop="dateCreated datePublished" datetime="2022-01-22T14:49:01+08:00">2022-01-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/" class="post-meta-item leancloud_visitors" data-flag-title="Reading Self-supervised Single-view 3D Reconstruction via Semantic Consistency" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>7.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>论文地址：https://arxiv.org/abs/2003.06473</p>
+<p>作者：Xueting Li, Sifei Liu, Kihwan Kim, Shalini De Mello, Varun Jampani, Ming-Hsuan Yang, and Jan Kautz</p>
+<p>发表： ECCV 2020</p>
+<p>链接： https://github.com/NVlabs/UMR</p>
+<hr />
+<blockquote>
+<p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p>
+</blockquote>
+<h2 id="why">Why：</h2>
+<ol type="1">
+<li>在3d重建模任务中，同时预测形状、相机位置和材质是一个很大的问题，因为它内在的不确定性。</li>
+<li>现有方法都需要借助各种手段：3D层面的监督、2D语义关键点、shading（这是什么？）、特定类别的3D template 、多视角等等。这些方法需要大量人力，所以很难广泛应用。</li>
+<li>人类会直觉感知到一个物体包括各个部分，比如鸟有两只腿、两个翅膀、一个头，从而识别物体。类似的，cv受此启发，也可以将一个物体定义为多个可变形的部分的集合。</li>
+</ol>
+<h2 id="what">What：</h2>
+<ol type="1">
+<li>仅需要单张图片+轮廓mask，利用语义一致性，实现自监督3D重建模</li>
+<li>思路：1. 每个物体可以看作由可变形的部分组成；2. 对同一类型的不同物体，它们的每一部分在语义上都是一致的</li>
+<li>通过自监督学习大量同类的图片，可以建立重建的mesh模型与图片之间的语义一致性。这样在同时预测形状、相机位置和材质的时候，可以降低模糊性。</li>
+<li>第一个做到不需要特定类别的template mesh模型或者语义关键点，就可以从单视角图像中实现3d重建模。因此，这个方法可以推广到各种物体类别，而不需要类别的标签</li>
+</ol>
+<p>读前疑问：</p>
+<h2 id="how">How：</h2>
+<h3 id="模型">模型</h3>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220122145159190.png" alt="image-20220122145159190" /><figcaption>image-20220122145159190</figcaption>
+</figure>
+<ol type="1">
+<li>（a）是原始图片。需要同一类别的大量图片一起作为输入</li>
+<li>（b）用SCOPS模型（另一篇工作），对图像进行语义分割的结果。这个模型也是自监督的</li>
+<li>（c）标准语义 uv map（Canonical semantic uv map）：
+<ol type="1">
+<li>理论上，同一类物体的mesh模型，尽管各自都有不同的形状，但每个点的语义含义都是一致的。</li>
+<li>因此，根据前一步生成的大量语义分割结果，可以生成一张对应这个类别的Canonical语义uv map。</li>
+</ol></li>
+<li>（d）由前一步生成的Canonical语义uv map，可以得到重建的mesh模型表面的点对应的语义标签</li>
+<li>橘色箭头：这个就是语义一致性了，它鼓励2D图像和3D模型之间的语义标签相互一致。这样，就可以解决前面提到过的在3D重建模的时候的“相机-形状不确定性”这个难题</li>
+</ol>
+<h3 id="具体方法">具体方法</h3>
+<h4 id="cmr是baseline">CMR是baseline</h4>
+<ol type="1">
+<li>用三个decoder <span class="math inline">\(D_{shape}\ D_{camera}\ D_{texture}\)</span> 同时预测mesh模型的形状、相机和材质
+<ol type="1">
+<li>形状 <span class="math inline">\(V=\tilde V + \Delta V\)</span>，其中 $V $ 是某类物体的template mesh模型，<span class="math inline">\(\Delta V\)</span> 是预测出来的点的偏移量</li>
+<li>相机pose <span class="math inline">\(\theta\)</span> 是 weak perspective transformation （？）</li>
+<li>材质 <span class="math inline">\(I_{flow}\)</span> 是 UV flow，是将输入图片到UV空间的映射，然后它可以被一个已经定义好的函数<span class="math inline">\(\phi\)</span>映射到mesh模型的表面的每一个点</li>
+</ol></li>
+<li>但是CMR需要人工标注的关键点作为输入，这篇论文主要就是把它去掉了。去掉之后呢，会出现相机+形状同时预测时Ambiguity的问题，所以就想方设法解决这个问题。</li>
+</ol>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220122160143711.png" alt="image-20220122160143711" /><figcaption>image-20220122160143711</figcaption>
+</figure>
+<h4 id="语义一致性解决相机形状同时预测时的ambiguity">语义一致性：解决相机+形状同时预测时的Ambiguity</h4>
+<p>也就是Fig 3中红色框的部分。</p>
+<ol type="1">
+<li><p><em>语义部件不变性 semantic part invariance：</em></p>
+<ol type="1">
+<li>对于2D图像，用SCOPS（自监督co-part语义分割，另一篇论文的方法）可以很准确地对物体各个部分进行分割</li>
+<li>对于3D mesh，每个点的语义含义是固定不变的，就算每个物体会有各自的形变</li>
+</ol></li>
+<li><p><em>语义一致性</em>：</p>
+<ol type="1">
+<li><p><img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220124121618081.png" alt="image-20220124121618081" style="zoom:50%;" /></p>
+<p>从Fig 4 (i) 可以看到，如果没有语义一致性，mesh模型中原本对应头的顶点被当作了翅膀尖，这样错误的变形对应了错误的相机pose。这就是相机+形状同时预测时的Ambiguity。</p></li>
+<li><p>前面已经提到过，可以为每个具体类别生成一张标准语义 uv map（Canonical semantic uv map）。这里，就可以让 每个物体的2D语义分割结果 与 标准语义 uv map 保持一致性，从而让3D模型的每个语义部件跟2D图像里相应的位置有对应关系。这样可以很好地解决相机-形状Ambiguity问题。</p></li>
+</ol></li>
+</ol>
+<h5 id="通过scops实现2d图像中部件的分割">通过SCOPS实现2D图像中部件的分割</h5>
+<p><img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220124114332065.png" alt="image-20220124114332065" style="zoom:50%;" /></p>
+<p>SCOPS 是自监督的方法，从一类物体的大量图片中发掘共同的语义部件。Fig 10第二行就是它的结果。后面还会提到，通过本文的方法，还可以反过来提升SCOPS的结果：利用生成的标准语义UV map作为伪标注反过来进行监督。</p>
+<h5 id="通过标准语义uv-map实现3d模型中部件的分割">通过标准语义uv map实现3D模型中部件的分割</h5>
+<ol type="1">
+<li><p>已经有了：</p>
+<ol type="1">
+<li>模型学到的texture flow <span class="math inline">\(I_{flow}\)</span>可以将输入图片映射到UV空间，然后它可以被一个已经定义好的函数<span class="math inline">\(\phi\)</span>映射到mesh模型的表面的每一个点</li>
+<li>通过SCOPS生成的图像 <span class="math inline">\(i\)</span> 的语义分割结果 <span class="math inline">\(P^i\in R^{H\times W\times N_p}\)</span>， 其中H和W是长和宽， <span class="math inline">\(N_p\)</span> 是语义部件数量</li>
+</ol></li>
+<li><p>这样的话，通过模型的 <span class="math inline">\(I_{flow}\)</span> 就可以把2D的语义分割结果 <span class="math inline">\(P^i\)</span> 映射到 UV 空间，把这个称为 语义UV map</p></li>
+<li><p>理论上来说，同一类别的所有物体都应该得到同一个语义UV map，因为 1. 根据语义部件不变性，mesh模型的每个顶点对应的语义部件都是固定不变的 2. UV map和3d mesh 中的点又是通过<span class="math inline">\(\Phi\)</span>映射的关系，每个顶点对应的UV map上的坐标也是不变的。</p></li>
+<li><p>但是因为SCOPS + <span class="math inline">\(I_{flow}\)</span> 的误差，各个物体生成的语义UV map事实上很不一样。所以这里提出了对 标准语义UV map <span class="math inline">\(\bar P_{uv}\)</span> 的估计方法：</p>
+<ol type="1">
+<li><p>通过某种方法选择出训练集中效果比较好的子集 <span class="math inline">\(\mathcal{U}\)</span>，对它们的结果进行加和，</p>
+<p><strong>选择样本的方式</strong>：</p>
+<ol type="1">
+<li>首先选择最好的那一个样本，即 perceptual distance（3D投影到2D的图像与原始RGB图像的知觉距离？）最小的</li>
+<li>然后选择K个跟这个最好的样本最接近的样本，即它们的语义UV map最接近</li>
+</ol>
+<p>公式如下：</p></li>
+<li><p><span class="math display">\[
+\bar P_{uv}=\frac{1}{|\mathcal{U}|}\sum_{i\in \mathcal{U}}I^i_{flow}(P^i)
+\]</span></p>
+<p>其中 <span class="math inline">\(I^i_{flow}(P^i)\)</span> 就是通过 <span class="math inline">\(I_{flow}\)</span> 映射语义分割结果 <span class="math inline">\(P^i\)</span> 得到的 语义UV map。</p></li>
+</ol></li>
+</ol>
+<h5 id="d-和-3d-间的语义一致性">2D 和 3D 间的语义一致性</h5>
+<ol type="1">
+<li><p><em>基于概率的约束 Probability-based constraint</em></p>
+<ol type="1">
+<li><p><span class="math display">\[
+L_{sp}=||P^i-\mathcal{R}(\Phi (\bar P_{uv});\theta^i)||^2
+\]</span></p>
+<p>标准语义UV map <span class="math inline">\(\bar P_{uv}\)</span> 由预定义好的函数 <span class="math inline">\(\Phi\)</span> 映射到 3D mesh表面，然后采用预测好的相机pose <span class="math inline">\(\theta^i\)</span> ，用可微分渲染 <span class="math inline">\(\mathcal{R}\)</span> 将3D模型渲染到2D，然后将结果与对应的由SCOPS生成的部件分割概率图 <span class="math inline">\(P^i\)</span> 做均方误差。</p></li>
+<li><p>注：这个由SCOPS生成的图像分割结果 <span class="math inline">\(P^i\)</span> 是概率数值的形式</p></li>
+<li><p>经验性地选择了采用均方误差MSE，比 KullbackLeibler divergence 效果好</p></li>
+</ol></li>
+<li><p><em>基于顶点的约束 Vertex-based constraint</em></p>
+<ol type="1">
+<li><p>让3D模型投影回2D之后，被分类到某个语义part的顶点仍然处在图像中该part对应的区域</p></li>
+<li><p><span class="math display">\[
+L_{sv}=\sum^{N_p}_{p=1} \frac{1}{|\bar V_p|}Chamfer(\mathcal{R}(\bar V_p;\theta^i),Y_p^i)
+\]</span></p>
+<p>其中，<span class="math inline">\(\bar V_p\)</span> 是已经学好的某类物体的template mesh中属于部件p的那部分，<span class="math inline">\(Y_p^i\)</span>是原始2D图像中属于部件p的那部分，<span class="math inline">\(N_p\)</span> 是语义部件数量。</p></li>
+<li><p>用Chamfer distance是因为投影后的顶点和原始的像素点并不是严格一对一对应的关系</p></li>
+<li><p>用某类物体的template mesh，就可以让网络学相机pose；反之，假如用单个具体物体的mesh的话，网络就仅仅会对3D物体的形状进行扭曲，不会学到正确的相机pose了【我有点不理解为啥】</p></li>
+</ol></li>
+</ol>
+<h3 id="渐进的训练方法em">渐进的训练方法EM</h3>
+<ol type="1">
+<li><p>之所以要用渐进式训练，是因为</p>
+<ol type="1">
+<li>需要3D重建模网络首先学会一个大体上可用的texture encoder <span class="math inline">\(I_{flow}\)</span>，然后才能生成标准语义UV map，</li>
+<li>这样还能先生成对应具体类别的template mesh，一方面加速网络的收敛，一方面可以用在前面提到的<em>基于顶点的约束</em>中。</li>
+</ol></li>
+<li><p>但是，如果直接把template mesh和重建模模型全都一起学习的话，效果不好；所以就提出了：EM训练步骤（expectation-maximization期望最大化？），就是先固定一部分学习另一部分。</p>
+<ol type="1">
+<li><p><strong>E</strong>：固定标准语义UV map和template（初始是球体），<strong>训练重建模网络</strong>。200轮。</p>
+<p>loss包括：</p>
+<ol type="1">
+<li><p>3D投影到2D的图像与gt剪影的 IoU ✖️ -1</p></li>
+<li><p>3D投影到2D的图像与原始RGB图像的 perceptual distance（知觉距离？）</p></li>
+<li><p>前面提到的基于概率的约束和基于顶点的约束</p></li>
+<li><p>材质循环一致性 Texture cycle consistency：</p>
+<ol type="1">
+<li><figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220124182432533.png" alt="image-20220124182432533" /><figcaption>image-20220124182432533</figcaption>
+</figure>
+<p>学习texture flow的时候最大的问题：颜色相似的3D mesh的面会被对应到错误的2D图像的像素点上</p></li>
+<li><p>这是一个cycle：强制预测出来的texture flow（2D to 3D）和相机投影（3D to 2D）二者一致。</p></li>
+<li><p>首先定义了<span class="math inline">\(\mathcal{C}_{in}^j\)</span>、 <span class="math inline">\(\mathcal{C}_{out}^j\)</span>分别是输入图像中被映射到三角形面<span class="math inline">\(j\)</span>的一定数量像素点的几何中心，和从三角形面<span class="math inline">\(j\)</span>渲染回2D图像时对应的一定数量像素点的几何中心。公式如下： <span class="math display">\[
+\mathcal{C}_{in}^j = \frac{1}{N_c}\sum^{N_c}_{m=1}\Phi(I_{flow}(\mathcal{G}^m))_j;
+\\ \mathcal{C}_{out}^j = \frac{\sum^{H\times W}_{m=1}\mathcal{W}_j^m\times \mathcal{G}^m}{\sum^{H\times W}_{m=1}\mathcal{W}_j^m}
+\]</span> 其中，<span class="math inline">\(\mathcal{G}^m\)</span>是投影图像的标准坐标网格（包含了像素的坐标<span class="math inline">\((u,v)\)</span>值），<span class="math inline">\(\Phi\)</span>是UV map，<span class="math inline">\(I_{flow}\)</span>把像素映射到3D mesh的面<span class="math inline">\(j\)</span>上；<span class="math inline">\(N_c\)</span>是对应到面<span class="math inline">\(j\)</span>的像素点的数量；<span class="math inline">\(\mathcal{W}\)</span>是可微分渲染时生成的概率map，每个<span class="math inline">\(\mathcal{W}_j^m\)</span>表示面 j 被投影到像素 m 上的概率。</p>
+<ul>
+<li>把重建模mesh模型渲染成2D图像，用的是 Soft Rasterizer，而不是CMR中用的 Neural Mesh Renderer，因为前者可以提供概率map，供texture cycle consistency使用</li>
+</ul></li>
+<li><p>那么，材质循环一致性就是让<span class="math inline">\(\mathcal{C}_{in}^j\)</span>接近 <span class="math inline">\(\mathcal{C}_{out}^j\)</span>： <span class="math display">\[
+L_{tcyc} = \frac{1}{|F|}\sum^{|F|}_{j=1}||\mathcal{C}_{in}^j-\mathcal{C}_{out}^j||^2_F
+\]</span></p></li>
+</ol></li>
+<li><p>还有写在附录里的两个loss：</p>
+<ol type="1">
+<li>graph Laplacian constraint 来鼓励mesh表面平滑【从pixel-mesh中来的】</li>
+<li>edge regularization 来惩罚大小不规则的面 代码里似乎是flatten loss</li>
+</ol></li>
+<li><p>还有写在附录里的对抗训练loss</p></li>
+</ol></li>
+<li><p><strong>M</strong>：利用训练好的重建模网络，更新template（从球体开始）和标准语义UV map。</p>
+<ol type="1">
+<li><p>template一开始是球体，然后每训练K轮，对它进行一次更新： <span class="math display">\[
+\bar V_t=\bar V_{t-1} + D_{shape}(\frac{1}{|\mathcal{Q}|}\sum_{i\in \mathcal{Q}}E(I^i))
+\]</span> <span class="math inline">\(V_{t}\)</span>和 <span class="math inline">\(V_{t-1}\)</span>是更新前后的template，I是输入的图片，经过E生成3D属性，D是形状 encoder。Q是经过某种方式选择出来的部分样本。</p>
+<p><strong>选择样本的方式</strong>：</p>
+<ol type="1">
+<li>首先选择最好的那一个样本，即与ground truth轮廓的IoU最小的</li>
+<li>然后选择K个跟这个最好的样本最接近的样本，即这些样本的gt轮廓与最好的样本的gt轮廓的IoU越小则越接近</li>
+</ol></li>
+<li><p>这样的话，template <span class="math inline">\(V_t\)</span> 就是选出来的样本的平均形状</p></li>
+</ol></li>
+<li><p>整个训练过程会包括两轮，每轮都包括一个E和一个M。（两轮分别就是代码中的<code>train_s1</code> <code>train_s2</code>。）在E中，训练200 epoch 重建模网络，然后在M中用训练好的网络更新template和标准语义UV map。注意在第一轮中（一轮包括一个E和M），只训练重建模网络，而没有语义一致性约束。</p></li>
+</ol></li>
+</ol>
+<h3 id="实验">实验</h3>
+<ol type="1">
+<li>数据集：PASCAL3D+中的车和摩托车、CUB-200-2011中的鸟、ImageNet中的马 斑马 牛、OpenImages中的企鹅</li>
+<li>局限性：
+<ol type="1">
+<li>依赖于SCOPS提供语义分割，有时候语义分割不准确的话结果就不好</li>
+<li>比较少见的相机pose很难</li>
+<li>细节性的地方效果不好，比如正在飞的鸟的两个翅膀、斑马的腿等</li>
+</ol></li>
+</ol>
+<h1 id="questions">Questions</h1>
+<ol type="1">
+<li><p>为什么要stage2 ？</p>
+<ol type="1">
+<li>这两个 stage的主要区别就是：stage1的时候没有用语义一致性约束，在stage2才加上。因为一开始texture flow encoder效果并不好，avg_uv也不准确，所以干脆先不用。所以分成s1和s2，最主要的就是因为在s1训练完之后，重建模网络已经大体可以用了，这时候就可以调用<code>avg_uv.py</code>来生成标准语义UV map，供s2的时候语义一致性用。</li>
+<li>附录里说，从效果上来看，2个stage比1个效果要好，且已经足够好了，有这张图对比了一下：<img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220127171646865.png" alt="image-20220127171646865" /></li>
+</ol></li>
+<li><p>avg_uv 就是学 seg map -&gt; uv map的么？</p>
+<ol type="1">
+<li>seg map -&gt; uv map这个过程是重建模网络中texture flow这个部分做的事情</li>
+<li>avg_uv就是论文里说的 标准语义 uv map（Canonical semantic uv map）：
+<ol type="1">
+<li>理论上，同一类物体的mesh模型，尽管各自都有不同的形状，但每个点的语义含义都是一致的</li>
+<li>因此，对于某一类物体的大量图像数据集（比如鸟），可以生成一张对应这整个类别的avg_uv</li>
+<li>利用这个avg_uv，相当于是给整个类别的template打上了语义标签，后续计算语义一致性约束的时候可以用。</li>
+<li>这个avg_uv的计算过程：
+<ol type="1">
+<li>首先用SCOPS（另一篇工作，无监督的）生成所有图像的语义分割结果seg map，然后用重建模网络学到的texture flow映射成uv map</li>
+<li>选择效果最好的一部分instances，对它们的uv map取平均，得到avg_uv</li>
+</ol></li>
+</ol></li>
+</ol></li>
+<li><p>paper 里面 有说固定camera 学shape？ 那代码里有fix camera预测么？</p>
+<p>我好像没有读到paper里有具体说到固定camera学shape耶……</p>
+<p>论文里提到要解决camera-shape一起学时的ambiguity的问题，但不是固定一个学另一个，而是利用avg_uv来实现语义一致性：让 每个物体的2D seg uv map 与 avg_uv 保持一致性，从而让3D模型的每个语义部件跟2D图像里相应的位置有对应关系。</p>
+<p><img src="/Users/jiayinzhu/Documents/笔记/放图/image-20220124121618081.png" alt="image-20220124121618081" style="zoom:50%;" /></p>
+<p>从这张图里可以看到，如果没有语义一致性，mesh模型中原本对应头的顶点被当作了翅膀尖，这样的camera就是错误的，错误的camera又造成了错误的shape。而有了语义一致性，就能利用语义让camera 更准确，这样就能跟着提升shape</p></li>
+<li><p>按照他的说法， 先是feature avg 然后 decode 出 average shape。那么这个feature就要学好一点，否则平均容易成球形。那么这个feature 还有其他loss在上面么？比如我们smr 上还有 consistency loss 但是加在 delta_vertice上？他有加在feature上么？否则不能确保这个 feature avg 了以后 还有意义</p>
+<p>我可能没有懂这个问题耶……学长说的是不是计算category level 的 template这个步骤呢？我觉得这个步骤里面保证效果好的方式有这几点比较关键：</p>
+<ol type="1">
+<li>更新category level 的 template是从M步骤才开始进行的；在此之前，E步骤中会在固定template的前提下，单独训练重建模网络200轮，这个过程中的loss还是挺多的，除了语义一致性没有用以外，其他的loss都用了，包括论文里提出的texture cycle consistency，还有附录里提到的graph Laplacian constraint、edge constraint等等</li>
+<li>计算average template的时候，并不是用了所有数据，而是选择了最好的一部分instances：
+<ol type="1">
+<li>首先选择最好的那一个instance，即与ground truth mask的IoU最小的</li>
+<li>然后选择K个跟这个最好的样本最接近的样本，即这些样本的gt mask与最好的样本的gt mask的IoU越小则越接近</li>
+</ol></li>
+</ol></li>
+<li><p>代码里面还放了一些 external的code，有用到么？</p>
+<ol type="1">
+<li>一个是SoftRas，用来把重建模mesh模型渲染成2D图像。论文里提到用它而不是CMR中用的 Neural Mesh Renderer，是因为它可以提供概率map，供texture cycle consistency使用</li>
+<li>另一个是Neural Mesh Renderer，备选的renderer</li>
+<li>再就是PerceptualSimilarity，用来计算了perceptual loss</li>
+</ol></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/DeepHuman-3D-Human-Reconstruction-from-a-Single-Image/" rel="bookmark">读 DeepHuman: 3D Human Reconstruction from a Single Image</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Pixel2Mesh-Generating-3D-Mesh-Models-from-Single-RGB-Images/" rel="bookmark">读Pixel2Mesh- Generating 3D Mesh Models from Single RGB Images</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/" rel="bookmark">读 Self-Supervised 3D Mesh Reconstruction from Single Images</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/读：论视觉知识/" rel="bookmark">读：论视觉知识</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/3D-Reconstruction/" rel="tag"># 3D Reconstruction</a>
+              <a href="/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
+              <a href="/tags/Self-supervised/" rel="tag"># Self-supervised</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/rebellious-person/" rel="prev" title="rebellious-person">
+                  <i class="fa fa-chevron-left"></i> rebellious-person
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">225k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:24</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>

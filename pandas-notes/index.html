@@ -24,15 +24,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘： 0. 创建df： 1234567&gt;&gt;&gt; df &#x3D; pd.DataFrame(np.arange(16).reshape(4, 4), columns&#x3D;list(&amp;#x27;ABCD&amp;#x27;), index&#x3D;list(&amp;#x27">
+<meta name="description" content="tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘： -1. 索引行列 直接用loc和iloc就好了：  用行名、列名索引，就用loc；用行号、列号索引，就用iloc 注意这个不是函数，是用df.loc[]，后面接方括号用的 方括号里面的东西就好说了  用逗号,分隔不同的维度，比如2维表格就是[行,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pandas最基础的操作">
 <meta property="og:url" content="https://jyzhu.top/pandas-notes/index.html">
 <meta property="og:site_name" content="Tianke Youke">
-<meta property="og:description" content="tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘： 0. 创建df： 1234567&gt;&gt;&gt; df &#x3D; pd.DataFrame(np.arange(16).reshape(4, 4), columns&#x3D;list(&amp;#x27;ABCD&amp;#x27;), index&#x3D;list(&amp;#x27">
+<meta property="og:description" content="tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘： -1. 索引行列 直接用loc和iloc就好了：  用行名、列名索引，就用loc；用行号、列号索引，就用iloc 注意这个不是函数，是用df.loc[]，后面接方括号用的 方括号里面的东西就好说了  用逗号,分隔不同的维度，比如2维表格就是[行,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-12T16:18:53.000Z">
-<meta property="article:modified_time" content="2021-07-30T16:20:40.586Z">
+<meta property="article:modified_time" content="2022-01-27T07:02:34.009Z">
 <meta property="article:author" content="Jiayin Zhu">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Pandas">
@@ -101,8 +101,8 @@
         <li class="menu-item menu-item-poems"><a href="/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
         <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">69</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">153</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">70</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">154</span></a></li>
         <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -160,7 +160,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdf"><span class="nav-number">1.</span> <span class="nav-text">0. 创建df：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%8C%E5%88%97"><span class="nav-number"></span> <span class="nav-text">1. 删除行列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#drop%E5%88%A0%E9%99%A4%E8%A1%8C%E5%88%97"><span class="nav-number">0.1.</span> <span class="nav-text">1.1. drop删除行列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D"><span class="nav-number">0.2.</span> <span class="nav-text">1.2. 去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#del%E5%88%A0%E9%99%A4%E5%88%97"><span class="nav-number">0.3.</span> <span class="nav-text">1.3. del删除列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%A1%8C"><span class="nav-number"></span> <span class="nav-text">2. 增加行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#loc-at-set_value"><span class="nav-number">0.1.</span> <span class="nav-text">2.1. loc &#x2F; at &#x2F; set_value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#append"><span class="nav-number">0.2.</span> <span class="nav-text">2.2. append</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df.loc%E8%A1%8C%E5%8F%B7-xxx"><span class="nav-number">0.3.</span> <span class="nav-text">2.3. df.loc[行号] &#x3D; [x,x,x]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%A1%8C"><span class="nav-number">0.4.</span> <span class="nav-text">2.4. 插入行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%88%97"><span class="nav-number"></span> <span class="nav-text">3. 增加列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#df%E6%88%96%E8%80%85df.loc"><span class="nav-number">0.1.</span> <span class="nav-text">3.1. df[]或者df.loc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df.insert"><span class="nav-number">0.2.</span> <span class="nav-text">3.2. df.insert()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pd.concat"><span class="nav-number">0.3.</span> <span class="nav-text">3.3. pd.concat()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iloc%E5%92%8Cloc%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%BB%99%E5%88%97%E8%B5%8B%E5%80%BC"><span class="nav-number">0.4.</span> <span class="nav-text">3.4. iloc和loc遍历过程中给列赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df%E5%88%97%E5%8F%B7-xxx"><span class="nav-number">0.5.</span> <span class="nav-text">3.5. df[列号] &#x3D; [x,x,x]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-number">0.6.</span> <span class="nav-text">3.6. 其他方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%8C%E5%88%97"><span class="nav-number"></span> <span class="nav-text">4. 修改行列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataframe%E6%8B%BC%E6%8E%A5"><span class="nav-number"></span> <span class="nav-text">5. dataFrame拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E5%88%97%E5%90%8D"><span class="nav-number"></span> <span class="nav-text">6. 改列名</span></a></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E8%A1%8C%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">-1. 索引行列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdf"><span class="nav-number">2.</span> <span class="nav-text">0. 创建df：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%8C%E5%88%97"><span class="nav-number">3.</span> <span class="nav-text">1. 删除行列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#drop%E5%88%A0%E9%99%A4%E8%A1%8C%E5%88%97"><span class="nav-number">3.1.</span> <span class="nav-text">1.1. drop删除行列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D"><span class="nav-number">3.2.</span> <span class="nav-text">1.2. 去重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#del%E5%88%A0%E9%99%A4%E5%88%97"><span class="nav-number">3.3.</span> <span class="nav-text">1.3. del删除列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">2. 增加行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loc-at-set_value"><span class="nav-number">4.1.</span> <span class="nav-text">2.1. loc &#x2F; at &#x2F; set_value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#append"><span class="nav-number">4.2.</span> <span class="nav-text">2.2. append</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df.loc%E8%A1%8C%E5%8F%B7-xxx"><span class="nav-number">4.3.</span> <span class="nav-text">2.3. df.loc[行号] &#x3D; [x,x,x]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%A1%8C"><span class="nav-number">4.4.</span> <span class="nav-text">2.4. 插入行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">3. 增加列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#df%E6%88%96%E8%80%85df.loc"><span class="nav-number">5.1.</span> <span class="nav-text">3.1. df[]或者df.loc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df.insert"><span class="nav-number">5.2.</span> <span class="nav-text">3.2. df.insert()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pd.concat"><span class="nav-number">5.3.</span> <span class="nav-text">3.3. pd.concat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iloc%E5%92%8Cloc%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%BB%99%E5%88%97%E8%B5%8B%E5%80%BC"><span class="nav-number">5.4.</span> <span class="nav-text">3.4. iloc和loc遍历过程中给列赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df%E5%88%97%E5%8F%B7-xxx"><span class="nav-number">5.5.</span> <span class="nav-text">3.5. df[列号] &#x3D; [x,x,x]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-number">5.6.</span> <span class="nav-text">3.6. 其他方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%8C%E5%88%97"><span class="nav-number">6.</span> <span class="nav-text">4. 修改行列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dataframe%E6%8B%BC%E6%8E%A5"><span class="nav-number">7.</span> <span class="nav-text">5. dataFrame拼接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B9%E5%88%97%E5%90%8D"><span class="nav-number">8.</span> <span class="nav-text">6. 改列名</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">154</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -184,7 +184,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -310,7 +310,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">字数:</span>
-      <span>4.1k</span>
+      <span>4.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -329,10 +329,23 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘：</p>
-<h3 id="创建df">0. 创建df：</h3>
+<h1 id="索引行列">-1. 索引行列</h1>
+<p>直接用<code>loc</code>和<code>iloc</code>就好了：</p>
+<ol type="1">
+<li>用行名、列名索引，就用<code>loc</code>；用行号、列号索引，就用<code>iloc</code></li>
+<li>注意这个不是函数，是用<code>df.loc[]</code>，后面接方括号用的</li>
+<li>方括号里面的东西就好说了
+<ol type="1">
+<li>用逗号<code>,</code>分隔不同的维度，比如2维表格就是<code>[行, 列]</code></li>
+<li>用字符串表示行名列名，或者数字表示行号列号</li>
+<li>用冒号<code>:</code>表示连续区间，比如<code>2:5</code>就是区间2、3、4；还可以单用冒号表示一整个维度全选</li>
+<li>举例子，第二行第三列：<code>df.iloc[1, 2]</code>，第四列：<code>df.iloc[:, 3]</code>，行名为<code>name</code>的那一行：<code>df.loc['name', :]</code></li>
+</ol></li>
+</ol>
+<h1 id="创建df">0. 创建df：</h1>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>df = pd.DataFrame(np.arange(<span class="number">16</span>).reshape(<span class="number">4</span>, <span class="number">4</span>), columns=<span class="built_in">list</span>(<span class="string">&#x27;ABCD&#x27;</span>), index=<span class="built_in">list</span>(<span class="string">&#x27;1234&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>df</span><br><span class="line">    A   B   C   D</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">3</span>   <span class="number">8</span>   <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br></pre></td></tr></table></figure>
-<h2 id="删除行列">1. 删除行列</h2>
-<h4 id="drop删除行列">1.1. drop删除行列</h4>
+<h1 id="删除行列">1. 删除行列</h1>
+<h2 id="drop删除行列">1.1. drop删除行列</h2>
 <p><code>inplace=True</code> 表示就地修改，如果不设置，则会创建副本返回</p>
 <p>通过行名删除：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df =df.drop([<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])      <span class="comment"># 不指定axis默认为0, 即“行”</span></span><br><span class="line">df.drop([<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>], inplace=<span class="literal">True</span>) <span class="comment"># inplace=True 就地修改</span></span><br></pre></td></tr></table></figure>
@@ -342,37 +355,37 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.drop([<span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>], axis=<span class="number">1</span>)               <span class="comment"># drop不会就地修改，创建副本返回</span></span><br><span class="line">df.drop([<span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)      </span><br></pre></td></tr></table></figure>
 <p>通过列号删除：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.drop(df.columns[<span class="number">0</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)       <span class="comment"># 删除第1列</span></span><br><span class="line">df.drop(df.columns[<span class="number">0</span>:<span class="number">3</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)     <span class="comment"># 删除前3列</span></span><br><span class="line">df.drop(df.columns[[<span class="number">0</span>, <span class="number">2</span>]], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)  <span class="comment"># 删除第1第3列</span></span><br></pre></td></tr></table></figure>
-<h4 id="去重">1.2. 去重</h4>
+<h2 id="去重">1.2. 去重</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>df.loc[<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;B&#x27;</span>]=<span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>df</span><br><span class="line">    A   B   C   D</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">9</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">3</span>   <span class="number">8</span>   <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chooses = df[<span class="string">&#x27;B&#x27;</span>].drop_duplicates().index <span class="comment"># B列删除重复行后的索引</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>df.loc[chooses] <span class="comment"># 删除B列重复的行</span></span><br><span class="line">    A   B   C   D</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">9</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br></pre></td></tr></table></figure>
-<h4 id="del删除列">1.3. del删除列</h4>
+<h2 id="del删除列">1.3. del删除列</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> df[<span class="string">&#x27;A&#x27;</span>]  <span class="comment"># 删除A列，会就地修改</span></span><br></pre></td></tr></table></figure>
-<h2 id="增加行">2. 增加行</h2>
-<h4 id="loc-at-set_value">2.1. loc / at / set_value</h4>
+<h1 id="增加行">2. 增加行</h1>
+<h2 id="loc-at-set_value">2.1. loc / at / set_value</h2>
 <p>想增加一行，行名为'5'，内容为[16, 17, 18, 19]</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.loc[<span class="string">&#x27;5&#x27;</span>] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]    <span class="comment"># 后面的序列是Iterable就行</span></span><br><span class="line">df.at[<span class="string">&#x27;5&#x27;</span>] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br><span class="line">df.set_value(<span class="string">&#x27;5&#x27;</span>, df.columns, [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], takeable=<span class="literal">False</span>)    <span class="comment"># 过时</span></span><br></pre></td></tr></table></figure>
-<h4 id="append">2.2. append</h4>
+<h2 id="append">2.2. append</h2>
 <p>添加有name的Series：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], index=df.columns, name=<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">df = df.append(s)</span><br></pre></td></tr></table></figure>
 <p>添加没有name的Series，必须<strong>ignore_index</strong>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], index=df.columns)</span><br><span class="line">df = df.append(s, ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <p>可以 append字典列表，同样需要必须ignore_index：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls = [&#123;<span class="string">&#x27;A&#x27;</span>: <span class="number">16</span>, <span class="string">&#x27;B&#x27;</span>: <span class="number">17</span>, <span class="string">&#x27;C&#x27;</span>: <span class="number">18</span>, <span class="string">&#x27;D&#x27;</span>: <span class="number">19</span>&#125;, &#123;<span class="string">&#x27;A&#x27;</span>: <span class="number">20</span>, <span class="string">&#x27;B&#x27;</span>: <span class="number">21</span>, <span class="string">&#x27;C&#x27;</span>: <span class="number">22</span>, <span class="string">&#x27;D&#x27;</span>: <span class="number">23</span>&#125;]</span><br><span class="line">df = df.append(ls, ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="df.loc行号-xxx">2.3. df.loc[行号] = [x,x,x]</h4>
+<h2 id="df.loc行号-xxx">2.3. df.loc[行号] = [x,x,x]</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.loc[<span class="built_in">len</span>(df)] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
 <p>len(df)生成的是最后一行行数，正好表示在最后一行增加。如果选择已经存在的行，会覆盖该行数据</p>
-<h4 id="插入行">2.4. 插入行</h4>
+<h2 id="插入行">2.4. 插入行</h2>
 <p>没有类似insert的方法，暂时替代方法可以先用reindex在行索引中增加一个索引，再给该索引对应的行赋值：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.reindex(index=df.index.insert(<span class="number">2</span>, <span class="string">&#x27;5&#x27;</span>))</span><br><span class="line">df.loc[<span class="string">&#x27;5&#x27;</span>] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="增加列">3. 增加列</h2>
+<h1 id="增加列">3. 增加列</h1>
 <p>序列s = 列A+列C的5种方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = [a + c <span class="keyword">for</span> a, c <span class="keyword">in</span> <span class="built_in">zip</span>(df[<span class="string">&#x27;A&#x27;</span>], df[<span class="string">&#x27;C&#x27;</span>])]          </span><br><span class="line">s = [row[<span class="string">&#x27;A&#x27;</span>] + row[<span class="string">&#x27;C&#x27;</span>] <span class="keyword">for</span> i, row <span class="keyword">in</span> df.iterrows()]  <span class="comment"># 通过iterrows()获取序列，s为list</span></span><br><span class="line">s = df.apply(<span class="keyword">lambda</span> row: row[<span class="string">&#x27;A&#x27;</span>] + row[<span class="string">&#x27;C&#x27;</span>], axis=<span class="number">1</span>)  <span class="comment"># 通过apply获取序列，s为Series</span></span><br><span class="line">s = df[<span class="string">&#x27;A&#x27;</span>] + df[<span class="string">&#x27;C&#x27;</span>]                                  <span class="comment"># 通过Series矢量相加获取序列</span></span><br><span class="line">s = df[<span class="string">&#x27;A&#x27;</span>].values + df[<span class="string">&#x27;C&#x27;</span>].values                    <span class="comment"># 通过Numpy矢量相加获取序列</span></span><br></pre></td></tr></table></figure>
-<h4 id="df或者df.loc">3.1. df[]或者df.loc</h4>
+<h2 id="df或者df.loc">3.1. df[]或者df.loc</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.loc[:, <span class="string">&#x27;E&#x27;</span>] = s</span><br><span class="line">df[<span class="string">&#x27;E&#x27;</span>] = s</span><br></pre></td></tr></table></figure>
-<h4 id="df.insert">3.2. df.insert()</h4>
+<h2 id="df.insert">3.2. df.insert()</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.insert(<span class="number">0</span>, <span class="string">&#x27;E&#x27;</span>, s) </span><br></pre></td></tr></table></figure>
-<h4 id="pd.concat">3.3. pd.concat()</h4>
+<h2 id="pd.concat">3.3. pd.concat()</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>], name=<span class="string">&#x27;E&#x27;</span>, index=df.index)</span><br><span class="line">df = pd.concat([df, s], axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="iloc和loc遍历过程中给列赋值">3.4. iloc和loc遍历过程中给列赋值</h4>
+<h2 id="iloc和loc遍历过程中给列赋值">3.4. iloc和loc遍历过程中给列赋值</h2>
 <p><strong>效率比较低</strong></p>
 <p>df['E']是DataFrame的一个Series，是引用，对其修改也能改变DataFrame，但运行时报了Warning</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;E&#x27;</span>] = <span class="literal">None</span>  <span class="comment"># 需事先创建e列，否则iloc遍历会报错，loc遍历无需事先创建</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(df)):</span><br><span class="line">    df[<span class="string">&#x27;E&#x27;</span>].iloc[i] = df[<span class="string">&#x27;A&#x27;</span>].iloc[i] + df[<span class="string">&#x27;C&#x27;</span>].iloc[i] </span><br><span class="line"><span class="comment"># SettingWithCopyWarning:　A value is trying to be set on a copy of a slice from a DataFrame</span></span><br></pre></td></tr></table></figure>
@@ -380,18 +393,18 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;E&#x27;</span>] = <span class="literal">None</span></span><br><span class="line">col_no = [i <span class="keyword">for</span> i <span class="keyword">in</span> df.columns].index(<span class="string">&#x27;E&#x27;</span>) </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(df)):</span><br><span class="line">    df.iloc[i, col_no] = df[<span class="string">&#x27;A&#x27;</span>].iloc[i] + df[<span class="string">&#x27;C&#x27;</span>].iloc[i]</span><br></pre></td></tr></table></figure>
 <p>用loc无需先给E列赋空值：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df.index:</span><br><span class="line">    df.loc[i, <span class="string">&#x27;E&#x27;</span>] = df.loc[i, <span class="string">&#x27;A&#x27;</span>] + df.loc[i, <span class="string">&#x27;C&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<h4 id="df列号-xxx">3.5. df[列号] = [x,x,x]</h4>
+<h2 id="df列号-xxx">3.5. df[列号] = [x,x,x]</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="built_in">len</span>(df)] = [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
-<h4 id="其他方法">3.6. 其他方法</h4>
+<h2 id="其他方法">3.6. 其他方法</h2>
 <p>增加3列，EFG，value默认为np.NaN</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.concat([df, pd.DataFrame(columns=<span class="built_in">list</span>(<span class="string">&#x27;EFG&#x27;</span>))])   <span class="comment"># 列的次序无法指定，并且fillna时会对整个df做出调整</span></span><br><span class="line">df = df.reindex(columns=<span class="built_in">list</span>(<span class="string">&#x27;ABCDEFG&#x27;</span>),  fill_value=<span class="number">0</span>)   <span class="comment"># 列的次序按照list指定，并且fill_value只对新增列做出调整，推荐！</span></span><br></pre></td></tr></table></figure>
-<h2 id="修改行列">4. 修改行列</h2>
+<h1 id="修改行列">4. 修改行列</h1>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># loc和iloc 可以更换单行、单列、多行、多列的值</span></span><br><span class="line">df1.loc[<span class="number">0</span>,<span class="string">&#x27;age&#x27;</span>]=<span class="number">25</span>      <span class="comment"># 思路：先用loc找到要更改的值，再用赋值（=）的方法实现更换值</span></span><br><span class="line">df1.iloc[<span class="number">0</span>,<span class="number">2</span>]=<span class="number">25</span>         <span class="comment"># iloc：用索引位置来查找</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># at 、iat只能更换单个值</span></span><br><span class="line">df1.at[<span class="number">0</span>,<span class="string">&#x27;age&#x27;</span>]=<span class="number">25</span>      <span class="comment"># iat 用来取某个单值,参数只能用数字索引</span></span><br><span class="line">df1.iat[<span class="number">0</span>,<span class="number">2</span>]=<span class="number">25</span>         <span class="comment"># at 用来取某个单值,参数只能用index和columns索引名称</span></span><br></pre></td></tr></table></figure>
-<h2 id="dataframe拼接">5. dataFrame拼接</h2>
+<h1 id="dataframe拼接">5. dataFrame拼接</h1>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([data1, data2], axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>第一个参数放入的是我们要拼接的数据，记住当有多组数据时，必须要用[]括起来，让其变为一个整体（因为这个参数只占一个位置，不加会抛出错误）</p>
 <p>axis参数：用来设置拼接方式（0-从下方纵向增加记录；1-从右侧增加字段），其中axis=0为默认值</p>
-<h2 id="改列名">6. 改列名</h2>
+<h1 id="改列名">6. 改列名</h1>
 <p>1、修改列名a，b为A、B。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.columns = [<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>2、只修改列名a为A</p>
@@ -510,13 +523,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="网站总字数">217k</span>
+    <span title="网站总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="网站阅读时长">3:17</span>
+    <span title="网站阅读时长">3:24</span>
   </span>
 </div>
 
