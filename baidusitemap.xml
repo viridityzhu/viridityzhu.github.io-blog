@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jyzhu.top/complexity-again/</loc>
+    <lastmod>2022-03-14</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/complexity/</loc>
+    <lastmod>2022-03-14</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/my-books/</loc>
+    <lastmod>2022-03-14</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/git-notebook/</loc>
+    <lastmod>2022-02-20</lastmod>
+  </url>
+  <url>
     <loc>https://jyzhu.top/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/</loc>
-    <lastmod>2022-01-27</lastmod>
+    <lastmod>2022-02-05</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/DeepHuman-3D-Human-Reconstruction-from-a-Single-Image/</loc>
+    <lastmod>2022-02-05</lastmod>
   </url>
   <url>
     <loc>https://jyzhu.top/pandas-notes/</loc>
@@ -18,10 +38,6 @@
   </url>
   <url>
     <loc>https://jyzhu.top/rebellious-person/</loc>
-    <lastmod>2022-01-09</lastmod>
-  </url>
-  <url>
-    <loc>https://jyzhu.top/git-notebook/</loc>
     <lastmod>2022-01-09</lastmod>
   </url>
   <url>
@@ -58,10 +74,6 @@
   </url>
   <url>
     <loc>https://jyzhu.top/Check-My-Evangelion-Typora-Theme/</loc>
-    <lastmod>2021-12-18</lastmod>
-  </url>
-  <url>
-    <loc>https://jyzhu.top/DeepHuman-3D-Human-Reconstruction-from-a-Single-Image/</loc>
     <lastmod>2021-12-18</lastmod>
   </url>
   <url>
@@ -434,10 +446,6 @@
   </url>
   <url>
     <loc>https://jyzhu.top/love-2/</loc>
-    <lastmod>2021-07-30</lastmod>
-  </url>
-  <url>
-    <loc>https://jyzhu.top/books/</loc>
     <lastmod>2021-07-30</lastmod>
   </url>
   <url>

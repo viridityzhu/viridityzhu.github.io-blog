@@ -32,7 +32,7 @@
 <meta property="og:description" content="reference: 廖雪峰 - Git教程 Coursera - Server-side Development with NodeJS, Express and MongoDB  0. Git Diagram 工作区(Working Directory) --add--&gt; 暂存区(Staging area) --commit--&gt; Master HEAD refers to ma">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-09T14:40:05.000Z">
-<meta property="article:modified_time" content="2022-01-09T16:50:46.524Z">
+<meta property="article:modified_time" content="2022-02-20T15:03:06.572Z">
 <meta property="article:author" content="Jiayin Zhu">
 <meta property="article:tag" content="Notebook">
 <meta property="article:tag" content="Git">
@@ -102,7 +102,7 @@
         <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">70</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">154</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">156</span></a></li>
         <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -160,7 +160,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-diagram"><span class="nav-number">1.</span> <span class="nav-text">0. Git Diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#global-configuration-for-git"><span class="nav-number">2.</span> <span class="nav-text">1. Global Configuration for Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start"><span class="nav-number">3.</span> <span class="nav-text">2. Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkoutresetrestore"><span class="nav-number">4.</span> <span class="nav-text">3. Checkout&#x2F;Reset&#x2F;Restore</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E4%BA%BA%E8%AF%9D"><span class="nav-number">4.1.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github"><span class="nav-number">5.</span> <span class="nav-text">Github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-with-a-remote-repo"><span class="nav-number">5.1.</span> <span class="nav-text">1. Connect with a remote repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clone-an-existing-remote-repo"><span class="nav-number">5.2.</span> <span class="nav-text">2. Clone an existing remote repo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#branch"><span class="nav-number">6.</span> <span class="nav-text">Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#solve-conflicts"><span class="nav-number">6.1.</span> <span class="nav-text">Solve conflicts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stash-to-save-current-work"><span class="nav-number">6.2.</span> <span class="nav-text">stash to save current work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cherry-pick-to-copy-a-specific-commit"><span class="nav-number">6.3.</span> <span class="nav-text">cherry-pick to copy a specific commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cooperation"><span class="nav-number">6.4.</span> <span class="nav-text">Cooperation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-number">7.</span> <span class="nav-text">Tag</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-diagram"><span class="nav-number">1.</span> <span class="nav-text">0. Git Diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#global-configuration-for-git"><span class="nav-number">2.</span> <span class="nav-text">1. Global Configuration for Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start"><span class="nav-number">3.</span> <span class="nav-text">2. Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkoutresetrestore"><span class="nav-number">4.</span> <span class="nav-text">3. Checkout&#x2F;Reset&#x2F;Restore</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E4%BA%BA%E8%AF%9D"><span class="nav-number">4.1.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">4. Stash的简单使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github"><span class="nav-number">6.</span> <span class="nav-text">Github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-with-your-github-account-using-ssh"><span class="nav-number">6.1.</span> <span class="nav-text">0. Connect with your Github account using SSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-with-a-remote-repo"><span class="nav-number">6.2.</span> <span class="nav-text">1. Connect with a remote repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clone-an-existing-remote-repo"><span class="nav-number">6.3.</span> <span class="nav-text">2. Clone an existing remote repo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#branch"><span class="nav-number">7.</span> <span class="nav-text">Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#solve-conflicts"><span class="nav-number">7.1.</span> <span class="nav-text">Solve conflicts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stash-to-save-current-work"><span class="nav-number">7.2.</span> <span class="nav-text">stash to save current work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cherry-pick-to-copy-a-specific-commit"><span class="nav-number">7.3.</span> <span class="nav-text">cherry-pick to copy a specific commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cooperation"><span class="nav-number">7.4.</span> <span class="nav-text">Cooperation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-number">8.</span> <span class="nav-text">Tag</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -310,7 +310,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">字数:</span>
-      <span>4.5k</span>
+      <span>4.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -414,8 +414,16 @@
 <p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD &lt;file&gt;</code>，就回到了场景1，第二步按场景1操作。</p>
 <p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，用<code>git reset HEAD^</code>，不过前提是没有推送到远程库。</p>
 <p>场景4：那已经推送到远程库了咋办呢？当然还是先在本地撤销到合适的历史版本（同场景3），然后再强制推送到远程库：<code>git push --force</code></p>
+<h2 id="stash的简单使用">4. Stash的简单使用</h2>
+<p>如果本地有更改，暂时不想commit；可是远程库又有了新的更新，需要同步过来。那就</p>
+<ul>
+<li>先用stash把本地更改暂存起来：<code>git stash</code></li>
+<li>然后正常pull：<code>git pull</code></li>
+<li>最后，把刚存起来的本地更改pop出来：<code>git stash pop</code></li>
+</ul>
+<p>如果有太多stash，想清空：<code>git stash clear</code></p>
 <h2 id="github">Github</h2>
-<p>###0. Connect with your Github account using SSH</p>
+<h3 id="connect-with-your-github-account-using-ssh">0. Connect with your Github account using SSH</h3>
 <h3 id="connect-with-a-remote-repo">1. Connect with a remote repo</h3>
 <ul>
 <li>Suppose you have a blank repo on Github, and an existing repo on your computer</li>
@@ -520,10 +528,10 @@
       <div class="popular-posts-title"><a href="/计算机组成与体系结构/" rel="bookmark">计算机组成与体系结构</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/C-Language-Notebook/" rel="bookmark">C Language Notebook</a></div>
+      <div class="popular-posts-title"><a href="/Java-Notebook/" rel="bookmark">Java Notebook</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/Java-Notebook/" rel="bookmark">Java Notebook</a></div>
+      <div class="popular-posts-title"><a href="/Python Notebook/" rel="bookmark">Python Notebook</a></div>
     </li>
   </ul>
 
@@ -615,13 +623,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="网站总字数">225k</span>
+    <span title="网站总字数">226k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="网站阅读时长">3:24</span>
+    <span title="网站阅读时长">3:25</span>
   </span>
 </div>
 
