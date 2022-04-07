@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Live demo of CodeTyping via Pythonanywhere</title>
+      <link href="/live-demo-of-code-typing-via-pythonanywhere/"/>
+      <url>/live-demo-of-code-typing-via-pythonanywhere/</url>
+      
+        <content type="html"><![CDATA[<figure><img src="https://user-images.githubusercontent.com/39082096/149967763-a9bb56c5-6411-4d86-90d3-f1e22845e2a8.png" alt="image" /><figcaption>image</figcaption></figure><p><a href="http://jyzhu.pythonanywhere.com/">Code Typing Practice</a> (or source code on Github: <a href="https://github.com/viridityzhu/code-typing">here</a>) is a tiny web page that I wrote for fun last semester, which is for me myself to practice code typing. It is a naive Django web app (with bugs🤪). BUT! I find a service to deploy it lively today. That's what is worth noting down now.</p><span id="more"></span><h2 id="note">Note</h2><p>Initially I tried to deploy this demo on Vercel.com. But it was too troublesome coz it does not support Django by default. Thankfully, I found <a href="https://www.pythonanywhere.com/">pythonanywhere</a>, on which each user can deploy one web app without payment. What's the best is that it is really easy to deploy: it provides access to Bash console.</p><p>Two things to be noted:</p><ol type="1"><li>Every 3 months, I have to login into the pythonanywhere to extend my web app, otherwise it will be killed.</li><li>The bug cost most of my time is that in the <code>view.py</code> I had used relative path to the static code files. However, I should use absolute path, with adding <code>BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</code> ahead.</li></ol><h2 id="todo">TODO</h2><p>Actually, after learned the MERN frame this semester, I am now aware of how naive this project is. However, I love Python, so it doesn't matter if i still regard Django as a hobby🤨. Who knows... I haven't even spent my time on that course project...</p><p>Now that the live demo is achieved, I might think of polishing this little project a bit.</p><ul><li>[ ] Fix bugs. Though i've already forgotten what those bugs are...</li><li>[ ] Replace the stupid code snippets...</li><li>[ ] Add the feature to compute time cost and typing speed. Also, save typing records.</li><li>[ ] Explicitly support other kinds of typing materials, and also support uploading customize materials.</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Django </tag>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>三月的人生主题是复杂性</title>
       <link href="/complexity-again/"/>
       <url>/complexity-again/</url>
@@ -36,6 +63,35 @@
           
       </categories>
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Reading Pixel2Mesh++: Multi-View 3D Mesh Generation via Deformation</title>
+      <link href="/Reading-Pixel2meshPP/"/>
+      <url>/Reading-Pixel2meshPP/</url>
+      
+        <content type="html"><![CDATA[<p>论文地址：https://arxiv.org/abs/1908.01491</p><p>作者：Chao Wen, Yinda Zhang, Zhuwen Li, Yanwei Fu</p><p>发表： ICCV 2019</p><p>链接： https://arxiv.org/abs/1908.01491</p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p></blockquote><h2 id="why">Why：</h2><ol type="1"><li>单视角图像3D重建模的效果不够好，尤其是背面，而且泛化能力也差。</li><li>所以增加多个视角的图像：更多视觉信息，且有已经定义得很好的传统方法。</li><li>但是传统方法需要更大量的图像；这时候深度学习模型可以隐式编码视角间的关联，就派上了用场。</li><li>很有用，但是欠研究。</li></ol><h2 id="what">What：</h2><ol type="1"><li>利用多视角图像，固定相机pose参数，利用GCN，从粗糙逐渐精细地变形，生成3D mesh重建模。</li><li>采样mesh模型顶点周围的区域，利用perceptual feature推理出对mesh的形变。</li><li>对于不同种类的物体泛化能力很好。</li></ol><p>读前疑问：</p><ol type="1"><li>似乎就是给pixel2mesh加上一层壳，应用在多视角图像上🤔那么这里的创新点本质在哪儿呢？</li><li>GCN用处大吗，为什么用它？</li><li>采样mesh顶点周围的区域，是什么意思？</li><li>多视角3D重建，应用真的广泛吗？</li></ol><h2 id="how">How：</h2><ol type="1"><li>多视角变形网络 Multi-View Deformation Network (MDN)</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> Deep Learning </tag>
+            
+            <tag> 3D Reconstruction </tag>
+            
+        </tags>
       
     </entry>
     

@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/"/>
-  <updated>2022-03-14T07:48:22.442Z</updated>
+  <updated>2022-04-07T15:34:41.597Z</updated>
   <id>https://jyzhu.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Live demo of CodeTyping via Pythonanywhere</title>
+    <link href="https://jyzhu.top/live-demo-of-code-typing-via-pythonanywhere/"/>
+    <id>https://jyzhu.top/live-demo-of-code-typing-via-pythonanywhere/</id>
+    <published>2022-04-07T15:24:15.000Z</published>
+    <updated>2022-04-07T15:34:41.597Z</updated>
+    
+    <content type="html"><![CDATA[<figure><img src="https://user-images.githubusercontent.com/39082096/149967763-a9bb56c5-6411-4d86-90d3-f1e22845e2a8.png" alt="image" /><figcaption>image</figcaption></figure><p><a href="http://jyzhu.pythonanywhere.com/">Code Typing Practice</a> (or source code on Github: <a href="https://github.com/viridityzhu/code-typing">here</a>) is a tiny web page that I wrote for fun last semester, which is for me myself to practice code typing. It is a naive Django web app (with bugs🤪). BUT! I find a service to deploy it lively today. That's what is worth noting down now.</p><span id="more"></span><h2 id="note">Note</h2><p>Initially I tried to deploy this demo on Vercel.com. But it was too troublesome coz it does not support Django by default. Thankfully, I found <a href="https://www.pythonanywhere.com/">pythonanywhere</a>, on which each user can deploy one web app without payment. What's the best is that it is really easy to deploy: it provides access to Bash console.</p><p>Two things to be noted:</p><ol type="1"><li>Every 3 months, I have to login into the pythonanywhere to extend my web app, otherwise it will be killed.</li><li>The bug cost most of my time is that in the <code>view.py</code> I had used relative path to the static code files. However, I should use absolute path, with adding <code>BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</code> ahead.</li></ol><h2 id="todo">TODO</h2><p>Actually, after learned the MERN frame this semester, I am now aware of how naive this project is. However, I love Python, so it doesn't matter if i still regard Django as a hobby🤨. Who knows... I haven't even spent my time on that course project...</p><p>Now that the live demo is achieved, I might think of polishing this little project a bit.</p><ul><li>[ ] Fix bugs. Though i've already forgotten what those bugs are...</li><li>[ ] Replace the stupid code snippets...</li><li>[ ] Add the feature to compute time cost and typing speed. Also, save typing records.</li><li>[ ] Explicitly support other kinds of typing materials, and also support uploading customize materials.</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;figure&gt;
+&lt;img src=&quot;https://user-images.githubusercontent.com/39082096/149967763-a9bb56c5-6411-4d86-90d3-f1e22845e2a8.png&quot; alt=&quot;image&quot; /&gt;&lt;figcaption&gt;image&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;http://jyzhu.pythonanywhere.com/&quot;&gt;Code Typing Practice&lt;/a&gt; (or source code on Github: &lt;a href=&quot;https://github.com/viridityzhu/code-typing&quot;&gt;here&lt;/a&gt;) is a tiny web page that I wrote for fun last semester, which is for me myself to practice code typing. It is a naive Django web app (with bugs🤪). BUT! I find a service to deploy it lively today. That&#39;s what is worth noting down now.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
+    
+    
+    <category term="Django" scheme="https://jyzhu.top/tags/Django/"/>
+    
+    <category term="Python" scheme="https://jyzhu.top/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>三月的人生主题是复杂性</title>
@@ -65,6 +91,34 @@
     
     <category term="poems" scheme="https://jyzhu.top/categories/poems/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>Reading Pixel2Mesh++: Multi-View 3D Mesh Generation via Deformation</title>
+    <link href="https://jyzhu.top/Reading-Pixel2meshPP/"/>
+    <id>https://jyzhu.top/Reading-Pixel2meshPP/</id>
+    <published>2022-02-06T09:59:29.000Z</published>
+    <updated>2022-03-14T07:49:35.086Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：https://arxiv.org/abs/1908.01491</p><p>作者：Chao Wen, Yinda Zhang, Zhuwen Li, Yanwei Fu</p><p>发表： ICCV 2019</p><p>链接： https://arxiv.org/abs/1908.01491</p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p></blockquote><h2 id="why">Why：</h2><ol type="1"><li>单视角图像3D重建模的效果不够好，尤其是背面，而且泛化能力也差。</li><li>所以增加多个视角的图像：更多视觉信息，且有已经定义得很好的传统方法。</li><li>但是传统方法需要更大量的图像；这时候深度学习模型可以隐式编码视角间的关联，就派上了用场。</li><li>很有用，但是欠研究。</li></ol><h2 id="what">What：</h2><ol type="1"><li>利用多视角图像，固定相机pose参数，利用GCN，从粗糙逐渐精细地变形，生成3D mesh重建模。</li><li>采样mesh模型顶点周围的区域，利用perceptual feature推理出对mesh的形变。</li><li>对于不同种类的物体泛化能力很好。</li></ol><p>读前疑问：</p><ol type="1"><li>似乎就是给pixel2mesh加上一层壳，应用在多视角图像上🤔那么这里的创新点本质在哪儿呢？</li><li>GCN用处大吗，为什么用它？</li><li>采样mesh顶点周围的区域，是什么意思？</li><li>多视角3D重建，应用真的广泛吗？</li></ol><h2 id="how">How：</h2><ol type="1"><li>多视角变形网络 Multi-View Deformation Network (MDN)</li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;论文地址：https://arxiv.org/abs/1908.01491&lt;/p&gt;
+&lt;p&gt;作者：Chao Wen, Yinda Zhang, Zhuwen Li, Yanwei Fu&lt;/p&gt;
+&lt;p&gt;发表： ICCV 2019&lt;/p&gt;
+&lt;p&gt;链接： https://arxiv.org/abs/1908.01491&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
+    
+    
+    <category term="Computer Vision" scheme="https://jyzhu.top/tags/Computer-Vision/"/>
+    
+    <category term="Deep Learning" scheme="https://jyzhu.top/tags/Deep-Learning/"/>
+    
+    <category term="3D Reconstruction" scheme="https://jyzhu.top/tags/3D-Reconstruction/"/>
     
   </entry>
   
@@ -501,66 +555,6 @@
     
     
     <category term="Python" scheme="https://jyzhu.top/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Weird things in Python</title>
-    <link href="https://jyzhu.top/Weird-things-in-Python/"/>
-    <id>https://jyzhu.top/Weird-things-in-Python/</id>
-    <published>2021-10-24T16:46:39.000Z</published>
-    <updated>2021-10-24T16:58:31.936Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="short-circuit">Short Circuit</h2><ul><li><code>a and b</code> evaluates to a if a is falsey, otherwise it evaluates to b</li><li><code>a or b</code> evaluates to a if a is truthy, otherwise it evaluates to b</li><li>not a evaluates to True if a is falsey, otherwise it evaluates to False</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0</span> <span class="keyword">and</span> <span class="string">&#x27;Hello&#x27;</span> <span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;x&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;y&#x27;</span> <span class="string">&#x27;y&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#x27;</span> <span class="keyword">or</span> <span class="number">0</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>-<span class="number">23</span> <span class="keyword">or</span> <span class="literal">False</span> -<span class="number">23</span></span><br></pre></td></tr></table></figure><ul><li>True is represented as 1, and False is represented as 0.</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span> == <span class="number">1</span> </span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">False</span> == <span class="number">0</span> </span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">False</span> == <span class="string">&#x27;&#x27;</span> </span><br><span class="line"><span class="literal">False</span> <span class="comment"># because False == 0, but 0 != &#x27;&#x27;, because &#x27;&#x27; == ord(&#x27;&#x27;)</span></span><br></pre></td></tr></table></figure><h2 id="different-behavior-in-shellscript">Different Behavior in shell/script</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>n1, n2 = <span class="number">1234e23</span>, <span class="number">1234e23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(n1), <span class="built_in">id</span>(n2)</span><br><span class="line">(<span class="number">4317529008</span>, <span class="number">4317529008</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n1 = <span class="number">1234e23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n2 = <span class="number">1234e23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(n1), <span class="built_in">id</span>(n2)</span><br><span class="line">(<span class="number">4318748880</span>, <span class="number">4318749104</span>)</span><br></pre></td></tr></table></figure><h2 id="the-one-line-if">The one line <code>if</code>:</h2><ol type="1"><li><p>don't have an else: <code>if True: print('xxx')</code></p></li><li><p>have an else and assign the value: <code>x = 1 if True else 0</code></p><p><strong>can't say <code>else x = 1</code>.</strong></p></li><li><p>have an else and don't wanna assign: dirty hack: ignore the returning value:</p><p><code>x = 1 if False else print(0)</code>, the print will return None to x.</p><p><code>print(1) if True else print(0)</code>, normally do.</p></li></ol><h2 id="ls-1-2-3-to-change-a-list-in-a-function"><code>ls[:] = [1, 2, 3]</code> To change a list in a function</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeLS</span>(<span class="params">ls</span>):</span></span><br><span class="line">  ls[:] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">ls = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">changeLS(ls)</span><br><span class="line"><span class="built_in">print</span>(ls)</span><br><span class="line"><span class="comment"># ls = [1,2,3] then.</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;short-circuit&quot;&gt;Short Circuit&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;a and b&lt;/code&gt; evaluates to a if a is falsey, otherwise it evaluates to b&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;a or b&lt;/code&gt; evaluates to a if a is truthy, otherwise it evaluates to b&lt;/li&gt;
-&lt;li&gt;not a evaluates to True if a is falsey, otherwise it evaluates to False&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;#x27;Hello&amp;#x27;&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&amp;#x27;x&amp;#x27;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;#x27;y&amp;#x27;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;#x27;y&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&amp;#x27;&amp;#x27;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;False&lt;/span&gt; -&lt;span class=&quot;number&quot;&gt;23&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;True is represented as 1, and False is represented as 0.&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
-    
-    
-    <category term="Python" scheme="https://jyzhu.top/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Type System of Scala: Covariant, Contravariant, and PECS Rule</title>
-    <link href="https://jyzhu.top/Type-System-of-Scala-Covariant-Contravariant-and-PECS-Rule/"/>
-    <id>https://jyzhu.top/Type-System-of-Scala-Covariant-Contravariant-and-PECS-Rule/</id>
-    <published>2021-10-24T16:17:49.000Z</published>
-    <updated>2021-10-24T16:45:28.311Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="type-system">Type System</h1><h2 id="what-are-types">What are types:</h2><ul><li>意义的逻辑含义</li><li>一个契约，要求所有成员有共同的特性</li><li>所有值、变量都有type</li><li>所有对象object都有type</li><li>所有class、trait都<strong>是</strong>type</li></ul><p><strong>value types &amp; reference types</strong></p><ul><li>有9种value types，它们不能为空：Byte Short Char Int Long Float Double Boolean Unit</li><li>其他都是reference types：objects functions 等等</li></ul><h3 id="type-hierarchies">Type Hierarchies</h3><figure><img src="https://i.loli.net/2021/10/25/WrhOGvbdoXtgJNi.png" alt="image-20211022140614737" /><figcaption>image-20211022140614737</figcaption></figure><h4 id="weak-conformance">WEAK CONFORMANCE</h4><figure><img src="https://i.loli.net/2021/10/25/qlE7RbaxHt6M2Qv.png" alt="image-20211022140142393" /><figcaption>image-20211022140142393</figcaption></figure><ul><li>和Java类似，前面type的都可以赋值转化成后面的type（typecast）</li><li>数、字符字面量，都可以赋值给 Byte Short and Char</li></ul><h4 id="subtype">Subtype</h4><ul><li><p>子类可以被当做父类</p><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s: <span class="type">Student</span> = <span class="keyword">new</span> <span class="type">SmartStudent</span> <span class="comment">// 如此可以。s仍然是一个Student类，但它拥有SmartStudent的属性和方法</span></span><br></pre></td></tr></table></figure></li><li><p>S是T的子类，记作<span class="math inline">\(𝑆 &lt;∶ 𝑇\)</span>, 读作 S is a T and satisfies all properties that T does，so S can be treated as T</p></li></ul><p>可以把S赋值给T的三种情况：</p><ol type="1"><li>𝑆 primitive-widens to 𝑇 : <strong>widening</strong> is like Int converted to Double, is done implicitly</li><li>𝑆 primitive-narrows to 𝑇 : <strong>narrowing</strong> is like Double to Int, needs conversion</li><li>𝑆 &lt;∶ 𝑇</li></ol><h3 id="type-inference">Type Inference</h3><p>Type inference is a technique for determining the type of some entity without explicitly specifying it</p><p>谨慎使用🤔</p><h2 id="generics-parametric-polymorphism-variance"><strong>GENERICS, PARAMETRIC POLYMORPHISM &amp; VARIANCE</strong></h2><p>想要通用化一个程序，可能是需要它可以处理不同的类型的参数。那么就可以把参数类型也作为一个参数传入，就是<strong>type parameter</strong>。表示为：</p><p><code>[T]</code></p><p>这样就会遇到subtype定义的问题。==<strong>a box of T should be able to both store and produce a T.</strong>==</p><p>假如GummyBear是Sweet的子类，但下面这两个都是错的：</p><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> b: <span class="type">Box</span>[<span class="type">GummyBear</span>] = <span class="keyword">new</span> <span class="type">Box</span>[<span class="type">Sweet</span>](<span class="keyword">new</span> <span class="type">Sweet</span>) <span class="comment">// wrong</span></span><br><span class="line"><span class="comment">// 因为上述b需要可以 存 且 提供box中的类：</span></span><br><span class="line">b.value = <span class="keyword">new</span> <span class="type">GummyBear</span> <span class="comment">// ok</span></span><br><span class="line"><span class="keyword">val</span> a: <span class="type">GummyBear</span> = b.value <span class="comment">// not ok!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> b: <span class="type">Box</span>[<span class="type">Sweet</span>] = <span class="keyword">new</span> <span class="type">Box</span>[<span class="type">GummyBear</span>](<span class="keyword">new</span> <span class="type">GummyBear</span>) <span class="comment">// wrong</span></span><br><span class="line"><span class="comment">// 因为上述b需要可以 存 且 提供box中的类：</span></span><br><span class="line">b.value = <span class="keyword">new</span> <span class="type">Sweet</span> <span class="comment">// not ok!</span></span><br><span class="line"><span class="keyword">val</span> a: <span class="type">Sweet</span> = b.value <span class="comment">// ok</span></span><br></pre></td></tr></table></figure><h3 id="pecs-rule---producer-extends-consumer-super">PECS Rule - Producer: Extends; Consumer: Super</h3><ol type="1"><li><p>if you need a box that <strong>P</strong>roduces T, use a box of anything that <strong>E</strong>xtends T</p><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">produceFromBox</span></span>(b: <span class="type">Box</span>[_ &lt;: <span class="type">Sweet</span>]): <span class="type">Sweet</span> = b.value</span><br></pre></td></tr></table></figure><p>covariant: <span class="math display">\[\frac{S &lt;: T}{C[S] &lt;: C[T]}\]</span></p><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>[+<span class="type">T</span>](<span class="params">val value: <span class="type">T</span></span>) <span class="comment">// make Box covariant in T</span></span></span><br><span class="line"><span class="keyword">val</span> b: <span class="type">Box</span>[<span class="type">Sweet</span>] = <span class="keyword">new</span> <span class="type">Box</span>[<span class="type">GummyBear</span>](<span class="keyword">new</span> <span class="type">GummyBear</span>) <span class="comment">// ok now</span></span><br></pre></td></tr></table></figure></li><li><p>if you need a box that <strong>C</strong>onsumes T, use a box of anything that is <strong>S</strong>uper of T</p><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">putInBox</span></span>(b: <span class="type">Box</span>[_ &gt;: <span class="type">GummyBear</span>], s: <span class="type">GummyBear</span>) = &#123; </span><br><span class="line">  b.value = s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>contravariant: <span class="math display">\[\frac{S &lt;: T}{C[T] &lt;: C[S]}\]</span></p><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Monster</span>[-<span class="type">T</span>] </span>&#123; <span class="comment">// make Monster contravariant in T</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span></span>(t: <span class="type">T</span>) = println(t) </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">val</span> m: <span class="type">Monster</span>[<span class="type">GummyBear</span>] = <span class="keyword">new</span> <span class="type">Monster</span>[<span class="type">Sweet</span>] <span class="comment">// ok now</span></span><br></pre></td></tr></table></figure></li></ol><h4 id="variance-of-function-types">VARIANCE OF FUNCTION TYPES</h4><p><span class="math display">\[\frac{I_2&lt;:I_1,R_2&lt;:R_1}{I_1=&gt;R_1&lt;:I_2=&gt;R_2}\]</span></p><p>for example, 一个function接收AnyRef，返回Subtring，那它就是这个function的子类：接收Sweet（&lt;: AnyRef），返回String(&gt;: Substring):</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AnyRef =&gt; Substring &lt;: Sweet =&gt; String</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;type-system&quot;&gt;Type System&lt;/h1&gt;
-&lt;h2 id=&quot;what-are-types&quot;&gt;What are types:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;意义的逻辑含义&lt;/li&gt;
-&lt;li&gt;一个契约，要求所有成员有共同的特性&lt;/li&gt;
-&lt;li&gt;所有值、变量都有type&lt;/li&gt;
-&lt;li&gt;所有对象object都有type&lt;/li&gt;
-&lt;li&gt;所有class、trait都&lt;strong&gt;是&lt;/strong&gt;type&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;value types &amp;amp; reference types&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
-    
-    
-    <category term="Scala" scheme="https://jyzhu.top/tags/Scala/"/>
     
   </entry>
   
