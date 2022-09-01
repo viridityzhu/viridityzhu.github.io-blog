@@ -4,6 +4,112 @@
   
     
     <entry>
+      <title>Reading NeuMan: Neural Human Radiance Field from a Single Video</title>
+      <link href="/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/"/>
+      <url>/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/</url>
+      
+        <content type="html"><![CDATA[<p>论文地址：https://arxiv.org/abs/2203.12575</p><p>作者：Jiang, Wei and Yi, Kwang Moo and Samei, Golnoosh and Tuzel, Oncel and Ranjan, Anurag</p><p>发表： ECCV22</p><p>开源代码： https://github.com/apple/ml-neuman</p><h2 id="why">Why：</h2><ol type="1"><li><p>人体的渲染和新姿势生成在增强现实的应用中很重要</p></li><li><p>NeRF的出现让新视角生成任务取得很大进步</p></li><li><p>但是现有工作都没有实现：根据单段wild视频，生成新的人物和新的场景</p><figure><img src="https://s2.loli.net/2022/08/24/NdDrEhojmBLCJz9.png" alt="image-20220824123146868" /><figcaption>image-20220824123146868</figcaption></figure></li></ol><h2 id="what">What：</h2><p>读前疑问：</p><ol type="1"><li>NeRF和人体SMPL模型是怎么有机统一的🤔</li></ol><h2 id="how">How：</h2><ol type="1"><li><p>输入是一段wild视频，moving camera的。用现存方法估计人体姿势、人体形状、人体mask（Mask-RCNN）、相机pose、sparse scene model、depth maps</p></li><li><p>然后训练两个 NeRF 模型，一个用于人体，一个用于由 Mask-RCNN 估计的分割mask引导的背景。 此外，通过将来自多视图重建和单目深度回归的深度估计融合在一起来规范场景 NeRF 模型</p></li><li><p>关于NeRF：(参考：<a href="https://zhuanlan.zhihu.com/p/360365941">zhihu</a>）</p><ol type="1"><li><p>NeRF是用神经辐射场建模一个场景，好处是可以生成新视角的图像。针对一个静态场景，需要提供大量相机参数已知的图片。基于这些图片训练好的神经网络，即可以从任意角度渲染出图片结果了。</p></li><li><p>它用MLP，把一个3d场景隐式地编码进神经网络里。输入为3d空间中一个点的坐标<span class="math inline">\(\bold x = (x,y,z)\)</span>和相机视角 <span class="math inline">\(\bold d = (\theta, \phi)\)</span>，输出为该点对应的体素的密度opacity，以及颜色<span class="math inline">\(\bold c = (r,g,b)\)</span>。公式就是 <span class="math display">\[f(\bold{x},\bold{v})=(\bold c, \sigma)\]</span></p></li><li><p>在具体的实现中， x 首先输入到MLP网络中，并输出 σ 和中间特征，中间特征和 d 再输入到额外的全连接层中并预测颜色。因此，体素密度只和空间位置有关，而颜色则与空间位置以及观察的视角都有关系。基于view dependent 的颜色预测，能够得到不同视角下不同的光照效果。</p></li><li><p>NeRF 函数得到的是一个3D空间点的颜色和密度信息，但当用一个相机去对这个场景成像时，所得到的2D 图像上的一个像素实际上对应了一条从相机出发的射线上的所有连续空间点。后续就有各种各样高效的方式来进行可微渲染了，本质上都是从这条射线上采样，获得平均的颜色信息。</p></li></ol></li></ol><h3 id="人体模型nerfsmpl">人体模型：NeRF+SMPL</h3><p>我主要关注的就是人体模型这部分了。总体来说，做法就是：</p><p>首先生成人体NeRF模型，然后用ROMP生成逐帧的人体SMPL模型，然后定义一个canonical的人体模型（主要是去掉姿势这个变量，变成大字型人体），根据像素点在SMPL模型上对应的位置，再对应到canonical模型上，学到人体的外貌。（其实训练中NeRF和SMPL模型是一起学的，没有分得那么开的先后顺序。）</p><figure><img src="https://s2.loli.net/2022/08/24/JSycDH34UlMBsEW.png" alt="image-20220824180150642" /><figcaption>image-20220824180150642</figcaption></figure><p>具体来说：</p><ol type="1"><li><p>对于某一帧图像，用ROMP估计人体的SMPL模型，但采取了一些改良：</p><ol type="1"><li>利用densepose估计人体的silhouette，以及MMPose估计人体的2D joints；根据这些结果优化SMPL参数</li></ol></li><li><p>把刚刚得到的SMPL模型warp成一个canonical的大字型人体模型，这个warp变换称为<span class="math inline">\(\mathcal T\)</span></p></li><li><p>怎么把图像中的像素点对应到canonical的大字型人体模型上呢？</p><ol type="1"><li><p>首先生成人体NeRF模型</p></li><li><p>对于空间中的每个点<span class="math inline">\(\bold x_f=\bold r_f(t)\)</span> （这里的f是第f帧图像），它都可以由一条射线<span class="math inline">\(\bold r\)</span>上对应的像素点渲染而来；那么对这个点直接应用前面的变换<span class="math inline">\(\mathcal{T}\)</span>，就得到它在canonical空间中对应的点了，<span class="math inline">\(\bold x&#39;_f = \mathcal{T}_{\theta_f}(\bold x_f)\)</span></p></li><li><p>但是因为SMPL的估计不是很准确，这个变换<span class="math inline">\(\mathcal{T}\)</span>也不是很准确，所以这里提出来，通过在训练中同时优化SMPL模型 <span class="math inline">\(\theta_f\)</span>和人体NeRF模型的方式，可以提升效果。</p></li><li><p>还有，还加了一个MLP改错网络<span class="math inline">\(\mathcal{E}\)</span>改正warping的误差。最终结果就是： <span class="math display">\[\bold {\tilde x&#39;_f} = \mathcal{T}_{\theta_f}(\bold x_f) + \mathcal{E}(\bold x_f, f)\]</span></p></li><li><p>此时相机视角也需要校正：对于射线ray上的第i个样本点， <span class="math display">\[\bold d(t_i)&#39;_f = \bold {\hat x}&#39;_f(t_i) - \bold {\hat x}&#39;_f(t_{i-1})\]</span></p></li></ol></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> 3D Generation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>It seems impossible to access USB devices in Docker on MacOS</title>
+      <link href="/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/"/>
+      <url>/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/</url>
+      
+        <content type="html"><![CDATA[<p>According to <a href="https://dev.to/rubberduck/using-usb-with-docker-for-mac-3fdd" class="uri">https://dev.to/rubberduck/using-usb-with-docker-for-mac-3fdd</a>, it seems impossible to forward USB to a Docker container on MacOS, coz the Docker is running in a virtual environment via <a href="https://github.com/docker/for-mac/issues/900">hyperkit</a>.</p><p>First of all, ports of the host (i.e., MacOS) cannot be directly accessed by any virtual environment (i.e., Docker) on it. So, &quot;you first have to expose it to the virtual machine where Docker is running&quot;. However, Docker is running on hyperkit, which doesn't support usb forwarding.</p><p>The author provided another way to do it, that is to use<code>docker-machine</code>, which uses a Virtualbox VM to host the <code>dockerd</code> daemon, to replace the original docker. Then... why bother still using Docker, instead of just using Virtualbox to run the seperated environment?</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Reading Video-to-Video Synthesis</title>
+      <link href="/Reading-Video-to-Video-Synthesis/"/>
+      <url>/Reading-Video-to-Video-Synthesis/</url>
+      
+        <content type="html"><![CDATA[<p>论文地址：https://tcwang0509.github.io/vid2vid/paper_vid2vid.pdf</p><p>作者：<a href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a href="http://mingyuliu.net/">Ming-Yu Liu</a>, <a href="http://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a>, <a href="https://liuguilin1225.github.io/">Guilin Liu</a>, Andrew Tao, <a href="http://jankautz.com/">Jan Kautz</a>, <a href="http://catanzaro.name/">Bryan Catanzaro</a></p><p>发表： NeurIPS 2018</p><p>Project：https://tcwang0509.github.io/vid2vid/</p><p>Github：https://github.com/NVIDIA/vid2vid</p><hr /><blockquote><p><strong>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</strong></p><p>这篇论文的背景是当时已经有比较好的pic2pic生成模型了。要让vid2vid也work的话，最重要的应该就是帧与帧之间consistency的问题。所以我会想在将pic2pic生成模型应用在video的基础上，对帧之间加上consistency loss。但直接这样肯定效率很低，因为一个视频中帧与帧之间肯定会包含大量冗余信息嘛，应该还需要想办法让帧之间信息共享，这样模型只需要预测后一帧与前一帧不同的地方，减少运算。例如，用一个小网络预测图像中静态与动态的部分，不知道可不可行。</p><p><strong>看完文章后</strong>：我感觉我在大体思路上把握准了，主要矛盾确实如此。但</p><ol type="1"><li>作者没有用consistency loss，而是用gan的思路，设计了一个条件视频鉴别器 <span class="math inline">\(D_V\)</span>，鉴别视频在时序上的动态是否真实自然。</li><li>我没有optical flow，光流，这方面的知识储备；作者利用一个网络预测optical flow，就可以直接根据前一帧图像得到后一帧图像中对应的像素点了，而且这样的结果能够很consistent。对于前一帧图像中没有对应的像素，再用一个补洞网络补洞。这样就解决了效率问题。</li><li>作者还利用了特征嵌入方法，实现了多模态视频的生成，这是我第一次了解到的方法，感觉很有趣。</li></ol></blockquote><h2 id="why">Why：</h2><ol type="1"><li>图像水平上的生成被研究得很好，但是视频上的此前却比较少；图像生成的成果如果直接放在视频上的话，效果不太妙，因为帧与帧之间缺乏连贯性。所以是需要一些temporal上的改进的</li></ol><h2 id="what">What：</h2><ol type="1"><li>利用GAN和一些时间-空间对抗目标（spatio-temporal adverbial objective），来实现video to video的生成。</li><li>用不同类型的输入来生成新的照片写实风格的视频，效果很好。</li><li>是一个全新定义的vid2vid任务，主要新点在于：输入的vid并不是完整的视频帧，而是一些可以操控的语义信息，例如segmentation masks, sketches, and poses</li></ol><p>读前疑问：</p><ol type="1"><li>在此之前没有比较好的vid2vid，这篇论文是在什么条件下实现了很好的vid2vid效果呢，比如其他方面的技术革新？我觉得主要是利用了gan，一个图像鉴别器+一个视频鉴别器相配合，取得很好的生成效果。除此之外我觉得optical flow用在这里也很好，效率高而且生成效果连贯（但是不知道新不新）；另外特征嵌入方法用在这里也很好，实现了根据语义信息来生成新视频，而且可以是多模态的视频</li><li>摘要里强调的时间-空间对抗目标（spatio-temporal adverbial objective）到底是什么？我感觉正文里好像没有再特别强调时间-空间这一对目标了……根据我自己的理解的话，主要就是那一对鉴别器：时间上--视频鉴别器鉴别在时序上的动态是否真实自然，空间上--图像鉴别器鉴别一张图像在空间上是否真实自然。</li></ol><h2 id="how">How：</h2><h3 id="定义vid2vid任务">定义vid2vid任务</h3><ol type="1"><li><p>定义输入的语义信息序列为<span class="math inline">\(s\)</span>，对应的真实视频序列为<span class="math inline">\(x\)</span>，模型生成的视频序列为<span class="math inline">\(\tilde x\)</span>，则模型的目标是在给定<span class="math inline">\(s\)</span>的条件下，让<span class="math inline">\(\tilde x\)</span>的条件分布拟合<span class="math inline">\(x\)</span>的条件分布</p></li><li><figure><img src="https://s2.loli.net/2022/09/01/VfJE42QpgUB5zxt.png" alt="image-20220524143313609" /><figcaption>image-20220524143313609</figcaption></figure><p>D是discriminator，G是generator。整个任务就变成了一个最大最小优化问题，论文主要通过设计网络和时空优化目标来解决这个问题。</p></li><li><p>为了简化问题，做了一个Markov假设：当前第t帧生成的视频<span class="math inline">\(\tilde x_t\)</span>，由且仅由第t帧输入<span class="math inline">\(s_t\)</span> + 前L帧输入<span class="math inline">\(s_{t-L}^{t-1}\)</span> + 前L帧生成的视频<span class="math inline">\(\tilde x_{t-L}^{t-1}\)</span>这三个因素决定。<img src="https://s2.loli.net/2022/09/01/Q9MPRD5otda3mAq.png" alt="image-20220524144030781" /></p><p>实验里，L取了个不大不小的2.建立了一个神经网络F，递归地逐帧生成视频。</p></li></ol><h3 id="网络架构">网络架构</h3><ol type="1"><li><p>网络F定义如下：</p><figure><img src="https://s2.loli.net/2022/09/01/5OA4ptSUjI9Mn7J.png" alt="image-20220524144722968" /><figcaption>image-20220524144722968</figcaption></figure><p>给定<span class="math inline">\((\tilde x_{t-L}^{t-1}, s_{t}^{t-1})\)</span>作为输入。对于与上一帧图像有关联的像素点，网络会利用optical flow来warp（扭曲？）上一帧像素点，得到这一帧新的像素点。对应等式的前半部分。还有一些像素是上一帧图像里没有的，这时候就需要生成来填充。对应等式的后半部分。具体来说：</p><ul><li>用一个optical flow预测网络W来估计从上一帧到这一帧的optical flow <span class="math inline">\(\tilde w_{t-1}\)</span>.</li><li>用一个生成器H来生成需要填充的像素<span class="math inline">\(\tilde h_t\)</span>.</li><li>用一个mask预测网络M来生成mask <span class="math inline">\(\tilde m_t\)</span>. 这个mask不是非0即1的，而是包含了0-1之间的连续值。这样做是为了更好地融合W和H生成的结果。比如说，在 zoom in 的情况下，一个物体逐渐靠近，那么它会逐帧放大。如果仅仅利用optical flow的扭曲结果，那么这个物体就会变得模糊。因此，还需要生成器来填充一些细节。有了soft mask，warp的像素和生成的像素就可以融合。</li></ul></li><li><p>用了coarse-to-fine的方法来生成高分辨率的视频</p></li><li><p>用了2个不同的discriminator来减轻gan训练中的mode collapse问题（模式倒塌，即生成的结果是很逼真，但是多样性不足）。</p><ol type="1"><li>条件图像鉴别器 <span class="math inline">\(D_I\)</span>，顾名思义，鉴别每一帧图像是否真实的</li><li>条件视频鉴别器 <span class="math inline">\(D_V\)</span>，鉴别视频在时序上的动态是否真实自然。给定optical flow，鉴别K个连续的帧</li></ol></li></ol><h3 id="losses">losses</h3><p><span class="math display">\[\mathop{min}\limits_{F} ( \mathop{max}\limits_{D_I}\mathcal{L}_I (F, D_I ) + \mathop{max}\limits_{D_V}  \mathcal{L}_V (F, D_V )) + λ_W L_W (F ),\]</span></p><ol type="1"><li><span class="math inline">\(\mathcal{L}_I\)</span> 是条件图像鉴别器 <span class="math inline">\(D_I\)</span>的gan loss：<img src="https://s2.loli.net/2022/09/01/J1mVkCnzWYZiaR9.png" alt="image-20220530194307049" />，其中，<span class="math inline">\(\phi_I\)</span> 就是从第1～T帧中随机取1帧的操作</li><li><span class="math inline">\(\mathcal{L}_V\)</span>是条件视频鉴别器 <span class="math inline">\(D_V\)</span>的 gan loss：<img src="https://s2.loli.net/2022/09/01/rq6yiaRSHUnEYzg.png" alt="image-20220530194419594" />，和图像的如出一辙，<span class="math inline">\(\phi_V\)</span> 就是从第1～T帧中随机取连续K帧的操作</li><li><span class="math inline">\(L_W\)</span> 是flow estimation loss：<img src="https://s2.loli.net/2022/09/01/AuZf1zlcihE3KsU.png" alt="image-20220530194534485" />，包括两部分，1. 真实flow和估计flow的端点误差 2. 把前一帧扭曲到后一帧的warp loss</li></ol><h3 id="前景-背景先验">前景-背景先验</h3><p>通过语义分割，给模型提供了一个前景、背景的先验信息，同时把补洞网络拆分成了两个：</p><ol type="1"><li>背景补洞网络：这个很容易，因为整个大背景其实可以由optical flow很准确地预测出来，补洞网络只需要补一点点从画面外面刚进来的部分</li><li>前景补洞网络：这个比较难，因为前景物品往往占比不大，但是又动作幅度很大，前景补洞网络需要从零开始生成很多东西</li></ol><p>通过用户实验，证明大部分人觉得有这个前景-背景先验之后，效果更好。</p><h3 id="多模态生成">多模态生成</h3><p>网络F是一个单模态映射函数，这意味着输入一个视频，它也只能生成一个视频。那怎样让它根据同一个输入视频，输出多个不同的视频呢？这里采用了特征嵌入方法（feature embedding scheme）。</p><ol type="1"><li>输入源视频的同时，也输入instance级别的语义分割mask <span class="math inline">\(s_t\)</span></li><li>训练一个图像编码器E，它把每一帧真实图像<span class="math inline">\(x_t\)</span>编码成d维的特征map（论文中d取3）。然后用一个instance-wise的平均池化，来让同一个物体的所有像素分享共同的特征向量。得到的这个instance-wise平均池化后的图像特征map称为<span class="math inline">\(z_t\)</span></li><li>这个<span class="math inline">\(z_t\)</span>，加上mask <span class="math inline">\(s_t\)</span>，再被输入到网络F</li><li>以上是训练的过程。训练结束后，对每个类型的对象的特征向量的高斯分布拟合一个混合高斯分布。</li><li>测试的时候，利用每个物体所对应的类型的分布，可以sample特征向量，进而生成新视频了。给出不同的特征向量，F就能生成不同的视频了</li></ol><figure><img src="https://tcwang0509.github.io/vid2vid/paper_gifs/cityscapes_change_styles.gif" alt="img" /><figcaption>img</figcaption></figure><h3 id="实现的细节">实现的细节</h3><ol type="1"><li>coarse-to-fine的训练：512 × 256, 1024 × 512, and 2048 × 1024 resolutions，这三种分辨率，先从低的开始训练起，逐渐增加到高的。</li><li>mask预测网络M和flow预测网络W共享权重，只有输出层不一样。</li><li>图像鉴别器是一个多尺度PatchGAN</li><li>除了空间上的多尺度，视频鉴别器还会考虑多个帧率，即时间上的多尺度，确保短期和长期都能consistent</li><li>2k分辨率，8个v100 gpus，训练10天……</li><li>datasets：<ol type="1"><li>Cityscapes：训练DeepLabV3网络来获得所有的语义分割mask，用FlowNet2的结果作为optical flow的ground truth，用Mask R- CNN的结果作为instance- level 语义mask的gt</li><li>Apolloscape</li><li>Face video dataset：FaceForensics dataset里的真实视频</li><li>Dance video dataset：从YouTube下载的跳舞视频💃</li></ol></li></ol><h3 id="结果">结果</h3><p>图像生成模型pix2pixHD和视频风格迁移模型COVST作为baseline。FID（论文定义的视频变种）跟baseline比略好，但human preference score（论文定义的由人来打分，评估哪个视频更真实）高很多。</p><p>通过更改语义mask，可以控制生成视频中的物体种类；通过更改特征向量，可以控制生成视频中的物体外观；在未来视频预测上也有很好的性能。</p><h3 id="局限性">局限性</h3><ol type="1"><li>缺少一个物体内部的具体信息，生成转弯的车的时候效果比较差。论文提出或许可以通过增加3D信息作为输入来解决</li><li>在整个视频中，一个物体的外观有时候还是前后不一致</li><li>偶然情况下，一辆车的颜色可能会逐渐发生变化</li><li>当通过更改语义信息来操纵视频生成的时候，例如把树改成房子，偶然会出现一部分变成房子，另一部分树变了形的情况（？是这个意思吗）。这或许可以通过采用更粗糙的语义标签的方式解决，因为这样模型就不会对标签形状过于敏感</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> Video Generation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Reading Few-shot Video-to-Video Synthesis</title>
+      <link href="/Reading-Few-shot-Video-to-Video-Synthesis/"/>
+      <url>/Reading-Few-shot-Video-to-Video-Synthesis/</url>
+      
+        <content type="html"><![CDATA[<p>论文地址：http://arxiv.org/abs/1910.12713</p><p>作者：<a href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a href="http://mingyuliu.net/">Ming-Yu Liu</a>, Andrew Tao, <a href="https://liuguilin1225.github.io/">Guilin Liu</a>, <a href="http://jankautz.com/">Jan Kautz</a>, <a href="http://catanzaro.name/">Bryan Catanzaro</a></p><p>发表： NeurIPS 2019</p><p>Project： https://nvlabs.github.io/few-shot-vid2vid</p><p>Github：https://github.com/NVLabs/few-shot-vid2vid</p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p><p>首先这个任务选题对我来说很新，我之前都没有意识到过这方面的问题。如果告诉我有这样的问题，需要去解决的话，我的直观的想法会受到这篇论文作者的上一篇中提到的 特征嵌入方法 所影响：会想也通过将一类物体的特征编码起来，然后通过学习不同个体的特征编码，来实现不同风格的视频生成。</p></blockquote><h2 id="why">Why：</h2><p>当今vid2vid方法的两个局限性：</p><ol type="1"><li>需要大量数据，尤其是需要生成的这个人的视频数据</li><li>泛化能力有限，比如说只能在训练集中包含的人上生成新的pose-to-human视频，不能泛化到训练集中不存在的人上</li></ol><p>所以这篇论文就是想解决这两个问题。</p><h2 id="what">What：</h2><ol type="1"><li><p>任务是Video-to-video synthesis，即利用输入的语义视频（例如人的姿势、街景），生成写实的视频。例如说，人体姿势生成的任务，就是首先收集一个人做大量不同动作的视频，作为训练集；然后向模型中输入动作序列，让模型生成该人做该动作的视频。再比如街景生成，也是以大量街景视频作为训练集，然后向模型中输入语义mask序列，让它生成风格类似的全新街景。</p></li><li><p>这篇论文提出了一个网络，其中包括一个网络权重生成模块（novel network weight generation module）和attention机制</p></li><li><p>这个方法的创新点在于，只需要在测试时，向模型提供少量的在训练集中没出现过的新的人物的图像，它就能生成这个新的人的视频。</p><figure><img src="https://s2.loli.net/2022/08/10/IUKDziV4AtOwsxu.png" alt="image-20220513171420180" /><figcaption>image-20220513171420180</figcaption></figure><p>上图中，左边是现存方法，它们基本上对于每个人，都需要在单独的训练集上训练。右边是这篇论文提出的方法，只需要训练一次，然后输入一些示范图像，就可以泛化到新的人上。</p></li></ol><p>读前疑问：</p><ol type="1"><li>说是利用少量的新的人物的示范图像，生成网络权重。意思是以原本的vid2vid网络的权重作为输出？为什么？我的更直观的想法是，直接用一个新网络，学习新人物的图像，然后把output给concat或者加进旧网络的output中……另外，直接作用于网络权重上，在我的粗浅理解中，会不会造成信息的损失呢？还是说本质上没差？ related work里提到这类网络属于adaptive network，跟常规网络相比有不同的inductive bias（想想也是），有对应的应用任务。或许我之后再了解一下这块。</li><li>标题中的few-shot是什么意思，就是指更少的data、更高的泛化性吗？这是一类任务吧，从少量标注的样本中学习的意思。这个确实就是啊，只需要一点点示范图像，就可以生成图中这个人/物的新video。</li><li>作者的上篇论文是利用gan，这篇又用上了attention，为什么作出这样本质的改变呢？</li></ol><h2 id="how">How：</h2><ol type="1"><li>视频生成任务可以分成3类：<ol type="1"><li>unconditional synthesis：随机生成视频片段</li><li>future video prediction</li><li>vid2vid：把语义输入转变成现实风的视频。这篇论文就是属于这个任务，不过它聚焦的点在于few shot，即通过在测试的时候输入少量图像，让生成的视频可以泛化到没见过的domain上</li></ol></li><li><p>vid2vid是前一篇工作的内容啦。reference：<a href="jyzhu.top/reading-video-to-video-synthesis"><em>Reading vid2vid</em></a></p></li><li><p>few-shot本质上就是多加了个网络E，用来生成原补洞网络H的权重。至于原本还有两个网络W和M，他们都不需要改动，因为他们都是基于上一帧生成的图像进行变形的，代表一种运动，而和视频本质的内容没有关系。</p></li><li><p>精髓一图：</p><figure><img src="https://s2.loli.net/2022/08/10/T6is35cjyHlvaNe.png" alt="image-20220810193845710" /><figcaption>image-20220810193845710</figcaption></figure></li><li><p>用最新的SOTA语义图像生成模型SPADE代替了上一篇论文中的网络H。SPADE包含several spatial modulation branches and a main image synthesis branch。不过网络E只更新SPADE模型中的spatial modulation branches的权重，因为1这样量比较小，2这样可以避免一个直接从input image到output image的短路（我尚没有深究原因）。</p></li><li><p>权重生成模块E。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> Video </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Live demo of CodeTyping via Pythonanywhere</title>
       <link href="/live-demo-of-code-typing-via-pythonanywhere/"/>
       <url>/live-demo-of-code-typing-via-pythonanywhere/</url>
