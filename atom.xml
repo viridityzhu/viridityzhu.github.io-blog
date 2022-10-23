@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/"/>
-  <updated>2022-09-01T04:57:08.650Z</updated>
+  <updated>2022-10-22T09:12:01.123Z</updated>
   <id>https://jyzhu.top/</id>
   
   <author>
@@ -15,6 +15,84 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>The difference between RNN&#39;s output and h_n</title>
+    <link href="https://jyzhu.top/The-difference-between-RNN-s-output-and-h-n/"/>
+    <id>https://jyzhu.top/The-difference-between-RNN-s-output-and-h-n/</id>
+    <published>2022-10-22T08:56:44.000Z</published>
+    <updated>2022-10-22T09:12:01.123Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Reference: <a href="https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm" class="uri">https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm</a></p></blockquote><p>I was so confused when doing a homework on implementing the Luong Attention, because it tells that the decoder is a RNN, which takes <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(s_{t-1}\)</span> as input, and outputs <span class="math inline">\(s_t\)</span>, i.e., <span class="math inline">\(s_t = RNN(y_{t-1}, s_{t-1})\)</span>.</p><p>But the pytorch implementation of RNN is: <span class="math inline">\(outputs, hidden\_last = RNN(inputs, hidden\_init)\)</span>, which takes in a sequence of elements, computes in serials, and outputs a sequence also.</p><p>I was confused about what is the <span class="math inline">\(s_t\)</span>. Is it the <span class="math inline">\(outputs\)</span>, or the <span class="math inline">\(hidden\_states\)</span>?</p><p>This is the very helpful picture:</p><p><img src="https://i.stack.imgur.com/SjnTl.png" /></p><p>The <span class="math inline">\(output\)</span> here is the <span class="math inline">\(hidden\_states\)</span> of the last layer among all elements in the sequence (time steps), while the <span class="math inline">\(h_n,c_n = hidden\_last\)</span> is the <span class="math inline">\(hidden\_states\)</span> of the last time step among all layers.</p><p>The former is the <span class="math inline">\(H\)</span>, hidden state collection, which can be used in subsequent calculations, like attentions or scores; and the latter is the hidden state that can be directly used in the next iteration.</p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Reference: &lt;a href=&quot;https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm&quot; class=&quot;uri&quot;&gt;https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I was so confused when doing a homework on implementing the Luong Attention, because it tells that the decoder is a RNN, which takes &lt;span class=&quot;math inline&quot;&gt;\(y_{t-1}\)&lt;/span&gt; and &lt;span class=&quot;math inline&quot;&gt;\(s_{t-1}\)&lt;/span&gt; as input, and outputs &lt;span class=&quot;math inline&quot;&gt;\(s_t\)&lt;/span&gt;, i.e., &lt;span class=&quot;math inline&quot;&gt;\(s_t = RNN(y_{t-1}, s_{t-1})\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;But the pytorch implementation of RNN is: &lt;span class=&quot;math inline&quot;&gt;\(outputs, hidden\_last = RNN(inputs, hidden\_init)\)&lt;/span&gt;, which takes in a sequence of elements, computes in serials, and outputs a sequence also.&lt;/p&gt;
+&lt;p&gt;I was confused about what is the &lt;span class=&quot;math inline&quot;&gt;\(s_t\)&lt;/span&gt;. Is it the &lt;span class=&quot;math inline&quot;&gt;\(outputs\)&lt;/span&gt;, or the &lt;span class=&quot;math inline&quot;&gt;\(hidden\_states\)&lt;/span&gt;?&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
+    
+    
+    <category term="Deep Learning" scheme="https://jyzhu.top/tags/Deep-Learning/"/>
+    
+    <category term="Neural Network" scheme="https://jyzhu.top/tags/Neural-Network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Reading 3D Photography using Context-aware Layered Depth Inpainting</title>
+    <link href="https://jyzhu.top/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/"/>
+    <id>https://jyzhu.top/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/</id>
+    <published>2022-10-07T00:35:43.000Z</published>
+    <updated>2022-10-22T09:15:26.167Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：<a href="https://shihmengli.github.io/3D-Photo-Inpainting" class="uri">https://shihmengli.github.io/3D-Photo-Inpainting</a></p><p>作者：<a href="https://shihmengli.github.io/">Meng-Li Shih</a>, <a href="https://lemonatsu.github.io/">Shih-Yang Su</a>, <a href="https://johanneskopf.de/">Johannes Kopf</a>, <a href="https://filebox.ece.vt.edu/~jbhuang/">Jia-Bin Huang</a></p><p>发表： CVPR2020</p><p>链接： <a href="https://github.com/vt-vl-lab/3d-photo-inpainting" class="uri">https://github.com/vt-vl-lab/3d-photo-inpainting</a></p><hr /><h2 id="why">Why：</h2><p>之前的照片3D化的方法，会在视角变动后出现的新像素区域 填充很模糊的背景；这个方法主要是用inpainting的方法提高新背景生成的效果</p><figure><img src="https://s2.loli.net/2022/10/22/dfjuy9vNrBak1oP.png" alt="image-20221007084129382" /><figcaption>image-20221007084129382</figcaption></figure><h2 id="what">What：</h2><ol type="1"><li>任务是3D photography，图像3D化，把一张2D+深度信息的RGB-D图像转化成3D风格的图像。</li><li>现在的多镜头智能手机拍的照片都能提供深度信息。没有的话，也能用其他模型预测深度。</li><li>用分层深度图像（Layered Depth Image）来表示图像：能显式地表示像素点之间的连通性。和普通的2D图像相比，可以把像素点分成多层来表示，同一个坐标处可以有重合的不同层次的像素点。</li><li>提出一个基于学习的 inpainting 方法填充重叠区域的像素，让3D图像视角变化的时候出现的新背景效果很好。</li></ol><h2 id="how">How：</h2><p>是一个很清晰的流程：</p><ol type="1"><li><p>输入为单张RGB-D图像。D为depth，一般多镜头智能手机拍摄的照片都能提供深度信息；没有的话就用其他模型预测深度，比如MegaDepth, MiDas, and Kinect depth sensor</p></li><li><p>将输入图像转化成分层深度图像（Layered Depth Image）。LDI中的每个像素点保存颜色和深度信息，以及上下左右四个方向的邻居像素点。同一个坐标处可以有重合的不同深度的像素点。</p></li><li><p>图像预处理：检测深度不连贯的边缘</p><figure><img src="https://s2.loli.net/2022/10/22/6tjCgUHTpVyIAFN.png" alt="image-20221007090910332" /><figcaption>image-20221007090910332</figcaption></figure><p>用filter把深度边缘过滤得更锐利，然后清理一些不连贯的边缘，最后根据连通性划分不同的深度边（如图2 （f）中，不同颜色表示不同深度边）。</p></li><li><p>对于每一个深度边，把LDI图中的像素点切割开，并在背景层扩展一些像素点，对扩展区域进行生成</p><figure><img src="https://s2.loli.net/2022/10/22/Ap62PxdYEDKzBkJ.png" alt="image-20221007091217942" /><figcaption>image-20221007091217942</figcaption></figure><ol type="1"><li><p>找到一个深度边，把两层的像素点切割开</p></li><li><p>对于背景层，用flood-fill like算法迭代地选取一定的已知区域作为context region，以及扩展一定的未知区域作为synthesis region</p></li><li><p>利用已知context region 生成未知synthesis region 的深度和颜色：采用基于学习的inpainting方法</p><figure><img src="https://s2.loli.net/2022/10/22/h8uGZm4XAEcL5SP.png" alt="image-20221007091716266" /><figcaption>image-20221007091716266</figcaption></figure><p>这个方法中，最关键的就是在预测color和depth之前，先预测了一下depth edges，然后把这个edges信息加进去，可以更好地预测color和depth。</p></li><li><p>将生成完毕的像素融合回LDI图像</p></li></ol></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;论文地址：&lt;a href=&quot;https://shihmengli.github.io/3D-Photo-Inpainting&quot; class=&quot;uri&quot;&gt;https://shihmengli.github.io/3D-Photo-Inpainting&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作者：&lt;a href=&quot;https://shihmengli.github.io/&quot;&gt;Meng-Li Shih&lt;/a&gt;, &lt;a href=&quot;https://lemonatsu.github.io/&quot;&gt;Shih-Yang Su&lt;/a&gt;, &lt;a href=&quot;https://johanneskopf.de/&quot;&gt;Johannes Kopf&lt;/a&gt;, &lt;a href=&quot;https://filebox.ece.vt.edu/~jbhuang/&quot;&gt;Jia-Bin Huang&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;发表： CVPR2020&lt;/p&gt;
+&lt;p&gt;链接： &lt;a href=&quot;https://github.com/vt-vl-lab/3d-photo-inpainting&quot; class=&quot;uri&quot;&gt;https://github.com/vt-vl-lab/3d-photo-inpainting&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
+    
+    
+    <category term="Computer Vision" scheme="https://jyzhu.top/tags/Computer-Vision/"/>
+    
+    <category term="3DCV" scheme="https://jyzhu.top/tags/3DCV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Reading SmoothNet: A Plug-and-Play Network for Refining Human Poses in Videos</title>
+    <link href="https://jyzhu.top/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/"/>
+    <id>https://jyzhu.top/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/</id>
+    <published>2022-09-09T06:25:03.000Z</published>
+    <updated>2022-10-22T09:16:13.032Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：https://arxiv.org/abs/2112.13715</p><p>作者：<a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Zeng%2C+A">Ailing Zeng</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Yang%2C+L">Lei Yang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Ju%2C+X">Xuan Ju</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Li%2C+J">Jiefeng Li</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Wang%2C+J">Jianyi Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Xu%2C+Q">Qiang Xu</a></p><p>发表： ECCV 2022</p><p>链接： <a href="https://github.com/cure-lab/SmoothNet" class="uri">https://github.com/cure-lab/SmoothNet</a></p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p></blockquote><h2 id="why">Why：</h2><ol type="1"><li>从视频估计人体姿势时，抖动是个问题</li><li>除了轻微抖动以外，有一些long- term抖动，还有因为重叠、姿势少见等原因造成的估测困难</li></ol><h2 id="what">What：</h2><figure><img src="https://s2.loli.net/2022/10/22/fRIB2t9hw8na6my.png" alt="image-20220909143919787" /><figcaption>image-20220909143919787</figcaption></figure><ol type="1"><li>一个仅基于时序的精炼网络，以其他网络的姿势估计结果作为输入。</li><li>有监督的</li><li>采用滑动窗口，基于TCN</li><li>并不是常见的那种基于学习的方法，即采用时间-空间模型来同时优化逐帧的准确率和时序的平滑性。这个方法通过学习每一个关节在长时间范围的运动特征（而不是关节之间的关系），来自然地建模身体运动中的平滑特征。</li><li>由于它仅仅需要时序信息，所以可以泛化到很多种任务上，包括2D和3D的姿势估计、body recovery等</li></ol><h2 id="how">How：</h2><ol type="1"><li><p>根据持续时长，将抖动归类为sudden jitter和long- term jitter两种。为了解决long- term的抖动问题，现有那些方法都不大行。</p><p>根据程度，又可以将抖动分为小抖动和大抖动。小抖动一般由于不可避免的误差，或者标注上的误差；大抖动则是由于图像质量差、姿势少、重叠严重等。</p><figure><img src="https://s2.loli.net/2022/10/22/pNa7bcVqzi9lGZw.png" alt="image-20220909143902334" /><figcaption>image-20220909143902334</figcaption></figure></li><li><p>将误差归类为相邻帧之间的抖动造成的误差（jitter error）和模型估计结果与真实结果之间的偏差（bias error）这两种。现有那些方法并没有将这两类误差解耦</p></li><li><p>提出了basic smoothnet和正经smoothnet。</p><ol type="1"><li><figure><img src="https://s2.loli.net/2022/10/22/Zf6lpahbHrRG7kF.png" alt="image-20220909154626864" /><figcaption>image-20220909154626864</figcaption></figure><p>Basic smoothnet，FCN是backbone。通过长度为T的滑窗，每次传入T帧图像，包含C个channels。</p><figure><img src="https://s2.loli.net/2022/10/22/hRcX2MCx8SnHZfz.png" alt="image-20220909155504588" /><figcaption>image-20220909155504588</figcaption></figure><p>权重<span class="math inline">\(w_t^l\)</span>和偏差<span class="math inline">\(b^l\)</span>是第<span class="math inline">\(t_{th}\)</span>帧的，并且在不同的channel之间是共享的。</p></li><li><figure><img src="https://s2.loli.net/2022/10/22/uCJgF8M6tG5S1PB.png" alt="image-20220909155701901" /><figcaption>image-20220909155701901</figcaption></figure><p>完整的motion- aware smoothnet就是加上了速度和加速度两个模块。</p><p>因为jitter的一个衡量方式就是加速度，所以把加速度直观地显示在模型中是一个很显然的方式。给定预测出的姿势<span class="math inline">\(\hat Y\)</span>，速度就是两帧之间相减，得到 <span class="math display">\[\hat V_{i,t} = \hat Y_{i,t} − \hat Y_{i,t−1}\]</span> 加速度就是速度之间的差： <span class="math display">\[\hat A_{i,t} = \hat V_{i,t} − \hat V_{i,t−1}\]</span></p></li></ol></li><li><p>loss就是两个：</p><ol type="1"><li><p>ground truth pose和估计pose之间的误差： <span class="math display">\[L_{pose} = \frac{1}{T\times C} \sum_{t=0}^T \sum_{i=0}^C |\hat G_{i,t} − Y_{i,t}|,\]</span></p></li><li><p>ground truth 加速度和估计加速度之间的误差： <span class="math display">\[L_{acc} = \frac{1}{(T-2)\times C} \sum_{t=0}^T \sum_{i=0}^C |\hat G&#39;&#39;_{i,t} − A_{i,t}|,\]</span></p></li></ol></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;论文地址：https://arxiv.org/abs/2112.13715&lt;/p&gt;
+&lt;p&gt;作者：&lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Zeng%2C+A&quot;&gt;Ailing Zeng&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Yang%2C+L&quot;&gt;Lei Yang&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Ju%2C+X&quot;&gt;Xuan Ju&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Li%2C+J&quot;&gt;Jiefeng Li&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Wang%2C+J&quot;&gt;Jianyi Wang&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Xu%2C+Q&quot;&gt;Qiang Xu&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;发表： ECCV 2022&lt;/p&gt;
+&lt;p&gt;链接： &lt;a href=&quot;https://github.com/cure-lab/SmoothNet&quot; class=&quot;uri&quot;&gt;https://github.com/cure-lab/SmoothNet&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/categories/Computer-Notes/"/>
+    
+    
+    <category term="Computer Vision" scheme="https://jyzhu.top/tags/Computer-Vision/"/>
+    
+  </entry>
   
   <entry>
     <title>Reading NeuMan: Neural Human Radiance Field from a Single Video</title>
@@ -474,71 +552,6 @@
     <category term="Theme" scheme="https://jyzhu.top/tags/Theme/"/>
     
     <category term="Evangelion" scheme="https://jyzhu.top/tags/Evangelion/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>阅读总结与别无所指</title>
-    <link href="https://jyzhu.top/On-Reading-in-November/"/>
-    <id>https://jyzhu.top/On-Reading-in-November/</id>
-    <published>2021-12-01T16:01:41.000Z</published>
-    <updated>2021-12-14T15:57:21.220Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://i.loli.net/2021/12/02/Hf8gyxVdShTbzCO.png" alt="我的微信读书11月阅读时长" style="zoom: 33%;" /></p><p>11月平均每日阅读43分钟，最高一天阅读4小时，总共21个小时。这意味着，这30天里，我大约有一整天的人生活在书里的世界。幸甚至哉！</p><p>这些时间最大头还是花在了<a href="https://jyzhu.top/2021/11/27/After-Reading-The-Wind-Up-Bird-Chronicle-by-Murakami-Haruki/">《奇鸟行状录》里（不太值）</a>，其次应该是钱钟书的《宋诗选注》和黑格尔的《小逻辑》里。看上去好奇怪的组合，不过不然。这其实很符合我的阅读习惯，一般是不同类型的书同时阅读，每次依当天的状态和心情去择一本翻开。实际上，想读《小逻辑》的时候，和想读《奇鸟行状录》的时候，整个人的状态是完全不一样的。据我观察，当我精神状态极佳、心情大好的时候，最想读哲学类的书；情感泛滥（高涨或者低落）的时候，最想读诗；感到疲乏的时候，想读小说来消遣。我倒也根据这么一点小习性，大言不惭地自觉“随性”，除了读书随心所欲以外，生活中大大小小的事上，心态也大抵类似。（主要是小事，大事实际上还是有点优柔寡断的，还想改呢。）</p><p>不过呢，这个月挑来读的这几本书，跟我之前的阅读惯性相比还是比较突兀的。一方面，小说上，我已经挺久没读日本小说了。虽然以前也喜欢村上春树，但这次是带着一些“怀旧”的心情去读他的。根据我的规划，在这个人生阶段，我是想读一些陀氏和海明威的，再往后也想涉猎一些不太熟悉但十分严肃的作家。</p><p>另一方面，这是我头一次迈入哲学原著的门🚪，精挑细选之后，才决定从黑格尔读起：人们说黑格尔是最后一个拥有完整的大哲学体系的哲学家；人们还说要想真的了解哲学，首先应该好好了解黑格尔。另外，黑格尔的辩论法，是想了解后世大多数哲学家，绕不过的一个话题。至于选择《小逻辑》，纯粹是贪图它比较短小精悍，但也完整包含了黑格尔整个逻辑学的思想，想来比较容易上手……然而读起来也不枉“晦涩”一词。我读得确实缓慢，但只要是一眼小小的泉眼，也总会源头活水慢慢来的。</p><p>宋诗嘛，是头脑一热想读古诗试试。之前喜欢的是现代诗，对古诗颇感敬畏。读起来其实很有趣，我以前对古诗的印象，是觉得所有诗都主题雷同，用的意象翻来覆去那几个。但捧起读来，才能真的体会到个中妙处。就是那么一板一眼的格律，那么受限的意象，那么几个主题，然每首诗都有实在的新意。我发现我渐渐开始喜欢起写景的诗来。</p><p>在新加坡这永无止境的夏季中，我心之所向的莫过于这样的场景了——</p><blockquote><p>嘉果浮沉酒半醺，床头书册乱纷纷。</p><p>北轩凉吹开疏竹，卧看青天行白云。</p><p>-- 苏舜钦《暑中闲咏》</p></blockquote><p>另外，读到一个有趣的诗人李觏，钱钟书说他写诗喜欢用独特的意象和“特立独行”的字。听上去这个评价并不是特别褒义，我倒是意外很喜欢。</p><blockquote><p>人言落日是天涯，望极天涯不见家；</p><p>已恨碧山相阻隔，碧山还被暮云遮！</p><p>-- 李觏《乡思》</p></blockquote><p>这种蕴含奇思的诗，可能美感会被削弱，但是灵气却是独具，是我所偏爱！</p><p>还有一位跟他评价相近的诗人王令，他的这首《暑旱苦热》是我目前印象最深的。天哪，一首诗难道不就是要体现诗人“手提天下”这样的意致纵横吗！</p><blockquote><p>清风无力屠得热，落日着翅飞上山。</p><p>人固已惧江海竭，天岂不惜河汉干？</p><p>昆仑之高有积雪，蓬莱之远常遗寒。</p><p><strong>不能手提天下往，何忍身去游其间？</strong></p><p>-- 王令《暑旱苦热》</p></blockquote><hr /><p>我人生的阅读量高峰，集中在高中三年，不长不短。大学以来，整个人“务实”了许多，大多数时间分给了小时候心目中“没有意义”的琐碎生活。这是有意义的。不过因为记忆能力的缺憾，我整个就好像一个虽然读写速度快，但容量很低的内存（我也不想混入这么奇怪的计算机比喻啊喂(#`O′)）……见什么东西，理解很快，忘得也很快。今天刚跟小熊凄惨地对了一下去年看的JOJO第四季的人物关系，发现我的记忆已经完全模糊混乱了。所以嘛，大部分读过的书，到最近一两年，几乎已经面目模糊了。我在想，有的书与我的关系可能已经衰退到了 听到书名时知道这本我读过 的地步，虽然我发誓我读每本书的时候都很认真（还很慢）。</p><p>以前在知乎上刷到“读过的书还是会忘记，那么读书到底有什么意义”这类问题，还会饶有兴致地点开认真看；现在看到倒是觉得看得明白了。要我回答的话，我认为这个问题本身是不成立的。问读书对人的意义在哪，不是和问“郊游”对人的意义在哪一样嘛。我能理解那种功利性的想法，把读书和学一门特长类比，希望带来一些价值；但我想这类想法都涉嫌自指，即一种逻辑上的悖论，是不成立的。（其实我很不喜欢“特长”这个词，因为它是功利性的；“兴趣”这个词才本质嘛。）</p><p>生活的目的（而不是意义）就是生活，再往后一步别无所指。我每日学习，阅读，喝酒（不是真的每天喝酒），晒太阳，这些事情的目的是什么呢？就是为了学习，阅读，喝酒，晒太阳呀！（去码头整点薯条笑话就是最准确的表达。）</p><p>想起来上次妈妈分享的一个有关性格、品质的心理学测试，测出来好多好多个评价维度，其中我最低的两项是什么“希望”“活力”，给我整挺乐的。那些问题问出来，按我的想法，选的确实都是最显得悲观的答案；但是这好像没法评价我这类荒诞主义<strong>信仰</strong>啊（瞎造了一个词）。虽然听上去很没有活力，但恰恰是超级有活力的！只不过望穿人生舞台的布景，直面整个荒诞而已，这不是对生活真正的热爱吗？</p><p>跟我心境最相近的毫无疑问是苏轼这一首词，我的最爱，没有之一：</p><blockquote><p>落日绣帘卷，亭下水连空。知君为我新作，窗户湿青红。</p><p>长记平山堂上，欹枕江南烟雨，杳杳没孤鸿。认得醉翁语，“山色有无中”。</p><p>一千顷，都镜净，倒碧峰。<strong>忽然浪起，掀舞一叶白头翁。</strong></p><p>堪笑兰台公子，未解庄生天籁，刚道有雌雄。<strong>一点浩然气，千里快哉风。</strong></p><p>-- 苏轼《水调歌头·黄州快哉亭赠张偓佺》</p></blockquote><p>我觉得人生诗意（或者一般语境中的意义），不说全部，至少一半都在这一句中了吧：“忽然浪起，掀舞一叶白头翁。”哈哈哈哈，解释不明白。</p><p>我其实最近才承认自己热爱生活。之前也确实中了常规思路的桎梏，觉得自己是消极悲观的。可是我方才自觉是极热爱生活的。就好像热爱一些自由度高的沙盒游戏，或者决策系统很复杂的策略游戏一样，我也热爱兼具这两种特性的生活，热爱生活的这两种特性。不过由于一些理科生的科学主义<strong>信仰</strong>，我倒是保有这样一种偏颇的理想：好想通过建模和参数来解释甚至预测整个世界啊哈哈哈。</p><p>最后再自己跟自己（因为大概没有别人会看吧）解释一下前文几处加粗的“<strong>信仰</strong>”二字的额外含义。其实只是一种疑心，既怀疑我对这些思想的理解之正确性，也怀疑这些思想本身的正确性。进一步来说，一方面意味着我仍然没有把这里写的任何东西当真，认为这些都有可能是错误的，并且可能会被之后的我推翻。另一方面，也意味着正如破除对“意义”的幻想一样，我当然也破除了对所有思想的幻想。再赘述一句，这类幻想的破除并不是消极的，而是勇敢的。是对应那句：</p><blockquote><p>我要的不是岸，我要海浪翻卷。</p></blockquote><p>写得也太零碎了，但能藉由阅读这个主题，把我最近这些细碎的想法一股脑说出来，倒也畅快。只是行文不得不说是坑坑洼洼，离我想达到的表达水平差远了。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/12/02/Hf8gyxVdShTbzCO.png&quot; alt=&quot;我的微信读书11月阅读时长&quot; style=&quot;zoom: 33%;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;11月平均每日阅读43分钟，最高一天阅读4小时，总共21个小时。这意味着，这30天里，我大约有一整天的人生活在书里的世界。幸甚至哉！&lt;/p&gt;
-&lt;p&gt;这些时间最大头还是花在了&lt;a href=&quot;https://jyzhu.top/2021/11/27/After-Reading-The-Wind-Up-Bird-Chronicle-by-Murakami-Haruki/&quot;&gt;《奇鸟行状录》里（不太值）&lt;/a&gt;，其次应该是钱钟书的《宋诗选注》和黑格尔的《小逻辑》里。看上去好奇怪的组合，不过不然。这其实很符合我的阅读习惯，一般是不同类型的书同时阅读，每次依当天的状态和心情去择一本翻开。实际上，想读《小逻辑》的时候，和想读《奇鸟行状录》的时候，整个人的状态是完全不一样的。据我观察，当我精神状态极佳、心情大好的时候，最想读哲学类的书；情感泛滥（高涨或者低落）的时候，最想读诗；感到疲乏的时候，想读小说来消遣。我倒也根据这么一点小习性，大言不惭地自觉“随性”，除了读书随心所欲以外，生活中大大小小的事上，心态也大抵类似。（主要是小事，大事实际上还是有点优柔寡断的，还想改呢。）&lt;/p&gt;
-&lt;p&gt;不过呢，这个月挑来读的这几本书，跟我之前的阅读惯性相比还是比较突兀的。一方面，小说上，我已经挺久没读日本小说了。虽然以前也喜欢村上春树，但这次是带着一些“怀旧”的心情去读他的。根据我的规划，在这个人生阶段，我是想读一些陀氏和海明威的，再往后也想涉猎一些不太熟悉但十分严肃的作家。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="thoughts" scheme="https://jyzhu.top/categories/thoughts/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>After Reading The Wind-Up Bird Chronicle by Murakami Haruki</title>
-    <link href="https://jyzhu.top/After-Reading-The-Wind-Up-Bird-Chronicle-by-Murakami-Haruki/"/>
-    <id>https://jyzhu.top/After-Reading-The-Wind-Up-Bird-Chronicle-by-Murakami-Haruki/</id>
-    <published>2021-11-27T14:29:05.000Z</published>
-    <updated>2021-11-27T14:45:26.379Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="读后感">读后感</h2><blockquote><p>在<em>微信读书</em>上花了整整22个小时读了<a href="https://en.wikipedia.org/wiki/The_Wind-Up_Bird_Chronicle">《奇鸟行状录》</a>，感受不佳，读完的时候甚至感到愤懑，胡说一通。</p></blockquote><p>读完我竟然有生气的感觉。尤不喜欢这个隐喻大乱炖式结尾。早知道这本小说通篇暗喻，一件事也没直接地、好端端地讲明白，我是断不会选择阅读的。生气大概是对我这二十多个小时感到不值。</p><p>我从来不讨厌隐喻，过去也从村上的《海边的卡夫卡》《挪威的森林》之类长篇里收获了村上式魔幻现实的趣味，也因此是喜欢村上春树的。</p><p>但是，不一样的地方在于，本书是所谓「村上春树转型之作」，开始触及更严肃、更宏大的议题，我原本也是对此颇有期待的。可是用他特有的轻飘飘的方式来探讨爱情、人生我尚能接受，照样探讨暴力、战场，我只有不理解。（剥皮那一段写得倒是很沉重，也很好。）</p><p>我认为隐喻该是为了更清楚、更深刻的表达而存在的，而这本书里的大量隐喻根本无益于表达。本书最大的一个主题，即暴力会以各种形式对人造成损害，完全是有更直截了当的方式可以表达清楚的，我一直在期待更直白深入的探讨。可是整本书被细枝末节的、含义不明的隐喻占据了篇幅，以悬疑的情节、跌宕的故事走向来吸引人，我只觉得是挂羊头卖狗肉。</p><p>无语凝噎。</p><h2 id="读中感">读中感</h2><p>这段时间在读村上春树的《奇鸟行状录》。我感觉还行，但是有一点不喜欢的地方。当然是会读完的，都读了三分之二了；但是容我在此吐吐槽吧。不喜欢的地方就是那种神神叨叨，老是说梦境与现实有联系、无法区分啊，老是说主角有什么样什么样的命运，然后遇到一些世外奇人，身上发生一些象征意义的变化，然后命运就哦豁转向了。命运之前是什么方向，后来又是什么方向呢？主角确实有感觉，但又道不明，不可说。总结起来就是：神神叨叨。看别人的想法的时候，有一个人提到村上说话总是有一股刻意的淡定、简短感，他又让笔下所有人都这样说话，导致所有人都有一股村上感，说的都不大像人话，也不一定符合人物性格了。太贴切了！</p><p>我想这本书读罢，我大概会搁置村上春树的作品们了。大概是又长大些了吧，阅读口味总之是变化了。下一本肯定会读陀氏的。</p><hr /><p>或许是我举一反三能力有限…有很多寓言性质的东西，我并没有找出来与之对应的现实意义的道理，并没有完全理解村上想表达的含义。</p><p>妻子有暗处的无人察觉的一面，妻子在某种超现实的意义上受困；作为与妻相爱的丈夫，冈田需要从一开始失去妻子的迷茫和失落中走出来，坚持自己，把这当成使生活停滞的磨难，想办法救回妻子，让生活步入正轨，给自己所处的世界重新拧上发条……可是现实生活—至少是我的现实生活，不是这么运转的呀，没有这样的形式呀？</p><p>一个地道的人，做出的事总是不那么地道、很令人意外；一个人渐渐地就滑入了一个与常人的世界不同的、仿佛停滞了的世界。这是怎样的一种人生困境呢？</p><p>书中冈田无法接受妻子和情人跑了的事实，很努力地思考、寻找答案，然后通过一些超现实的隐喻和境遇，还真的发现了妻子遇到了只有自己才能挽救的困境这一事实。可是现实生活中，更多时候，发生这种不遂人意的事，更大概率那就是事实吧，把自己放在井底枯想，只会想疯了，不会想通了吧？</p><h2 id="傻里傻气的雨蛙女儿从笠原may身上唯一感怀到的">傻里傻气的雨蛙女儿——从笠原May身上唯一感怀到的</h2><blockquote><p>最近我暗暗觉得好笑：人们这样从早到晚忙得不亦乐乎有点怪。没这样想过？怎么说好呢，我在这里的工作，只不过按头头如此这般的吩咐如此这般地干罢了，丝毫用不着动脑，等于说脑浆那东西上工前放在寄存柜里下工时再随手拿回。一天七小时对着操作台一个劲儿往发罩上栽头发，然后在食堂吃饭进浴室洗澡，接下去当然就得像一般人那样睡觉。一天二十四小时可自由支配的时间实在少得可怜，而且“自由时间”也由于人困马乏而多用来打瞌睡或怔怔发呆，几乎谈不上用心想点什么。当然周末不用做工，却又要集中洗衣服搞卫生。有时还要上街，一忽儿就过去了。一次曾下决心写写日记，但简直没什么好写，只一周就扔一边去了。日复一日千篇一律嘛！ 尽管这样，尽管这样，对于自己如此成为工作的一部分我还是半点厌恶情绪都没有，别扭感什么的也没有。或者不如说由于这样蚂蚁式地一门心思劳动，我甚至觉得渐渐靠近了“本来的自己”。怎么说呢，说倒说不好，总之好像是由于不思考自己而反倒接近自己的核心。我所说的“有点怪”就是这个意思。</p></blockquote><p>唉，我还没有长大（或者说还没有和解）的一点是什么呢，就是无论自己做什么，都还在担心没有在做「正确」的事情，担心虚耗时间，担心一头栽进什么洞里似的。</p><blockquote><p>那两人居然相信世界是如同单元住宅那样始终一贯如此这般的，以为只要以始终一贯的方法干下去，一切终将水到渠成，所以他们也才为我的倒行逆施而困惑而伤心而气恼。</p></blockquote><p>其实笠原may就是加缪笔下的荒诞人，觉察了世界如同舞台布景，一旦坍塌背后什么也不是。这里她所谓雨蛙一般的父母，就是从来没有过从自己扮演的角色中抽离出来，从来没有停下来反思过的平凡人罢</p><h2 id="有关拧发条鸟的比喻又及为什么要翻译成奇鸟行状录呢">有关「拧发条鸟」的比喻；又及，为什么要翻译成「奇鸟行状录」呢？</h2><blockquote><p>&quot;拧发条鸟是实际存在的鸟。什么样我不知道，我也没亲眼见过，只听过叫声。拧发条鸟落在那边树枝上一点一点拧世界发条，‘吱吱吱吱’拧个不停。如果它不拧发条，世界就不动了。但这点谁也不晓得，世上所有的人都以为一座远为堂皇和复杂的巨大装置在稳稳驱动世界，其实不然，是拧发条鸟飞到各个地方，每到一处就一点点拧动小发条来驱动世界。发条很简单，和发条玩具上的差不多，只消拧发条即可，但那发条唯独拧发条鸟方能看到。&quot;</p></blockquote><p>这个比喻没有打动我。我眼中的世界比这个精巧多了。不过比喻本身还是很精彩的</p><blockquote><p>但是，无论是不是偶然的一致，在肉桂的故事中“拧发条鸟”这一存在都不可漠视。人们在它那只有特殊人方可听见的鸣声引导下走向无可回避的毁灭。在那里，一如兽医自始至终感觉的那样，所谓人的自由意志等等是无能为力的。他们像被上紧背部发条而置于桌面的偶人，只能从事别无选择余地的行为，只能朝别无选择余地的方向前进。处于听到鸟鸣范围内的人们，几乎人人都遭受剧烈磨损以至消失。大部分人死掉了，他们直接从桌边滚到了地下。</p></blockquote><p>这才理解到村上比喻的准确。「拧发条」是被动而不是主动，是别无选择、剧烈磨损、走向毁灭。</p>]]></content>
-    
-    
-    <summary type="html">我认为隐喻该是为了更清楚、更深刻的表达而存在的，而这本书里的大量隐喻根本无益于表达。</summary>
-    
-    
-    
-    <category term="thoughts" scheme="https://jyzhu.top/categories/thoughts/"/>
-    
-    
-    <category term="Literature" scheme="https://jyzhu.top/tags/Literature/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Houses with open doors</title>
-    <link href="https://jyzhu.top/Houses-with-open-doors/"/>
-    <id>https://jyzhu.top/Houses-with-open-doors/</id>
-    <published>2021-11-27T14:23:00.000Z</published>
-    <updated>2021-11-27T14:23:41.552Z</updated>
-    
-    <content type="html"><![CDATA[<p>互联网冲浪对于我来说最浪漫的事情之一，就是顺着一篇搜来的技术文档，随手点开博客主页时，发现博客中记满了朴素但真挚的生活感想。有哲思，有小故事，有少年得意的成就记叙，也有人到中年的感怀伤时……每个人的博客都是独一无二的，网站名字和独特装饰极力彰显着个性；但所有博客又有一个共同的特点，就是毫无保留的文字和期待被造访的心情。这就好像在漠然的大城市里，却有一些不起眼的小屋子，真诚地敞着所有的门窗，等待像我这样的，可能会来，也可能不会来的旅人。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;互联网冲浪对于我来说最浪漫的事情之一，就是顺着一篇搜来的技术文档，随手点开博客主页时，发现博客中记满了朴素但真挚的生活感想。有哲思，有小故事，有少年得意的成就记叙，也有人到中年的感怀伤时……每个人的博客都是独一无二的，网站名字和独特装饰极力彰显着个性；但所有博客又有一个共同</summary>
-      
-    
-    
-    
-    <category term="thoughts" scheme="https://jyzhu.top/categories/thoughts/"/>
-    
     
   </entry>
   
