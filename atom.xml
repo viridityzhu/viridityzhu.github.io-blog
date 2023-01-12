@@ -185,15 +185,15 @@
     <link href="https://jyzhu.top/NeRF-Notebook/"/>
     <id>https://jyzhu.top/NeRF-Notebook/</id>
     <published>2023-01-12T09:33:39.000Z</published>
-    <updated>2023-01-12T10:12:26.321Z</updated>
+    <updated>2023-01-12T10:36:59.994Z</updated>
     
-    <content type="html"><![CDATA[<p>I am currently burying myself into the sea of NeRF. I plan to archive my learning notes here. I am still a beginner, so the notes absolutely contain errors, and are not finished yet.</p><h1 id="contents">Contents</h1><p><a href="https://jyzhu.top/Learning-NeRF/">Learning NeRF</a>: Reading list, learning references, and plans</p><p><a href="https://jyzhu.top/Introduction-to-NeRF/">1. Introduction to NeRF</a>: What is NeRF and its features</p><p>2. Techniques</p><p>​ <a href="https://jyzhu.top/NeRF-Network-Architecture/">2.1. Network Architecture</a></p><p>​ <a href="https://jyzhu.top/NeRF-Hybrid-representations/">2.2. Hybrid representations</a></p><p>​ <a href="https://jyzhu.top/NeRF-Differentiable-Forward-Maps/">2.3. Differentiable Forward Maps</a></p><p>​ <a href="https://jyzhu.top/Prior-based-reconstruction-of-neural-fields/">2.4. Prior-based reconstruction of neural fields</a></p><p>​ <a href="https://jyzhu.top/Manipulate-Neural-Fields/">2.5. Manipulate Neural Fields</a></p><p>3. Applications</p><p><em>TBC</em></p>]]></content>
+    <content type="html"><![CDATA[<p>I am currently burying myself into the sea of NeRF. I plan to archive my learning notes here. I am still a beginner, so the notes absolutely contain errors, and are not finished yet.</p><h1 id="contents">Contents</h1><p><a href="https://jyzhu.top/Learning-NeRF/">Learning NeRF</a>: Reading list, learning references, and plans</p><p><strong>Notes of CVPR22' Tutorial:</strong></p><p><a href="https://jyzhu.top/Introduction-to-NeRF/">1. Introduction to NeRF</a>: What is NeRF and its features</p><p>2. Techniques</p><p>​ <a href="https://jyzhu.top/NeRF-Network-Architecture/">2.1. Network Architecture</a></p><p>​ <a href="https://jyzhu.top/NeRF-Hybrid-representations/">2.2. Hybrid representations</a></p><p>​ <a href="https://jyzhu.top/NeRF-Differentiable-Forward-Maps/">2.3. Differentiable Forward Maps</a></p><p>​ <a href="https://jyzhu.top/Prior-based-reconstruction-of-neural-fields/">2.4. Prior-based reconstruction of neural fields</a></p><p>​ <a href="https://jyzhu.top/Manipulate-Neural-Fields/">2.5. Manipulate Neural Fields</a></p><p>3. Applications</p><p><em>TBC</em></p><p><strong>Notes of paper reading</strong>:</p><p><a href="https://jyzhu.top/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/">Reading NeuMan: Neural Human Radiance Field from a Single Video</a></p>]]></content>
     
     
     <summary type="html">&lt;p&gt;I am currently burying myself into the sea of NeRF. I plan to archive my learning notes here. I am still a beginner, so the notes absolutely contain errors, and are not finished yet.&lt;/p&gt;
 &lt;h1 id=&quot;contents&quot;&gt;Contents&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://jyzhu.top/Learning-NeRF/&quot;&gt;Learning NeRF&lt;/a&gt;: Reading list, learning references, and plans&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://jyzhu.top/Introduction-to-NeRF/&quot;&gt;1. Introduction to NeRF&lt;/a&gt;: What is NeRF and its features&lt;/p&gt;</summary>
+&lt;p&gt;&lt;strong&gt;Notes of CVPR22&#39; Tutorial:&lt;/strong&gt;&lt;/p&gt;</summary>
     
     
     
