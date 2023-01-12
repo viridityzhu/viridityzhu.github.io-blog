@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jyzhu.top/NeRF-Notebook-Part-One/</loc>
+    <lastmod>2023-01-12</lastmod>
+  </url>
+  <url>
     <loc>https://jyzhu.top/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/</loc>
     <lastmod>2022-10-22</lastmod>
   </url>
