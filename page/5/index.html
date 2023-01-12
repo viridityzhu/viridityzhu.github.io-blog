@@ -98,7 +98,7 @@
         <li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">76</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">166</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">173</span></a></li>
         <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fas fa-comment-dots fa-fw"></i>留言板</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -168,7 +168,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">166</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -231,6 +231,849 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/LCM-GCD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/LCM-GCD/" class="post-title-link" itemprop="url">Coding Problem about Least Common Multiple and Greatest Common Divisor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-10-15 22:26:29" itemprop="dateCreated datePublished" datetime="2021-10-15T22:26:29+08:00">2021-10-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/LCM-GCD/" class="post-meta-item leancloud_visitors" data-flag-title="Coding Problem about Least Common Multiple and Greatest Common Divisor" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/LCM-GCD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/LCM-GCD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在复习期末考试，被计算最小公倍数的一道题卡了两次了……怪我数学基础忘光了。在此整理一下最小公倍数和最大公约数相关的概念和定理。然后整理一下这道题：</p>
+<blockquote>
+<p>Write a function to take in a tuple of integers, and it will return the smallest integer that is a multiple of every number in the tuple. Sample run:</p>
+<p>&gt;&gt;&gt; print(smallestMultiple((2, 3, 5,)))</p>
+<p>30</p>
+<p>&gt;&gt;&gt; print(smallestMultiple((1, 2, 3, 4)))</p>
+<p>12</p>
+<p>&gt;&gt;&gt; print(smallestMultiple((399, 772, 163, 959, 242)))</p>
+<p>832307365428</p>
+</blockquote>
+<h3 id="概念和定理">概念和定理</h3>
+<p><strong>最大公约数</strong>：如果一个数可以分别被a和b整除，那它就是a和b的公约数。最大的那个就是最大公约数。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/LCM-GCD/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/5-years-cognition-plan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/5-years-cognition-plan/" class="post-title-link" itemprop="url">My ideal 5 years' cognition plan</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-10-13 00:28:52" itemprop="dateCreated datePublished" datetime="2021-10-13T00:28:52+08:00">2021-10-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/5-years-cognition-plan/" class="post-meta-item leancloud_visitors" data-flag-title="My ideal 5 years' cognition plan" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/5-years-cognition-plan/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/5-years-cognition-plan/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>165</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>My ideal 5 years' cognition plan🤔：</p>
+<p>关于哲学/社会/权力/资本主义：黑格尔（《小逻辑》）→马克思（《资本论》）→韦伯（《新教伦理与资本主义精神》）→福柯（《规训与惩罚》）</p>
+<p>关于文学/存在主义：加缪/海明威→陀思妥耶夫斯基→尼采/萨特</p>
+<p>（关于精神分析：拉康/齐泽克）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/5-years-cognition-plan/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/oct-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/oct-2021/" class="post-title-link" itemprop="url">十月随想</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-10-13 00:11:37" itemprop="dateCreated datePublished" datetime="2021-10-13T00:11:37+08:00">2021-10-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/oct-2021/" class="post-meta-item leancloud_visitors" data-flag-title="十月随想" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/oct-2021/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/oct-2021/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>912</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="关于生活">关于生活</h2>
+<p>关于生活，值得一提的就是我在学着做菜了。可惜做菜是在异国他乡通过室友、女票、下厨房app、瞎折腾等渠道混合学习的，跟家乡的菜系一点都不搭边；在北京的7年生活里，我的口味本来就已经受到了学校食堂、外卖的影响，做菜风格再这样一混杂，我可就全然不是湖北人的胃了。有机会回家的时候还是要好好学学家里人做菜的。不过，几时才会回家呢？</p>
+<p>我不再大费周章地在日记本上写日记，像初高中那样。因为写得再深刻、再动情，日后也懒得翻看啊……而且确实很费时间。我采用了一种新的形式，谓之 video diary （从某部恐怖片里学的方式……），暂时还挺有意思的。</p>
+<p><img src="https://jyzhu.top/mydocs/pics/video-diary-screenshot.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/oct-2021/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/SAC-GIG-repos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/SAC-GIG-repos/" class="post-title-link" itemprop="url">攻壳机动队评论摘</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-10-11 00:34:05" itemprop="dateCreated datePublished" datetime="2021-10-11T00:34:05+08:00">2021-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/SAC-GIG-repos/" class="post-meta-item leancloud_visitors" data-flag-title="攻壳机动队评论摘" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/SAC-GIG-repos/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/SAC-GIG-repos/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我摘了一些关于攻壳机动队tv版第二季的评论,对我挺有启发的.</p>
+<p>对政治和社会的认识还不到看懂全剧的程度,过个几年会再二刷的.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/SAC-GIG-repos/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/SAC-GIG-EP2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/SAC-GIG-EP2/" class="post-title-link" itemprop="url">《攻壳机动队》第二季第2话 -- 饱食的我</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-09-23 22:02:42" itemprop="dateCreated datePublished" datetime="2021-09-23T22:02:42+08:00">2021-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/SAC-GIG-EP2/" class="post-meta-item leancloud_visitors" data-flag-title="《攻壳机动队》第二季第2话 -- 饱食的我" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/SAC-GIG-EP2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/SAC-GIG-EP2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>3.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我最近在看《攻壳机动队》，这是一部赛博朋克动漫系列作品，探讨各种社会、政治、哲学话题。我今晚看了TV版第二季第2话“饱食的我”，是我认为最好的剧集之一。除了这集以外，第一季第13话也很精彩。</p>
+<p>《攻壳》TV版的剧集一般都分主线剧集或独立故事剧集，主线之间穿插着独立的故事。第二季第2话就是一集独立故事，总时长也不到半小时，因此如果感兴趣不妨去看一看，b站上就有。<a target="_blank" rel="noopener" href="https://www.bilibili.com/bangumi/play/ss1565?t=1348">《攻壳机动队》TV版第二季第2话</a></p>
+<h2 id="梗概">梗概</h2>
+<h3 id="正义的基诺">正义的基诺</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/SAC-GIG-EP2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/Shortcut-Modification-for-Amethyst/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Shortcut-Modification-for-Amethyst/" class="post-title-link" itemprop="url">Shortcut Modification for Amethyst</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-09-20 13:47:16" itemprop="dateCreated datePublished" datetime="2021-09-20T13:47:16+08:00">2021-09-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/Shortcut-Modification-for-Amethyst/" class="post-meta-item leancloud_visitors" data-flag-title="Shortcut Modification for Amethyst" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/Shortcut-Modification-for-Amethyst/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/Shortcut-Modification-for-Amethyst/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Today I installed a window layout manager on MacOS -- <a target="_blank" rel="noopener" href="https://github.com/ianyh/Amethyst">Amethyst</a>. It allows to use shortcuts to swich windows into different layouts. Because I am using 2 monitors, and always work with lots of windows together, I really need one to smoothly set up the layouts.</p>
+<p>In fact, I wanted an app to help me remember the layouts and automatically recover it at the beginning. And I've downloaded the <strong>Layouts</strong>. But I don't wanna learn to use 2 apps together. I hope I'll make use both of them one day.</p>
+<h3 id="shortcuts-for-me">Shortcuts for me</h3>
+<p>Here I comment on the default shortcuts. I myself has only 2 monitors, so I don't need some of the functions.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Shortcut-Modification-for-Amethyst/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/git-notebook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/git-notebook/" class="post-title-link" itemprop="url">Everything I should know about Git</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-08-09 22:40:05" itemprop="dateCreated datePublished" datetime="2021-08-09T22:40:05+08:00">2021-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/git-notebook/" class="post-meta-item leancloud_visitors" data-flag-title="Everything I should know about Git" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/git-notebook/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/git-notebook/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>reference:</p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">廖雪峰 - Git教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/server-side-nodejs/home/welcome">Coursera - Server-side Development with NodeJS, Express and MongoDB</a></p>
+</blockquote>
+<h2 id="git-diagram">0. Git Diagram</h2>
+<p>工作区(Working Directory) <strong>--add--&gt;</strong> 暂存区(Staging area) <strong>--commit--&gt;</strong> Master</p>
+<p>HEAD refers to master</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/git-notebook/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -575,853 +1418,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/" class="post-title-link" itemprop="url">一篇论文发表了--Using machine learning to examine street green space types at a high spatial resolution- Application in Los Angeles County on socioeconomic disparities in exposure</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2021-05-19 23:06:38" itemprop="dateCreated datePublished" datetime="2021-05-19T23:06:38+08:00">2021-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/" class="post-meta-item leancloud_visitors" data-flag-title="一篇论文发表了--Using machine learning to examine street green space types at a high spatial resolution- Application in Los Angeles County on socioeconomic disparities in exposure" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>2.4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Yi Sun, Xingzhi Wang, Jiayin Zhu, Liangjian Chen, Yuhang Jia, Jean M. Lawrence, Luo-hua Jiang, Xiaohui Xie, Jun Wu, Using machine learning to examine street green space types at a high spatial resolution: Application in Los Angeles County on socioeconomic disparities in exposure, Science of The Total Environment, Volume 787, 2021, 147653, ISSN 0048-9697, <a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.scitotenv.2021.147653" class="uri">https://doi.org/10.1016/j.scitotenv.2021.147653</a>. (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0048969721027248" class="uri">https://www.sciencedirect.com/science/article/pii/S0048969721027248</a>)</p>
-<p><a href="https://jyzhu.top/mydocs/STOTEN-greenSpace-publication.pdf">PDF</a></p>
-<h3 id="abstract">Abstract:</h3>
-<p><strong>Background</strong> Compared to commonly-used green space indicators from downward-facing satellite imagery, street view-based green space may capture different types of green space and represent how environments are perceived and experienced by people on the ground, which is important to elucidate the underlying mechanisms linking green space and health. <strong>Objectives</strong> This study aimed to evaluate machine learning models that can classify the type of vegetation (i.e., tree, low-lying vegetation, grass) from street view images; and to investigate the associations between street green space and socioeconomic (SES) factors, in Los Angeles County, California. <strong>Methods</strong> SES variables were obtained from the CalEnviroScreen3.0 dataset. Microsoft Bing Maps images in conjunction with deep learning were used to measure total and types of street view green space, which were compared to normalized difference vegetation index (NDVI) as commonly-used satellite-based green space measure. Generalized linear mixed model was used to examine associations between green space and census tract SES, adjusting for population density and rural/urban status. <strong>Results</strong> The accuracy of the deep learning model was high with 92.5% mean intersection over union. NDVI were moderately correlated with total street view-based green space and tree, and weakly correlated with low-lying vegetation and grass. Total and three types of green space showed significant negative associations with neighborhood SES. The percentage of total green space decreased by 2.62 [95% confidence interval (CI): −3.02, −2.21, p &lt; 0.001] with each interquartile range increase in CalEnviroScreen3.0 score. Disadvantaged communities contained approximately 5% less average street green space than other communities. <strong>Conclusion</strong> Street view imagery coupled with deep learning approach can accurately and efficiently measure eye-level street green space and distinguish vegetation types. In Los Angeles County, disadvantaged communities had substantively less street green space. Governments and urban planners need to consider the type and visibility of street green space from pedestrian's perspective.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8%E4%BA%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/pandas-notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/pandas-notes/" class="post-title-link" itemprop="url">Pandas最基础的操作</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2021-05-13 00:18:53" itemprop="dateCreated datePublished" datetime="2021-05-13T00:18:53+08:00">2021-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/pandas-notes/" class="post-meta-item leancloud_visitors" data-flag-title="Pandas最基础的操作" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/pandas-notes/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/pandas-notes/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>4.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>tmd，用惯了r，开始用Python pandas，每一步我都知道要干啥，就是不知道要怎么做，太烦了！！我来把最基础的操作系统学习一下，记在这里备忘：</p>
-<h1 id="索引行列">-1. 索引行列</h1>
-<p>直接用<code>loc</code>和<code>iloc</code>就好了：</p>
-<ol type="1">
-<li>用行名、列名索引，就用<code>loc</code>；用行号、列号索引，就用<code>iloc</code></li>
-<li>注意这个不是函数，是用<code>df.loc[]</code>，后面接方括号用的</li>
-<li>方括号里面的东西就好说了
-<ol type="1">
-<li>用逗号<code>,</code>分隔不同的维度，比如2维表格就是<code>[行, 列]</code></li>
-<li>用字符串表示行名列名，或者数字表示行号列号</li>
-<li>用冒号<code>:</code>表示连续区间，比如<code>2:5</code>就是区间2、3、4；还可以单用冒号表示一整个维度全选</li>
-<li>举例子，第二行第三列：<code>df.iloc[1, 2]</code>，第四列：<code>df.iloc[:, 3]</code>，行名为<code>name</code>的那一行：<code>df.loc['name', :]</code></li>
-</ol></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/pandas-notes/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/2020%E9%9A%8F%E6%83%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020%E9%9A%8F%E6%83%B3/" class="post-title-link" itemprop="url">2020随想</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2021-02-27 22:06:36" itemprop="dateCreated datePublished" datetime="2021-02-27T22:06:36+08:00">2021-02-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2020%E9%9A%8F%E6%83%B3/" class="post-meta-item leancloud_visitors" data-flag-title="2020随想" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/2020%E9%9A%8F%E6%83%B3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020%E9%9A%8F%E6%83%B3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>470</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在这个目的、功利、简历至上的时代（这无可指摘），我所信奉的一种生活方式（懒惰主义/浪漫主义）是：在某些上不了台面/不足为外人道的兴致上持续投入精力。例如在自己建的小破网站写狗屁诗，读对本专业毫无用处的书，喝酒，玩单机游戏，等等。</p>
-<p>2020.10.19</p>
-<hr>
-<p>做人好难，人真的有连贯性和完整性吗，午睡前后心态会有重大变化，在客厅里和在卧室里觉得人生目标都不一样，支离破碎的一个人怎样勠力同心？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020%E9%9A%8F%E6%83%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/A-Little-Django-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/A-Little-Django-Notes/" class="post-title-link" itemprop="url">A Little Django Notes</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2021-02-27 21:54:38" itemprop="dateCreated datePublished" datetime="2021-02-27T21:54:38+08:00">2021-02-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/A-Little-Django-Notes/" class="post-meta-item leancloud_visitors" data-flag-title="A Little Django Notes" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/A-Little-Django-Notes/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/A-Little-Django-Notes/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>3.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Well!!!! I had thought my website was closed down and had no energy to recover it. But now I find it still accessible from a network outside CN. It's banned just because... I hadn't set up the website Bei'an asked by CN gov on time. I'm just lazy and busy.</p>
-<p>So, now, I can still post something.</p>
-<hr>
-<h2 id="start">Start</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/A-Little-Django-Notes/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/Found-an-amazing-App-Sonic-Pi-for-coding-the-music/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Found-an-amazing-App-Sonic-Pi-for-coding-the-music/" class="post-title-link" itemprop="url">Found an amazing App - Sonic-Pi, for coding the music</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2020-12-11 20:41:46" itemprop="dateCreated datePublished" datetime="2020-12-11T20:41:46+08:00">2020-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/Found-an-amazing-App-Sonic-Pi-for-coding-the-music/" class="post-meta-item leancloud_visitors" data-flag-title="Found an amazing App - Sonic-Pi, for coding the music" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/Found-an-amazing-App-Sonic-Pi-for-coding-the-music/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/Found-an-amazing-App-Sonic-Pi-for-coding-the-music/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>275</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>I found an amazing software named sonic-pi.</p>
-<p>You code the music.</p>
-<p>You can write codes with loops, controlling sound effects with synthesizers.</p>
-<p>And you can edit your codes while playing the music to control it, making you like a DJ!</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Found-an-amazing-App-Sonic-Pi-for-coding-the-music/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%9AHadoop%E3%80%81YARN%E3%80%81Spark%E3%80%81Hive/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%9AHadoop%E3%80%81YARN%E3%80%81Spark%E3%80%81Hive/" class="post-title-link" itemprop="url">数据分析知识补充：Hadoop、YARN、Spark、Hive</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2020-12-11 15:57:57" itemprop="dateCreated datePublished" datetime="2020-12-11T15:57:57+08:00">2020-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%9AHadoop%E3%80%81YARN%E3%80%81Spark%E3%80%81Hive/" class="post-meta-item leancloud_visitors" data-flag-title="数据分析知识补充：Hadoop、YARN、Spark、Hive" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%9AHadoop%E3%80%81YARN%E3%80%81Spark%E3%80%81Hive/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%9AHadoop%E3%80%81YARN%E3%80%81Spark%E3%80%81Hive/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="hadoop">Hadoop</h2>
-<h3 id="概念"><a target="_blank" rel="noopener" href="https://blog.csdn.net/houbin0912/article/details/72967178">概念</a></h3>
-<p>HDFS文件系统+MapReduce数据处理</p>
-<p>假如有1T的数据，我想一行一行正则过滤出想要的内容。就需要</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%9AHadoop%E3%80%81YARN%E3%80%81Spark%E3%80%81Hive/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/TensorFlow%E6%90%AD%E5%BB%BARNN%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/TensorFlow%E6%90%AD%E5%BB%BARNN%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">TensorFlow搭建RNN网络</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2020-12-10 18:58:21" itemprop="dateCreated datePublished" datetime="2020-12-10T18:58:21+08:00">2020-12-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/TensorFlow%E6%90%AD%E5%BB%BARNN%E7%BD%91%E7%BB%9C/" class="post-meta-item leancloud_visitors" data-flag-title="TensorFlow搭建RNN网络" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/TensorFlow%E6%90%AD%E5%BB%BARNN%E7%BD%91%E7%BB%9C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/TensorFlow%E6%90%AD%E5%BB%BARNN%E7%BD%91%E7%BB%9C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>191</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="tensorflow搭建rnn网络">TensorFlow搭建RNN网络</h1>
-<p>b站看的爱可可老师上传的公开课<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Sx411S7Dv?t=3341">《不用博士学位玩转Tensorflow深度学习》</a>。这是第二集，<a href="https://jyzhu.top/2020/12/10/TensorFlow%E6%90%AD%E5%BB%BA%E6%89%8B%E5%86%99%E8%AF%86%E5%88%AB%E7%BD%91%E7%BB%9C/">第一集讲的是全连接和卷积网络</a>。</p>
-<h2 id="recurrent-neural-network">Recurrent Neural Network</h2>
-<figure>
-<img src="https://jyzhu.top/mydocs/pics/image-20201212150337929-7759680.png" alt="image-20201212150337929"><figcaption>image-20201212150337929</figcaption>
-</figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/TensorFlow%E6%90%AD%E5%BB%BARNN%E7%BD%91%E7%BB%9C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
@@ -1444,13 +1442,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="网站总字数">251k</span>
+    <span title="网站总字数">252k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="网站阅读时长">3:48</span>
+    <span title="网站阅读时长">3:49</span>
   </span>
 </div>
 

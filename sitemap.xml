@@ -2,7 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jyzhu.top/NeRF-Notebook-Part-One/</loc>
+    <loc>https://jyzhu.top/Learning-NeRF/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/Introduction-to-NeRF/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/NeRF-Network-Architecture/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/NeRF-Hybrid-representations/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/NeRF-Differentiable-Forward-Maps/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/Prior-based-reconstruction-of-neural-fields/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/NeRF-Notebook/</loc>
+    
+    <lastmod>2023-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/Manipulate-Neural-Fields/</loc>
     
     <lastmod>2023-01-12</lastmod>
     
@@ -1700,6 +1763,13 @@
   </url>
   
   <url>
+    <loc>https://jyzhu.top/tags/NeRF/</loc>
+    <lastmod>2023-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jyzhu.top/tags/Docker/</loc>
     <lastmod>2023-01-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -1736,6 +1806,13 @@
   
   <url>
     <loc>https://jyzhu.top/tags/Pytorch/</loc>
+    <lastmod>2023-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/tags/3DCV/</loc>
     <lastmod>2023-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1813,13 +1890,6 @@
   
   <url>
     <loc>https://jyzhu.top/tags/Markdown/</loc>
-    <lastmod>2023-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jyzhu.top/tags/3DCV/</loc>
     <lastmod>2023-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2086,13 +2156,6 @@
   
   <url>
     <loc>https://jyzhu.top/tags/MapReduce/</loc>
-    <lastmod>2023-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jyzhu.top/tags/NeRF/</loc>
     <lastmod>2023-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
