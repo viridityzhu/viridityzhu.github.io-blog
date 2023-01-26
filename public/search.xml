@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>齐次坐标系</title>
+      <link href="/homogeneous-coordinates/"/>
+      <url>/homogeneous-coordinates/</url>
+      
+        <content type="html"><![CDATA[<h1 id="齐次坐标系">齐次坐标系</h1><p>之前不理解为什么要用一个和从小到大学的笛卡尔坐标系不同的齐次坐标系来表示东西，并且弄得很复杂；学了各种公式也很糊涂。现在终于明白了</p><h2 id="齐次坐标系的现实意义">齐次坐标系的现实意义</h2><p>就是用来表示现实世界中我们眼睛看到的样子：两条平行线在无限远处能相交。 <embed src="https://pic4.zhimg.com/80/v2-dc3c0223dd24d2084fcda13b2d0e60f3_1440w.webp" /></p><h2 id="齐次坐标系的本质">齐次坐标系的本质：</h2><p>就是用N+1维来代表N维坐标。</p><p>也就是说，原本二维空间的点<span class="math inline">\((X,Y)\)</span>，增加一个维度，用<span class="math inline">\((x,y,w)\)</span>来表示。把齐次坐标转换成笛卡尔坐标是很简单的，对前两个维度分别除以最后一个维度的值，就好了，即 <span class="math display">\[X=\frac x w,\  Y=\frac y w\\ (X,Y)=(\frac x w,\frac y w)\]</span> <embed src="https://pic2.zhimg.com/80/v2-da28eed57fda0fc6a06b7122be5f2a1d_1440w.webp" /></p><p>这样做就可以表示两条平行线在远处能相交了！why？</p><p>要解释这个，需要先解释一个齐次坐标系的特点：规模不变性（也是叫homogeneous这个名字的原因）。也就是说，对任意非零的k，<span class="math inline">\((x,y,w)\)</span>和<span class="math inline">\((kx,ky,kw)\)</span>都表示二维空间中同一个点<span class="math inline">\((\frac x w,\frac y w)\)</span>。（因为<span class="math inline">\(\frac{kx}{kw}=\frac xw\)</span>嘛。）</p><p>首先，用原本笛卡尔坐标系中的表示方法，无限远处的点会被表示成<span class="math inline">\((\infin,\infin)\)</span>，从而失去意义。但是我们发现用齐次坐标，我们就有了一个方法明确表示无限远处的任意点，即，<span class="math inline">\((x,y,0)\)</span>。（为什么？因为把它转换回笛卡尔坐标，会得到<span class="math inline">\((\frac x 0,\frac y 0)=(\infin,\infin)\)</span>）。</p><p>现在，用初中所学，联立两条直线的方程，得到的解是两条直线的交点。假如有两条平行线<span class="math inline">\(Ax+By+C=0\)</span>和<span class="math inline">\(Ax+By+D=0\)</span>，求交点，则 <span class="math display">\[\left\{\matrix{Ax+By+C=0 \\Ax+By+D=0}\right.\]</span> 在笛卡尔坐标系中，可知唯一解是<span class="math inline">\(C=D\)</span>，即两条线为同一条直线。</p><p>但是，如果把它换成齐次坐标，得到 <span class="math display">\[\left\{\matrix{A\frac x w+B\frac y w+C=0\\ A\frac x w + B\frac y w +D=0}\right.\]</span></p><p><span class="math display">\[\left\{\matrix{Ax+By+Cw=0\\Ax+By+Dw=0}\right.\]</span></p><p>当<span class="math inline">\(w=0\)</span>，上式变成<span class="math inline">\(Ax+By=0\)</span>，得到解<span class="math inline">\((x,-\frac {A}Bx,0)\)</span>。其实这里的x和y是什么不重要，重要的是w=0，意味着这是个无限远处的点。也就是说，两条平行线在无限远处相交了！甚至能明确求出交点！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> poems | Computer Notes | thoughts </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 3D Computer Vision </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Introduction to NeRF</title>
       <link href="/Introduction-to-NeRF/"/>
       <url>/Introduction-to-NeRF/</url>

@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jyzhu.top/homogeneous-coordinates/</loc>
+    
+    <lastmod>2023-01-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jyzhu.top/about/index.html</loc>
     
     <lastmod>2023-01-26</lastmod>
@@ -2189,10 +2198,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://jyzhu.top/tags/3D-Computer-Vision/</loc>
+    <lastmod>2023-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
     <loc>https://jyzhu.top/categories/Computer-Notes/</loc>
+    <lastmod>2023-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/categories/poems-Computer-Notes-thoughts/</loc>
     <lastmod>2023-01-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
