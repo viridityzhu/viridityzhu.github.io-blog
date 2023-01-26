@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jyzhu.top/about/index.html</loc>
+    <lastmod>2023-01-26</lastmod>
+  </url>
+  <url>
     <loc>https://jyzhu.top/NeRF-Notebook/</loc>
     <lastmod>2023-01-12</lastmod>
   </url>
@@ -43,10 +47,6 @@
   <url>
     <loc>https://jyzhu.top/The-difference-between-RNN-s-output-and-h-n/</loc>
     <lastmod>2022-10-22</lastmod>
-  </url>
-  <url>
-    <loc>https://jyzhu.top/about/index.html</loc>
-    <lastmod>2022-09-01</lastmod>
   </url>
   <url>
     <loc>https://jyzhu.top/Reading-Few-shot-Video-to-Video-Synthesis/</loc>
