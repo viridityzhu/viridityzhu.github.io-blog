@@ -13,12 +13,14 @@
       
       <categories>
           
-          <category> poems | Computer Notes | thoughts </category>
+          <category> Computer Notes </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> Computer Vision </tag>
             
             <tag> 3D Computer Vision </tag>
             
