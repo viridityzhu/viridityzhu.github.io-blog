@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/blog/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<meta name="description" content="reference: 廖雪峰 - Git教程 Coursera - Server-side Development with NodeJS, Express and MongoDB  0. Git Diagram 工作区(Working Directory) --add--&gt; 暂存区(Staging area) --commit--&gt; Master HEAD refers to ma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Everything I should know about Git">
+<meta property="og:url" content="https://jyzhu.top/blog/git-notebook/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="reference: 廖雪峰 - Git教程 Coursera - Server-side Development with NodeJS, Express and MongoDB  0. Git Diagram 工作区(Working Directory) --add--&gt; 暂存区(Staging area) --commit--&gt; Master HEAD refers to ma">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-09T14:40:05.000Z">
+<meta property="article:modified_time" content="2022-02-20T15:03:06.572Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Notebook">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jyzhu.top/blog/git-notebook/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/blog/git-notebook/","path":"git-notebook/","title":"Everything I should know about Git"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Everything I should know about Git | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/blog/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-notes"><a href="/blog/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/blog/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">77</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">174</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-diagram"><span class="nav-number">1.</span> <span class="nav-text">0. Git Diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#global-configuration-for-git"><span class="nav-number">2.</span> <span class="nav-text">1. Global Configuration for Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start"><span class="nav-number">3.</span> <span class="nav-text">2. Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkoutresetrestore"><span class="nav-number">4.</span> <span class="nav-text">3. Checkout&#x2F;Reset&#x2F;Restore</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E4%BA%BA%E8%AF%9D"><span class="nav-number">4.1.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">4. Stash的简单使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github"><span class="nav-number">6.</span> <span class="nav-text">Github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-with-your-github-account-using-ssh"><span class="nav-number">6.1.</span> <span class="nav-text">0. Connect with your Github account using SSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-with-a-remote-repo"><span class="nav-number">6.2.</span> <span class="nav-text">1. Connect with a remote repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clone-an-existing-remote-repo"><span class="nav-number">6.3.</span> <span class="nav-text">2. Clone an existing remote repo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#branch"><span class="nav-number">7.</span> <span class="nav-text">Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#solve-conflicts"><span class="nav-number">7.1.</span> <span class="nav-text">Solve conflicts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stash-to-save-current-work"><span class="nav-number">7.2.</span> <span class="nav-text">stash to save current work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cherry-pick-to-copy-a-specific-commit"><span class="nav-number">7.3.</span> <span class="nav-text">cherry-pick to copy a specific commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cooperation"><span class="nav-number">7.4.</span> <span class="nav-text">Cooperation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-number">8.</span> <span class="nav-text">Tag</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com.sg/citations?user=S8ozWfsAAAAJ" title="GoogleScholar → https:&#x2F;&#x2F;scholar.google.com.sg&#x2F;citations?user&#x3D;S8ozWfsAAAAJ" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script> -->
+<script type='text/javascript' id='clustrmaps'
+    src='//cdn.clustrmaps.com/map_v2.js?cl=c1c1c1&w=a&t=tt&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=484848&ct=f9f9f9&cmo=3acc3a&cmn=600073'></script>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/git-notebook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Everything I should know about Git
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-08-09 22:40:05" itemprop="dateCreated datePublished" datetime="2021-08-09T22:40:05+08:00">2021-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/git-notebook/" class="post-meta-item leancloud_visitors" data-flag-title="Everything I should know about Git" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/git-notebook/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/git-notebook/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>reference:</p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">廖雪峰 - Git教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/server-side-nodejs/home/welcome">Coursera - Server-side Development with NodeJS, Express and MongoDB</a></p>
+</blockquote>
+<h2 id="git-diagram">0. Git Diagram</h2>
+<p>工作区(Working Directory) <strong>--add--&gt;</strong> 暂存区(Staging area) <strong>--commit--&gt;</strong> Master</p>
+<p>HEAD refers to master</p>
+<h2 id="global-configuration-for-git">1. Global Configuration for Git</h2>
+<ul>
+<li>Check to make sure that Git is installed and available on the command line, by typing the following at the command prompt:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>To configure your user name to be used by Git, type the following at the prompt:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>To configure your email to be used by Git, type the following at the prompt:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &lt;your email address&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Check your default Git global configuration:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+<h2 id="start">2. Start</h2>
+<ul>
+<li>Initializes the current folder as a git repository, just go to the folder and type the following at the prompt:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>Now the folder will be mark as a master</p>
+<ul>
+<li>Current status of the foler:
+<ul>
+<li>current branch</li>
+<li>untracked files: files that are not been added to Git repository. Use <code>add</code> to add.</li>
+<li>Changes not staged for commit: still use <code>add</code> to update</li>
+<li>changes to be committed: files listed below are ready to be committed</li>
+</ul></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<ul>
+<li>See change details of a file:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Add files to staging area:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file(s)/folder(s)&gt;</span><br><span class="line">git add . <span class="comment"># the &quot;.&quot; means all files</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>After adding some files, you can commit the current state of the folder into Git repository:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit</span><br><span class="line"><span class="comment"># use -m &lt;message&gt; to add message</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Show the brief log of all the commits with messages</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline</span><br></pre></td></tr></table></figure>
+<h2 id="checkoutresetrestore">3. Checkout/Reset/Restore</h2>
+<ul>
+<li>Discard changes of the last commit, and checkout the file from an older commit. <strong>last commit -&gt; any commit (staged)</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;commit&gt; &lt;file&gt;</span><br><span class="line"><span class="comment"># commit means commit id, using first several chars is ok</span></span><br></pre></td></tr></table></figure>
+<p>The file changes will be automatically set into the staging area, all you need to do is submitting.</p>
+<ul>
+<li>Reset a file from staged to untracked: <strong>staged -&gt; untracked</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset &lt;commit [default=HEAD]&gt; &lt;file&gt;</span><br><span class="line">git reset &lt;commit-id-found-from-log&gt; <span class="comment"># use git log to find previous commit</span></span><br><span class="line">git reset HEAD^ <span class="comment"># previous version</span></span><br></pre></td></tr></table></figure>
+<p>This command essentially has deeper meaning: You can return to past versions by config the <code>&lt;commit&gt;</code>.</p>
+<p><code>HEAD</code>: current version; <code>HEAD^</code>: previous version; <code>HEAD^^</code>: previous previous version...;<code>HEAD-100</code>: 100 versions before</p>
+<ul>
+<li>Reset the staging area to untracked. (Just status, not actually discarding your changes on the files)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Discard changes of an untracked file: <strong>untracked -&gt; last commit</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git restore &lt;file&gt;</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">git checkout -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Return to a future version? Still use commit id as reference in <code>git reset</code>. But how to know the commit id of a future version? Use <code>reflog</code> to see command history.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<h3 id="说人话">说人话</h3>
+<p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- &lt;file&gt;</code>或者<code>git restore &lt;file&gt;</code>。</p>
+<p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD &lt;file&gt;</code>，就回到了场景1，第二步按场景1操作。</p>
+<p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，用<code>git reset HEAD^</code>，不过前提是没有推送到远程库。</p>
+<p>场景4：那已经推送到远程库了咋办呢？当然还是先在本地撤销到合适的历史版本（同场景3），然后再强制推送到远程库：<code>git push --force</code></p>
+<h2 id="stash的简单使用">4. Stash的简单使用</h2>
+<p>如果本地有更改，暂时不想commit；可是远程库又有了新的更新，需要同步过来。那就</p>
+<ul>
+<li>先用stash把本地更改暂存起来：<code>git stash</code></li>
+<li>然后正常pull：<code>git pull</code></li>
+<li>最后，把刚存起来的本地更改pop出来：<code>git stash pop</code></li>
+</ul>
+<p>如果有太多stash，想清空：<code>git stash clear</code></p>
+<h2 id="github">Github</h2>
+<h3 id="connect-with-your-github-account-using-ssh">0. Connect with your Github account using SSH</h3>
+<h3 id="connect-with-a-remote-repo">1. Connect with a remote repo</h3>
+<ul>
+<li>Suppose you have a blank repo on Github, and an existing repo on your computer</li>
+<li>Connect local repo with a remote one:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:username/repoName.git</span><br></pre></td></tr></table></figure>
+<p><code>origin</code> is the default name of a remote repo.</p>
+<ul>
+<li>Push local repo to the remote one:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>command <code>-u</code> is for: Branch 'master' set up to track remote branch 'master' from 'origin'.</p>
+<p>After the first push, you don't need the <code>-u</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Show info of remote repo:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Disconnect remote repo by name:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="clone-an-existing-remote-repo">2. Clone an existing remote repo</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:username/repoName.git</span><br></pre></td></tr></table></figure>
+<p>Instead of ssh, https is also available.</p>
+<h2 id="branch">Branch</h2>
+<ul>
+<li>Create a new branch</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Switch to a branch</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Show branchs:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<p>Current bransh has a <code>*</code> ahead.</p>
+<ul>
+<li>Merge branch to current one:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Delete a branch</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="solve-conflicts">Solve conflicts</h3>
+<p>When you merge a branch to current branch, sometimes there are conflicts.</p>
+<p>The conflicts will be directly showed in the files as:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; <span class="string">HEAD</span></span><br><span class="line"><span class="string">Creating a new branch is quick &amp; simple.</span></span><br><span class="line"><span class="string">=======</span></span><br><span class="line"><span class="string">Creating a new branch is quick AND simple.</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Just fix it manually, then <code>add</code>, then <code>commit</code>.</li>
+<li>Show merge logs:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --graph --pretty=oneline --abbrev-commit</span><br><span class="line">git <span class="built_in">log</span> --graph</span><br></pre></td></tr></table></figure>
+<h3 id="stash-to-save-current-work"><code>stash</code> to save current work</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment"># save the work</span></span><br><span class="line">git stash list <span class="comment"># list saved works</span></span><br><span class="line">git stash pop <span class="comment"># restore the saved works and delete the stash</span></span><br></pre></td></tr></table></figure>
+<h3 id="cherry-pick-to-copy-a-specific-commit"><code>cherry-pick</code> to copy a specific commit</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commit id&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="cooperation">Cooperation</h3>
+<ul>
+<li>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交；</li>
+<li>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致；</li>
+<li>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code>；</li>
+<li>从远程抓取分支，使用<code>git pull</code>，如果有冲突，要先处理冲突。</li>
+</ul>
+<h2 id="tag">Tag</h2>
+<p>Tag is a name that we give to a commit.</p>
+<ul>
+<li>Set a new tag to the newest commit:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;name&gt;</span><br><span class="line"><span class="comment"># add message:</span></span><br><span class="line">git tag -a v0.1 -m <span class="string">&quot;version 0.1 released&quot;</span></span><br></pre></td></tr></table></figure>
+<p>To a past commit?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;name&gt; &lt;commit id&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>List all tag:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<p>Show info of a tag:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Delete a tag:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/SQL-Notebook/" rel="bookmark">SQL Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Quick-Notes-About-Data-Structures/" rel="bookmark">Data Structures and Their ADTs</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/计算机组成与体系结构/" rel="bookmark">计算机组成与体系结构</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/C-Language-Notebook/" rel="bookmark">C Language Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Java-Notebook/" rel="bookmark">Java Notebook</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/blog/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/Notebook/" rel="tag"># Notebook</a>
+              <a href="/blog/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/me-changing/" rel="prev" title="记在转变之即">
+                  <i class="fa fa-chevron-left"></i> 记在转变之即
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/Shortcut-Modification-for-Amethyst/" rel="next" title="Shortcut Modification for Amethyst">
+                  Shortcut Modification for Amethyst <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">253k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:50</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/blog/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/blog/git-notebook/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>

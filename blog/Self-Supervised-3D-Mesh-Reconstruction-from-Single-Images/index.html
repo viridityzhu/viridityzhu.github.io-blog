@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/blog/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<meta name="description" content="论文地址：https:&#x2F;&#x2F;openaccess.thecvf.com&#x2F;content&#x2F;CVPR2021&#x2F;papers&#x2F;Hu_Self-Supervised_3D_Mesh_Reconstruction_From_Single_Images_CVPR_2021_paper.pdf 作者：Tao Hu, Liwei Wang, Xiaogang Xu, Shu Liu, Jiaya Jia 发表： C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读 Self-Supervised 3D Mesh Reconstruction from Single Images">
+<meta property="og:url" content="https://jyzhu.top/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="论文地址：https:&#x2F;&#x2F;openaccess.thecvf.com&#x2F;content&#x2F;CVPR2021&#x2F;papers&#x2F;Hu_Self-Supervised_3D_Mesh_Reconstruction_From_Single_Images_CVPR_2021_paper.pdf 作者：Tao Hu, Liwei Wang, Xiaogang Xu, Shu Liu, Jiaya Jia 发表： C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/wUJZyYX6bnGFDQf.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/6aM2eJnWV8BNqDT.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/VeAl1bxuhqZjadI.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/rEA4DxuOcXwbMWp.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/yUl5NSI1fLBcGqp.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/LNQiJRxUnK7Oea9.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/ZNl7FLOmqcT8gBj.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/PuTKVtX5U2derjQ.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/qyNIB8GF7usA1ba.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/ekRbuiONBLHlSKx.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/26/FXYkC8h6EeZSapr.png">
+<meta property="article:published_time" content="2021-10-21T09:13:51.000Z">
+<meta property="article:modified_time" content="2022-01-26T09:52:38.271Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Computer Vision">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="3D Reconstruction">
+<meta property="article:tag" content="Paper Reading">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/26/wUJZyYX6bnGFDQf.png">
+
+
+<link rel="canonical" href="https://jyzhu.top/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/","path":"Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/","title":"读 Self-Supervised 3D Mesh Reconstruction from Single Images"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>读 Self-Supervised 3D Mesh Reconstruction from Single Images | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/blog/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-notes"><a href="/blog/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/blog/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">77</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">174</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#why"><span class="nav-number">1.</span> <span class="nav-text">Why：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what"><span class="nav-number">2.</span> <span class="nav-text">What：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how"><span class="nav-number">3.</span> <span class="nav-text">How：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-smr%E7%9A%84%E6%8F%90%E5%87%BA"><span class="nav-number">3.1.</span> <span class="nav-text">a. SMR的提出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-3d%E5%88%B02d---%E5%8F%AF%E5%BE%AE%E5%88%86%E6%B8%B2%E6%9F%93-differentiable-rendering"><span class="nav-number">3.2.</span> <span class="nav-text">b. 3D到2D - 可微分渲染 Differentiable Rendering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c.-2d%E5%88%B03d---3d-%E9%87%8D%E5%BB%BA%E6%A8%A1%E7%9A%84%E5%85%AC%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">c. 2D到3D - 3D 重建模的公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d.-smr%E6%A8%A1%E5%9E%8B%E7%BB%86%E8%8A%82"><span class="nav-number">3.4.</span> <span class="nav-text">d. SMR模型细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%AF%E6%8F%92%E8%A1%A5%E4%B8%80%E8%87%B4%E6%80%A7interpolated-consistency"><span class="nav-number">3.4.1.</span> <span class="nav-text">3. 第一个是插补一致性（Interpolated Consistency）。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%AF-landmark-%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">3.4.2.</span> <span class="nav-text">4. 第二个是 Landmark 一致性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e.-%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.5.</span> <span class="nav-text">e. 实验</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com.sg/citations?user=S8ozWfsAAAAJ" title="GoogleScholar → https:&#x2F;&#x2F;scholar.google.com.sg&#x2F;citations?user&#x3D;S8ozWfsAAAAJ" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script> -->
+<script type='text/javascript' id='clustrmaps'
+    src='//cdn.clustrmaps.com/map_v2.js?cl=c1c1c1&w=a&t=tt&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=484848&ct=f9f9f9&cmo=3acc3a&cmn=600073'></script>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          读 Self-Supervised 3D Mesh Reconstruction from Single Images
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2021-10-21 17:13:51" itemprop="dateCreated datePublished" datetime="2021-10-21T17:13:51+08:00">2021-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/" class="post-meta-item leancloud_visitors" data-flag-title="读 Self-Supervised 3D Mesh Reconstruction from Single Images" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>5.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>论文地址：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Hu_Self-Supervised_3D_Mesh_Reconstruction_From_Single_Images_CVPR_2021_paper.pdf" class="uri">https://openaccess.thecvf.com/content/CVPR2021/papers/Hu_Self-Supervised_3D_Mesh_Reconstruction_From_Single_Images_CVPR_2021_paper.pdf</a></p>
+<p>作者：Tao Hu, Liwei Wang, Xiaogang Xu, Shu Liu, Jiaya Jia</p>
+<p>发表： CVPR 2021</p>
+<p>Github链接： <a target="_blank" rel="noopener" href="https://github.com/dvlab-research/SMR" class="uri">https://github.com/dvlab-research/SMR</a></p>
+<hr />
+<blockquote>
+<p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p>
+</blockquote>
+<h2 id="why">Why：</h2>
+<ol type="1">
+<li>对于单视角3D重建模任务，最直观的是用3D层面的标注进行监督学习。但是3D标注还是挺麻烦的，如果可以只用2D标注就好了。</li>
+<li>现在也不是没有光靠2D标注实现的。但是如果没有3D层面的监督，这些工作的效果还不是很理想。</li>
+<li>所以这篇文章想提出一个仅靠2D层面的mask标注，就能实现3D重建模的模型，而且效果很好</li>
+</ol>
+<h2 id="what">What：</h2>
+<ol type="1">
+<li>提出一个自监督 3D Mesh 重建方法（Self-supervised Mesh Reconstruction, SMR）</li>
+<li>SMR只需要轮廓 mask 作为标注，就可以重建自然界的物体，比如鸟、牛、自行车</li>
+<li>这个方法在多个数据集上，都提升了有监督和无监督的对2D图像进行3D重建模的效果</li>
+<li>这个方法还可以迁移到其他图像合成任务上，比如新视角生成、形状转换、材质转换等等</li>
+</ol>
+<p>读前疑问：</p>
+<ol type="1">
+<li>自监督是怎么应用在这里的？处处运用了自监督……一个是对于2D层面，可以把 原始图像 作为 生成的3D模型再渲染成的2D图像 的拟合目标；第二个是可以把 生成的3D模型 作为 生成的3D模型再渲染成的2D图像再生成的3D模型 的拟合目标；第三个是可以把 landmark的分类 作为 根据landmark对应的2D图像像素特征所预测出的分类 的自监督拟合目标……🪆🪆🪆🤡🪆🪆🪆🪆</li>
+<li>landmark 是什么？用途是什么？我不知道landmark翻译成中文的什么词比较好，这好像也阻碍了我对它的理解……文中landmark就是3D mesh模型中的每个顶点。文中认为只要是同一类物体的mesh模型，那么它们的每个landmark的语义含义应该都是一样的。所以根据这个道理，设计了一个Landmark Consistency，让模型重建的结果在local层面更加精细了。</li>
+<li>我猜这里是不是使用插补和预测的方法，根据2D标注生成了3D标注呢？是也不是……的确是通过插补的方法，生成了新的标注，扩充了数据集，但具体过程是通过线性插补生成了一些新的2D图像。也的确是通过2D标注生成了3D标注，但这个生成的过程正是整个模型需要训练的部分。总的来说，不是我一开始想象中那么简单的……</li>
+</ol>
+<h2 id="how">How：</h2>
+<figure>
+<img src="https://i.loli.net/2021/10/26/wUJZyYX6bnGFDQf.png" alt="image-20211024232421890" /><figcaption>image-20211024232421890</figcaption>
+</figure>
+<h3 id="a.-smr的提出">a. SMR的提出</h3>
+<ol type="1">
+<li>传统的单视角3D物体重建方法一般都是给3D先验模型调参（比如3DMM给脸的 SMPL给人的），这样又贵又耗时，所以不能很快应用到多种多样其他物体上。</li>
+<li>深度学习领域，可以用监督学习来实现3D重建，效果比较好。一般都需要3D标注，也有很多通过2D监督来做的方法，因为2D属性比3D属性更好识别。本质上2D标注用的方法基本上都是可微分渲染（differentiable render，后面有介绍），把3D空间映射到2D图像上。</li>
+<li>光是2D监督的话，不能保证3D层面属性的准确性。也有研究（ARCH）显示了2D和3D监督结合起来可以进一步提升效果。所以这篇文章提出，能不能光靠2D标注来实现3D层面的重建呢？</li>
+<li>SMR的2D部分和其他2D监督方法类似，重建的3D模型又被渲染回了2D图像，作为输入；3D属性部分采用了2个新的自监督方法：插补的一致性（Interpolated Consistency）和landmark的一致性（Landmark Consistency）。
+<ol type="1">
+<li>IC：在自监督训练的时候，通过插补两个3D模型，生成新的3D模型，作为3D层面的标注。跟其他方法（original or randomly augmented attribute）比，这个方法可以从更多视角、几何结构、外观的角度渲染图像</li>
+<li>LC：如果3D物体的landmark具有一致性，那每个local的细节部分会更好。mesh模型中的点作为landmark，然后对每个landmark的特征进行分类。这样既能保证每个landmark的特殊性，又能提升每个小部分的建模效果。</li>
+</ol></li>
+</ol>
+<figure>
+<img src="https://i.loli.net/2021/10/26/6aM2eJnWV8BNqDT.png" alt="image-20211024234148377" /><figcaption>image-20211024234148377</figcaption>
+</figure>
+<h3 id="b.-3d到2d---可微分渲染-differentiable-rendering">b. 3D到2D - 可微分渲染 Differentiable Rendering</h3>
+<p>可微分渲染 Differentiable Rendering 本质上是一个不用任何训练、可以直接用的公式，实现在特定的相机视角和光线的条件下，把3D物体映射到2D图像中。</p>
+<p>一点一点说明公式：<span class="math inline">\(X=R(A)=R([C,L,S,T])\)</span></p>
+<ol type="1">
+<li>3D mesh 物体表示为：<span class="math inline">\(O(S,T)\)</span>，S是shape，包括mesh点和面；T是texture，为UV map。</li>
+<li>渲染相机表示为：<span class="math inline">\(C = (a,e,d)\)</span>，<span class="math inline">\(a\in [0\degree,360\degree]\)</span>是azimuth，地平经度/方位角；<span class="math inline">\(e\in [-90\degree,90\degree]\)</span>是elevation，仰角；<span class="math inline">\(d\in (0,+\infin]\)</span>是distance，距离。</li>
+<li><span class="math inline">\(L\in R^l\)</span>是光线，通过 <strong>球谐 Spherical Harmonics</strong>方法建模。
+<ol type="1">
+<li>代码里的lights是 of shape <span class="math inline">\((batch\_size,9)\)</span>，所以是用9个参数模拟环境光函数 <a target="_blank" rel="noopener" href="https://kaolin.readthedocs.io/en/latest/modules/kaolin.render.mesh.html#efficient-monte-carlo-methods-for-light-transport-in-scattering-media">参考 kaolin 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://lianera.github.io/post/2016/sh-lighting-exp/">参考 球谐光照（Spherical Harmonics Lighting）及其应用-实验篇</a>：球谐函数的主要作用就是用简单的系数表示复杂的球面函数。通过采样，可以估算出球谐函数。这里用9个参数可以得到前3阶球谐函数，已经可以很好地拟合光照函数了。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/NVIDIAGameWorks/kaolin/blob/2d319cabd74d0290caa5c0a1c316fcb029ec2c71/kaolin/render/mesh/utils.py#L79">参考 kaolin 里的spherical_harmonic_lighting 源码</a>，从代码里可以看出来，最后对图像进行渲染的时候，是把球谐建模得到的光照一一作用在每个像素上，得到 lighting effect</li>
+</ol></li>
+<li>则<span class="math inline">\(A=[C,L,S,T]\)</span> 就是一个3D属性，包括了3D物体<span class="math inline">\(O(S,T)\)</span>和特定的相机视角C和光线L。</li>
+<li><span class="math inline">\(X=[I,M]\)</span>是2D属性。这里I是image，RGB图像；M是mask，轮廓掩膜。</li>
+<li>R就是可微分渲染器 Differentiable rederer 了，本质上就是一个不需要训练的可微分的操作。它可以把3D属性映射成3D属性。</li>
+</ol>
+<h3 id="c.-2d到3d---3d-重建模的公式">c. 2D到3D - 3D 重建模的公式</h3>
+<p>3D重建就很好理解了，是反过来训练一个encoder E，本质上是R的反函数，实现<span class="math inline">\(A=[C,L,S,T]=E(X)\)</span>。</p>
+<p>这篇论文里，整体encoder E也分成了四个子encoder，<span class="math inline">\(E_c\)</span> for camera, <span class="math inline">\(E_l\)</span> for light, <span class="math inline">\(E_s\)</span> for shape, <span class="math inline">\(E_t\)</span> for texture。</p>
+<ol type="1">
+<li>其中<span class="math inline">\(E_c\)</span> 是一个4维向量，包括<span class="math inline">\([a_x,a_y,e,d]\)</span>。e是elevation，仰角；d是distance，距离。这里<span class="math inline">\(a_x,a_y\)</span>可以换算成azimuth：<span class="math inline">\(a=atan2(a_x,a_y)\)</span>。为什么用这个呢，是为了避免原本的a的定义域造成的不连续回归的问题。</li>
+<li><span class="math inline">\(E_s\)</span>也做了一点变换，实际上是真实形状相对于一个球体mesh的偏移量<span class="math inline">\(\Delta s\)</span>。</li>
+<li><span class="math inline">\(E_t\)</span>，先预测了一个 2D flow map，然后通过空间变换（spatial transformation）生成UV map。</li>
+<li><span class="math inline">\(E_l\)</span>，没什么变化，直接是 Spherical Harmonics 模型表示的l维向量</li>
+</ol>
+<h3 id="d.-smr模型细节">d. SMR模型细节</h3>
+<figure>
+<img src="https://i.loli.net/2021/10/26/VeAl1bxuhqZjadI.png" alt="精髓都在这个图上了" /><figcaption>精髓都在这个图上了</figcaption>
+</figure>
+<ol type="1">
+<li>3D 监督：图3(a)里的情况：如果 3D 属性已经有了，那啥也不用管，直接让模型学它。对应下面这个公式，即如果图片i的3D ground truth <span class="math inline">\(A_i^{gt}\)</span> 是已有的，就直接通过回归来训练模型E的参数<span class="math inline">\(\theta\)</span>，让<span class="math inline">\(E_\theta(X_i)\)</span> ，即模型预测的属性值<span class="math inline">\(A_i\)</span>，拟合真值 <span class="math inline">\(A_i^{gt}\)</span>。</li>
+</ol>
+<figure>
+<img src="https://i.loli.net/2021/10/26/rEA4DxuOcXwbMWp.png" alt="image-20211026140522984" /><figcaption>image-20211026140522984</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>2D监督生成3D属性：图3(b)里对应这个情况。首先模型<span class="math inline">\(E_\theta\)</span>可以根据2D属性<span class="math inline">\(X_i\)</span>生成一个3D属性<span class="math inline">\(A_i\)</span>，即<span class="math inline">\(A_i=E_\theta(X_i)\)</span>，然后用可微分渲染R，再把这个生成的<span class="math inline">\(A_i\)</span>给映射回2D……即得到<span class="math inline">\(R(E_\theta(X_i))\)</span>。然后就可以让这个<span class="math inline">\(R(E_\theta(X_i))\)</span>去拟合原2D图像<span class="math inline">\(X_i\)</span>了。这里的loss用的是 image distance 和silhouette distance loss 的加权和，文章说这是比较常用的loss。</li>
+</ol>
+<figure>
+<img src="https://i.loli.net/2021/10/26/yUl5NSI1fLBcGqp.png" alt="image-20211026141659535" /><figcaption>image-20211026141659535</figcaption>
+</figure>
+<ul>
+<li>Image Distance loss：用L1距离（曼哈顿距离）来衡量。公式如下，圈圈点表示的是逐元素乘法。</li>
+</ul>
+<figure>
+<img src="https://i.loli.net/2021/10/26/LNQiJRxUnK7Oea9.png" alt="image-20211026143006851" /><figcaption>image-20211026143006851</figcaption>
+</figure>
+<ul>
+<li>Silhouette Distance loss：即两张图片的mask的交并比IoU。</li>
+</ul>
+<figure>
+<img src="https://i.loli.net/2021/10/26/ZNl7FLOmqcT8gBj.png" alt="image-20211026143821564" /><figcaption>image-20211026143821564</figcaption>
+</figure>
+<p><em>仅仅用上述的方式来实现2D监督的3D建模，效果是远远不够的。所以本文的核心其实在后面提出的两个一致性上，它们利用了特定类别的3D mesh模型的特性，提升了3D监督的效果。</em></p>
+<h4 id="第一个是插补一致性interpolated-consistency">3. 第一个是插补一致性（Interpolated Consistency）。</h4>
+<ol type="1">
+<li>首先提出 Cycle Consistency，如图3(c)。首先，<span class="math inline">\(A_i=E_\theta(X_i)\)</span>，是模型生成的3D属性。然后，通过可微分渲染R，就又可以把<span class="math inline">\(A_i\)</span>渲染到2D图像层面，得到<span class="math inline">\(R(A_i)\)</span>了。然后再套娃🪆一次，对<span class="math inline">\(R(A_i)\)</span>再通过模型Encode变成3D的<span class="math inline">\(E_\theta(R(A_i)))\)</span>，就可以把<span class="math inline">\(A_i\)</span>作为这个<span class="math inline">\(E_\theta(R(A_i)))\)</span>的3D标注，进行自监督回归了😳！说起来好绕，看公式好像容易理解一点： <span class="math inline">\(\theta = arg\ min_\theta \frac{1}{N}\sum^N_{i=1}||E_\theta(R(E_\theta(X_i)))-E_\theta(X_i)||_1\)</span>。这个公式是和前面的公式4（我写在d. 2 2D监督生成3D属性里的）一起optimize的。</li>
+<li>现在的问题是：模型生成的3D属性数量不太够，可能会导致重建模过拟合或者退化。</li>
+<li>所以提出了 Interpolation Consistency，通过线性插值，获得大量新的3D标注，相当于扩充了数据集。如图3(d)。<span class="math inline">\(A_i\)</span>和<span class="math inline">\(A_j\)</span>是模型分别基于两张图像生成的两个3D物体属性集，回顾前文知道一个3D物体属性集包括相机、光线、形状和材质，即<span class="math inline">\(A=[C,L,S,T]\)</span>。这里就首先随机生成一个4维向量<span class="math inline">\(\alpha=[\alpha_c,\alpha_l,\alpha_s,\alpha_t]\)</span>，其中每个维度的值都是0-1之间的随机数。然后新生成的3D物体属性集就是<span class="math inline">\(A_{ij}^\alpha = (1-\alpha)\cdot A_i+\alpha \cdot A_j\)</span>。下图表示了插值生成的3D标注的效果：<img src="https://i.loli.net/2021/10/26/PuTKVtX5U2derjQ.png" alt="image-20211026172529831" /></li>
+<li>新生成的这些<span class="math inline">\(A_{ij}^\alpha\)</span>都可以拿来像<span class="math inline">\(A_i\)</span>一样用了，即通过可微分渲染得到对应的2D属性：<span class="math inline">\(X_{ij}^\alpha = R(A_{ij}^\alpha)\)</span>，然后又可以用模型E来预测出3D属性<span class="math inline">\(E_\theta (X_{ij}^\alpha)\)</span>了。</li>
+<li>于是，利用这些线性插值生成的新标注，通过自回归来训练模型E的 IC loss诞生了：<img src="https://i.loli.net/2021/10/26/qyNIB8GF7usA1ba.png" alt="image-20211026173601185" /></li>
+</ol>
+<h4 id="第二个是-landmark-一致性">4. 第二个是 Landmark 一致性</h4>
+<p>其实我觉得前面这些步骤弄完之后，生成的图片效果已经非常不错了，哈哈哈哈。但是作者还是觉得不够，在图片细节上还可以更精细。所以又提出了一个Landmark Consistency，仍然是一个自监督的方法。</p>
+<figure>
+<img src="https://i.loli.net/2021/10/26/ekRbuiONBLHlSKx.png" alt="从图2截的Landmark Consistency这部分" /><figcaption>从图2截的Landmark Consistency这部分</figcaption>
+</figure>
+<ol type="1">
+<li>LC背后的原理是：如果把3D Mesh模型的每一个顶点看作一个landmark，那同一类物体的3D mesh模型，其每一个landmark的语义含义应该是一致的。（比如说一个3D模型的第k个landmark表示一只鸟的左眼中心，那另一只鸟的3D模型应该也是一样。）然后把什么作为语义含义呢？就是把每个landmark投影到2D图像上，简单通过一个神经网络提取出其对应的像素特征。</li>
+<li>对每一个输入的图像，都通过一个U-Net <span class="math inline">\(E_f\)</span>，来提取出像素级别的特征图F。</li>
+<li>然后，把3D mesh模型的每一个点投影到2D图像上，作为一个landmark。</li>
+<li>计算出landmark的位置<span class="math inline">\(l_k\)</span>，通过空间转换（spatial transformation），从特征图F中得到这个位置<span class="math inline">\(l_k\)</span>的特征：<span class="math inline">\(f_k=F(l_k)\)</span></li>
+<li>用一个多层感知器（MLP）<span class="math inline">\(D_\Phi\)</span> （<span class="math inline">\(\Phi\)</span>是权重）来预测每个landmark的索引分类 <span class="math inline">\(D_\Phi (f_k)\)</span></li>
+<li><span class="math inline">\(D_\Phi (f_k)\)</span>需要拟合的恰好就是k，这样就是一个自监督landmark分类过程了</li>
+<li>表示这个过程的 LC loss 公式如下。V是mesh模型中顶点的数量。<span class="math inline">\(v_k\)</span>表示这个点是否可见，<span class="math inline">\(y_k\)</span>是一个one-hot向量，选择第k个值。 <img src="https://i.loli.net/2021/10/26/FXYkC8h6EeZSapr.png" alt="image-20211026180514413" /></li>
+</ol>
+<p>最后，整个模型的loss就是上述所有loss的加权和： <span class="math display">\[
+L=\lambda_{2D}L_{2D}+\lambda_{IC}L_{IC}+\lambda_{LC}L_{LC}
+\]</span> 其中， <span class="math display">\[
+L_{2D}=\lambda_{img}L_{img}+\lambda_{sil}L_{sil}
+\]</span></p>
+<h3 id="e.-实验">e. 实验</h3>
+<ol type="1">
+<li>进行比较使用的单视角3D重建模数据集：ShapeNet BFM CUB-200-2011</li>
+<li>也在一些特定类别的wild数据上测试了效果</li>
+<li>正好利用线性插值 + 可微分渲染，SMR还可以做一些图像合成的事，比如改变光线、相机视角、物体形状和质地等等😯</li>
+</ol>
+<p><strong>理解有误的地方敬请批评！！</strong></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/DeepHuman-3D-Human-Reconstruction-from-a-Single-Image/" rel="bookmark">读 DeepHuman: 3D Human Reconstruction from a Single Image</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Pixel2Mesh-Generating-3D-Mesh-Models-from-Single-RGB-Images/" rel="bookmark">读Pixel2Mesh- Generating 3D Mesh Models from Single RGB Images</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Reading-Pixel2meshPP/" rel="bookmark">Reading Pixel2Mesh++: Multi-View 3D Mesh Generation via Deformation</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/读：论视觉知识/" rel="bookmark">读：论视觉知识</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Reading-Self-supervised-Single-view-3D-Reconstruction-via-Semantic-Consistency/" rel="bookmark">Reading Self-supervised Single-view 3D Reconstruction via Semantic Consistency</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/blog/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
+              <a href="/blog/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/blog/tags/3D-Reconstruction/" rel="tag"># 3D Reconstruction</a>
+              <a href="/blog/tags/Paper-Reading/" rel="tag"># Paper Reading</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/Pixel2Mesh-Generating-3D-Mesh-Models-from-Single-RGB-Images/" rel="prev" title="读Pixel2Mesh- Generating 3D Mesh Models from Single RGB Images">
+                  <i class="fa fa-chevron-left"></i> 读Pixel2Mesh- Generating 3D Mesh Models from Single RGB Images
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/Modify-Clustrmaps-Widget-for-Hexo/" rel="next" title="Modify Clustrmaps Widget for Hexo">
+                  Modify Clustrmaps Widget for Hexo <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">253k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:50</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/blog/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/blog/Self-Supervised-3D-Mesh-Reconstruction-from-Single-Images/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>

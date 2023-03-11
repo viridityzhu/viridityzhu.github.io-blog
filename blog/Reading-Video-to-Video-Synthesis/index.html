@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/blog/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<meta name="description" content="论文地址：https:&#x2F;&#x2F;tcwang0509.github.io&#x2F;vid2vid&#x2F;paper_vid2vid.pdf 作者：Ting-Chun Wang, Ming-Yu Liu, Jun-Yan Zhu, Guilin Liu, Andrew Tao, Jan Kautz, Bryan Catanzaro 发表： NeurIPS 2018 Project：https:&#x2F;&#x2F;tcwang0509.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reading Video-to-Video Synthesis">
+<meta property="og:url" content="https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="论文地址：https:&#x2F;&#x2F;tcwang0509.github.io&#x2F;vid2vid&#x2F;paper_vid2vid.pdf 作者：Ting-Chun Wang, Ming-Yu Liu, Jun-Yan Zhu, Guilin Liu, Andrew Tao, Jan Kautz, Bryan Catanzaro 发表： NeurIPS 2018 Project：https:&#x2F;&#x2F;tcwang0509.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/09/01/VfJE42QpgUB5zxt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/01/Q9MPRD5otda3mAq.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/01/5OA4ptSUjI9Mn7J.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/01/J1mVkCnzWYZiaR9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/01/rq6yiaRSHUnEYzg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/01/AuZf1zlcihE3KsU.png">
+<meta property="og:image" content="https://tcwang0509.github.io/vid2vid/paper_gifs/cityscapes_change_styles.gif">
+<meta property="article:published_time" content="2022-05-13T09:36:36.000Z">
+<meta property="article:modified_time" content="2022-09-01T04:59:24.160Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Computer Vision">
+<meta property="article:tag" content="Video Generation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/09/01/VfJE42QpgUB5zxt.png">
+
+
+<link rel="canonical" href="https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/","path":"Reading-Video-to-Video-Synthesis/","title":"Reading Video-to-Video Synthesis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Reading Video-to-Video Synthesis | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/blog/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-notes"><a href="/blog/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/blog/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">77</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">174</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#why"><span class="nav-number">1.</span> <span class="nav-text">Why：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what"><span class="nav-number">2.</span> <span class="nav-text">What：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how"><span class="nav-number">3.</span> <span class="nav-text">How：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89vid2vid%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.1.</span> <span class="nav-text">定义vid2vid任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#losses"><span class="nav-number">3.3.</span> <span class="nav-text">losses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%99%AF-%E8%83%8C%E6%99%AF%E5%85%88%E9%AA%8C"><span class="nav-number">3.4.</span> <span class="nav-text">前景-背景先验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E7%94%9F%E6%88%90"><span class="nav-number">3.5.</span> <span class="nav-text">多模态生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">3.6.</span> <span class="nav-text">实现的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">3.7.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">3.8.</span> <span class="nav-text">局限性</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com.sg/citations?user=S8ozWfsAAAAJ" title="GoogleScholar → https:&#x2F;&#x2F;scholar.google.com.sg&#x2F;citations?user&#x3D;S8ozWfsAAAAJ" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script> -->
+<script type='text/javascript' id='clustrmaps'
+    src='//cdn.clustrmaps.com/map_v2.js?cl=c1c1c1&w=a&t=tt&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=484848&ct=f9f9f9&cmo=3acc3a&cmn=600073'></script>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Reading Video-to-Video Synthesis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2022-05-13 17:36:36" itemprop="dateCreated datePublished" datetime="2022-05-13T17:36:36+08:00">2022-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/Reading-Video-to-Video-Synthesis/" class="post-meta-item leancloud_visitors" data-flag-title="Reading Video-to-Video Synthesis" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/Reading-Video-to-Video-Synthesis/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/Reading-Video-to-Video-Synthesis/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>论文地址：https://tcwang0509.github.io/vid2vid/paper_vid2vid.pdf</p>
+<p>作者：<a target="_blank" rel="noopener" href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a target="_blank" rel="noopener" href="http://mingyuliu.net/">Ming-Yu Liu</a>, <a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a>, <a target="_blank" rel="noopener" href="https://liuguilin1225.github.io/">Guilin Liu</a>, Andrew Tao, <a target="_blank" rel="noopener" href="http://jankautz.com/">Jan Kautz</a>, <a target="_blank" rel="noopener" href="http://catanzaro.name/">Bryan Catanzaro</a></p>
+<p>发表： NeurIPS 2018</p>
+<p>Project：https://tcwang0509.github.io/vid2vid/</p>
+<p>Github：https://github.com/NVIDIA/vid2vid</p>
+<hr />
+<blockquote>
+<p><strong>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</strong></p>
+<p>这篇论文的背景是当时已经有比较好的pic2pic生成模型了。要让vid2vid也work的话，最重要的应该就是帧与帧之间consistency的问题。所以我会想在将pic2pic生成模型应用在video的基础上，对帧之间加上consistency loss。但直接这样肯定效率很低，因为一个视频中帧与帧之间肯定会包含大量冗余信息嘛，应该还需要想办法让帧之间信息共享，这样模型只需要预测后一帧与前一帧不同的地方，减少运算。例如，用一个小网络预测图像中静态与动态的部分，不知道可不可行。</p>
+<p><strong>看完文章后</strong>：我感觉我在大体思路上把握准了，主要矛盾确实如此。但</p>
+<ol type="1">
+<li>作者没有用consistency loss，而是用gan的思路，设计了一个条件视频鉴别器 <span class="math inline">\(D_V\)</span>，鉴别视频在时序上的动态是否真实自然。</li>
+<li>我没有optical flow，光流，这方面的知识储备；作者利用一个网络预测optical flow，就可以直接根据前一帧图像得到后一帧图像中对应的像素点了，而且这样的结果能够很consistent。对于前一帧图像中没有对应的像素，再用一个补洞网络补洞。这样就解决了效率问题。</li>
+<li>作者还利用了特征嵌入方法，实现了多模态视频的生成，这是我第一次了解到的方法，感觉很有趣。</li>
+</ol>
+</blockquote>
+<h2 id="why">Why：</h2>
+<ol type="1">
+<li>图像水平上的生成被研究得很好，但是视频上的此前却比较少；图像生成的成果如果直接放在视频上的话，效果不太妙，因为帧与帧之间缺乏连贯性。所以是需要一些temporal上的改进的</li>
+</ol>
+<h2 id="what">What：</h2>
+<ol type="1">
+<li>利用GAN和一些时间-空间对抗目标（spatio-temporal adverbial objective），来实现video to video的生成。</li>
+<li>用不同类型的输入来生成新的照片写实风格的视频，效果很好。</li>
+<li>是一个全新定义的vid2vid任务，主要新点在于：输入的vid并不是完整的视频帧，而是一些可以操控的语义信息，例如segmentation masks, sketches, and poses</li>
+</ol>
+<p>读前疑问：</p>
+<ol type="1">
+<li>在此之前没有比较好的vid2vid，这篇论文是在什么条件下实现了很好的vid2vid效果呢，比如其他方面的技术革新？我觉得主要是利用了gan，一个图像鉴别器+一个视频鉴别器相配合，取得很好的生成效果。除此之外我觉得optical flow用在这里也很好，效率高而且生成效果连贯（但是不知道新不新）；另外特征嵌入方法用在这里也很好，实现了根据语义信息来生成新视频，而且可以是多模态的视频</li>
+<li>摘要里强调的时间-空间对抗目标（spatio-temporal adverbial objective）到底是什么？我感觉正文里好像没有再特别强调时间-空间这一对目标了……根据我自己的理解的话，主要就是那一对鉴别器：时间上--视频鉴别器鉴别在时序上的动态是否真实自然，空间上--图像鉴别器鉴别一张图像在空间上是否真实自然。</li>
+</ol>
+<h2 id="how">How：</h2>
+<h3 id="定义vid2vid任务">定义vid2vid任务</h3>
+<ol type="1">
+<li><p>定义输入的语义信息序列为<span class="math inline">\(s\)</span>，对应的真实视频序列为<span class="math inline">\(x\)</span>，模型生成的视频序列为<span class="math inline">\(\tilde x\)</span>，则模型的目标是在给定<span class="math inline">\(s\)</span>的条件下，让<span class="math inline">\(\tilde x\)</span>的条件分布拟合<span class="math inline">\(x\)</span>的条件分布</p></li>
+<li><figure>
+<img src="https://s2.loli.net/2022/09/01/VfJE42QpgUB5zxt.png" alt="image-20220524143313609" /><figcaption>image-20220524143313609</figcaption>
+</figure>
+<p>D是discriminator，G是generator。整个任务就变成了一个最大最小优化问题，论文主要通过设计网络和时空优化目标来解决这个问题。</p></li>
+<li><p>为了简化问题，做了一个Markov假设：当前第t帧生成的视频<span class="math inline">\(\tilde x_t\)</span>，由且仅由第t帧输入<span class="math inline">\(s_t\)</span> + 前L帧输入<span class="math inline">\(s_{t-L}^{t-1}\)</span> + 前L帧生成的视频<span class="math inline">\(\tilde x_{t-L}^{t-1}\)</span>这三个因素决定。<img src="https://s2.loli.net/2022/09/01/Q9MPRD5otda3mAq.png" alt="image-20220524144030781" /></p>
+<p>实验里，L取了个不大不小的2.建立了一个神经网络F，递归地逐帧生成视频。</p></li>
+</ol>
+<h3 id="网络架构">网络架构</h3>
+<ol type="1">
+<li><p>网络F定义如下：</p>
+<figure>
+<img src="https://s2.loli.net/2022/09/01/5OA4ptSUjI9Mn7J.png" alt="image-20220524144722968" /><figcaption>image-20220524144722968</figcaption>
+</figure>
+<p>给定<span class="math inline">\((\tilde x_{t-L}^{t-1}, s_{t}^{t-1})\)</span>作为输入。对于与上一帧图像有关联的像素点，网络会利用optical flow来warp（扭曲？）上一帧像素点，得到这一帧新的像素点。对应等式的前半部分。还有一些像素是上一帧图像里没有的，这时候就需要生成来填充。对应等式的后半部分。具体来说：</p>
+<ul>
+<li>用一个optical flow预测网络W来估计从上一帧到这一帧的optical flow <span class="math inline">\(\tilde w_{t-1}\)</span>.</li>
+<li>用一个生成器H来生成需要填充的像素<span class="math inline">\(\tilde h_t\)</span>.</li>
+<li>用一个mask预测网络M来生成mask <span class="math inline">\(\tilde m_t\)</span>. 这个mask不是非0即1的，而是包含了0-1之间的连续值。这样做是为了更好地融合W和H生成的结果。比如说，在 zoom in 的情况下，一个物体逐渐靠近，那么它会逐帧放大。如果仅仅利用optical flow的扭曲结果，那么这个物体就会变得模糊。因此，还需要生成器来填充一些细节。有了soft mask，warp的像素和生成的像素就可以融合。</li>
+</ul></li>
+<li><p>用了coarse-to-fine的方法来生成高分辨率的视频</p></li>
+<li><p>用了2个不同的discriminator来减轻gan训练中的mode collapse问题（模式倒塌，即生成的结果是很逼真，但是多样性不足）。</p>
+<ol type="1">
+<li>条件图像鉴别器 <span class="math inline">\(D_I\)</span>，顾名思义，鉴别每一帧图像是否真实的</li>
+<li>条件视频鉴别器 <span class="math inline">\(D_V\)</span>，鉴别视频在时序上的动态是否真实自然。给定optical flow，鉴别K个连续的帧</li>
+</ol></li>
+</ol>
+<h3 id="losses">losses</h3>
+<p><span class="math display">\[
+\mathop{min}\limits_{F} ( \mathop{max}\limits_{D_I}\mathcal{L}_I (F, D_I ) + \mathop{max}\limits_{D_V}  \mathcal{L}_V (F, D_V )) + λ_W L_W (F ),
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(\mathcal{L}_I\)</span> 是条件图像鉴别器 <span class="math inline">\(D_I\)</span>的gan loss：<img src="https://s2.loli.net/2022/09/01/J1mVkCnzWYZiaR9.png" alt="image-20220530194307049" />，其中，<span class="math inline">\(\phi_I\)</span> 就是从第1～T帧中随机取1帧的操作</li>
+<li><span class="math inline">\(\mathcal{L}_V\)</span>是条件视频鉴别器 <span class="math inline">\(D_V\)</span>的 gan loss：<img src="https://s2.loli.net/2022/09/01/rq6yiaRSHUnEYzg.png" alt="image-20220530194419594" />，和图像的如出一辙，<span class="math inline">\(\phi_V\)</span> 就是从第1～T帧中随机取连续K帧的操作</li>
+<li><span class="math inline">\(L_W\)</span> 是flow estimation loss：<img src="https://s2.loli.net/2022/09/01/AuZf1zlcihE3KsU.png" alt="image-20220530194534485" />，包括两部分，1. 真实flow和估计flow的端点误差 2. 把前一帧扭曲到后一帧的warp loss</li>
+</ol>
+<h3 id="前景-背景先验">前景-背景先验</h3>
+<p>通过语义分割，给模型提供了一个前景、背景的先验信息，同时把补洞网络拆分成了两个：</p>
+<ol type="1">
+<li>背景补洞网络：这个很容易，因为整个大背景其实可以由optical flow很准确地预测出来，补洞网络只需要补一点点从画面外面刚进来的部分</li>
+<li>前景补洞网络：这个比较难，因为前景物品往往占比不大，但是又动作幅度很大，前景补洞网络需要从零开始生成很多东西</li>
+</ol>
+<p>通过用户实验，证明大部分人觉得有这个前景-背景先验之后，效果更好。</p>
+<h3 id="多模态生成">多模态生成</h3>
+<p>网络F是一个单模态映射函数，这意味着输入一个视频，它也只能生成一个视频。那怎样让它根据同一个输入视频，输出多个不同的视频呢？这里采用了特征嵌入方法（feature embedding scheme）。</p>
+<ol type="1">
+<li>输入源视频的同时，也输入instance级别的语义分割mask <span class="math inline">\(s_t\)</span></li>
+<li>训练一个图像编码器E，它把每一帧真实图像<span class="math inline">\(x_t\)</span>编码成d维的特征map（论文中d取3）。然后用一个instance-wise的平均池化，来让同一个物体的所有像素分享共同的特征向量。得到的这个instance-wise平均池化后的图像特征map称为<span class="math inline">\(z_t\)</span></li>
+<li>这个<span class="math inline">\(z_t\)</span>，加上mask <span class="math inline">\(s_t\)</span>，再被输入到网络F</li>
+<li>以上是训练的过程。训练结束后，对每个类型的对象的特征向量的高斯分布拟合一个混合高斯分布。</li>
+<li>测试的时候，利用每个物体所对应的类型的分布，可以sample特征向量，进而生成新视频了。给出不同的特征向量，F就能生成不同的视频了</li>
+</ol>
+<figure>
+<img src="https://tcwang0509.github.io/vid2vid/paper_gifs/cityscapes_change_styles.gif" alt="img" /><figcaption>img</figcaption>
+</figure>
+<h3 id="实现的细节">实现的细节</h3>
+<ol type="1">
+<li>coarse-to-fine的训练：512 × 256, 1024 × 512, and 2048 × 1024 resolutions，这三种分辨率，先从低的开始训练起，逐渐增加到高的。</li>
+<li>mask预测网络M和flow预测网络W共享权重，只有输出层不一样。</li>
+<li>图像鉴别器是一个多尺度PatchGAN</li>
+<li>除了空间上的多尺度，视频鉴别器还会考虑多个帧率，即时间上的多尺度，确保短期和长期都能consistent</li>
+<li>2k分辨率，8个v100 gpus，训练10天……</li>
+<li>datasets：
+<ol type="1">
+<li>Cityscapes：训练DeepLabV3网络来获得所有的语义分割mask，用FlowNet2的结果作为optical flow的ground truth，用Mask R- CNN的结果作为instance- level 语义mask的gt</li>
+<li>Apolloscape</li>
+<li>Face video dataset：FaceForensics dataset里的真实视频</li>
+<li>Dance video dataset：从YouTube下载的跳舞视频💃</li>
+</ol></li>
+</ol>
+<h3 id="结果">结果</h3>
+<p>图像生成模型pix2pixHD和视频风格迁移模型COVST作为baseline。FID（论文定义的视频变种）跟baseline比略好，但human preference score（论文定义的由人来打分，评估哪个视频更真实）高很多。</p>
+<p>通过更改语义mask，可以控制生成视频中的物体种类；通过更改特征向量，可以控制生成视频中的物体外观；在未来视频预测上也有很好的性能。</p>
+<h3 id="局限性">局限性</h3>
+<ol type="1">
+<li>缺少一个物体内部的具体信息，生成转弯的车的时候效果比较差。论文提出或许可以通过增加3D信息作为输入来解决</li>
+<li>在整个视频中，一个物体的外观有时候还是前后不一致</li>
+<li>偶然情况下，一辆车的颜色可能会逐渐发生变化</li>
+<li>当通过更改语义信息来操纵视频生成的时候，例如把树改成房子，偶然会出现一部分变成房子，另一部分树变了形的情况（？是这个意思吗）。这或许可以通过采用更粗糙的语义标签的方式解决，因为这样模型就不会对标签形状过于敏感</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/DeepHuman-3D-Human-Reconstruction-from-a-Single-Image/" rel="bookmark">读 DeepHuman: 3D Human Reconstruction from a Single Image</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Introduction-to-NeRF/" rel="bookmark">Introduction to NeRF</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Learning-NeRF/" rel="bookmark">Learning NeRF</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Manipulate-Neural-Fields/" rel="bookmark">Manipulate Neural Fields</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/NeRF-Differentiable-Forward-Maps/" rel="bookmark">NeRF Differentiable Forward Maps</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/blog/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
+              <a href="/blog/tags/Video-Generation/" rel="tag"># Video Generation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" rel="prev" title="Reading Few-shot Video-to-Video Synthesis">
+                  <i class="fa fa-chevron-left"></i> Reading Few-shot Video-to-Video Synthesis
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/" rel="next" title="It seems impossible to access USB devices in Docker on MacOS">
+                  It seems impossible to access USB devices in Docker on MacOS <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">253k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:50</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/blog/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"跟我说点啥吧！\n（昵称、Email、网站都可以不填）","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/blog/Reading-Video-to-Video-Synthesis/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>
