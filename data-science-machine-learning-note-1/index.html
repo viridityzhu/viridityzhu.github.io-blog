@@ -23,11 +23,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"viridityzhu.github.io","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
 <meta name="description" content="这学期开了数据科学课，很开心。我校信管还是有点跟上时代，不至于跟着整个老旧专业的没落而没落，而是有转型打算的嘛。听c老师说甚至学院开会打算把整个专业改名，安上「大数据」，但后来发现如此的话教学内容也要大改而师资不够。说白了就是学院里边很多老师还是太软了，技术不大行，教不了硬的。 这课两周内把前四章基础的东西讲完了，数据导入和简单数据预处理之类的，比我想象中快，我还比较期待后面能学到新东西。 第五章">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Data Science + Machine Learning Note 1: Classification with Linear Regression and Logistic Regression">
-<meta property="og:url" content="https://viridityzhu.github.io/blog/data-science-machine-learning-note-1/index.html">
+<meta property="og:url" content="https://jyzhu.top/blog/data-science-machine-learning-note-1/index.html">
 <meta property="og:site_name" content="Tianke Youke">
 <meta property="og:description" content="这学期开了数据科学课，很开心。我校信管还是有点跟上时代，不至于跟着整个老旧专业的没落而没落，而是有转型打算的嘛。听c老师说甚至学院开会打算把整个专业改名，安上「大数据」，但后来发现如此的话教学内容也要大改而师资不够。说白了就是学院里边很多老师还是太软了，技术不大行，教不了硬的。 这课两周内把前四章基础的东西讲完了，数据导入和简单数据预处理之类的，比我想象中快，我还比较期待后面能学到新东西。 第五章">
 <meta property="og:locale" content="zh_CN">
@@ -46,11 +46,11 @@
 <meta name="twitter:image" content="https://jyzhu.top/mydocs/2019/09/image.png">
 
 
-<link rel="canonical" href="https://viridityzhu.github.io/blog/data-science-machine-learning-note-1/">
+<link rel="canonical" href="https://jyzhu.top/blog/data-science-machine-learning-note-1/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://viridityzhu.github.io/blog/data-science-machine-learning-note-1/","path":"data-science-machine-learning-note-1/","title":"Data Science + Machine Learning Note 1: Classification with Linear Regression and Logistic Regression"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/blog/data-science-machine-learning-note-1/","path":"data-science-machine-learning-note-1/","title":"Data Science + Machine Learning Note 1: Classification with Linear Regression and Logistic Regression"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Data Science + Machine Learning Note 1: Classification with Linear Regression and Logistic Regression | Tianke Youke</title>
@@ -252,7 +252,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://viridityzhu.github.io/blog/data-science-machine-learning-note-1/">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/data-science-machine-learning-note-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">

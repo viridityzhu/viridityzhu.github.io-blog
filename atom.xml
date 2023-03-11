@@ -3,11 +3,11 @@
   <title>Tianke Youke</title>
   
   <subtitle>A Base for Secreting and Running at Night</subtitle>
-  <link href="https://viridityzhu.github.io/blog/atom.xml" rel="self"/>
+  <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
-  <link href="https://viridityzhu.github.io/blog/"/>
+  <link href="https://jyzhu.top/blog/"/>
   <updated>2023-01-26T10:58:06.245Z</updated>
-  <id>https://viridityzhu.github.io/blog/</id>
+  <id>https://jyzhu.top/blog/</id>
   
   <author>
     <name>Jiayin Zhu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>齐次坐标系</title>
-    <link href="https://viridityzhu.github.io/blog/homogeneous-coordinates/"/>
-    <id>https://viridityzhu.github.io/blog/homogeneous-coordinates/</id>
+    <link href="https://jyzhu.top/blog/homogeneous-coordinates/"/>
+    <id>https://jyzhu.top/blog/homogeneous-coordinates/</id>
     <published>2023-01-26T10:49:19.000Z</published>
     <updated>2023-01-26T10:58:06.245Z</updated>
     
@@ -33,19 +33,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="3D Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/3D-Computer-Vision/"/>
+    <category term="3D Computer Vision" scheme="https://jyzhu.top/blog/tags/3D-Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>Introduction to NeRF</title>
-    <link href="https://viridityzhu.github.io/blog/Introduction-to-NeRF/"/>
-    <id>https://viridityzhu.github.io/blog/Introduction-to-NeRF/</id>
+    <link href="https://jyzhu.top/blog/Introduction-to-NeRF/"/>
+    <id>https://jyzhu.top/blog/Introduction-to-NeRF/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:14:21.514Z</updated>
     
@@ -61,19 +61,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>Learning NeRF</title>
-    <link href="https://viridityzhu.github.io/blog/Learning-NeRF/"/>
-    <id>https://viridityzhu.github.io/blog/Learning-NeRF/</id>
+    <link href="https://jyzhu.top/blog/Learning-NeRF/"/>
+    <id>https://jyzhu.top/blog/Learning-NeRF/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:14:37.635Z</updated>
     
@@ -87,19 +87,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>Manipulate Neural Fields</title>
-    <link href="https://viridityzhu.github.io/blog/Manipulate-Neural-Fields/"/>
-    <id>https://viridityzhu.github.io/blog/Manipulate-Neural-Fields/</id>
+    <link href="https://jyzhu.top/blog/Manipulate-Neural-Fields/"/>
+    <id>https://jyzhu.top/blog/Manipulate-Neural-Fields/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:11:38.197Z</updated>
     
@@ -115,19 +115,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>NeRF Differentiable Forward Maps</title>
-    <link href="https://viridityzhu.github.io/blog/NeRF-Differentiable-Forward-Maps/"/>
-    <id>https://viridityzhu.github.io/blog/NeRF-Differentiable-Forward-Maps/</id>
+    <link href="https://jyzhu.top/blog/NeRF-Differentiable-Forward-Maps/"/>
+    <id>https://jyzhu.top/blog/NeRF-Differentiable-Forward-Maps/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:13:34.505Z</updated>
     
@@ -143,19 +143,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>NeRF Hybrid representations</title>
-    <link href="https://viridityzhu.github.io/blog/NeRF-Hybrid-representations/"/>
-    <id>https://viridityzhu.github.io/blog/NeRF-Hybrid-representations/</id>
+    <link href="https://jyzhu.top/blog/NeRF-Hybrid-representations/"/>
+    <id>https://jyzhu.top/blog/NeRF-Hybrid-representations/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:13:55.420Z</updated>
     
@@ -171,19 +171,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>NeRF Network Architecture</title>
-    <link href="https://viridityzhu.github.io/blog/NeRF-Network-Architecture/"/>
-    <id>https://viridityzhu.github.io/blog/NeRF-Network-Architecture/</id>
+    <link href="https://jyzhu.top/blog/NeRF-Network-Architecture/"/>
+    <id>https://jyzhu.top/blog/NeRF-Network-Architecture/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:14:07.993Z</updated>
     
@@ -197,19 +197,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>NeRF Notebook</title>
-    <link href="https://viridityzhu.github.io/blog/NeRF-Notebook/"/>
-    <id>https://viridityzhu.github.io/blog/NeRF-Notebook/</id>
+    <link href="https://jyzhu.top/blog/NeRF-Notebook/"/>
+    <id>https://jyzhu.top/blog/NeRF-Notebook/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:36:59.994Z</updated>
     
@@ -223,19 +223,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>Prior based reconstruction of neural fields</title>
-    <link href="https://viridityzhu.github.io/blog/Prior-based-reconstruction-of-neural-fields/"/>
-    <id>https://viridityzhu.github.io/blog/Prior-based-reconstruction-of-neural-fields/</id>
+    <link href="https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/"/>
+    <id>https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/</id>
     <published>2023-01-12T09:33:39.000Z</published>
     <updated>2023-01-12T10:13:12.867Z</updated>
     
@@ -251,19 +251,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="NeRF" scheme="https://viridityzhu.github.io/blog/tags/NeRF/"/>
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
     
   </entry>
   
   <entry>
     <title>The difference between RNN&#39;s output and h_n</title>
-    <link href="https://viridityzhu.github.io/blog/The-difference-between-RNN-s-output-and-h-n/"/>
-    <id>https://viridityzhu.github.io/blog/The-difference-between-RNN-s-output-and-h-n/</id>
+    <link href="https://jyzhu.top/blog/The-difference-between-RNN-s-output-and-h-n/"/>
+    <id>https://jyzhu.top/blog/The-difference-between-RNN-s-output-and-h-n/</id>
     <published>2022-10-22T08:56:44.000Z</published>
     <updated>2022-10-22T09:12:01.123Z</updated>
     
@@ -279,19 +279,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Deep Learning" scheme="https://viridityzhu.github.io/blog/tags/Deep-Learning/"/>
+    <category term="Deep Learning" scheme="https://jyzhu.top/blog/tags/Deep-Learning/"/>
     
-    <category term="Neural Network" scheme="https://viridityzhu.github.io/blog/tags/Neural-Network/"/>
+    <category term="Neural Network" scheme="https://jyzhu.top/blog/tags/Neural-Network/"/>
     
   </entry>
   
   <entry>
     <title>Reading 3D Photography using Context-aware Layered Depth Inpainting</title>
-    <link href="https://viridityzhu.github.io/blog/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/"/>
-    <id>https://viridityzhu.github.io/blog/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/</id>
+    <link href="https://jyzhu.top/blog/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/"/>
+    <id>https://jyzhu.top/blog/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/</id>
     <published>2022-10-07T00:35:43.000Z</published>
     <updated>2022-10-22T09:15:26.167Z</updated>
     
@@ -305,19 +305,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="3DCV" scheme="https://viridityzhu.github.io/blog/tags/3DCV/"/>
+    <category term="3DCV" scheme="https://jyzhu.top/blog/tags/3DCV/"/>
     
   </entry>
   
   <entry>
     <title>Reading SmoothNet: A Plug-and-Play Network for Refining Human Poses in Videos</title>
-    <link href="https://viridityzhu.github.io/blog/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/"/>
-    <id>https://viridityzhu.github.io/blog/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/</id>
+    <link href="https://jyzhu.top/blog/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/"/>
+    <id>https://jyzhu.top/blog/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/</id>
     <published>2022-09-09T06:25:03.000Z</published>
     <updated>2022-10-22T09:16:13.032Z</updated>
     
@@ -331,17 +331,17 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>Reading NeuMan: Neural Human Radiance Field from a Single Video</title>
-    <link href="https://viridityzhu.github.io/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/"/>
-    <id>https://viridityzhu.github.io/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/</id>
+    <link href="https://jyzhu.top/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/"/>
+    <id>https://jyzhu.top/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/</id>
     <published>2022-08-24T04:25:25.000Z</published>
     <updated>2022-09-01T04:57:08.650Z</updated>
     
@@ -355,19 +355,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="3D Generation" scheme="https://viridityzhu.github.io/blog/tags/3D-Generation/"/>
+    <category term="3D Generation" scheme="https://jyzhu.top/blog/tags/3D-Generation/"/>
     
   </entry>
   
   <entry>
     <title>It seems impossible to access USB devices in Docker on MacOS</title>
-    <link href="https://viridityzhu.github.io/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/"/>
-    <id>https://viridityzhu.github.io/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/</id>
+    <link href="https://jyzhu.top/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/"/>
+    <id>https://jyzhu.top/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/</id>
     <published>2022-05-16T11:59:12.000Z</published>
     <updated>2022-09-01T04:57:56.460Z</updated>
     
@@ -381,17 +381,17 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Docker" scheme="https://viridityzhu.github.io/blog/tags/Docker/"/>
+    <category term="Docker" scheme="https://jyzhu.top/blog/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Reading Video-to-Video Synthesis</title>
-    <link href="https://viridityzhu.github.io/blog/Reading-Video-to-Video-Synthesis/"/>
-    <id>https://viridityzhu.github.io/blog/Reading-Video-to-Video-Synthesis/</id>
+    <link href="https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/"/>
+    <id>https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/</id>
     <published>2022-05-13T09:36:36.000Z</published>
     <updated>2022-09-01T04:59:24.160Z</updated>
     
@@ -405,19 +405,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="Video Generation" scheme="https://viridityzhu.github.io/blog/tags/Video-Generation/"/>
+    <category term="Video Generation" scheme="https://jyzhu.top/blog/tags/Video-Generation/"/>
     
   </entry>
   
   <entry>
     <title>Reading Few-shot Video-to-Video Synthesis</title>
-    <link href="https://viridityzhu.github.io/blog/Reading-Few-shot-Video-to-Video-Synthesis/"/>
-    <id>https://viridityzhu.github.io/blog/Reading-Few-shot-Video-to-Video-Synthesis/</id>
+    <link href="https://jyzhu.top/blog/Reading-Few-shot-Video-to-Video-Synthesis/"/>
+    <id>https://jyzhu.top/blog/Reading-Few-shot-Video-to-Video-Synthesis/</id>
     <published>2022-05-13T08:49:57.000Z</published>
     <updated>2022-09-01T05:00:11.103Z</updated>
     
@@ -431,19 +431,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="Video" scheme="https://viridityzhu.github.io/blog/tags/Video/"/>
+    <category term="Video" scheme="https://jyzhu.top/blog/tags/Video/"/>
     
   </entry>
   
   <entry>
     <title>Live demo of CodeTyping via Pythonanywhere</title>
-    <link href="https://viridityzhu.github.io/blog/live-demo-of-code-typing-via-pythonanywhere/"/>
-    <id>https://viridityzhu.github.io/blog/live-demo-of-code-typing-via-pythonanywhere/</id>
+    <link href="https://jyzhu.top/blog/live-demo-of-code-typing-via-pythonanywhere/"/>
+    <id>https://jyzhu.top/blog/live-demo-of-code-typing-via-pythonanywhere/</id>
     <published>2022-04-07T15:24:15.000Z</published>
     <updated>2022-04-07T15:34:41.597Z</updated>
     
@@ -457,19 +457,19 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Django" scheme="https://viridityzhu.github.io/blog/tags/Django/"/>
+    <category term="Django" scheme="https://jyzhu.top/blog/tags/Django/"/>
     
-    <category term="Python" scheme="https://viridityzhu.github.io/blog/tags/Python/"/>
+    <category term="Python" scheme="https://jyzhu.top/blog/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>三月的人生主题是复杂性</title>
-    <link href="https://viridityzhu.github.io/blog/complexity-again/"/>
-    <id>https://viridityzhu.github.io/blog/complexity-again/</id>
+    <link href="https://jyzhu.top/blog/complexity-again/"/>
+    <id>https://jyzhu.top/blog/complexity-again/</id>
     <published>2022-03-14T07:26:36.000Z</published>
     <updated>2022-03-14T07:48:22.442Z</updated>
     
@@ -488,15 +488,15 @@
     
     
     
-    <category term="thoughts" scheme="https://viridityzhu.github.io/blog/categories/thoughts/"/>
+    <category term="thoughts" scheme="https://jyzhu.top/blog/categories/thoughts/"/>
     
     
   </entry>
   
   <entry>
     <title>复杂性</title>
-    <link href="https://viridityzhu.github.io/blog/complexity/"/>
-    <id>https://viridityzhu.github.io/blog/complexity/</id>
+    <link href="https://jyzhu.top/blog/complexity/"/>
+    <id>https://jyzhu.top/blog/complexity/</id>
     <published>2022-03-14T07:22:53.000Z</published>
     <updated>2022-03-14T07:26:15.368Z</updated>
     
@@ -513,15 +513,15 @@
     
     
     
-    <category term="poems" scheme="https://viridityzhu.github.io/blog/categories/poems/"/>
+    <category term="poems" scheme="https://jyzhu.top/blog/categories/poems/"/>
     
     
   </entry>
   
   <entry>
     <title>Reading Pixel2Mesh++: Multi-View 3D Mesh Generation via Deformation</title>
-    <link href="https://viridityzhu.github.io/blog/Reading-Pixel2meshPP/"/>
-    <id>https://viridityzhu.github.io/blog/Reading-Pixel2meshPP/</id>
+    <link href="https://jyzhu.top/blog/Reading-Pixel2meshPP/"/>
+    <id>https://jyzhu.top/blog/Reading-Pixel2meshPP/</id>
     <published>2022-02-06T09:59:29.000Z</published>
     <updated>2022-03-14T07:49:35.086Z</updated>
     
@@ -535,14 +535,14 @@
     
     
     
-    <category term="Computer Notes" scheme="https://viridityzhu.github.io/blog/categories/Computer-Notes/"/>
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
     
     
-    <category term="Computer Vision" scheme="https://viridityzhu.github.io/blog/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
-    <category term="Deep Learning" scheme="https://viridityzhu.github.io/blog/tags/Deep-Learning/"/>
+    <category term="Deep Learning" scheme="https://jyzhu.top/blog/tags/Deep-Learning/"/>
     
-    <category term="3D Reconstruction" scheme="https://viridityzhu.github.io/blog/tags/3D-Reconstruction/"/>
+    <category term="3D Reconstruction" scheme="https://jyzhu.top/blog/tags/3D-Reconstruction/"/>
     
   </entry>
   
