@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Camera projection with the pinhole model</title>
+      <link href="/blog/Camera-Model-Notes/"/>
+      <url>/blog/Camera-Model-Notes/</url>
+      
+        <content type="html"><![CDATA[<p>A camera is a mapping between the 3D world (object space) and a 2D image.</p><p>In general, the camera projection matrix P has 11 degrees of freedom: <span class="math display">\[P=K[R\ \ \ t]\]</span></p><table><thead><tr class="header"><th>Component</th><th># DOF</th><th>Elements</th><th>Known As</th></tr></thead><tbody><tr class="odd"><td>K</td><td>5</td><td><span class="math inline">\(f_x, f_y, s,p_x, p_y\)</span></td><td>Intrinsic Parameters; camera calibration matrix</td></tr><tr class="even"><td>R</td><td>3</td><td><span class="math inline">\(\alpha,\beta,\gamma\)</span></td><td>Extrinsic Parameters</td></tr><tr class="odd"><td>t (or <span class="math inline">\(\tilde{C}\)</span>)</td><td>3</td><td><span class="math inline">\((t_x,t_y,t_z)\)</span></td><td>Extrinsic Parameters</td></tr></tbody></table><p>3D world frame ----- R, t ----&gt; 3D camera frame ------ K -----&gt; 2D image</p><p>Explanation:</p><ul><li><p>P: Projective camera, maps 3D world points to 2D image points.</p></li><li><p>K: Camera calibration matrix, 3 x 3, <span class="math inline">\(x=K[I|0]X_{cam}\)</span>, given 3D points in camera coordinate frame <span class="math inline">\(X_{cam}\)</span>, we can project it into 2D points on image <span class="math inline">\(x\)</span>.</p><p><img src="https://s2.loli.net/2023/04/02/FEe9lM5t3TJKgyL.png" alt="image-20230402220641473" style="zoom:50%;" /></p></li><li><p>R and t: Camera Rotation and Translation, rigid transformation. <span class="math inline">\(X_{cam}=( X,Y,Z,1)^T\)</span> is expressed in the camera coordinate frame. In general, 3D points are expressed in a different Euclidean coordinate frame, known as the <strong>world coordinate frame</strong>. The two frames are related via a rigid transformation (R, t).</p></li></ul><h3 id="some-other-terms-you-may-see">Some other terms you may see</h3><ul><li><p><strong>P</strong>: 3x4, homogeneous, camera projection matrix, <span class="math inline">\(P=diag(f,f,1)[I|0]\)</span>. P is K without considering <span class="math inline">\((x_{cam},y_{cam})\)</span> in the image. (In other words, it simplify <span class="math inline">\((p_x, p_y)=(0,0)\)</span>.</p><p><img src="https://s2.loli.net/2023/04/02/TlcW7QFhOAXK6sY.png" alt="image-20230402220006624" style="zoom:50%;" /></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 3D Computer Vision </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Configure Academic Page in Jekyll + Blog in Hexo together</title>
+      <link href="/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/"/>
+      <url>/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/</url>
+      
+        <content type="html"><![CDATA[<h2 id="difficult-situations">Difficult situations:</h2><ol type="1"><li>The Academic page is powered by <a href="http://jekyllrb.com/">Jekyll</a>, while the blog website is powered by Hexo.</li><li>And they are maintained in two separated repositories on Github.</li><li>Besides <code>[username].github.io</code>, I have a domain <code>jyzhu.top</code>, and want to use my custom domain.</li><li>All in all, I hope to visit the academic page is at <a href="jyzhu.top" class="uri">jyzhu.top</a>, while visit the blog is at <a href="jyzhu.top/blog" class="uri">jyzhu.top/blog</a>.</li></ol><h2 id="now-lets-configure.">Now let's configure.</h2><ol type="1"><li><p>Rename the blog repo as <code>blog</code>; rename the academic page repo as <code>[username].github.io</code>.</p></li><li><p>Edit the blog's Hexo config file:</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://jyzhu.top/blog</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/blog/</span></span><br></pre></td></tr></table></figure><p><em>While no need to move all the files into a subfolder <code>blog</code> of your repo.</em></p><p>The Jekyll config is simple. Nothing needs to specify.</p></li><li><p>Edit the Github repo settings. Set the academic repo's <strong>custom domain</strong> as <code>jyzhu.top</code>. A <code>CNAME</code> file will be automatically added in the root. Now obviously, the <code>jyzhu.top</code> successfully refers to the academic page.</p><p>Then you know what, everything is done! Because all other repos with github page turns on, are automatically mapped to subpaths of <code>[username].github.io</code> by Github. Then coz <code>[username].github.io</code> is mapped to <code>[url]</code>, everything will be there, including <code>[url]/blog</code> for the <code>blog</code> repo.</p></li></ol><h2 id="todo">TODO</h2><p>The <code>hexo-douban</code> plugin cannot render styles now. Need to fix.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Blog </tag>
+            
+            <tag> Jekyll </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>齐次坐标系</title>
       <link href="/blog/homogeneous-coordinates/"/>
       <url>/blog/homogeneous-coordinates/</url>

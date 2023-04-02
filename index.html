@@ -96,8 +96,8 @@
         <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
         <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">77</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">174</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">78</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">176</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -166,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -177,7 +177,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -230,6 +230,288 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Camera-Model-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/Camera-Model-Notes/" class="post-title-link" itemprop="url">Camera projection with the pinhole model</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2023-04-02 21:44:43" itemprop="dateCreated datePublished" datetime="2023-04-02T21:44:43+08:00">2023-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/Camera-Model-Notes/" class="post-meta-item leancloud_visitors" data-flag-title="Camera projection with the pinhole model" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/Camera-Model-Notes/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/Camera-Model-Notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>A camera is a mapping between the 3D world (object space) and a 2D image.</p>
+<p>In general, the camera projection matrix P has 11 degrees of freedom: <span class="math display">\[
+P=K[R\ \ \ t]
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th># DOF</th>
+<th>Elements</th>
+<th>Known As</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>K</td>
+<td>5</td>
+<td><span class="math inline">\(f_x, f_y, s,p_x, p_y\)</span></td>
+<td>Intrinsic Parameters; camera calibration matrix</td>
+</tr>
+<tr class="even">
+<td>R</td>
+<td>3</td>
+<td><span class="math inline">\(\alpha,\beta,\gamma\)</span></td>
+<td>Extrinsic Parameters</td>
+</tr>
+<tr class="odd">
+<td>t (or <span class="math inline">\(\tilde{C}\)</span>)</td>
+<td>3</td>
+<td><span class="math inline">\((t_x,t_y,t_z)\)</span></td>
+<td>Extrinsic Parameters</td>
+</tr>
+</tbody>
+</table>
+<p>3D world frame ----- R, t ----&gt; 3D camera frame ------ K -----&gt; 2D image</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/Camera-Model-Notes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/" class="post-title-link" itemprop="url">Configure Academic Page in Jekyll + Blog in Hexo together</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2023-03-14 14:24:17" itemprop="dateCreated datePublished" datetime="2023-03-14T14:24:17+08:00">2023-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/" class="post-meta-item leancloud_visitors" data-flag-title="Configure Academic Page in Jekyll + Blog in Hexo together" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="difficult-situations">Difficult situations:</h2>
+<ol type="1">
+<li>The Academic page is powered by <a target="_blank" rel="noopener" href="http://jekyllrb.com/">Jekyll</a>, while the blog website is powered by Hexo.</li>
+<li>And they are maintained in two separated repositories on Github.</li>
+<li>Besides <code>[username].github.io</code>, I have a domain <code>jyzhu.top</code>, and want to use my custom domain.</li>
+<li>All in all, I hope to visit the academic page is at <a href="jyzhu.top" class="uri">jyzhu.top</a>, while visit the blog is at <a href="jyzhu.top/blog" class="uri">jyzhu.top/blog</a>.</li>
+</ol>
+<h2 id="now-lets-configure.">Now let's configure.</h2>
+<ol type="1">
+<li><p>Rename the blog repo as <code>blog</code>; rename the academic page repo as <code>[username].github.io</code>.</p></li>
+<li><p>Edit the blog's Hexo config file:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://jyzhu.top/blog</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/blog/</span></span><br></pre></td></tr></table></figure>
+<p><em>While no need to move all the files into a subfolder <code>blog</code> of your repo.</em></p>
+<p>The Jekyll config is simple. Nothing needs to specify.</p></li>
+<li><p>Edit the Github repo settings. Set the academic repo's <strong>custom domain</strong> as <code>jyzhu.top</code>. A <code>CNAME</code> file will be automatically added in the root. Now obviously, the <code>jyzhu.top</code> successfully refers to the academic page.</p>
+<p>Then you know what, everything is done! Because all other repos with github page turns on, are automatically mapped to subpaths of <code>[username].github.io</code> by Github. Then coz <code>[username].github.io</code> is mapped to <code>[url]</code>, everything will be there, including <code>[url]/blog</code> for the <code>blog</code> repo.</p></li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1191,248 +1473,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/Prior-based-reconstruction-of-neural-fields/" class="post-title-link" itemprop="url">Prior based reconstruction of neural fields</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2023-01-12 17:33:39" itemprop="dateCreated datePublished" datetime="2023-01-12T17:33:39+08:00">2023-01-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/blog/Prior-based-reconstruction-of-neural-fields/" class="post-meta-item leancloud_visitors" data-flag-title="Prior based reconstruction of neural fields" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/blog/Prior-based-reconstruction-of-neural-fields/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/blog/Prior-based-reconstruction-of-neural-fields/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>1.8k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p>
-<h2 id="prior-based-reconstruction-of-neural-fields">2.4. Prior-based reconstruction of neural fields</h2>
-<p>Sounds like a one-shot task: instead of fitting and optimizing a neural field each for one scene; let's learn a prior distribution of neural field. Then, given a specific scene, it adjusts the neural field in just one forward.</p>
-<figure>
-<img src="https://s2.loli.net/2023/01/12/rMOwKRJBuedFm1n.png" alt="image-20221211234430727"><figcaption>image-20221211234430727</figcaption>
-</figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/Prior-based-reconstruction-of-neural-fields/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/The-difference-between-RNN-s-output-and-h-n/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/The-difference-between-RNN-s-output-and-h-n/" class="post-title-link" itemprop="url">The difference between RNN's output and h_n</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2022-10-22 16:56:44" itemprop="dateCreated datePublished" datetime="2022-10-22T16:56:44+08:00">2022-10-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/blog/The-difference-between-RNN-s-output-and-h-n/" class="post-meta-item leancloud_visitors" data-flag-title="The difference between RNN's output and h_n" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/blog/The-difference-between-RNN-s-output-and-h-n/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/blog/The-difference-between-RNN-s-output-and-h-n/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>929</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>Reference: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm" class="uri">https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm</a></p>
-</blockquote>
-<p>I was so confused when doing a homework on implementing the Luong Attention, because it tells that the decoder is a RNN, which takes <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(s_{t-1}\)</span> as input, and outputs <span class="math inline">\(s_t\)</span>, i.e., <span class="math inline">\(s_t = RNN(y_{t-1}, s_{t-1})\)</span>.</p>
-<p>But the pytorch implementation of RNN is: <span class="math inline">\(outputs, hidden\_last = RNN(inputs, hidden\_init)\)</span>, which takes in a sequence of elements, computes in serials, and outputs a sequence also.</p>
-<p>I was confused about what is the <span class="math inline">\(s_t\)</span>. Is it the <span class="math inline">\(outputs\)</span>, or the <span class="math inline">\(hidden\_states\)</span>?</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/The-difference-between-RNN-s-output-and-h-n/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1457,13 +1497,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="网站总字数">253k</span>
+    <span title="网站总字数">255k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="网站阅读时长">3:50</span>
+    <span title="网站阅读时长">3:52</span>
   </span>
 </div>
 
