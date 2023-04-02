@@ -1748,6 +1748,13 @@
   </url>
   
   <url>
+    <loc>https://jyzhu.top/blog/tags/3D-Computer-Vision/</loc>
+    <lastmod>2023-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jyzhu.top/blog/tags/Typora/</loc>
     <lastmod>2023-04-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -1763,6 +1770,27 @@
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Evangelion/</loc>
+    <lastmod>2023-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/blog/tags/Blog/</loc>
+    <lastmod>2023-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/blog/tags/Hexo/</loc>
+    <lastmod>2023-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/blog/tags/Jekyll/</loc>
     <lastmod>2023-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1812,13 +1840,6 @@
   
   <url>
     <loc>https://jyzhu.top/blog/tags/MacOS/</loc>
-    <lastmod>2023-04-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jyzhu.top/blog/tags/Hexo/</loc>
     <lastmod>2023-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2042,13 +2063,6 @@
   </url>
   
   <url>
-    <loc>https://jyzhu.top/blog/tags/Blog/</loc>
-    <lastmod>2023-04-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jyzhu.top/blog/tags/VPS/</loc>
     <lastmod>2023-04-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -2211,20 +2225,6 @@
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Java/</loc>
-    <lastmod>2023-04-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jyzhu.top/blog/tags/3D-Computer-Vision/</loc>
-    <lastmod>2023-04-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jyzhu.top/blog/tags/Jekyll/</loc>
     <lastmod>2023-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
