@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jyzhu.top/blog/Camera-Model-Notes/</loc>
+    <loc>https://jyzhu.top/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/</loc>
     
     <lastmod>2023-04-02</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>https://jyzhu.top/blog/Configure-Academic-Page-in-Jekyll-Blog-in-Hexo-together/</loc>
+    <loc>https://jyzhu.top/blog/Camera-Model-Notes/</loc>
     
-    <lastmod>2023-03-14</lastmod>
+    <lastmod>2023-04-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
