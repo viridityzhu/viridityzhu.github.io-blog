@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/04/02/FEe9lM5t3TJKgyL.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/02/TlcW7QFhOAXK6sY.png">
 <meta property="article:published_time" content="2023-04-02T13:44:43.000Z">
-<meta property="article:modified_time" content="2023-04-02T14:54:10.380Z">
+<meta property="article:modified_time" content="2023-04-02T15:47:48.447Z">
 <meta property="article:author" content="Jiayin Zhu">
 <meta property="article:tag" content="3D Computer Vision">
 <meta name="twitter:card" content="summary">
@@ -368,13 +368,13 @@ P=K[R\ \ \ t]
 <ul>
 <li><p>P: Projective camera, maps 3D world points to 2D image points.</p></li>
 <li><p>K: Camera calibration matrix, 3 x 3, <span class="math inline">\(x=K[I|0]X_{cam}\)</span>, given 3D points in camera coordinate frame <span class="math inline">\(X_{cam}\)</span>, we can project it into 2D points on image <span class="math inline">\(x\)</span>.</p>
-<p><img src="https://s2.loli.net/2023/04/02/FEe9lM5t3TJKgyL.png" alt="image-20230402220641473" style="zoom:50%;" /></p></li>
+<p><img src="https://s2.loli.net/2023/04/02/FEe9lM5t3TJKgyL.png" alt="K" style="zoom:50%;" /></p></li>
 <li><p>R and t: Camera Rotation and Translation, rigid transformation. <span class="math inline">\(X_{cam}=( X,Y,Z,1)^T\)</span> is expressed in the camera coordinate frame. In general, 3D points are expressed in a different Euclidean coordinate frame, known as the <strong>world coordinate frame</strong>. The two frames are related via a rigid transformation (R, t).</p></li>
 </ul>
 <h3 id="some-other-terms-you-may-see">Some other terms you may see</h3>
 <ul>
 <li><p><strong>P</strong>: 3x4, homogeneous, camera projection matrix, <span class="math inline">\(P=diag(f,f,1)[I|0]\)</span>. P is K without considering <span class="math inline">\((x_{cam},y_{cam})\)</span> in the image. (In other words, it simplify <span class="math inline">\((p_x, p_y)=(0,0)\)</span>.</p>
-<p><img src="https://s2.loli.net/2023/04/02/TlcW7QFhOAXK6sY.png" alt="image-20230402220006624" style="zoom:50%;" /></p></li>
+<p><img src="https://s2.loli.net/2023/04/02/TlcW7QFhOAXK6sY.png" alt="P" style="zoom:50%;" /></p></li>
 </ul>
 
     </div>
