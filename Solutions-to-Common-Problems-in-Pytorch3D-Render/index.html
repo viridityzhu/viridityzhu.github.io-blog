@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/blog/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<meta name="description" content="Pytorch3D Rendering 的一些疑难杂症 有哪些？  有了相机内参 K，而render又需要NDC坐标系，那要怎么定义相机？ 图像的黄蓝色反了？ render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？ 皮肤表面反光太强，光滑得像镜面一样，怎样更自然？ 怎么物体只剩半截，更远的部分似乎被截掉了？ 没解决的问题：PBR（physical based rendering">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solutions to Common Problems in Pytorch3D Rendering">
+<meta property="og:url" content="https://jyzhu.top/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="Pytorch3D Rendering 的一些疑难杂症 有哪些？  有了相机内参 K，而render又需要NDC坐标系，那要怎么定义相机？ 图像的黄蓝色反了？ render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？ 皮肤表面反光太强，光滑得像镜面一样，怎样更自然？ 怎么物体只剩半截，更远的部分似乎被截掉了？ 没解决的问题：PBR（physical based rendering">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/669761/145090051-67b506d7-6d73-4826-a677-5873b7cb92ba.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad2.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_big.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_half.png">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_full.png">
+<meta property="article:published_time" content="2023-04-23T06:22:24.000Z">
+<meta property="article:modified_time" content="2023-04-23T06:35:01.342Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Computer Vision">
+<meta property="article:tag" content="3D Computer Vision">
+<meta property="article:tag" content="Pytorch3D">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/669761/145090051-67b506d7-6d73-4826-a677-5873b7cb92ba.png">
+
+
+<link rel="canonical" href="https://jyzhu.top/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jyzhu.top/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/","path":"Solutions-to-Common-Problems-in-Pytorch3D-Render/","title":"Solutions to Common Problems in Pytorch3D Rendering"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Solutions to Common Problems in Pytorch3D Rendering | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/blog/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A Base for Secreting and Running at Night</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-notes"><a href="/blog/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/blog/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">79</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">177</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pytorch3d-rendering-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87"><span class="nav-number">1.</span> <span class="nav-text">Pytorch3D Rendering 的一些疑难杂症</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BA%86%E7%9B%B8%E6%9C%BA%E5%86%85%E5%8F%82-k%E8%80%8Crender%E5%8F%88%E9%9C%80%E8%A6%81ndc%E5%9D%90%E6%A0%87%E7%B3%BB%E9%82%A3%E8%A6%81%E6%80%8E%E4%B9%88%E5%AE%9A%E4%B9%89%E7%9B%B8%E6%9C%BA"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 有了相机内参 K，而render又需要NDC坐标系，那要怎么定义相机？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E9%BB%84%E8%93%9D%E8%89%B2%E5%8F%8D%E4%BA%86"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 图像的黄蓝色反了？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render-%E5%AE%8C%E7%9A%84%E5%9B%BE%E5%83%8F%E9%94%AF%E9%BD%BF%E5%BE%88%E4%B8%A5%E9%87%8D%E6%80%8E%E4%B9%88%E6%8A%97%E9%94%AF%E9%BD%BFantialiasing"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9A%AE%E8%82%A4%E8%A1%A8%E9%9D%A2%E5%8F%8D%E5%85%89%E5%A4%AA%E5%BC%BA%E5%85%89%E6%BB%91%E5%BE%97%E5%83%8F%E9%95%9C%E9%9D%A2%E4%B8%80%E6%A0%B7%E6%80%8E%E6%A0%B7%E6%9B%B4%E8%87%AA%E7%84%B6"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 皮肤表面反光太强，光滑得像镜面一样，怎样更自然？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%89%A9%E4%BD%93%E5%8F%AA%E5%89%A9%E5%8D%8A%E6%88%AA%E6%9B%B4%E8%BF%9C%E7%9A%84%E9%83%A8%E5%88%86%E4%BC%BC%E4%B9%8E%E8%A2%AB%E6%88%AA%E6%8E%89%E4%BA%86"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 怎么物体只剩半截，更远的部分似乎被截掉了？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-3"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98pbrphysical-based-rendering"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 没解决的问题：PBR（physical based rendering）</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com.sg/citations?user=S8ozWfsAAAAJ" title="GoogleScholar → https:&#x2F;&#x2F;scholar.google.com.sg&#x2F;citations?user&#x3D;S8ozWfsAAAAJ" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script> -->
+<script type='text/javascript' id='clustrmaps'
+    src='//cdn.clustrmaps.com/map_v2.js?cl=c1c1c1&w=a&t=tt&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=484848&ct=f9f9f9&cmo=3acc3a&cmn=600073'></script>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Solutions to Common Problems in Pytorch3D Rendering
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2023-04-23 14:22:24" itemprop="dateCreated datePublished" datetime="2023-04-23T14:22:24+08:00">2023-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/" class="post-meta-item leancloud_visitors" data-flag-title="Solutions to Common Problems in Pytorch3D Rendering" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="pytorch3d-rendering-的一些疑难杂症">Pytorch3D Rendering 的一些疑难杂症</h1>
+<p>有哪些？</p>
+<ol type="1">
+<li>有了相机内参 K，而render又需要NDC坐标系，那要怎么定义相机？</li>
+<li>图像的黄蓝色反了？</li>
+<li>render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？</li>
+<li>皮肤表面反光太强，光滑得像镜面一样，怎样更自然？</li>
+<li>怎么物体只剩半截，更远的部分似乎被截掉了？</li>
+<li>没解决的问题：PBR（physical based rendering）</li>
+</ol>
+<span id="more"></span>
+<h3 id="有了相机内参-k而render又需要ndc坐标系那要怎么定义相机">1. 有了相机内参 K，而render又需要NDC坐标系，那要怎么定义相机？</h3>
+<p>这里的坑在于，camera本身支持任意坐标系，比如Freihand提供的是screen是224*224的相机坐标系。但是，render是默认NDC坐标系的！也就是normalized coordinate system，x和y是normalized到[-1,1]的。</p>
+<p>一开始我直接把相机内参传给<code>PerspectiveCameras</code>，并且定义我的相机screen是224*224，像这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cameras = PerspectiveCameras(K=ks, image_size=((<span class="number">224</span>,<span class="number">224</span>),))</span><br></pre></td></tr></table></figure>
+<p>完全不报错，就是有问题：render 过后没东西在画面上。</p>
+<h4 id="解决">解决：</h4>
+<p>我最后在<a target="_blank" rel="noopener" href="https://pytorch3d.org/docs/cameras">官方文档</a>找到不起眼的一句：</p>
+<blockquote>
+<p>The PyTorch3D renderer for both meshes and point clouds assumes that the camera transformed points, meaning the points passed as input to the rasterizer, are in PyTorch3D's NDC space.</p>
+</blockquote>
+<figure>
+<img src="https://user-images.githubusercontent.com/669761/145090051-67b506d7-6d73-4826-a677-5873b7cb92ba.png" alt="（世界坐标系 -&gt; 相机坐标系 -&gt; ndc坐标系 -&gt; 图像坐标系）" /><figcaption>（世界坐标系 -&gt; 相机坐标系 -&gt; ndc坐标系 -&gt; 图像坐标系）</figcaption>
+</figure>
+<p>我一看，原来默认PerspectiveCameras是ndc坐标系的，<code>in_ndc = False</code> by default！</p>
+<p>所以解决方法就是：</p>
+<blockquote>
+<p>Screen space camera parameters are common and for that case the user needs to set <code>in_ndc</code> to <code>False</code> and also provide the <code>image_size=(height, width)</code> of the screen, aka the image.</p>
+</blockquote>
+<p>那么加一个参数就好了，可是谁知道这问题困扰了我整整两三天：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cameras = PerspectiveCameras(K=ks, in_ndc=<span class="literal">False</span>, image_size=((<span class="number">224</span>,<span class="number">224</span>),))</span><br></pre></td></tr></table></figure>
+<p>另外，我还找到了如下这个等价方法，是先把内参转到NDC坐标系，再传给<code>PerspectiveCameras</code>。（至于为什么探索到这个方法，在后面问题 3 里可以找到原因…）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ndc_fcl_prp</span>(<span class="params">Ks</span>):</span></span><br><span class="line">        ndc_fx = Ks[:, <span class="number">0</span>, <span class="number">0</span>] * <span class="number">2</span> / <span class="number">224.0</span></span><br><span class="line">        ndc_fy = Ks[:, <span class="number">1</span>, <span class="number">1</span>] * <span class="number">2</span> / <span class="number">224.0</span></span><br><span class="line">        ndc_px = - (Ks[:, <span class="number">0</span>, <span class="number">2</span>] - <span class="number">112.0</span>) * <span class="number">2</span> / <span class="number">224.0</span></span><br><span class="line">        ndc_py = - (Ks[:, <span class="number">1</span>, <span class="number">2</span>] - <span class="number">112.0</span>) * <span class="number">2</span> / <span class="number">224.0</span></span><br><span class="line">        focal_length = torch.stack([ndc_fx, ndc_fy], dim=-<span class="number">1</span>)</span><br><span class="line">        principal_point = torch.stack([ndc_px, ndc_py], dim=-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> focal_length, principal_point</span><br><span class="line"></span><br><span class="line">fcl, prp = get_ndc_fcl_prp(Ks)</span><br><span class="line">cameras = PerspectiveCameras(focal_length=-fcl, principal_point=prp)</span><br></pre></td></tr></table></figure>
+<p>注意<code>focal_length=-fcl</code>，这个负号是为什么呢？这是另一个坑了哈哈哈哈。</p>
+<p>答案是：pytorch3d坐标系的convention和我的相机不一样，它是+X指向左，+Y指向上，+Z指向图像平面外。这其中有个上下左右镜像的关系。</p>
+<h3 id="图像的黄蓝色反了">2. 图像的黄蓝色反了？</h3>
+<p>cv2的图像是BGR（老生常谈了），pytorch3d的是RGB。如果图像的黄蓝色相反了，基本就是这个问题，需要翻转一下，可以用torch的<code>clip(dim=(2,))</code></p>
+<h3 id="render-完的图像锯齿很严重怎么抗锯齿antialiasing">3. render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？</h3>
+<p>锯齿就是说像下图这样，物体的边缘很尖锐，像素点粒粒分明！</p>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad.png" alt="rand_4_skin_rendered_bad" /><figcaption>rand_4_skin_rendered_bad</figcaption>
+</figure>
+<p>下面是我抗锯齿处理后的效果，可以看见边缘柔和了很多：</p>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered.png" alt="rand_4_skin_rendered" /><figcaption>rand_4_skin_rendered</figcaption>
+</figure>
+<p>（我真的搞了一周这个问题……看看我的心路历程：</p>
+<ol type="1">
+<li>是不是 camera 没有用 NDC，而是直接用224x224的坐标系，导致投影过程有损失？所以我试了先转换成 NDC 坐标系的相机，再render。答案是，没有影响。</li>
+<li>是不是 Shader 的参数设置得不对，比如 <code>blur_radius</code> 和 <code>faces_per_pixel</code> 应该调大一些？这其实是一个很直观的想法了，甚至一个有经验的学长看了之后都告诉我应该是这个问题。可是当我疯狂调大这两个参数，发现并没有改变这个问题。blur_radius 只会让物体内部的材质更模糊，但是边缘的锯齿完全没改变。faces_per_pixel更是无益，几乎不影响效果。</li>
+<li>是不是图像尺寸太小了（224x224），只能达到这么个效果？我首先测试了调大图像尺寸，到<code>1024x1024</code>，发现锯齿边缘的确是不明显了！可是我又看了相机拍摄的原始图像，虽然是有点模糊，但是不至于这么大的锯齿呀，肯定还有别的问题。）</li>
+</ol>
+<h4 id="解决-1">解决：</h4>
+<p>终于，在这个issue里找到同样的问题：https://github.com/facebookresearch/pytorch3d/issues/399</p>
+<p>解决方案是：</p>
+<blockquote>
+<p>render at a higher resolution and then use average pooling to reduce back to the target resolution</p>
+</blockquote>
+<p>居然这么暴力……不过issue里面有很详细的解释，也能理解，这就是render原理之外需要考虑的事情，甚至算不上什么bug。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">aa_factor = <span class="number">3</span> <span class="comment"># Anti-aliasing factor</span></span><br><span class="line">raster_settings_soft = RasterizationSettings(</span><br><span class="line">        image_size=<span class="number">224</span> * aa_factor, </span><br><span class="line">    )</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line">images = renderer(mesh)</span><br><span class="line">images = images.permute(<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># NHWC -&gt; NCHW</span></span><br><span class="line">images = F.avg_pool2d(images, kernel_size=aa_factor, stride=aa_factor)</span><br><span class="line">images = images.permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>)  <span class="comment"># NCHW -&gt; NHWC</span></span><br></pre></td></tr></table></figure>
+<h3 id="皮肤表面反光太强光滑得像镜面一样怎样更自然">4. 皮肤表面反光太强，光滑得像镜面一样，怎样更自然？</h3>
+<p>一开始，皮肤 render 出来像这样，跟陶瓷似的，像话吗：</p>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad2.png" alt="rand_4_skin_rendered_bad2" /><figcaption>rand_4_skin_rendered_bad2</figcaption>
+</figure>
+<p>改进后，效果这样，自然多了：</p>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_big.png" alt="rand_4_skin_rendered_big" /><figcaption>rand_4_skin_rendered_big</figcaption>
+</figure>
+<h4 id="解决-2">解决：</h4>
+<p>其实搞清楚材质相关的一些参数就好了。主要来说，这个反光是由这两个量决定的：</p>
+<ol type="1">
+<li><code>specular_color</code>: specular reflectivity of the material，指定镜面反射颜色，在表面有光泽和镜面般的地方看到的颜色。</li>
+<li><code>shininess</code>：定义材质中镜面反射高光的焦点。 值通常介于 0 到 1000 之间，较高的值会产生紧密、集中的高光。</li>
+</ol>
+<p>注意这里是改物体material的这些参数。虽然lighting也有这些参数定义，但这是关于光源的，和这个反光没有关系。</p>
+<p>所以修改很简单：定义materials类，调整<code>specular_color</code>。默认是<code>1,1,1</code>，就是纯白色；调成<code>0.2,0.2,0.2</code>比较适合人的皮肤。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pytorch3d.renderer <span class="keyword">import</span> Materials</span><br><span class="line"></span><br><span class="line">materials = Materials(</span><br><span class="line">    specular_color=((<span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>),), <span class="comment"># 默认是1,1,1，就是纯白色；测试发现调成0.2,0.2,0.2比较适合人的皮肤。</span></span><br><span class="line">    shininess=<span class="number">30</span>, <span class="comment"># 默认值是 64，看上去高光稍微有点聚集了，改成30的话略自然，差别不太明显</span></span><br><span class="line">)</span><br><span class="line"> renderer_p3d = MeshRenderer(</span><br><span class="line">    rasterizer=MeshRasterizer(),</span><br><span class="line">    shader=HardPhongShader(</span><br><span class="line">        materials=materials,</span><br><span class="line">    ),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="怎么物体只剩半截更远的部分似乎被截掉了">5. 怎么物体只剩半截，更远的部分似乎被截掉了？</h3>
+<p>还是一只手的模型，render 出来居然只有半个手背，距离相机更远的部分像是被截断了：</p>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_half.png" alt="rand_1_skin_rendered_half" /><figcaption>rand_1_skin_rendered_half</figcaption>
+</figure>
+<p>改进后，正常的效果应该是这样才对：</p>
+<figure>
+<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_full.png" alt="rand_1_skin_rendered_full" /><figcaption>rand_1_skin_rendered_full</figcaption>
+</figure>
+<p>所以问题出在哪呢？的确是“更远的部分被截掉了”。我找到了<code>RasterizationSettings</code>里有这么一个相关的参数：</p>
+<ul>
+<li>z_clip_value: if not None, then triangles will be clipped (and possibly subdivided into smaller triangles) such that z &gt;= z_clip_value. This avoids camera projections that go to infinity as z-&gt;0. Default is None as clipping affects rasterization speed and should only be turned on if explicitly needed. See clip.py for all the extra computation that is required.</li>
+</ul>
+<p>可是问题不在这个参数上，因为它的默认值就是None，应该在后续都没有影响。</p>
+<h4 id="解决-3">解决：</h4>
+<p>经过仔细看源码，我发现问题出在<code>SoftPhongShader</code>……具体来说，在<code>shader.py</code> 第138-139行，<code>SoftPhongShader</code>的<code>forward</code>函数里：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">znear = kwargs.get(<span class="string">&quot;znear&quot;</span>, <span class="built_in">getattr</span>(cameras, <span class="string">&quot;znear&quot;</span>, <span class="number">1.0</span>))</span><br><span class="line">zfar = kwargs.get(<span class="string">&quot;zfar&quot;</span>, <span class="built_in">getattr</span>(cameras, <span class="string">&quot;zfar&quot;</span>, <span class="number">100.0</span>))</span><br></pre></td></tr></table></figure>
+<p>居然有一个默认的z范围[1,100]……………………所以其实是我的mesh的scale太大了，再加上相机的dist比较大，整个深度就超过zfar了。所以有两种方法，要么缩小一下mesh的尺度；要么不想改变原数据的话，在render的时候，把<code>znear</code> <code>zfar</code>参数额外传入，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">images = renderer(mesh, ..., znear=-<span class="number">2.0</span>, zfar=<span class="number">1000.0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="没解决的问题pbrphysical-based-rendering">6. 没解决的问题：PBR（physical based rendering）</h3>
+<p>我的数据中3D mesh的材质用了PBR（physical based rendering）。它提供三张贴图图像：diffuse map，specular map和normal map。</p>
+<p>但是pytorch3d目前并不支持PBR inspired shading（see <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/issues/174">issue</a>）。</p>
+<p>所以目前我只能把diffuse map作为一般意义上的texture map，而忽略了specular map和normal map这两张图。</p>
+<p>我不确定能不能自己实现这部分功能，比如自定义 <code>phong_shading</code>函数（参考<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/issues/865">issue</a>）。但这有点超出我的能力范围和精力范围，所以暂时搁置了。如果能实现的话，PyTorch3D 似乎是欢迎contribution的（<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/issues/174">issue</a>）</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/homogeneous-coordinates/" rel="bookmark">齐次坐标系</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/DeepHuman-3D-Human-Reconstruction-from-a-Single-Image/" rel="bookmark">读 DeepHuman: 3D Human Reconstruction from a Single Image</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Introduction-to-NeRF/" rel="bookmark">Introduction to NeRF</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Learning-NeRF/" rel="bookmark">Learning NeRF</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Manipulate-Neural-Fields/" rel="bookmark">Manipulate Neural Fields</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其他发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/blog/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
+              <a href="/blog/tags/3D-Computer-Vision/" rel="tag"># 3D Computer Vision</a>
+              <a href="/blog/tags/Pytorch3D/" rel="tag"># Pytorch3D</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/Camera-Model-Notes/" rel="prev" title="Camera projection with the pinhole model">
+                  <i class="fa fa-chevron-left"></i> Camera projection with the pinhole model
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/blog/en/Solutions-to-Common-Problems-in-Pytorch3D-Render/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="网站总字数">260k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="网站阅读时长">3:56</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/blog/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"Feel free!","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/blog/Solutions-to-Common-Problems-in-Pytorch3D-Render/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>
