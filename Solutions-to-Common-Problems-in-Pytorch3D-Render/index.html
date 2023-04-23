@@ -32,14 +32,14 @@
 <meta property="og:description" content="Pytorch3D Rendering 的一些疑难杂症 有哪些？  有了相机内参 K，而render又需要NDC坐标系，那要怎么定义相机？ 图像的黄蓝色反了？ render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？ 皮肤表面反光太强，光滑得像镜面一样，怎样更自然？ 怎么物体只剩半截，更远的部分似乎被截掉了？ 没解决的问题：PBR（physical based rendering">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://user-images.githubusercontent.com/669761/145090051-67b506d7-6d73-4826-a677-5873b7cb92ba.png">
-<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad.png">
-<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered.png">
-<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad2.png">
-<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_big.png">
-<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_half.png">
-<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_full.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/23/6gx5DEXJK9uMGwS.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/23/LAchPHVfImRtkDs.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/23/8NWzr7txYKyqRk6.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/23/4qHNOs58ZhEI6Ry.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/23/imzqovVyWfnK3Fs.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/23/gSJ5wm74RUjHODY.png">
 <meta property="article:published_time" content="2023-04-23T06:22:24.000Z">
-<meta property="article:modified_time" content="2023-04-23T06:35:01.342Z">
+<meta property="article:modified_time" content="2023-04-23T06:42:33.231Z">
 <meta property="article:author" content="Jiayin Zhu">
 <meta property="article:tag" content="Computer Vision">
 <meta property="article:tag" content="3D Computer Vision">
@@ -376,11 +376,11 @@
 <h3 id="render-完的图像锯齿很严重怎么抗锯齿antialiasing">3. render 完的图像锯齿很严重？怎么抗锯齿（Antialiasing）？</h3>
 <p>锯齿就是说像下图这样，物体的边缘很尖锐，像素点粒粒分明！</p>
 <figure>
-<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad.png" alt="rand_4_skin_rendered_bad" /><figcaption>rand_4_skin_rendered_bad</figcaption>
+<img src="https://s2.loli.net/2023/04/23/6gx5DEXJK9uMGwS.png" alt="rand_4_skin_rendered_bad" /><figcaption>rand_4_skin_rendered_bad</figcaption>
 </figure>
 <p>下面是我抗锯齿处理后的效果，可以看见边缘柔和了很多：</p>
 <figure>
-<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered.png" alt="rand_4_skin_rendered" /><figcaption>rand_4_skin_rendered</figcaption>
+<img src="https://s2.loli.net/2023/04/23/LAchPHVfImRtkDs.png" alt="rand_4_skin_rendered" /><figcaption>rand_4_skin_rendered</figcaption>
 </figure>
 <p>（我真的搞了一周这个问题……看看我的心路历程：</p>
 <ol type="1">
@@ -400,11 +400,11 @@
 <h3 id="皮肤表面反光太强光滑得像镜面一样怎样更自然">4. 皮肤表面反光太强，光滑得像镜面一样，怎样更自然？</h3>
 <p>一开始，皮肤 render 出来像这样，跟陶瓷似的，像话吗：</p>
 <figure>
-<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_bad2.png" alt="rand_4_skin_rendered_bad2" /><figcaption>rand_4_skin_rendered_bad2</figcaption>
+<img src="https://s2.loli.net/2023/04/23/8NWzr7txYKyqRk6.png" alt="rand_4_skin_rendered_bad2" /><figcaption>rand_4_skin_rendered_bad2</figcaption>
 </figure>
 <p>改进后，效果这样，自然多了：</p>
 <figure>
-<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_4_skin_rendered_big.png" alt="rand_4_skin_rendered_big" /><figcaption>rand_4_skin_rendered_big</figcaption>
+<img src="https://s2.loli.net/2023/04/23/4qHNOs58ZhEI6Ry.png" alt="rand_4_skin_rendered_big" /><figcaption>rand_4_skin_rendered_big</figcaption>
 </figure>
 <h4 id="解决-2">解决：</h4>
 <p>其实搞清楚材质相关的一些参数就好了。主要来说，这个反光是由这两个量决定的：</p>
@@ -418,11 +418,11 @@
 <h3 id="怎么物体只剩半截更远的部分似乎被截掉了">5. 怎么物体只剩半截，更远的部分似乎被截掉了？</h3>
 <p>还是一只手的模型，render 出来居然只有半个手背，距离相机更远的部分像是被截断了：</p>
 <figure>
-<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_half.png" alt="rand_1_skin_rendered_half" /><figcaption>rand_1_skin_rendered_half</figcaption>
+<img src="https://s2.loli.net/2023/04/23/imzqovVyWfnK3Fs.png" alt="rand_1_skin_rendered_half" /><figcaption>rand_1_skin_rendered_half</figcaption>
 </figure>
 <p>改进后，正常的效果应该是这样才对：</p>
 <figure>
-<img src="/Users/jiayinzhu/Documents/笔记/放图/rand_1_skin_rendered_full.png" alt="rand_1_skin_rendered_full" /><figcaption>rand_1_skin_rendered_full</figcaption>
+<img src="https://s2.loli.net/2023/04/23/gSJ5wm74RUjHODY.png" alt="rand_1_skin_rendered_full" /><figcaption>rand_1_skin_rendered_full</figcaption>
 </figure>
 <p>所以问题出在哪呢？的确是“更远的部分被截掉了”。我找到了<code>RasterizationSettings</code>里有这么一个相关的参数：</p>
 <ul>
