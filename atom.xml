@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2023-04-23T06:42:33.231Z</updated>
+  <updated>2023-07-03T18:09:29.807Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>奶奶</title>
+    <link href="https://jyzhu.top/blog/%E5%A5%B6%E5%A5%B6/"/>
+    <id>https://jyzhu.top/blog/%E5%A5%B6%E5%A5%B6/</id>
+    <published>2023-07-03T18:08:23.000Z</published>
+    <updated>2023-07-03T18:09:29.807Z</updated>
+    
+    <content type="html"><![CDATA[<p>奶奶身体还好，但心态不好。健忘、固执，自闭，悲观。她几乎没有什么盼头了。她觉得活得失败，活得不好。她觉得如今脸上无光。她说：</p><p>我最痛恨别人，半熟不熟的人见面，跟你打招呼，问你家里近况怎么样。我很生气，简直想骂回去。可是你骂了吧，人家觉得你是神经病。可是我要怎么回答呢？我这两个儿子，一个工作都丢了，一个身体又那样不好。</p><p>我命苦啊。我从小家里穷，也没人管我。13岁就出去工作养活自己了。跟了你爷爷，过的都是苦日子。他一个月三十四块五角钱，二十块钱给他爸妈，雷打不动的。家里饭都吃不起了，也要给。剩下十四块五，十块钱给我，他留四块五。抽最差的烟，走得那么早。</p><p>我要管家里所有事。他什么也不管啊，一日三餐，他妈，两个儿子，去河边洗衣服。我还要上班。我每天都好累。</p><p>好不容易，日子稍微好一点了。他又走了！我那时简直恨他。</p><p>别看我现在这样，现在是我最轻松的日子。共产党给我发钱。所以我说，感谢共产党。我拿自己的钱，过自己的日子！就是记性不好。人活到连自理能力也没有了，还有什么意思。跟你爸说好了，到时候我死在这间屋子了，就火化。我都看得开。</p><p>死！我听到就眼泪直湍湍地流。奶奶说，不说这个了。她也抹眼泪。</p><p>奶奶一个月领三千多退休工资，自己省吃俭用，只花得了一千多。剩的，存在那，每年寒暑假我和妹妹去看她，她发给我们。</p><p>我说爸爸，你帮我把钱退给她。</p><p>爸爸说你拿着。她自己花不完，这钱不给你们，她拿着有什么用了？给了她安心。</p><p>我走的时候，她送出屋子，送到楼梯口。</p><p>我走远了，爸爸说，你回头再给奶奶挥挥手，你看她在阳台上看你呢。</p><p>我转头看到一簇花白的头发，远远的，很小。</p><p>能不能不要有离别呢？</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;奶奶身体还好，但心态不好。健忘、固执，自闭，悲观。她几乎没有什么盼头了。她觉得活得失败，活得不好。她觉得如今脸上无光。她说：&lt;/p&gt;
+&lt;p&gt;我最痛恨别人，半熟不熟的人见面，跟你打招呼，问你家里近况怎么样。我很生气，简直想骂回去。可是你骂了吧，人家觉得你是神经病。可是我要怎么回答呢？我这两个儿子，一个工作都丢了，一个身体又那样不好。&lt;/p&gt;
+&lt;p&gt;我命苦啊。我从小家里穷，也没人管我。13岁就出去工作养活自己了。跟了你爷爷，过的都是苦日子。他一个月三十四块五角钱，二十块钱给他爸妈，雷打不动的。家里饭都吃不起了，也要给。剩下十四块五，十块钱给我，他留四块五。抽最差的烟，走得那么早。&lt;/p&gt;
+&lt;p&gt;我要管家里所有事。他什么也不管啊，一日三餐，他妈，两个儿子，去河边洗衣服。我还要上班。我每天都好累。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="thoughts" scheme="https://jyzhu.top/blog/categories/thoughts/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Solutions to Common Problems in Pytorch3D Rendering</title>
@@ -567,32 +589,6 @@ P=K[R\ \ \ t]
     <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
     <category term="Video" scheme="https://jyzhu.top/blog/tags/Video/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Live demo of CodeTyping via Pythonanywhere</title>
-    <link href="https://jyzhu.top/blog/live-demo-of-code-typing-via-pythonanywhere/"/>
-    <id>https://jyzhu.top/blog/live-demo-of-code-typing-via-pythonanywhere/</id>
-    <published>2022-04-07T15:24:15.000Z</published>
-    <updated>2022-04-07T15:34:41.597Z</updated>
-    
-    <content type="html"><![CDATA[<figure><img src="https://user-images.githubusercontent.com/39082096/149967763-a9bb56c5-6411-4d86-90d3-f1e22845e2a8.png" alt="image" /><figcaption>image</figcaption></figure><p><a href="http://jyzhu.pythonanywhere.com/">Code Typing Practice</a> (or source code on Github: <a href="https://github.com/viridityzhu/code-typing">here</a>) is a tiny web page that I wrote for fun last semester, which is for me myself to practice code typing. It is a naive Django web app (with bugs🤪). BUT! I find a service to deploy it lively today. That's what is worth noting down now.</p><span id="more"></span><h2 id="note">Note</h2><p>Initially I tried to deploy this demo on Vercel.com. But it was too troublesome coz it does not support Django by default. Thankfully, I found <a href="https://www.pythonanywhere.com/">pythonanywhere</a>, on which each user can deploy one web app without payment. What's the best is that it is really easy to deploy: it provides access to Bash console.</p><p>Two things to be noted:</p><ol type="1"><li>Every 3 months, I have to login into the pythonanywhere to extend my web app, otherwise it will be killed.</li><li>The bug cost most of my time is that in the <code>view.py</code> I had used relative path to the static code files. However, I should use absolute path, with adding <code>BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</code> ahead.</li></ol><h2 id="todo">TODO</h2><p>Actually, after learned the MERN frame this semester, I am now aware of how naive this project is. However, I love Python, so it doesn't matter if i still regard Django as a hobby🤨. Who knows... I haven't even spent my time on that course project...</p><p>Now that the live demo is achieved, I might think of polishing this little project a bit.</p><ul><li>[ ] Fix bugs. Though i've already forgotten what those bugs are...</li><li>[ ] Replace the stupid code snippets...</li><li>[ ] Add the feature to compute time cost and typing speed. Also, save typing records.</li><li>[ ] Explicitly support other kinds of typing materials, and also support uploading customize materials.</li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;figure&gt;
-&lt;img src=&quot;https://user-images.githubusercontent.com/39082096/149967763-a9bb56c5-6411-4d86-90d3-f1e22845e2a8.png&quot; alt=&quot;image&quot; /&gt;&lt;figcaption&gt;image&lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;p&gt;&lt;a href=&quot;http://jyzhu.pythonanywhere.com/&quot;&gt;Code Typing Practice&lt;/a&gt; (or source code on Github: &lt;a href=&quot;https://github.com/viridityzhu/code-typing&quot;&gt;here&lt;/a&gt;) is a tiny web page that I wrote for fun last semester, which is for me myself to practice code typing. It is a naive Django web app (with bugs🤪). BUT! I find a service to deploy it lively today. That&#39;s what is worth noting down now.&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Django" scheme="https://jyzhu.top/blog/tags/Django/"/>
-    
-    <category term="Python" scheme="https://jyzhu.top/blog/tags/Python/"/>
     
   </entry>
   
