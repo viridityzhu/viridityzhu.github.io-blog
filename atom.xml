@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2023-07-16T18:01:09.376Z</updated>
+  <updated>2023-07-16T18:01:58.015Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -21,16 +21,16 @@
     <link href="https://jyzhu.top/blog/ChatGPT-Applications-to-be-explored/"/>
     <id>https://jyzhu.top/blog/ChatGPT-Applications-to-be-explored/</id>
     <published>2023-07-16T17:57:48.000Z</published>
-    <updated>2023-07-16T18:01:09.376Z</updated>
+    <updated>2023-07-16T18:01:58.015Z</updated>
     
-    <content type="html"><![CDATA[<p>今天逛 github，发现了一些很 amazing 的chatgpt applications，摘录一些感兴趣的精华在此。真是感慨：LLM 以来天天风云变幻，弄潮儿在前面兴风作浪，我在后面望其项背……</p><ol type="1"><li>(Useful) egoist / openai-proxy 用 Vercel 开一个小的 Proxy server，转发 gpt API，这样可以绕开有些国家地区的 IP 限制</li><li>BuilderIO / ai-shell 在命令行里使用 chatgpt，把自然语言转化成 Linux commands，命令是 <code>ai [texts]</code></li><li>eli64s / readme-ai 一个轻量的 script，根据 repository 生成酷炫的 readme 文件</li><li>efJerryYang / chatgpt-cli 命令行 chatgpt client</li><li>yufeikang / ai-cli 另一个命令行 chatgpt client（实测的时候再对比一下这俩）</li><li>mukulpatnaik / researchgpt 输入论文 PDF 文件，然后和 gpt 聊论文。一个用 Flask 开发的 web client 貌似，可以再仔细看一下咋实现的，挺有意思</li><li>(⭐️ Amazing) AntonOsika / gpt-engineer 很方便安装，pip install 就好了！直接通过描述 + AI 追问 + 补充细节，生成一个代码项目</li><li>(⭐️ Amazing) Yidadaa / ChatGPT-Next-Web 好像很实用的 web GUI！一键部署到 Vercel。我找这玩意主要是为了直接用 API 访问 GPT-4，就不用订阅每个月的 ChatGPT Plus 了，后者太贵了，也用不了那么多</li></ol><p><img src="https://s2.loli.net/2023/07/17/QU2X5ckaCmyJeGv.png" /></p>]]></content>
+    <content type="html"><![CDATA[<p>今天逛 github，发现了一些很 amazing 的chatgpt applications，摘录一些感兴趣的精华在此。真是感慨：LLM 以来天天风云变幻，弄潮儿在前面兴风作浪，我在后面望其项背……</p><ol type="1"><li><p>(Useful) egoist / openai-proxy</p><p>用 Vercel 开一个小的 Proxy server，转发 gpt API，这样可以绕开有些国家地区的 IP 限制</p></li><li><p>BuilderIO / ai-shell</p><p>在命令行里使用 chatgpt，把自然语言转化成 Linux commands，命令是 <code>ai [texts]</code></p></li><li><p>eli64s / readme-ai</p><p>一个轻量的 script，根据 repository 生成酷炫的 readme 文件</p></li><li><p>efJerryYang / chatgpt-cli</p><p>命令行 chatgpt client</p></li><li><p>yufeikang / ai-cli</p><p>另一个命令行 chatgpt client（实测的时候再对比一下这俩）</p></li><li><p>mukulpatnaik / researchgpt</p><p>输入论文 PDF 文件，然后和 gpt 聊论文。一个用 Flask 开发的 web client 貌似，可以再仔细看一下咋实现的，挺有意思</p></li><li><p>(⭐️ Amazing) AntonOsika / gpt-engineer</p><p>很方便安装，pip install 就好了！直接通过描述 + AI 追问 + 补充细节，生成一个代码项目</p></li><li><p>(⭐️ Amazing) Yidadaa / ChatGPT-Next-Web</p><p>好像很实用的 web GUI！一键部署到 Vercel。我找这玩意主要是为了直接用 API 访问 GPT-4，就不用订阅每个月的 ChatGPT Plus 了，后者太贵了，也用不了那么多</p></li></ol><p><img src="https://s2.loli.net/2023/07/17/QU2X5ckaCmyJeGv.png" /></p>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;今天逛 github，发现了一些很 amazing 的chatgpt applications，摘录一些感兴趣的精华在此。真是感慨：LLM 以来天天风云变幻，弄潮儿在前面兴风作浪，我在后面望其项背……&lt;/p&gt;
 &lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;(Useful) egois</summary>
+&lt;li&gt;&lt;p&gt;(Useful) eg</summary>
       
     
     
