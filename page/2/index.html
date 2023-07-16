@@ -96,8 +96,8 @@
         <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
         <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">79</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">178</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">80</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">179</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -166,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">178</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -177,7 +177,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-count">80</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -230,6 +230,127 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/NeRF-Hybrid-representations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/NeRF-Hybrid-representations/" class="post-title-link" itemprop="url">NeRF Hybrid representations</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2023-01-12 17:33:39" itemprop="dateCreated datePublished" datetime="2023-01-12T17:33:39+08:00">2023-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/NeRF-Hybrid-representations/" class="post-meta-item leancloud_visitors" data-flag-title="NeRF Hybrid representations" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/NeRF-Hybrid-representations/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/NeRF-Hybrid-representations/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p>
+<h2 id="hybrid-representations">2.2. Hybrid representations</h2>
+<h3 id="tradeoffs-of-choosing-a-proper-representation">Tradeoffs of choosing a proper representation</h3>
+<figure>
+<img src="https://s2.loli.net/2023/01/12/NyvS91xlLJA8KWR.png" alt="image-20221208172055153"><figcaption>image-20221208172055153</figcaption>
+</figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/NeRF-Hybrid-representations/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1276,125 +1397,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/Reading-Video-to-Video-Synthesis/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Reading-Few-shot-Video-to-Video-Synthesis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" class="post-title-link" itemprop="url">Reading Few-shot Video-to-Video Synthesis</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2022-05-13 16:49:57" itemprop="dateCreated datePublished" datetime="2022-05-13T16:49:57+08:00">2022-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" class="post-meta-item leancloud_visitors" data-flag-title="Reading Few-shot Video-to-Video Synthesis" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>论文地址：http://arxiv.org/abs/1910.12713</p>
-<p>作者：<a target="_blank" rel="noopener" href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a target="_blank" rel="noopener" href="http://mingyuliu.net/">Ming-Yu Liu</a>, Andrew Tao, <a target="_blank" rel="noopener" href="https://liuguilin1225.github.io/">Guilin Liu</a>, <a target="_blank" rel="noopener" href="http://jankautz.com/">Jan Kautz</a>, <a target="_blank" rel="noopener" href="http://catanzaro.name/">Bryan Catanzaro</a></p>
-<p>发表： NeurIPS 2019</p>
-<p>Project： https://nvlabs.github.io/few-shot-vid2vid</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

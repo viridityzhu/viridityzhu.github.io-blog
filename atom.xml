@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2023-07-03T18:11:44.610Z</updated>
+  <updated>2023-07-16T17:58:29.380Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ChatGPT Applications to be explored</title>
+    <link href="https://jyzhu.top/blog/ChatGPT-Applications-to-be-explored/"/>
+    <id>https://jyzhu.top/blog/ChatGPT-Applications-to-be-explored/</id>
+    <published>2023-07-16T17:57:48.000Z</published>
+    <updated>2023-07-16T17:58:29.380Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天逛 github，发现了一些很 amazing 的chatgpt applications，摘录一些感兴趣的精华在此。真是感慨：LLM 以来天天风云变幻，弄潮儿在前面兴风作浪，我在后面望其项背……</p><ol type="1"><li>(Useful) egoist / openai-proxy 用 Vercel 开一个小的 Proxy server，转发 gpt API，这样可以绕开有些国家地区的 IP 限制</li><li>BuilderIO / ai-shell 在命令行里使用 chatgpt，把自然语言转化成 Linux commands，命令是 <code>ai [texts]</code></li><li>eli64s / readme-ai 一个轻量的 script，根据 repository 生成酷炫的 readme 文件</li><li>efJerryYang / chatgpt-cli 命令行 chatgpt client</li><li>yufeikang / ai-cli 另一个命令行 chatgpt client（实测的时候再对比一下这俩）</li><li>mukulpatnaik / researchgpt 输入论文 PDF 文件，然后和 gpt 聊论文。一个用 Flask 开发的 web client 貌似，可以再仔细看一下咋实现的，挺有意思</li><li>(⭐️ Amazing) AntonOsika / gpt-engineer 很方便安装，pip install 就好了！直接通过描述 + AI 追问 + 补充细节，生成一个代码项目</li><li>(⭐️ Amazing) Yidadaa / ChatGPT-Next-Web 好像很实用的 web GUI！一键部署到 Vercel。我找这玩意主要是为了直接用 API 访问 GPT-4，就不用订阅每个月的 ChatGPT Plus 了，后者太贵了，也用不了那么多</li></ol><p><img src="/Users/jiayinzhu/Documents/笔记/放图/Pasted%20image%2020230716235600.png" /></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天逛 github，发现了一些很 amazing 的chatgpt applications，摘录一些感兴趣的精华在此。真是感慨：LLM 以来天天风云变幻，弄潮儿在前面兴风作浪，我在后面望其项背……&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;(Useful) egois</summary>
+      
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="LLM" scheme="https://jyzhu.top/blog/tags/LLM/"/>
+    
+  </entry>
   
   <entry>
     <title>奶奶</title>
@@ -563,32 +589,6 @@ P=K[R\ \ \ t]
     <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
     <category term="Video Generation" scheme="https://jyzhu.top/blog/tags/Video-Generation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Reading Few-shot Video-to-Video Synthesis</title>
-    <link href="https://jyzhu.top/blog/Reading-Few-shot-Video-to-Video-Synthesis/"/>
-    <id>https://jyzhu.top/blog/Reading-Few-shot-Video-to-Video-Synthesis/</id>
-    <published>2022-05-13T08:49:57.000Z</published>
-    <updated>2022-09-01T05:00:11.103Z</updated>
-    
-    <content type="html"><![CDATA[<p>论文地址：http://arxiv.org/abs/1910.12713</p><p>作者：<a href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a href="http://mingyuliu.net/">Ming-Yu Liu</a>, Andrew Tao, <a href="https://liuguilin1225.github.io/">Guilin Liu</a>, <a href="http://jankautz.com/">Jan Kautz</a>, <a href="http://catanzaro.name/">Bryan Catanzaro</a></p><p>发表： NeurIPS 2019</p><p>Project： https://nvlabs.github.io/few-shot-vid2vid</p><p>Github：https://github.com/NVLabs/few-shot-vid2vid</p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p><p>首先这个任务选题对我来说很新，我之前都没有意识到过这方面的问题。如果告诉我有这样的问题，需要去解决的话，我的直观的想法会受到这篇论文作者的上一篇中提到的 特征嵌入方法 所影响：会想也通过将一类物体的特征编码起来，然后通过学习不同个体的特征编码，来实现不同风格的视频生成。</p></blockquote><h2 id="why">Why：</h2><p>当今vid2vid方法的两个局限性：</p><ol type="1"><li>需要大量数据，尤其是需要生成的这个人的视频数据</li><li>泛化能力有限，比如说只能在训练集中包含的人上生成新的pose-to-human视频，不能泛化到训练集中不存在的人上</li></ol><p>所以这篇论文就是想解决这两个问题。</p><h2 id="what">What：</h2><ol type="1"><li><p>任务是Video-to-video synthesis，即利用输入的语义视频（例如人的姿势、街景），生成写实的视频。例如说，人体姿势生成的任务，就是首先收集一个人做大量不同动作的视频，作为训练集；然后向模型中输入动作序列，让模型生成该人做该动作的视频。再比如街景生成，也是以大量街景视频作为训练集，然后向模型中输入语义mask序列，让它生成风格类似的全新街景。</p></li><li><p>这篇论文提出了一个网络，其中包括一个网络权重生成模块（novel network weight generation module）和attention机制</p></li><li><p>这个方法的创新点在于，只需要在测试时，向模型提供少量的在训练集中没出现过的新的人物的图像，它就能生成这个新的人的视频。</p><figure><img src="https://s2.loli.net/2022/08/10/IUKDziV4AtOwsxu.png" alt="image-20220513171420180" /><figcaption>image-20220513171420180</figcaption></figure><p>上图中，左边是现存方法，它们基本上对于每个人，都需要在单独的训练集上训练。右边是这篇论文提出的方法，只需要训练一次，然后输入一些示范图像，就可以泛化到新的人上。</p></li></ol><p>读前疑问：</p><ol type="1"><li>说是利用少量的新的人物的示范图像，生成网络权重。意思是以原本的vid2vid网络的权重作为输出？为什么？我的更直观的想法是，直接用一个新网络，学习新人物的图像，然后把output给concat或者加进旧网络的output中……另外，直接作用于网络权重上，在我的粗浅理解中，会不会造成信息的损失呢？还是说本质上没差？ related work里提到这类网络属于adaptive network，跟常规网络相比有不同的inductive bias（想想也是），有对应的应用任务。或许我之后再了解一下这块。</li><li>标题中的few-shot是什么意思，就是指更少的data、更高的泛化性吗？这是一类任务吧，从少量标注的样本中学习的意思。这个确实就是啊，只需要一点点示范图像，就可以生成图中这个人/物的新video。</li><li>作者的上篇论文是利用gan，这篇又用上了attention，为什么作出这样本质的改变呢？</li></ol><h2 id="how">How：</h2><ol type="1"><li>视频生成任务可以分成3类：<ol type="1"><li>unconditional synthesis：随机生成视频片段</li><li>future video prediction</li><li>vid2vid：把语义输入转变成现实风的视频。这篇论文就是属于这个任务，不过它聚焦的点在于few shot，即通过在测试的时候输入少量图像，让生成的视频可以泛化到没见过的domain上</li></ol></li><li><p>vid2vid是前一篇工作的内容啦。reference：<a href="jyzhu.top/reading-video-to-video-synthesis"><em>Reading vid2vid</em></a></p></li><li><p>few-shot本质上就是多加了个网络E，用来生成原补洞网络H的权重。至于原本还有两个网络W和M，他们都不需要改动，因为他们都是基于上一帧生成的图像进行变形的，代表一种运动，而和视频本质的内容没有关系。</p></li><li><p>精髓一图：</p><figure><img src="https://s2.loli.net/2022/08/10/T6is35cjyHlvaNe.png" alt="image-20220810193845710" /><figcaption>image-20220810193845710</figcaption></figure></li><li><p>用最新的SOTA语义图像生成模型SPADE代替了上一篇论文中的网络H。SPADE包含several spatial modulation branches and a main image synthesis branch。不过网络E只更新SPADE模型中的spatial modulation branches的权重，因为1这样量比较小，2这样可以避免一个直接从input image到output image的短路（我尚没有深究原因）。</p></li><li><p>权重生成模块E。</p></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;论文地址：http://arxiv.org/abs/1910.12713&lt;/p&gt;
-&lt;p&gt;作者：&lt;a href=&quot;https://tcwang0509.github.io/&quot;&gt;Ting-Chun Wang&lt;/a&gt;, &lt;a href=&quot;http://mingyuliu.net/&quot;&gt;Ming-Yu Liu&lt;/a&gt;, Andrew Tao, &lt;a href=&quot;https://liuguilin1225.github.io/&quot;&gt;Guilin Liu&lt;/a&gt;, &lt;a href=&quot;http://jankautz.com/&quot;&gt;Jan Kautz&lt;/a&gt;, &lt;a href=&quot;http://catanzaro.name/&quot;&gt;Bryan Catanzaro&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;发表： NeurIPS 2019&lt;/p&gt;
-&lt;p&gt;Project： https://nvlabs.github.io/few-shot-vid2vid&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="Video" scheme="https://jyzhu.top/blog/tags/Video/"/>
     
   </entry>
   
