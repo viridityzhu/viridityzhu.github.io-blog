@@ -43,6 +43,28 @@
   </entry>
   
   <entry>
+    <title>Back to Homeland</title>
+    <link href="https://jyzhu.top/blog/Back-to-Homeland/"/>
+    <id>https://jyzhu.top/blog/Back-to-Homeland/</id>
+    <published>2023-07-05T12:44:49.000Z</published>
+    <updated>2023-07-16T18:19:38.272Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天，恩施的傍晚似乎没有夕阳。天空是深蓝色，深山上有几只黑鸟掠过。厚重的狗叫声。我闻到一种使我感到悲戚的气味，或许是和过去某种悲戚的回忆联系起来。具体回忆内容倒也记不清。明天我要走了，我说要吃点辣的，去了南边又没有了。结果还是去吃了潮汕牛肉。妈妈今天比较易怒，我看得到她的伤感。</p><p>回国，这个词对我来说不算什么，身处国内的时候，自己是没有概念的。只有在国外的时候，才对国内有概念。这一点真是讽刺。国内的时间匆匆而过，以前会为了在国外多待几年而争取，争取到了又雀跃。现在真要待那么多年了，才感到自己正坐在什么飞驰而远去的列车上。</p><p>人生在世，奔头这个词，我是想解构它的。人活着不为了什么，活就活了。可是我分明在努力什么，在抓住些什么。嘴硬罢了，谁能超凡脱俗，没点惦念的东西？亲人，向往的某种生活，成就感，这就是我的奔头。只是：停在原地原来是一种幸运，也是一种特权。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天，恩施的傍晚似乎没有夕阳。天空是深蓝色，深山上有几只黑鸟掠过。厚重的狗叫声。我闻到一种使我感到悲戚的气味，或许是和过去某种悲戚的回忆联系起来。具体回忆内容倒也记不清。明天我要走了，我说要吃点辣的，去了南边又没有了。结果还是去吃了潮汕牛肉。妈妈今天比较易怒，我看得到她的伤</summary>
+      
+    
+    
+    
+    <category term="thoughts" scheme="https://jyzhu.top/blog/categories/thoughts/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>奶奶</title>
     <link href="https://jyzhu.top/blog/Grandma/"/>
     <id>https://jyzhu.top/blog/Grandma/</id>
@@ -517,6 +539,28 @@ P=K[R\ \ \ t]
   </entry>
   
   <entry>
+    <title>To Midnight</title>
+    <link href="https://jyzhu.top/blog/To-Midnight/"/>
+    <id>https://jyzhu.top/blog/To-Midnight/</id>
+    <published>2022-09-08T18:06:51.000Z</published>
+    <updated>2023-07-16T18:23:52.850Z</updated>
+    
+    <content type="html"><![CDATA[<p>失眠的话</p><p>夜晚就变得绵长</p><p>第几节脊椎上了发条，拧动时</p><p>奇异的对偶的诗流向新的小节</p><p>而绵长的夜不该有诗</p><p>也不该有糟糕的比喻和比喻一样的风</p><p>该给每一阵海浪命什么名呢</p><p>这是当下最要紧的幽暗问题</p><p>别无要紧事</p><p>一个人有多想参与生活</p><p>又跟生活对坐在长桌两端</p><p>飞光飞光，劝尔一杯酒</p><p>天亮后又到了酒神的梦</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;失眠的话&lt;/p&gt;
+&lt;p&gt;夜晚就变得绵长&lt;/p&gt;
+&lt;p&gt;第几节脊椎上了发条，拧动时&lt;/p&gt;
+&lt;p&gt;奇异的对偶的诗流向新的小节&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="poems" scheme="https://jyzhu.top/blog/categories/poems/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Reading NeuMan: Neural Human Radiance Field from a Single Video</title>
     <link href="https://jyzhu.top/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/"/>
     <id>https://jyzhu.top/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/</id>
@@ -539,56 +583,6 @@ P=K[R\ \ \ t]
     <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
     <category term="3D Generation" scheme="https://jyzhu.top/blog/tags/3D-Generation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>It seems impossible to access USB devices in Docker on MacOS</title>
-    <link href="https://jyzhu.top/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/"/>
-    <id>https://jyzhu.top/blog/It-seems-impossible-to-access-USB-devices-in-Docker-on-MacOS/</id>
-    <published>2022-05-16T11:59:12.000Z</published>
-    <updated>2022-09-01T04:57:56.460Z</updated>
-    
-    <content type="html"><![CDATA[<p>According to <a href="https://dev.to/rubberduck/using-usb-with-docker-for-mac-3fdd" class="uri">https://dev.to/rubberduck/using-usb-with-docker-for-mac-3fdd</a>, it seems impossible to forward USB to a Docker container on MacOS, coz the Docker is running in a virtual environment via <a href="https://github.com/docker/for-mac/issues/900">hyperkit</a>.</p><p>First of all, ports of the host (i.e., MacOS) cannot be directly accessed by any virtual environment (i.e., Docker) on it. So, &quot;you first have to expose it to the virtual machine where Docker is running&quot;. However, Docker is running on hyperkit, which doesn't support usb forwarding.</p><p>The author provided another way to do it, that is to use<code>docker-machine</code>, which uses a Virtualbox VM to host the <code>dockerd</code> daemon, to replace the original docker. Then... why bother still using Docker, instead of just using Virtualbox to run the seperated environment?</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;According to &lt;a href=&quot;https://dev.to/rubberduck/using-usb-with-docker-for-mac-3fdd&quot; class=&quot;uri&quot;&gt;https://dev.to/rubberduck/using-usb-with-</summary>
-      
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Docker" scheme="https://jyzhu.top/blog/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Reading Video-to-Video Synthesis</title>
-    <link href="https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/"/>
-    <id>https://jyzhu.top/blog/Reading-Video-to-Video-Synthesis/</id>
-    <published>2022-05-13T09:36:36.000Z</published>
-    <updated>2022-09-01T04:59:24.160Z</updated>
-    
-    <content type="html"><![CDATA[<p>论文地址：https://tcwang0509.github.io/vid2vid/paper_vid2vid.pdf</p><p>作者：<a href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a href="http://mingyuliu.net/">Ming-Yu Liu</a>, <a href="http://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a>, <a href="https://liuguilin1225.github.io/">Guilin Liu</a>, Andrew Tao, <a href="http://jankautz.com/">Jan Kautz</a>, <a href="http://catanzaro.name/">Bryan Catanzaro</a></p><p>发表： NeurIPS 2018</p><p>Project：https://tcwang0509.github.io/vid2vid/</p><p>Github：https://github.com/NVIDIA/vid2vid</p><hr /><blockquote><p><strong>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</strong></p><p>这篇论文的背景是当时已经有比较好的pic2pic生成模型了。要让vid2vid也work的话，最重要的应该就是帧与帧之间consistency的问题。所以我会想在将pic2pic生成模型应用在video的基础上，对帧之间加上consistency loss。但直接这样肯定效率很低，因为一个视频中帧与帧之间肯定会包含大量冗余信息嘛，应该还需要想办法让帧之间信息共享，这样模型只需要预测后一帧与前一帧不同的地方，减少运算。例如，用一个小网络预测图像中静态与动态的部分，不知道可不可行。</p><p><strong>看完文章后</strong>：我感觉我在大体思路上把握准了，主要矛盾确实如此。但</p><ol type="1"><li>作者没有用consistency loss，而是用gan的思路，设计了一个条件视频鉴别器 <span class="math inline">\(D_V\)</span>，鉴别视频在时序上的动态是否真实自然。</li><li>我没有optical flow，光流，这方面的知识储备；作者利用一个网络预测optical flow，就可以直接根据前一帧图像得到后一帧图像中对应的像素点了，而且这样的结果能够很consistent。对于前一帧图像中没有对应的像素，再用一个补洞网络补洞。这样就解决了效率问题。</li><li>作者还利用了特征嵌入方法，实现了多模态视频的生成，这是我第一次了解到的方法，感觉很有趣。</li></ol></blockquote><h2 id="why">Why：</h2><ol type="1"><li>图像水平上的生成被研究得很好，但是视频上的此前却比较少；图像生成的成果如果直接放在视频上的话，效果不太妙，因为帧与帧之间缺乏连贯性。所以是需要一些temporal上的改进的</li></ol><h2 id="what">What：</h2><ol type="1"><li>利用GAN和一些时间-空间对抗目标（spatio-temporal adverbial objective），来实现video to video的生成。</li><li>用不同类型的输入来生成新的照片写实风格的视频，效果很好。</li><li>是一个全新定义的vid2vid任务，主要新点在于：输入的vid并不是完整的视频帧，而是一些可以操控的语义信息，例如segmentation masks, sketches, and poses</li></ol><p>读前疑问：</p><ol type="1"><li>在此之前没有比较好的vid2vid，这篇论文是在什么条件下实现了很好的vid2vid效果呢，比如其他方面的技术革新？我觉得主要是利用了gan，一个图像鉴别器+一个视频鉴别器相配合，取得很好的生成效果。除此之外我觉得optical flow用在这里也很好，效率高而且生成效果连贯（但是不知道新不新）；另外特征嵌入方法用在这里也很好，实现了根据语义信息来生成新视频，而且可以是多模态的视频</li><li>摘要里强调的时间-空间对抗目标（spatio-temporal adverbial objective）到底是什么？我感觉正文里好像没有再特别强调时间-空间这一对目标了……根据我自己的理解的话，主要就是那一对鉴别器：时间上--视频鉴别器鉴别在时序上的动态是否真实自然，空间上--图像鉴别器鉴别一张图像在空间上是否真实自然。</li></ol><h2 id="how">How：</h2><h3 id="定义vid2vid任务">定义vid2vid任务</h3><ol type="1"><li><p>定义输入的语义信息序列为<span class="math inline">\(s\)</span>，对应的真实视频序列为<span class="math inline">\(x\)</span>，模型生成的视频序列为<span class="math inline">\(\tilde x\)</span>，则模型的目标是在给定<span class="math inline">\(s\)</span>的条件下，让<span class="math inline">\(\tilde x\)</span>的条件分布拟合<span class="math inline">\(x\)</span>的条件分布</p></li><li><figure><img src="https://s2.loli.net/2022/09/01/VfJE42QpgUB5zxt.png" alt="image-20220524143313609" /><figcaption>image-20220524143313609</figcaption></figure><p>D是discriminator，G是generator。整个任务就变成了一个最大最小优化问题，论文主要通过设计网络和时空优化目标来解决这个问题。</p></li><li><p>为了简化问题，做了一个Markov假设：当前第t帧生成的视频<span class="math inline">\(\tilde x_t\)</span>，由且仅由第t帧输入<span class="math inline">\(s_t\)</span> + 前L帧输入<span class="math inline">\(s_{t-L}^{t-1}\)</span> + 前L帧生成的视频<span class="math inline">\(\tilde x_{t-L}^{t-1}\)</span>这三个因素决定。<img src="https://s2.loli.net/2022/09/01/Q9MPRD5otda3mAq.png" alt="image-20220524144030781" /></p><p>实验里，L取了个不大不小的2.建立了一个神经网络F，递归地逐帧生成视频。</p></li></ol><h3 id="网络架构">网络架构</h3><ol type="1"><li><p>网络F定义如下：</p><figure><img src="https://s2.loli.net/2022/09/01/5OA4ptSUjI9Mn7J.png" alt="image-20220524144722968" /><figcaption>image-20220524144722968</figcaption></figure><p>给定<span class="math inline">\((\tilde x_{t-L}^{t-1}, s_{t}^{t-1})\)</span>作为输入。对于与上一帧图像有关联的像素点，网络会利用optical flow来warp（扭曲？）上一帧像素点，得到这一帧新的像素点。对应等式的前半部分。还有一些像素是上一帧图像里没有的，这时候就需要生成来填充。对应等式的后半部分。具体来说：</p><ul><li>用一个optical flow预测网络W来估计从上一帧到这一帧的optical flow <span class="math inline">\(\tilde w_{t-1}\)</span>.</li><li>用一个生成器H来生成需要填充的像素<span class="math inline">\(\tilde h_t\)</span>.</li><li>用一个mask预测网络M来生成mask <span class="math inline">\(\tilde m_t\)</span>. 这个mask不是非0即1的，而是包含了0-1之间的连续值。这样做是为了更好地融合W和H生成的结果。比如说，在 zoom in 的情况下，一个物体逐渐靠近，那么它会逐帧放大。如果仅仅利用optical flow的扭曲结果，那么这个物体就会变得模糊。因此，还需要生成器来填充一些细节。有了soft mask，warp的像素和生成的像素就可以融合。</li></ul></li><li><p>用了coarse-to-fine的方法来生成高分辨率的视频</p></li><li><p>用了2个不同的discriminator来减轻gan训练中的mode collapse问题（模式倒塌，即生成的结果是很逼真，但是多样性不足）。</p><ol type="1"><li>条件图像鉴别器 <span class="math inline">\(D_I\)</span>，顾名思义，鉴别每一帧图像是否真实的</li><li>条件视频鉴别器 <span class="math inline">\(D_V\)</span>，鉴别视频在时序上的动态是否真实自然。给定optical flow，鉴别K个连续的帧</li></ol></li></ol><h3 id="losses">losses</h3><p><span class="math display">\[\mathop{min}\limits_{F} ( \mathop{max}\limits_{D_I}\mathcal{L}_I (F, D_I ) + \mathop{max}\limits_{D_V}  \mathcal{L}_V (F, D_V )) + λ_W L_W (F ),\]</span></p><ol type="1"><li><span class="math inline">\(\mathcal{L}_I\)</span> 是条件图像鉴别器 <span class="math inline">\(D_I\)</span>的gan loss：<img src="https://s2.loli.net/2022/09/01/J1mVkCnzWYZiaR9.png" alt="image-20220530194307049" />，其中，<span class="math inline">\(\phi_I\)</span> 就是从第1～T帧中随机取1帧的操作</li><li><span class="math inline">\(\mathcal{L}_V\)</span>是条件视频鉴别器 <span class="math inline">\(D_V\)</span>的 gan loss：<img src="https://s2.loli.net/2022/09/01/rq6yiaRSHUnEYzg.png" alt="image-20220530194419594" />，和图像的如出一辙，<span class="math inline">\(\phi_V\)</span> 就是从第1～T帧中随机取连续K帧的操作</li><li><span class="math inline">\(L_W\)</span> 是flow estimation loss：<img src="https://s2.loli.net/2022/09/01/AuZf1zlcihE3KsU.png" alt="image-20220530194534485" />，包括两部分，1. 真实flow和估计flow的端点误差 2. 把前一帧扭曲到后一帧的warp loss</li></ol><h3 id="前景-背景先验">前景-背景先验</h3><p>通过语义分割，给模型提供了一个前景、背景的先验信息，同时把补洞网络拆分成了两个：</p><ol type="1"><li>背景补洞网络：这个很容易，因为整个大背景其实可以由optical flow很准确地预测出来，补洞网络只需要补一点点从画面外面刚进来的部分</li><li>前景补洞网络：这个比较难，因为前景物品往往占比不大，但是又动作幅度很大，前景补洞网络需要从零开始生成很多东西</li></ol><p>通过用户实验，证明大部分人觉得有这个前景-背景先验之后，效果更好。</p><h3 id="多模态生成">多模态生成</h3><p>网络F是一个单模态映射函数，这意味着输入一个视频，它也只能生成一个视频。那怎样让它根据同一个输入视频，输出多个不同的视频呢？这里采用了特征嵌入方法（feature embedding scheme）。</p><ol type="1"><li>输入源视频的同时，也输入instance级别的语义分割mask <span class="math inline">\(s_t\)</span></li><li>训练一个图像编码器E，它把每一帧真实图像<span class="math inline">\(x_t\)</span>编码成d维的特征map（论文中d取3）。然后用一个instance-wise的平均池化，来让同一个物体的所有像素分享共同的特征向量。得到的这个instance-wise平均池化后的图像特征map称为<span class="math inline">\(z_t\)</span></li><li>这个<span class="math inline">\(z_t\)</span>，加上mask <span class="math inline">\(s_t\)</span>，再被输入到网络F</li><li>以上是训练的过程。训练结束后，对每个类型的对象的特征向量的高斯分布拟合一个混合高斯分布。</li><li>测试的时候，利用每个物体所对应的类型的分布，可以sample特征向量，进而生成新视频了。给出不同的特征向量，F就能生成不同的视频了</li></ol><figure><img src="https://tcwang0509.github.io/vid2vid/paper_gifs/cityscapes_change_styles.gif" alt="img" /><figcaption>img</figcaption></figure><h3 id="实现的细节">实现的细节</h3><ol type="1"><li>coarse-to-fine的训练：512 × 256, 1024 × 512, and 2048 × 1024 resolutions，这三种分辨率，先从低的开始训练起，逐渐增加到高的。</li><li>mask预测网络M和flow预测网络W共享权重，只有输出层不一样。</li><li>图像鉴别器是一个多尺度PatchGAN</li><li>除了空间上的多尺度，视频鉴别器还会考虑多个帧率，即时间上的多尺度，确保短期和长期都能consistent</li><li>2k分辨率，8个v100 gpus，训练10天……</li><li>datasets：<ol type="1"><li>Cityscapes：训练DeepLabV3网络来获得所有的语义分割mask，用FlowNet2的结果作为optical flow的ground truth，用Mask R- CNN的结果作为instance- level 语义mask的gt</li><li>Apolloscape</li><li>Face video dataset：FaceForensics dataset里的真实视频</li><li>Dance video dataset：从YouTube下载的跳舞视频💃</li></ol></li></ol><h3 id="结果">结果</h3><p>图像生成模型pix2pixHD和视频风格迁移模型COVST作为baseline。FID（论文定义的视频变种）跟baseline比略好，但human preference score（论文定义的由人来打分，评估哪个视频更真实）高很多。</p><p>通过更改语义mask，可以控制生成视频中的物体种类；通过更改特征向量，可以控制生成视频中的物体外观；在未来视频预测上也有很好的性能。</p><h3 id="局限性">局限性</h3><ol type="1"><li>缺少一个物体内部的具体信息，生成转弯的车的时候效果比较差。论文提出或许可以通过增加3D信息作为输入来解决</li><li>在整个视频中，一个物体的外观有时候还是前后不一致</li><li>偶然情况下，一辆车的颜色可能会逐渐发生变化</li><li>当通过更改语义信息来操纵视频生成的时候，例如把树改成房子，偶然会出现一部分变成房子，另一部分树变了形的情况（？是这个意思吗）。这或许可以通过采用更粗糙的语义标签的方式解决，因为这样模型就不会对标签形状过于敏感</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;论文地址：https://tcwang0509.github.io/vid2vid/paper_vid2vid.pdf&lt;/p&gt;
-&lt;p&gt;作者：&lt;a href=&quot;https://tcwang0509.github.io/&quot;&gt;Ting-Chun Wang&lt;/a&gt;, &lt;a href=&quot;http://mingyuliu.net/&quot;&gt;Ming-Yu Liu&lt;/a&gt;, &lt;a href=&quot;http://www.cs.cmu.edu/~junyanz/&quot;&gt;Jun-Yan Zhu&lt;/a&gt;, &lt;a href=&quot;https://liuguilin1225.github.io/&quot;&gt;Guilin Liu&lt;/a&gt;, Andrew Tao, &lt;a href=&quot;http://jankautz.com/&quot;&gt;Jan Kautz&lt;/a&gt;, &lt;a href=&quot;http://catanzaro.name/&quot;&gt;Bryan Catanzaro&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;发表： NeurIPS 2018&lt;/p&gt;
-&lt;p&gt;Project：https://tcwang0509.github.io/vid2vid/&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="Video Generation" scheme="https://jyzhu.top/blog/tags/Video-Generation/"/>
     
   </entry>
   

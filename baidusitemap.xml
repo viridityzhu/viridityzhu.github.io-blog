@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jyzhu.top/blog/blog/To-Midnight/</loc>
+    <lastmod>2023-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/blog/blog/Back-to-Homeland/</loc>
+    <lastmod>2023-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/blog/blog/about/index.html</loc>
+    <lastmod>2023-07-16</lastmod>
+  </url>
+  <url>
     <loc>https://jyzhu.top/blog/blog/ChatGPT-Applications-to-be-explored/</loc>
     <lastmod>2023-07-16</lastmod>
   </url>
@@ -22,10 +34,6 @@
   </url>
   <url>
     <loc>https://jyzhu.top/blog/blog/homogeneous-coordinates/</loc>
-    <lastmod>2023-01-26</lastmod>
-  </url>
-  <url>
-    <loc>https://jyzhu.top/blog/blog/about/index.html</loc>
     <lastmod>2023-01-26</lastmod>
   </url>
   <url>
