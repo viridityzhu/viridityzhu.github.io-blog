@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Tianke Youke</title>
   
-  <subtitle>A Base for Secreting and Running at Night</subtitle>
+  <subtitle>A sanctuary for secreting and rushing at night.</subtitle>
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2023-07-16T18:01:58.015Z</updated>
+  <updated>2023-07-21T11:29:22.901Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Reading Handy: Towards a high fidelity 3D hand shape and appearance model</title>
+    <link href="https://jyzhu.top/blog/Reading-Handy-Towards-a-high-fidelity-3D-hand-shape-and-appearance-model/"/>
+    <id>https://jyzhu.top/blog/Reading-Handy-Towards-a-high-fidelity-3D-hand-shape-and-appearance-model/</id>
+    <published>2023-07-17T11:32:07.000Z</published>
+    <updated>2023-07-21T11:29:22.901Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：https://rolpotamias.github.io/Handy/</p><p>作者：Rolandos Alexandros Potamias, Stylianos Ploumpis, Stylianos Moschoglou, Vasileios Triantafyllou, Stefanos Zafeiriou. From Imperial College London and Cosmos.</p><p>发表： CVPR23</p><p>链接： <a href="https://github.com/rolpotamias/handy" class="uri">https://github.com/rolpotamias/handy</a></p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p></blockquote><p>Q：我感觉这个任务听起来还挺直观的，就是用GAN去训练外观，定义一些更多vertices的mesh template，用超级大量的样本去训练堆效果嘛？hand model的定义会有什么新意吗？我倒是想不出来。</p><p>A：确实很直观，hand model的定义没什么太大区别。贡献点主要在于：1. 很大很好很variant的新数据集，造成了很好的Handy 2. 用StyleGAN来学texture，而不是传统的PCA，得到的texture更高频细节，更好。</p><h2 id="why">Why：</h2><ol type="1"><li>VR AR发展，对人手的建模、追踪和重建的研究变得流行，因为手是一个重要的显示人的行为的东西</li><li>大部分工作基于MANO，只有很粗糙的low polygon count，而且只基于31个样本构建，distribution不够宽</li><li>大部分工作都忽略了材质的构建</li></ol><h2 id="what">What：</h2><ol type="1"><li>提出一个large-scale的hand model，包含了形状和外观，用超过1200个人类样本训练，样本有large diversity</li><li>构建Synthetic dataset，训练一个hand pose estimation网络，从单张图像中重建手</li><li>提出一个基于GAN的有高频细节的手的外观+形状重建方法，即使是in-the-wild的单视角图像作为输入</li></ol><p>读前疑问：</p><ol type="1"><li>看上去作者是用NeRF做了一个high fidelity的hand model。我不太清楚技术细节如何实现，尤其是nerf如何跟parametric model结合，如果训练一个nerf layer，让它可以根据单张输入图像infer一个新手。不知道我哪里来的误解，总之不是用的nerf诶……</li><li>fig 1 看上去效果有点假……似乎是皮肤反光率的问题，用的什么lighting representation呢？没什么representation，纯粹用PCA去掉了阴影成分</li><li>居然连皱纹、血管、指甲油也能出来，确实是高频细节了。有针对这些东西做特别的优化吗？还是全是那个style-based GAN的功劳，或者大样本量的功劳呢？真是大力出奇迹呀。还真就是GAN的功劳……？</li></ol><h2 id="how">How：</h2><h3 id="收集large-scale数据集">1. 收集large-scale数据集</h3><p>raw scan：3000 vertices meshes。1208个人，包括关于他们的meta data，比如性别，年龄，身高，种族等。这些人的diversity比较大</p><h3 id="形状重建">2. 形状重建</h3><ol type="1"><li>对齐3D scans 和 mesh template<ol type="1"><li>用了两组template，一个是低分辨率的MANO，它可以直接用进SMPL人体模型中，有778个顶点；一个是高分辨的template，有8407个顶点</li><li>获得稠密的correspondence的方法是：<ol type="1"><li>从多视角渲染这些raw scans，用MediaPipe来检测2D关键点</li><li>用linear triangulation来把2D关键点转换到3D；利用手指骨架到表面尖端的投影来检测指尖。</li><li>用3D关键点来把template和3D scans的表面对齐</li><li>用Non-rigid Iterative Closest Point algorithm (NICP)来registration，寻找稠密的顶点对应关系</li></ol></li></ol></li><li>转换成规范的张开手掌的姿势<ol type="1"><li>用PCA构建一个手部形状模型。</li><li>公式和MANO几乎一样，<span class="math inline">\(\beta\)</span> <span class="math inline">\(\theta\)</span> 两个参数，分别是形状和姿势参数。</li></ol></li></ol><h3 id="高分辨率外观模型">3. 高分辨率外观模型</h3><ol type="1"><li>叫一个图像学艺术家（😳）设计了一个UV template，把scans给unwrap成那样了</li><li>对UV textures进行预处理，去掉阴影和光照：用PCA来识别描述阴影的因素，然后把这些因素去掉。（PCA居然这么好用？！）</li><li>用一个图像处理步骤，将手部纹理映射到更自然的颜色，包括增加亮度，伽玛校正，以及调整色调。</li><li>训练过程：不像其他方法那样直接把外观空间映射到一个低频PCA域，而是用GAN来建模材质。学习率较小，0.001；一个正则权重50也很有效。（啊？这个GAN就这么一句带过吗？直接用的StyleGANv3？）</li></ol><h3 id="实验">实验</h3><ol type="1"><li>和MANO比hand model：<ol type="1"><li>更紧致，5个主成分表现90% variance，mano需要9个才行</li><li>泛化到数据集外的手的能力更强</li><li>特异性误差（specificity error）？衡量生成的手和ground truth的误差</li></ol></li><li>重建小孩的手，效果更好</li><li>从单张图像进行3D重建：<ol type="1"><li>生成数据集：用自己训的GAN模型生成30000张图像，为了更真实，渲染的手跟ShapeNet中的物体有交互，以及是和用SMPL表示的人放在一起的</li><li>模型直接参考3，14，16；加了一个预测材质参数的分支</li><li>loss：L2 between estimated and gt shape parameter， pose parameter，and 3D vertices； L1 between estimated and gt UV map；L1 between estimated and gt 2D image；LPIPS loss on two images</li><li>另外设计了in-the-wild数据集，用预训练的模型预测handy 姿势、形状和材质参数，然后只优化材质参数w来拟合材质。</li><li>优化函数包括L1 and LPIPS loss on two images，以及一个对w的L2正则。得到了改进的材质参数w‘之后，finetune回归网络。</li><li>为了定量评估所提出方法的纹理重建，我们向网络提供数据中使用的扫描设备的图像。gt UV map用的是之前registration后得到的。（我不理解诶，这样真的能跟HTML公平比较吗？一方面你的handy就是从这些数据中来的，当然能对in-distribution的东西拟合得更好啊？另一方面HTML生成的UV map和你的定义是一样的吗？这个gt UV map对它来说有用吗？）</li><li>结论是：handy+GAN能得到高频细节，甚至皱纹、戒指、纹身、指甲油、白癜风之类的；handy+PCA会过渡平滑，甚至对肤色的重建失败；HTML更不行。</li></ol></li><li>Test on FreiHand 刷新了指标，7.8 MPVPE and MPJPE……</li><li>从点云重建形状和姿势。降维打击了MANO和LISA，即使用Hand+MANO+10个PCA Components，也比其他方法好很多……</li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;论文地址：https://rolpotamias.github.io/Handy/&lt;/p&gt;
+&lt;p&gt;作者：Rolandos Alexandros Potamias, Stylianos Ploumpis, Stylianos Moschoglou, Vasileios Triantafyllou, Stefanos Zafeiriou. From Imperial College London and Cosmos.&lt;/p&gt;
+&lt;p&gt;发表： CVPR23&lt;/p&gt;
+&lt;p&gt;链接： &lt;a href=&quot;https://github.com/rolpotamias/handy&quot; class=&quot;uri&quot;&gt;https://github.com/rolpotamias/handy&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="3D Computer Vision" scheme="https://jyzhu.top/blog/tags/3D-Computer-Vision/"/>
+    
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
+    
+    <category term="Hand" scheme="https://jyzhu.top/blog/tags/Hand/"/>
+    
+  </entry>
   
   <entry>
     <title>ChatGPT Applications to be explored</title>
@@ -557,32 +585,6 @@ P=K[R\ \ \ t]
     
     <category term="poems" scheme="https://jyzhu.top/blog/categories/poems/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Reading NeuMan: Neural Human Radiance Field from a Single Video</title>
-    <link href="https://jyzhu.top/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/"/>
-    <id>https://jyzhu.top/blog/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/</id>
-    <published>2022-08-24T04:25:25.000Z</published>
-    <updated>2022-09-01T04:57:08.650Z</updated>
-    
-    <content type="html"><![CDATA[<p>论文地址：https://arxiv.org/abs/2203.12575</p><p>作者：Jiang, Wei and Yi, Kwang Moo and Samei, Golnoosh and Tuzel, Oncel and Ranjan, Anurag</p><p>发表： ECCV22</p><p>开源代码： https://github.com/apple/ml-neuman</p><h2 id="why">Why：</h2><ol type="1"><li><p>人体的渲染和新姿势生成在增强现实的应用中很重要</p></li><li><p>NeRF的出现让新视角生成任务取得很大进步</p></li><li><p>但是现有工作都没有实现：根据单段wild视频，生成新的人物和新的场景</p><figure><img src="https://s2.loli.net/2022/08/24/NdDrEhojmBLCJz9.png" alt="image-20220824123146868" /><figcaption>image-20220824123146868</figcaption></figure></li></ol><h2 id="what">What：</h2><p>读前疑问：</p><ol type="1"><li>NeRF和人体SMPL模型是怎么有机统一的🤔</li></ol><h2 id="how">How：</h2><ol type="1"><li><p>输入是一段wild视频，moving camera的。用现存方法估计人体姿势、人体形状、人体mask（Mask-RCNN）、相机pose、sparse scene model、depth maps</p></li><li><p>然后训练两个 NeRF 模型，一个用于人体，一个用于由 Mask-RCNN 估计的分割mask引导的背景。 此外，通过将来自多视图重建和单目深度回归的深度估计融合在一起来规范场景 NeRF 模型</p></li><li><p>关于NeRF：(参考：<a href="https://zhuanlan.zhihu.com/p/360365941">zhihu</a>）</p><ol type="1"><li><p>NeRF是用神经辐射场建模一个场景，好处是可以生成新视角的图像。针对一个静态场景，需要提供大量相机参数已知的图片。基于这些图片训练好的神经网络，即可以从任意角度渲染出图片结果了。</p></li><li><p>它用MLP，把一个3d场景隐式地编码进神经网络里。输入为3d空间中一个点的坐标<span class="math inline">\(\bold x = (x,y,z)\)</span>和相机视角 <span class="math inline">\(\bold d = (\theta, \phi)\)</span>，输出为该点对应的体素的密度opacity，以及颜色<span class="math inline">\(\bold c = (r,g,b)\)</span>。公式就是 <span class="math display">\[f(\bold{x},\bold{v})=(\bold c, \sigma)\]</span></p></li><li><p>在具体的实现中， x 首先输入到MLP网络中，并输出 σ 和中间特征，中间特征和 d 再输入到额外的全连接层中并预测颜色。因此，体素密度只和空间位置有关，而颜色则与空间位置以及观察的视角都有关系。基于view dependent 的颜色预测，能够得到不同视角下不同的光照效果。</p></li><li><p>NeRF 函数得到的是一个3D空间点的颜色和密度信息，但当用一个相机去对这个场景成像时，所得到的2D 图像上的一个像素实际上对应了一条从相机出发的射线上的所有连续空间点。后续就有各种各样高效的方式来进行可微渲染了，本质上都是从这条射线上采样，获得平均的颜色信息。</p></li></ol></li></ol><h3 id="人体模型nerfsmpl">人体模型：NeRF+SMPL</h3><p>我主要关注的就是人体模型这部分了。总体来说，做法就是：</p><p>首先生成人体NeRF模型，然后用ROMP生成逐帧的人体SMPL模型，然后定义一个canonical的人体模型（主要是去掉姿势这个变量，变成大字型人体），根据像素点在SMPL模型上对应的位置，再对应到canonical模型上，学到人体的外貌。（其实训练中NeRF和SMPL模型是一起学的，没有分得那么开的先后顺序。）</p><figure><img src="https://s2.loli.net/2022/08/24/JSycDH34UlMBsEW.png" alt="image-20220824180150642" /><figcaption>image-20220824180150642</figcaption></figure><p>具体来说：</p><ol type="1"><li><p>对于某一帧图像，用ROMP估计人体的SMPL模型，但采取了一些改良：</p><ol type="1"><li>利用densepose估计人体的silhouette，以及MMPose估计人体的2D joints；根据这些结果优化SMPL参数</li></ol></li><li><p>把刚刚得到的SMPL模型warp成一个canonical的大字型人体模型，这个warp变换称为<span class="math inline">\(\mathcal T\)</span></p></li><li><p>怎么把图像中的像素点对应到canonical的大字型人体模型上呢？</p><ol type="1"><li><p>首先生成人体NeRF模型</p></li><li><p>对于空间中的每个点<span class="math inline">\(\bold x_f=\bold r_f(t)\)</span> （这里的f是第f帧图像），它都可以由一条射线<span class="math inline">\(\bold r\)</span>上对应的像素点渲染而来；那么对这个点直接应用前面的变换<span class="math inline">\(\mathcal{T}\)</span>，就得到它在canonical空间中对应的点了，<span class="math inline">\(\bold x&#39;_f = \mathcal{T}_{\theta_f}(\bold x_f)\)</span></p></li><li><p>但是因为SMPL的估计不是很准确，这个变换<span class="math inline">\(\mathcal{T}\)</span>也不是很准确，所以这里提出来，通过在训练中同时优化SMPL模型 <span class="math inline">\(\theta_f\)</span>和人体NeRF模型的方式，可以提升效果。</p></li><li><p>还有，还加了一个MLP改错网络<span class="math inline">\(\mathcal{E}\)</span>改正warping的误差。最终结果就是： <span class="math display">\[\bold {\tilde x&#39;_f} = \mathcal{T}_{\theta_f}(\bold x_f) + \mathcal{E}(\bold x_f, f)\]</span></p></li><li><p>此时相机视角也需要校正：对于射线ray上的第i个样本点， <span class="math display">\[\bold d(t_i)&#39;_f = \bold {\hat x}&#39;_f(t_i) - \bold {\hat x}&#39;_f(t_{i-1})\]</span></p></li></ol></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;论文地址：https://arxiv.org/abs/2203.12575&lt;/p&gt;
-&lt;p&gt;作者：Jiang, Wei and Yi, Kwang Moo and Samei, Golnoosh and Tuzel, Oncel and Ranjan, Anurag&lt;/p&gt;
-&lt;p&gt;发表： ECCV22&lt;/p&gt;
-&lt;p&gt;开源代码： https://github.com/apple/ml-neuman&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="3D Generation" scheme="https://jyzhu.top/blog/tags/3D-Generation/"/>
     
   </entry>
   

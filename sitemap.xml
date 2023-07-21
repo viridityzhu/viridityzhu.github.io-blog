@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jyzhu.top/blog/Reading-Handy-Towards-a-high-fidelity-3D-hand-shape-and-appearance-model/</loc>
+    
+    <lastmod>2023-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jyzhu.top/blog/To-Midnight/</loc>
     
     <lastmod>2023-07-16</lastmod>
@@ -1723,7 +1732,7 @@
 
   <url>
     <loc>https://jyzhu.top/blog</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1731,560 +1740,567 @@
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Computer-Vision/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Video/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/%E4%B8%89%E5%97%A8/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/philosophy/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/literature/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Django/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Web/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Python/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Literature/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/3D-Computer-Vision/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/LLM/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Typora/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Theme/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Evangelion/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Blog/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Hexo/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Jekyll/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Deep-Learning/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/3D-Reconstruction/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Paper-Reading/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/NeRF/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Docker/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Code/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/MacOS/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/grandpa/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Pytorch/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/3DCV/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/3D-Generation/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Video-Generation/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Arduino/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Ghost-In-The-Shell/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/SQL/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Notebook/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Mac/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Pytorch3D/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/TensorFlow/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Neural-Network/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Scala/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Markdown/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/ERP/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Management/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Anki/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Charles/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/tcpdump/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/%E6%8A%93%E5%8C%85/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/family/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Data-Science/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Machine-Learning/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/R/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/%E9%9A%BE%E8%A8%80%E4%BA%8C%E9%A6%96/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Git/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/%E6%96%87%E5%AD%A6/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/SEO/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/iTerm/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/%E3%80%8A%E4%B8%8D%E8%83%BD%E6%89%BF%E5%8F%97%E7%9A%84%E7%94%9F%E5%91%BD%E4%B9%8B%E8%BD%BB%E3%80%8B/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/%E4%B9%A6%E8%AF%84/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/VPS/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Vultr/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/WordPress/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Mesh/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/3D/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Pandas/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Shodan/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/HTML/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Nginx/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Website/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/https/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Sublime-Text-3/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/WordPress-Plugin/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/WordPress-Theme/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Crawler/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Scrapy/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/ZhihuCrawl/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Paper/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Hadoop/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/MapReduce/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Data-Structure/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Self-supervised/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/C/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/tags/Java/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jyzhu.top/blog/tags/Hand/</loc>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -2293,21 +2309,21 @@
   
   <url>
     <loc>https://jyzhu.top/blog/categories/Computer-Notes/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/categories/thoughts/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jyzhu.top/blog/categories/poems/</loc>
-    <lastmod>2023-07-16</lastmod>
+    <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
