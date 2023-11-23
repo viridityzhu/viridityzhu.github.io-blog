@@ -32,7 +32,7 @@
 <meta property="og:description" content="This is part of my journey of learning NeRF. 1. Introduction to NeRF What is NeRF  Reference: Original NeRF paper; an online ariticle">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-12T09:33:39.000Z">
-<meta property="article:modified_time" content="2023-01-12T10:14:21.514Z">
+<meta property="article:modified_time" content="2023-07-28T10:41:26.239Z">
 <meta property="article:author" content="Jiayin Zhu">
 <meta property="article:tag" content="Computer Vision">
 <meta property="article:tag" content="NeRF">
@@ -100,8 +100,8 @@
         <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
         <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">81</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">182</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">82</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">183</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -158,7 +158,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction-to-nerf"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction to NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-nerf"><span class="nav-number">1.1.</span> <span class="nav-text">What is NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sdf---signed-distance-function"><span class="nav-number">1.1.1.</span> <span class="nav-text">SDF - Signed Distance Function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#features-of-nerf"><span class="nav-number">1.2.</span> <span class="nav-text">Features of NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#problem-formulation"><span class="nav-number">1.3.</span> <span class="nav-text">Problem Formulation</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction-to-nerf"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction to NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-nerf"><span class="nav-number">1.1.</span> <span class="nav-text">What is NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#implementation"><span class="nav-number">1.1.1.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mlp-structure"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">MLP Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#novel-view-synthesis"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Novel view synthesis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#depth-regularization"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Depth regularization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#positional-encoding"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">Positional encoding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sdf---signed-distance-function"><span class="nav-number">1.1.2.</span> <span class="nav-text">SDF - Signed Distance Function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#features-of-nerf"><span class="nav-number">1.2.</span> <span class="nav-text">Features of NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#problem-formulation"><span class="nav-number">1.3.</span> <span class="nav-text">Problem Formulation</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -171,7 +171,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -182,7 +182,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -309,14 +309,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">字数:</span>
-      <span>1.2k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -340,6 +340,43 @@
 <p>那么辐射和颜色是什么关系呢？简单讲就是，光就是电磁辐射，或者说是振荡的电磁场，光又有波长和频率，<span class="math inline">\(波长\times 频率=光速\)</span>，光的颜色是由频率决定的，大多数光是不可见的，人眼可见的光谱称为可见光谱，对应的频率就是我们认为的颜色：</p>
 <p><embed src="https://pic1.zhimg.com/80/v2-381aa740f21b7eba1f896fd98dcc1308_1440w.webp" /></p>
 <p><embed src="https://pic1.zhimg.com/80/v2-51bd3710b9f891c4c44fde12545e4fd4_1440w.webp" /></p>
+<h3 id="implementation">Implementation</h3>
+<h4 id="mlp-structure">MLP Structure</h4>
+<ol type="1">
+<li>The net is constrained to be multi-view consistent by restricting the predicting of <span class="math inline">\(\sigma\)</span> to be independent of viewing direction</li>
+<li>While the color <span class="math inline">\(\bold c\)</span> depends on both viewing direction and in-scene coordinate.</li>
+</ol>
+<p>How is this implemented?</p>
+<p>The MLP is designed to be two-stages:</p>
+<ol type="1">
+<li><span class="math inline">\(F_{\theta_1}(\bold x) = (\sigma, \text{&lt;256 dim features&gt;})\)</span></li>
+<li><span class="math inline">\(F_{\theta_2}(\text{&lt;256 dim features&gt;}, \bold d)=\bold c\)</span></li>
+</ol>
+<h4 id="novel-view-synthesis">Novel view synthesis</h4>
+<p>For each pixel, sample points along the camera ray through this pixel;</p>
+<p>For each sampling point, compute local color and density;</p>
+<p>Use volume rendering, an integral along the camera ray through pixels is used: <span class="math display">\[
+C(\bold r)=\int_{t_1}^{t_2} T(t)\cdot \sigma (\bold r(t))\cdot \bold c(\bold r(t),\bold d)\cdot dt \\
+T(t)=\exp (-\int_{t_1}^t \sigma(\bold r(u))\cdot du)
+\]</span> We can get the color C of the pixel.</p>
+<p>This can be implemented by sampling approaches.</p>
+<p>Now everything can be approximated: <span class="math display">\[
+\hat C(\bold r)=\sum_{i=1}^N \alpha_iT_i\bold c_i \\
+T_i=\exp (-\sum_{j=1}^{i-1}\sigma_i\delta_j) \\
+\alpha_i=1-\exp(\sigma_i\delta_i)\\
+\delta_i=\text{distance between sampling point i and i+1}
+\]</span></p>
+<ul>
+<li>Loss is just L2 on color of the pixels:</li>
+</ul>
+<p><span class="math display">\[
+L=\sum_{r\in R}\| \hat C(\bold r)-C_{gt}(\bold r)\|^2_2
+\]</span></p>
+<h4 id="depth-regularization">Depth regularization</h4>
+<p>Similar to the above formulas, expected depth can also be calculated, and can be used to regularize the depth smoothness.</p>
+<h4 id="positional-encoding">Positional encoding</h4>
+<p>It is required to greatly improve the fine detail results.</p>
+<p>There are many other positional encoding techs, including trainable parametric, integral, and hierarchical variants</p>
 <h3 id="sdf---signed-distance-function">SDF - Signed Distance Function</h3>
 <p>SDF是一种计算图形学中定义距离的函数。SDF定义了空间中的点到隐式曲面的距离，该点在曲面内外决定了其SDF的正负性。</p>
 <p>相较于其他像点云（point cloud）、体素（voxel）、面云（mesh）那样的经典3D模型表示方法，SDF有固定的数学方程，更关注物体的表面信息，具有可控的计算成本。</p>
@@ -508,13 +545,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="网站总字数">264k</span>
+    <span title="网站总字数">268k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="网站阅读时长">4:01</span>
+    <span title="网站阅读时长">4:03</span>
   </span>
 </div>
 

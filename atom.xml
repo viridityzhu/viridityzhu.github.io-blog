@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2023-07-21T11:41:56.456Z</updated>
+  <updated>2023-11-23T21:43:37.425Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Reading Neural Capture of Animatable 3D Human from Monocular Video</title>
+    <link href="https://jyzhu.top/blog/Reading-Neural-Capture-of-Animatable-3D-Human-from-Monocular-Video/"/>
+    <id>https://jyzhu.top/blog/Reading-Neural-Capture-of-Animatable-3D-Human-from-Monocular-Video/</id>
+    <published>2023-11-23T20:46:40.000Z</published>
+    <updated>2023-11-23T21:43:37.425Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：</p><p>作者：Gusi Te, Xiu Li, Xiao Li, Jinglu Wang, Wei Hu, and Yan Lu</p><p>发表： ECCV 2022</p><p>链接： <a href="https://arxiv.org/abs/2208.08728" class="uri">https://arxiv.org/abs/2208.08728</a></p><hr /><h2 id="why">Why：</h2><ol type="1"><li>之前的3D人体重建工作一般需要多视角视频，或者额外的3D几何信息。这篇工作以单视角视频为输入</li><li>之前的工作建模出来的3D人体很难泛化到新的pose</li><li>之前的工作都只能解决一部分的问题：基于参数化人体模型的方法对appearance的表示精度有限；基于NeRF的方法的appearance效果好，但是要么只关注于NeRF场本身的构建，要么需要精确的3D mesh作为先验。</li></ol><h2 id="what">What：</h2><ol type="1"><li>提出一个从单视角视频重建animatable的3D人体的方法</li><li>表示方法是把 dynamic NeRF 和一个 human mesh （SMPL）相结合。这个 dynamic NeRF 的输入是一些嵌入到mesh 顶点的局部信息，这样，当需要表现一个人不同的姿势的时候，本质上是对这个 canonical space 的静态NeRF进行deformation。<strong>这里的关键问题是如何设计这个局部信息，来让查询observation space中的任意一点的时候，都能够良好地deform到canonical space，从而找到静态NeRF里正确的点</strong></li><li>在优化过程中，首先借用别的工具初始化一个mesh pose，然后逐帧地同时 finetune mesh pose 和 NeRF</li></ol><h2 id="how">How：</h2><h3 id="query-embedding-for-nerf">Query embedding for NeRF</h3><figure><img src="https://s2.loli.net/2023/11/24/IFWcdEZDfquSVNJ.png" alt="image-20231124051120340" /><figcaption>image-20231124051120340</figcaption></figure><p>精髓就在图里了：</p><ol type="1"><li><p>人体的表现形式是我们熟悉的：首先有一个由pose参数<span class="math inline">\(\theta\)</span>驱动的SMPL mesh，以及一个mesh-guided NeRF，后者的输入是对应query ray上的3D points的embedding</p></li><li><p>Query embedding的具体构成：</p><ol type="1"><li>最直观的 Latent Code：存储在每一个mesh顶点上，表示的是appearance信息。对于一个query point，会找到mesh顶点中K nearest neighbors所对应的latent codes</li><li>被称为 Deformation Guidance：其实是在<strong>canonical space</strong>中，刚刚用到的那些KNN顶点的坐标（用inverse LBS得到），以及query point相对于mesh表面投影点的方向。这个信息能够指导deformation field，所以叫guidance</li><li>另一方面还有 Deformation Priors：是在<strong>observation space</strong>中，query point相对于刚刚用到的那些KNN顶点的距离。文中说这是用来防止deformation field落入local minima的，所以叫做priors</li></ol></li><li><figure><img src="https://s2.loli.net/2023/11/24/2d4HiJucZTotBxP.png" alt="image-20231124052407094" /><figcaption>image-20231124052407094</figcaption></figure><p>文中特意用上图强调了这里需要用到K近邻顶点，而不是单个最近的顶点。因为如果只用单个最近的顶点（图a），就不能提供不同的deformation pattern 的信息；而（b）里加上了K-NN distance之后，就能有这个deformation pattern信息了。（我有点疑惑什么是deformation pattern，就是这个表面的凹凸性吗？）</p></li></ol><h3 id="训练过程">训练过程</h3><ol type="1"><li>首先借用别的工具初始化一个mesh pose。但是这个pose不够精准，还需要finetune。文中提到这里直接是finetune per-frame pose parameter，而不用per-vertex offset，因为后者可能容易过拟合到local minima（？有点疑惑，我以为用pose parameter或许是有利于在后续用temporal consistency之类的，但是好像并没有用到；那pose param相比之下就是一个更不精准而已？）</li><li>训练时逐帧地同时 finetune mesh pose 和 NeRF。loss很直观：<ol type="1"><li>NeRF渲染图和原视频帧的L2 loss</li><li>正则 <span class="math inline">\(\|\theta-\theta^0\|^2_2\)</span>，是为了让每帧的pose finetune不至于太偏离初始估计</li></ol></li></ol><h3 id="实验">实验</h3><ol type="1"><li>训练要在v100上60小时；数据集用到People-Snapshot、DoubleFusion、ZJU-MoCap、Human3.6M；指标用PSNR和SSIM</li><li>在2022，没有什么能直接对比的其他工作，跟需要多视角视频输入的AniNeRF、底层架构很不同的A-NeRF、mesh-based 的方法VideoAvatar比了三下，比他们都好</li></ol><figure><img src="https://s2.loli.net/2023/11/24/r4V68kqj9HBdaxD.png" alt="image-20231124054314933" /><figcaption>image-20231124054314933</figcaption></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;论文地址：&lt;/p&gt;
+&lt;p&gt;作者：Gusi Te, Xiu Li, Xiao Li, Jinglu Wang, Wei Hu, and Yan Lu&lt;/p&gt;
+&lt;p&gt;发表： ECCV 2022&lt;/p&gt;
+&lt;p&gt;链接： &lt;a href=&quot;https://arxiv.org/abs/2208.08728&quot; class=&quot;uri&quot;&gt;https://arxiv.org/abs/2208.08728&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="3D Computer Vision" scheme="https://jyzhu.top/blog/tags/3D-Computer-Vision/"/>
+    
+    <category term="Human Reconstruction" scheme="https://jyzhu.top/blog/tags/Human-Reconstruction/"/>
+    
+  </entry>
   
   <entry>
     <title>Reading Handy: Towards a high fidelity 3D hand shape and appearance model</title>
@@ -275,9 +301,9 @@ P=K[R\ \ \ t]
     <link href="https://jyzhu.top/blog/Introduction-to-NeRF/"/>
     <id>https://jyzhu.top/blog/Introduction-to-NeRF/</id>
     <published>2023-01-12T09:33:39.000Z</published>
-    <updated>2023-01-12T10:14:21.514Z</updated>
+    <updated>2023-07-28T10:41:26.239Z</updated>
     
-    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h1 id="introduction-to-nerf">1. Introduction to NeRF</h1><h2 id="what-is-nerf">What is NeRF</h2><blockquote><p>Reference: Original NeRF paper; an online ariticle</p></blockquote><p>在已知视角下对场景进行一系列的捕获 (包括拍摄到的图像，以及每张图像对应的内外参)，合成新视角下的图像。</p><p>NeRF 想做这样一件事，不需要中间三维重建的过程，仅根据位姿内参和图像，直接合成新视角下的图像。为此 NeRF 引入了辐射场的概念，这在图形学中是非常重要的概念，在此我们给出渲染方程的定义：</p><p><embed src="https://pic1.zhimg.com/80/v2-1a80de23a422688b739f36828affb8ec_1440w.webp" /></p><p><embed src="https://pic4.zhimg.com/80/v2-c469e4968a3e6cf8ec7a81f816de4f87_1440w.webp" /></p><p>那么辐射和颜色是什么关系呢？简单讲就是，光就是电磁辐射，或者说是振荡的电磁场，光又有波长和频率，<span class="math inline">\(波长\times 频率=光速\)</span>，光的颜色是由频率决定的，大多数光是不可见的，人眼可见的光谱称为可见光谱，对应的频率就是我们认为的颜色：</p><p><embed src="https://pic1.zhimg.com/80/v2-381aa740f21b7eba1f896fd98dcc1308_1440w.webp" /></p><p><embed src="https://pic1.zhimg.com/80/v2-51bd3710b9f891c4c44fde12545e4fd4_1440w.webp" /></p><h3 id="sdf---signed-distance-function">SDF - Signed Distance Function</h3><p>SDF是一种计算图形学中定义距离的函数。SDF定义了空间中的点到隐式曲面的距离，该点在曲面内外决定了其SDF的正负性。</p><p>相较于其他像点云（point cloud）、体素（voxel）、面云（mesh）那样的经典3D模型表示方法，SDF有固定的数学方程，更关注物体的表面信息，具有可控的计算成本。</p><h2 id="features-of-nerf">Features of NeRF</h2><ul><li>Representation can be discrete or continuous. but the discrete representation will be a big one if you have more dimensions, e.g., 3 dim.<ul><li>Actually the Plenoxels try to use 3D grids to store the fields. Fast, however, too much memory.</li></ul></li><li>Neural Field has advantages:<ol type="1"><li>Compactness 紧致:</li><li>Regularization: nn itself as inductive bias makes it easy to learn</li><li>Domain Agonostic: cheap to add a dimension</li></ol></li><li>also problems<ul><li>Editability / Manipulability</li><li>Computational Complexity</li><li>Spectral Bias</li></ul></li></ul><h2 id="problem-formulation">Problem Formulation</h2><ul><li>Input: multiview images</li><li>Output: 3D Geometry and appearance</li><li>Objective:</li></ul><p><span class="math display">\[\arg \min_x\|y-F(x)\|+\lambda P(x)\]</span></p><p>y is multiview images, F is forward mapping, x is the desired 3D reconstruction.</p><p>F can be differentiable, then you can supervise this.</p><ul><li>nn本身就是某种constraints，你就不需要加太多handicraft constraints</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h1 id="introduction-to-nerf">1. Introduction to NeRF</h1><h2 id="what-is-nerf">What is NeRF</h2><blockquote><p>Reference: Original NeRF paper; an online ariticle</p></blockquote><p>在已知视角下对场景进行一系列的捕获 (包括拍摄到的图像，以及每张图像对应的内外参)，合成新视角下的图像。</p><p>NeRF 想做这样一件事，不需要中间三维重建的过程，仅根据位姿内参和图像，直接合成新视角下的图像。为此 NeRF 引入了辐射场的概念，这在图形学中是非常重要的概念，在此我们给出渲染方程的定义：</p><p><embed src="https://pic1.zhimg.com/80/v2-1a80de23a422688b739f36828affb8ec_1440w.webp" /></p><p><embed src="https://pic4.zhimg.com/80/v2-c469e4968a3e6cf8ec7a81f816de4f87_1440w.webp" /></p><p>那么辐射和颜色是什么关系呢？简单讲就是，光就是电磁辐射，或者说是振荡的电磁场，光又有波长和频率，<span class="math inline">\(波长\times 频率=光速\)</span>，光的颜色是由频率决定的，大多数光是不可见的，人眼可见的光谱称为可见光谱，对应的频率就是我们认为的颜色：</p><p><embed src="https://pic1.zhimg.com/80/v2-381aa740f21b7eba1f896fd98dcc1308_1440w.webp" /></p><p><embed src="https://pic1.zhimg.com/80/v2-51bd3710b9f891c4c44fde12545e4fd4_1440w.webp" /></p><h3 id="implementation">Implementation</h3><h4 id="mlp-structure">MLP Structure</h4><ol type="1"><li>The net is constrained to be multi-view consistent by restricting the predicting of <span class="math inline">\(\sigma\)</span> to be independent of viewing direction</li><li>While the color <span class="math inline">\(\bold c\)</span> depends on both viewing direction and in-scene coordinate.</li></ol><p>How is this implemented?</p><p>The MLP is designed to be two-stages:</p><ol type="1"><li><span class="math inline">\(F_{\theta_1}(\bold x) = (\sigma, \text{&lt;256 dim features&gt;})\)</span></li><li><span class="math inline">\(F_{\theta_2}(\text{&lt;256 dim features&gt;}, \bold d)=\bold c\)</span></li></ol><h4 id="novel-view-synthesis">Novel view synthesis</h4><p>For each pixel, sample points along the camera ray through this pixel;</p><p>For each sampling point, compute local color and density;</p><p>Use volume rendering, an integral along the camera ray through pixels is used: <span class="math display">\[C(\bold r)=\int_{t_1}^{t_2} T(t)\cdot \sigma (\bold r(t))\cdot \bold c(\bold r(t),\bold d)\cdot dt \\T(t)=\exp (-\int_{t_1}^t \sigma(\bold r(u))\cdot du)\]</span> We can get the color C of the pixel.</p><p>This can be implemented by sampling approaches.</p><p>Now everything can be approximated: <span class="math display">\[\hat C(\bold r)=\sum_{i=1}^N \alpha_iT_i\bold c_i \\T_i=\exp (-\sum_{j=1}^{i-1}\sigma_i\delta_j) \\\alpha_i=1-\exp(\sigma_i\delta_i)\\\delta_i=\text{distance between sampling point i and i+1}\]</span></p><ul><li>Loss is just L2 on color of the pixels:</li></ul><p><span class="math display">\[L=\sum_{r\in R}\| \hat C(\bold r)-C_{gt}(\bold r)\|^2_2\]</span></p><h4 id="depth-regularization">Depth regularization</h4><p>Similar to the above formulas, expected depth can also be calculated, and can be used to regularize the depth smoothness.</p><h4 id="positional-encoding">Positional encoding</h4><p>It is required to greatly improve the fine detail results.</p><p>There are many other positional encoding techs, including trainable parametric, integral, and hierarchical variants</p><h3 id="sdf---signed-distance-function">SDF - Signed Distance Function</h3><p>SDF是一种计算图形学中定义距离的函数。SDF定义了空间中的点到隐式曲面的距离，该点在曲面内外决定了其SDF的正负性。</p><p>相较于其他像点云（point cloud）、体素（voxel）、面云（mesh）那样的经典3D模型表示方法，SDF有固定的数学方程，更关注物体的表面信息，具有可控的计算成本。</p><h2 id="features-of-nerf">Features of NeRF</h2><ul><li>Representation can be discrete or continuous. but the discrete representation will be a big one if you have more dimensions, e.g., 3 dim.<ul><li>Actually the Plenoxels try to use 3D grids to store the fields. Fast, however, too much memory.</li></ul></li><li>Neural Field has advantages:<ol type="1"><li>Compactness 紧致:</li><li>Regularization: nn itself as inductive bias makes it easy to learn</li><li>Domain Agonostic: cheap to add a dimension</li></ol></li><li>also problems<ul><li>Editability / Manipulability</li><li>Computational Complexity</li><li>Spectral Bias</li></ul></li></ul><h2 id="problem-formulation">Problem Formulation</h2><ul><li>Input: multiview images</li><li>Output: 3D Geometry and appearance</li><li>Objective:</li></ul><p><span class="math display">\[\arg \min_x\|y-F(x)\|+\lambda P(x)\]</span></p><p>y is multiview images, F is forward mapping, x is the desired 3D reconstruction.</p><p>F can be differentiable, then you can supervise this.</p><ul><li>nn本身就是某种constraints，你就不需要加太多handicraft constraints</li></ul>]]></content>
     
     
     <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
@@ -563,28 +589,6 @@ P=K[R\ \ \ t]
     
     
     <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>To Midnight</title>
-    <link href="https://jyzhu.top/blog/To-Midnight/"/>
-    <id>https://jyzhu.top/blog/To-Midnight/</id>
-    <published>2022-09-08T18:06:51.000Z</published>
-    <updated>2023-07-16T18:23:52.850Z</updated>
-    
-    <content type="html"><![CDATA[<p>失眠的话</p><p>夜晚就变得绵长</p><p>第几节脊椎上了发条，拧动时</p><p>奇异的对偶的诗流向新的小节</p><p>而绵长的夜不该有诗</p><p>也不该有糟糕的比喻和比喻一样的风</p><p>该给每一阵海浪命什么名呢</p><p>这是当下最要紧的幽暗问题</p><p>别无要紧事</p><p>一个人有多想参与生活</p><p>又跟生活对坐在长桌两端</p><p>飞光飞光，劝尔一杯酒</p><p>天亮后又到了酒神的梦</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;失眠的话&lt;/p&gt;
-&lt;p&gt;夜晚就变得绵长&lt;/p&gt;
-&lt;p&gt;第几节脊椎上了发条，拧动时&lt;/p&gt;
-&lt;p&gt;奇异的对偶的诗流向新的小节&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="poems" scheme="https://jyzhu.top/blog/categories/poems/"/>
-    
     
   </entry>
   

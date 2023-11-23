@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jyzhu.top/blog/blog/Reading-Neural-Capture-of-Animatable-3D-Human-from-Monocular-Video/</loc>
+    <lastmod>2023-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://jyzhu.top/blog/blog/Introduction-to-NeRF/</loc>
+    <lastmod>2023-07-28</lastmod>
+  </url>
+  <url>
     <loc>https://jyzhu.top/blog/blog/Reading-Handy-Towards-a-high-fidelity-3D-hand-shape-and-appearance-model/</loc>
     <lastmod>2023-07-21</lastmod>
   </url>
@@ -46,10 +54,6 @@
   </url>
   <url>
     <loc>https://jyzhu.top/blog/blog/Learning-NeRF/</loc>
-    <lastmod>2023-01-12</lastmod>
-  </url>
-  <url>
-    <loc>https://jyzhu.top/blog/blog/Introduction-to-NeRF/</loc>
     <lastmod>2023-01-12</lastmod>
   </url>
   <url>
