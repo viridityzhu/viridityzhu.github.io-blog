@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2023-11-23T21:43:37.425Z</updated>
+  <updated>2024-04-11T20:10:24.922Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,70 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Score-based generative model</title>
+    <link href="https://jyzhu.top/blog/Score-based-generative-model/"/>
+    <id>https://jyzhu.top/blog/Score-based-generative-model/</id>
+    <published>2024-04-09T20:08:34.000Z</published>
+    <updated>2024-04-11T20:10:24.922Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>references: <a href="https://yang-song.net/blog/2021/score/" class="uri">https://yang-song.net/blog/2021/score/</a><a href="https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#" class="uri">https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#</a> https://lilianweng.github.io/posts/2021-07-11-diffusion-models/ # Score-based models v.s. diffusion models - 一开始两者独立发展，所以有不同的理论依据和术语 - 最后两者殊途同归：得到一样的模型 # Score function 1. 生成模型可以归类为两类： 1. 显式的，基于likelihood的模型，比如autoregressive，normalizing flow，VAE。这些方法通过近似最大似然来建模概率密度分布。问题是，为了计算likelihood，需要一个normalizing constant这个量，它要么是未知的，要么要想尽办法通过其他的限制来估计或者消除。所以这类模型比较复杂。 2. 隐式的，直接建模一个概率分布的sample process，而不是概率分布本身。比如GAN。但是它需要对抗学习，这比较不稳定，而且可能有模式坍塌的问题。 2. Score function和第一类相关，它也是建模likelihood——但不是它本身，而是跟它相关的一个量，即 Stein score function。这样的一个神奇好处是，可以直接消除normalizing constant这个量。 <img src="https://s2.loli.net/2024/04/12/rGvERP3W1gXV964.png" /> <em>（图中，等高线表示一个概率分布，箭头表示它的分数场。score-based model就是建模这些分数场)</em> 3. 具体一点来说： 1. 假设给定一个数据集 <span class="math inline">\({x_1,x_2,...,x_N}\)</span>，每个数据都是从一个未知的数据分布 <span class="math inline">\(p(x)\)</span> 采样。我们用一个生成模型来生成新的数据，这些数据都是从这个分布中采样的 2. 我们要想办法表示这个概率分布。前面说的基于likelihood的模型是这么做的：直接建模这个概率密度函数： <span class="math display">\[p_\theta(x)=\frac{e^{-f_\theta(x)}}{Z_\theta}\]</span> 其中这个 <span class="math inline">\(Z_\theta&gt;0\)</span> 就是依赖于 <span class="math inline">\(\theta\)</span> 的那个normalizing constant了。 这个 <span class="math inline">\(p_\theta(x)\)</span> 训练的目标函数就是最大log-likelihood： <span class="math display">\[\max_\theta\sum^N_{i=1}\log p_\theta(x_i)\]</span> 3. 前面说了，问题就是 <span class="math inline">\(Z_\theta\)</span> 很难估计。为了避开估计它，我们的神经网络不再直接估计概率分布，而是估计它的分数（概率密度函数的log的梯度）： <span class="math display">\[s_\theta(x)=\nabla_x\log p(x)=-\nabla_x f_\theta(x)-\nabla_x\log Z_\theta = -\nabla_x f_\theta(x)\]</span> 去掉了 <span class="math inline">\(Z_\theta\)</span>！ 4. 训练的目标函数是 <strong>Fisher divergence</strong>： <span class="math display">\[\mathbb E_{p(x)}[\|\nabla_x\log p(x)-s_\theta(x)\|^2_2]\]</span> 5. 现在的问题就是，上式中的 <span class="math inline">\(\nabla_x\log p(x)\)</span>未知。但是很好解决，一种叫<strong>score matching</strong>的方法可以直接最小化 <strong>Fisher divergence</strong>，不需要知道真实的score。 6. 最后的问题就是得到了这个 score function 之后，怎么从中采样新的数据了。<strong>Langevin dynamics</strong> 提出了一种迭代式的采样方法，就是和diffusion的步骤一模一样的。相当于从空间中任意一个位置初始化，然后顺着score function往高概率密度的方向优化，足够多的步骤之后就到了峰值处。 # 关 noise 什么事？</p></blockquote><p>是这样的，前面提到的方法已经讲清楚了神经网络建模和目标函数。但是假如直接拿着数据集（比如图像）让网络学习的话，效果并不好。因为这个score function在低概率密度的区域样本很少，学得也很不好。</p><p><img src="https://s2.loli.net/2024/04/12/6cuXBCoHShsMiaO.png" /></p><p>为了解决这个问题，我们才往数据中加 noise，在被噪声扰动后的数据集上训练网络。这些扰动后的数据点极大地扩充了数据集，最主要的是能填充那些低概率密度的分布区域。</p><p>大的噪声破坏数据分布，小的噪声不够填充低概率密度区域。所以就用多尺度的噪声。也就是diffusion model的前向过程了。</p><p>总体来说，score-based model就是在这些噪声扰动后的数据集上训练的。训练的时候，噪声的尺度当然也可以作为一个已知量输入，也就是noise conditional <span class="math inline">\(s_\theta(x,i)\)</span></p><h1 id="diffusion-models">diffusion models</h1><p>to read：<a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/" class="uri">https://lilianweng.github.io/posts/2021-07-11-diffusion-models/</a></p><p>从diffusion models的角度解释整个模型</p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;references: &lt;a href=&quot;https://yang-song.net/blog/2021/score/&quot; class=&quot;uri&quot;&gt;https://yang-song.net/blog/2021/score/&lt;/a&gt;&lt;a href=&quot;https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#&quot; class=&quot;uri&quot;&gt;https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#&lt;/a&gt; https://lilianweng.github.io/posts/2021-07-11-diffusion-models/ # Score-based models v.s. diffusion models - 一开始两者独立发展，所以有不同的理论依据和术语 - 最后两者殊途同归：得到一样的模型 # Score function 1. 生成模型可以归类为两类： 1. 显式的，基于likelihood的模型，比如autoregressive，normalizing flow，VAE。这些方法通过近似最大似然来建模概率密度分布。问题是，为了计算likelihood，需要一个normalizing constant这个量，它要么是未知的，要么要想尽办法通过其他的限制来估计或者消除。所以这类模型比较复杂。 2. 隐式的，直接建模一个概率分布的sample process，而不是概率分布本身。比如GAN。但是它需要对抗学习，这比较不稳定，而且可能有模式坍塌的问题。 2. Score function和第一类相关，它也是建模likelihood——但不是它本身，而是跟它相关的一个量，即 Stein score function。这样的一个神奇好处是，可以直接消除normalizing constant这个量。 &lt;img src=&quot;https://s2.loli.net/2024/04/12/rGvERP3W1gXV964.png&quot;&gt; &lt;em&gt;（图中，等高线表示一个概率分布，箭头表示它的分数场。score-based model就是建模这些分数场)&lt;/em&gt; 3. 具体一点来说： 1. 假设给定一个数据集 &lt;span class=&quot;math inline&quot;&gt;\({x_1,x_2,...,x_N}\)&lt;/span&gt;，每个数据都是从一个未知的数据分布 &lt;span class=&quot;math inline&quot;&gt;\(p(x)\)&lt;/span&gt; 采样。我们用一个生成模型来生成新的数据，这些数据都是从这个分布中采样的 2. 我们要想办法表示这个概率分布。前面说的基于likelihood的模型是这么做的：直接建模这个概率密度函数： &lt;span class=&quot;math display&quot;&gt;\[
+p_\theta(x)=\frac{e^{-f_\theta(x)}}{Z_\theta}
+\]&lt;/span&gt; 其中这个 &lt;span class=&quot;math inline&quot;&gt;\(Z_\theta&amp;gt;0\)&lt;/span&gt; 就是依赖于 &lt;span class=&quot;math inline&quot;&gt;\(\theta\)&lt;/span&gt; 的那个normalizing constant了。 这个 &lt;span class=&quot;math inline&quot;&gt;\(p_\theta(x)\)&lt;/span&gt; 训练的目标函数就是最大log-likelihood： &lt;span class=&quot;math display&quot;&gt;\[
+\max_\theta\sum^N_{i=1}\log p_\theta(x_i)
+\]&lt;/span&gt; 3. 前面说了，问题就是 &lt;span class=&quot;math inline&quot;&gt;\(Z_\theta\)&lt;/span&gt; 很难估计。为了避开估计它，我们的神经网络不再直接估计概率分布，而是估计它的分数（概率密度函数的log的梯度）： &lt;span class=&quot;math display&quot;&gt;\[
+s_\theta(x)=\nabla_x\log p(x)=-\nabla_x f_\theta(x)-\nabla_x\log Z_\theta = -\nabla_x f_\theta(x)
+\]&lt;/span&gt; 去掉了 &lt;span class=&quot;math inline&quot;&gt;\(Z_\theta\)&lt;/span&gt;！ 4. 训练的目标函数是 &lt;strong&gt;Fisher divergence&lt;/strong&gt;： &lt;span class=&quot;math display&quot;&gt;\[
+\mathbb E_{p(x)}[\|\nabla_x\log p(x)-s_\theta(x)\|^2_2]
+\]&lt;/span&gt; 5. 现在的问题就是，上式中的 &lt;span class=&quot;math inline&quot;&gt;\(\nabla_x\log p(x)\)&lt;/span&gt;未知。但是很好解决，一种叫&lt;strong&gt;score matching&lt;/strong&gt;的方法可以直接最小化 &lt;strong&gt;Fisher divergence&lt;/strong&gt;，不需要知道真实的score。 6. 最后的问题就是得到了这个 score function 之后，怎么从中采样新的数据了。&lt;strong&gt;Langevin dynamics&lt;/strong&gt; 提出了一种迭代式的采样方法，就是和diffusion的步骤一模一样的。相当于从空间中任意一个位置初始化，然后顺着score function往高概率密度的方向优化，足够多的步骤之后就到了峰值处。 # 关 noise 什么事？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;是这样的，前面提到的方法已经讲清楚了神经网络建模和目标函数。但是假如直接拿着数据集（比如图像）让网络学习的话，效果并不好。因为这个score function在低概率密度的区域样本很少，学得也很不好。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2024/04/12/6cuXBCoHShsMiaO.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，我们才往数据中加 noise，在被噪声扰动后的数据集上训练网络。这些扰动后的数据点极大地扩充了数据集，最主要的是能填充那些低概率密度的分布区域。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="generative model" scheme="https://jyzhu.top/blog/tags/generative-model/"/>
+    
+    <category term="diffusion model" scheme="https://jyzhu.top/blog/tags/diffusion-model/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Reading Learning Locally Editable Virtual Humans</title>
+    <link href="https://jyzhu.top/blog/Reading-Learning-Locally-Editable-Virtual-Humans/"/>
+    <id>https://jyzhu.top/blog/Reading-Learning-Locally-Editable-Virtual-Humans/</id>
+    <published>2023-12-12T09:02:56.000Z</published>
+    <updated>2023-12-12T10:05:31.614Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：<a href="https://files.ait.ethz.ch/projects/custom-humans/paper.pdf" class="uri">https://files.ait.ethz.ch/projects/custom-humans/paper.pdf</a></p><p>作者：Hsuan-I Ho, Lixin Xue, Jie Song, Otmar Hilliges。ETH</p><p>发表： CVPR23</p><p>链接： <a href="https://custom-humans.github.io/" class="uri">https://custom-humans.github.io/</a></p><hr /><h2 id="why">Why：</h2><ol type="1"><li>3D数字人现在很热门</li><li>传统方法中，重建好一个3D数字人之后，不知道怎么编辑和定制它</li><li>所以想搞一个方法，既能创建3D数字人，又能在创建完成后对它进行定制化</li></ol><h2 id="what">What：</h2><ol type="1"><li>这个方法允许在不同的3D人之间部分地迁移几何和外貌细节，还能在改变人的姿势的时候保留一致的局部细节</li><li>具体一点说，是把NeRF和LBS-articulated（铰接）的mesh模型的优点结合起来：NeRF很灵活，有很强的建模能力；mesh模型可以变形，并且可以被完全显式地控制</li><li>再具体一点，是提出了一个混合的3D人体representation，允许跨不同主体进行局部编辑；然后提出了一整套的生成这种3D数字人的流程，既能拟合没见过的3D扫描人数据，也能随机采样生成新的个体；另外还提出一个大尺度高质量3D扫描人体数据集</li></ol><h2 id="how">How：</h2><p><img src="https://s2.loli.net/2023/12/12/3MfkXdqwn1rpeF8.png" /></p><ol type="1"><li><p>混合的3D人体representation：</p><ol type="1"><li><p>有一个可学习的特征codebook，包含<span class="math inline">\(M\times 2F\)</span>个特征，其中<span class="math inline">\(F\)</span>个是几何特征，另外<span class="math inline">\(F\)</span>个是外貌特征。给定一个human mesh，mesh有M个顶点（M很大，一万多），每个顶点跟codebook中的特征显式地一一对应。</p></li><li><p>当NeRF渲染时，给定空间中一个query点，提取局部的特征：</p><figure><img src="https://s2.loli.net/2023/12/12/RL3ehZ6nuGq12B4.png" alt="image-20231212173121173" /><figcaption>image-20231212173121173</figcaption></figure><ol type="1"><li>找出mesh顶点中离它最近的3个顶点，对这3个顶点对应的特征用barycentric interpolation（重心插值法？）得到插值后的特征</li><li>还需要把全局坐标转换成局部坐标，这么做是为了让局部与全局解耦，方便在后续更改人体pose的时候不影响局部的细节。转换方式：还是根据mesh顶点中离它最近的3个顶点组成的三角形，直接用<span class="math inline">\((u,v)\)</span>表示query点投影到三角形平面上的点在三角形中的位置，然后再加上一个<span class="math inline">\(d\)</span>表示query点距离三角形平面的距离，以及一个<span class="math inline">\(\bold n\)</span>表示距离的方向</li><li>decoder，或者说renderer，不是单独一个NeRF，而是分成了两个独立的，一个是SDF field，一个是rgb field。论文里说这样能方便用3D loss显式地监督这两个网络。后面的实验证明如果不解耦这两个网络的话，效果会差很多</li><li>那么最后给到这两个neural fields的输入，就是<span class="math inline">\(\bold f_s/\bold f_c,(u,v,d),\bold n\)</span>，分别是几何特征或者颜色特征、局部坐标、方向</li></ol></li></ol></li><li><p>采样个体样本时，有两种方式：</p><ol type="1"><li>直接采样已有的个体样本。训练的时候，针对每个个体样本，都是单独学习一个codebook。假如有N个ground truth人体，那codebook实际上是有<span class="math inline">\(N\times M\times 2F\)</span>这么多维度。想要采样其中一个个体，直接从N个样本中取一个entry就好了</li><li>生成全新的样本？用PCA。具体说，是创建一个新的D维的codebook（<span class="math inline">\(D\times 2MF\)</span>），这D个维度是对N个人体样本拟合出的PCA系数。生成随机新人体样本的时候，只要简单随机生成D个PCA参数，然后乘以利用这个新codebook算好的特征向量就好了</li></ol></li><li><p>训练过程</p><ol type="1"><li>给定一个扫描的3D人体（高质量、很细节的mesh），用其他现有工具把一个SMPL mesh和它对齐，得到相应的pose和shape参数。</li><li>用M个扫描的3D人体，分别训练特征codebook的M个entries。</li><li>三方面的loss：<ol type="1"><li>3D loss，包括rgb loss和sdf loss；</li><li>2D adversarial loss，这里是用前面提到的PCA采样方法，得到随机生成的人体，渲染成2D图像；然后用相同的相机视角用任意gt 3D人体扫描得到2D图像，然后用StyleGAN辨别这两张真假图像。这里的用意是，不需要严格相同的gt监督，就可以对PCA得到的生成样本进行监督，这样的监督又能传播到全部训练样本上，应该是能很好地提升模型的泛化性能。实验结果看这个loss还挺重要的。</li><li>简单的对特征的正则项，让特征符合高斯分布</li></ol></li></ol></li><li><p>一些编辑方式</p><figure><img src="https://s2.loli.net/2023/12/12/Xh6aIN3q7OgzGrl.png" alt="image-20231212175622543" /><figcaption>image-20231212175622543</figcaption></figure><ol type="1"><li><p>初始化：采样一个3D数字人样本。也就是前面提到的两种采样方式，可以采样已有的，也可以采样全新生成的</p></li><li><p>optimize特征，拟合一个3D扫描人体。用到的是3D loss</p></li><li><p>跨个体的特征编辑：简单粗暴，先用Blender选择人体局部对应的顶点，然后把想要的样本的codebook中的那部分特征交换到目标的codebook来</p></li><li><p>绘制材质：拿到渲染后的2D图像后，可以直接对2D图像进行一些绘制，然后再用它监督训练codebook。后面的实验结果看上去效果还不错，但limitation说不能很好地拟合过于高精度的细节</p><figure><img src="https://s2.loli.net/2023/12/12/b3nCjQsoRNuwcTg.png" alt="image-20231212180508779" /><figcaption>image-20231212180508779</figcaption></figure></li><li><p>更换人体姿势：这个representation本身是由一个SMPL mesh加一个codebook组成的；只要对SMPL mesh的参数进行修改，就能直接改变姿势了</p></li></ol></li><li><p>实验</p><ol type="1"><li>用了自己提出的CustomHumans以及THuman2.0数据集来训练模型；用SIZER数据集来测试对没见过的人体扫描的拟合性能</li><li>用chamfer distance、normal consistency、f-score来衡量拟合性能；结果挺好</li><li>展示了编辑性能，看起来挺好</li><li>ablation study：值得深究<img src="https://s2.loli.net/2023/12/12/gwQCR6b2dvLpAz8.png" alt="image-20231212175727556" /></li></ol></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;论文地址：&lt;a href=&quot;https://files.ait.ethz.ch/projects/custom-humans/paper.pdf&quot; class=&quot;uri&quot;&gt;https://files.ait.ethz.ch/projects/custom-humans/paper.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作者：Hsuan-I Ho, Lixin Xue, Jie Song, Otmar Hilliges。ETH&lt;/p&gt;
+&lt;p&gt;发表： CVPR23&lt;/p&gt;
+&lt;p&gt;链接： &lt;a href=&quot;https://custom-humans.github.io/&quot; class=&quot;uri&quot;&gt;https://custom-humans.github.io/&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="3D Computer Vision" scheme="https://jyzhu.top/blog/tags/3D-Computer-Vision/"/>
+    
+    <category term="3D Reconstruction" scheme="https://jyzhu.top/blog/tags/3D-Reconstruction/"/>
+    
+    <category term="3D Human" scheme="https://jyzhu.top/blog/tags/3D-Human/"/>
+    
+  </entry>
   
   <entry>
     <title>Reading Neural Capture of Animatable 3D Human from Monocular Video</title>
@@ -39,6 +103,52 @@
     <category term="3D Computer Vision" scheme="https://jyzhu.top/blog/tags/3D-Computer-Vision/"/>
     
     <category term="Human Reconstruction" scheme="https://jyzhu.top/blog/tags/Human-Reconstruction/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KL散度 （Kullback-Leibler Divergence，相对熵）</title>
+    <link href="https://jyzhu.top/blog/KL%E6%95%A3%E5%BA%A6-%EF%BC%88Kullback-Leibler-Divergence,%E7%9B%B8%E5%AF%B9%E7%86%B5%EF%BC%89/"/>
+    <id>https://jyzhu.top/blog/KL%E6%95%A3%E5%BA%A6-%EF%BC%88Kullback-Leibler-Divergence,%E7%9B%B8%E5%AF%B9%E7%86%B5%EF%BC%89/</id>
+    <published>2023-10-11T20:04:11.000Z</published>
+    <updated>2024-04-11T20:07:54.408Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>References: <a href="https://zhuanlan.zhihu.com/p/45131536" class="uri">https://zhuanlan.zhihu.com/p/45131536</a> <a href="https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/" class="uri">https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/</a> https://www.jiqizhixin.com/articles/2018-05-29-2 # 含义 - 一句话：KL散度可以用来<strong>衡量两个分布之间的差异/匹配程度</strong>。但它并不是一个真正的度量或者距离，因为它不具有对称性。 - 广义的散度指的是一类运算，它将矢量空间上的一个矢量场对应到一个标量场上，通俗的讲，就是输入一组矢量，返回一个标量。 - 在统计学意义上来说，KL散度可以用来衡量两个分布之间的差异程度。若两者差异越小，KL散度越小，反之亦反。当两分布一致时，其KL散度为0。正是因为其可以衡量两个分布之间的差异，所以在VAE、EM、GAN中均有使用到KL散度。 - 在信息论中，其可理解为编码系统对信息进行编码时所需要的平均附加信息量。 # 定义 <img src="https://s2.loli.net/2024/04/12/yDOmFUz2IMvjCbh.png" /> ### 理解熵 - 熵是用来表示信息量。 - 首先，我们考虑一个离散的随机变量 <span class="math inline">\(x\)</span> 。当我们观察到这个变量的一个具体值的时候，我们接收到了多少信息呢？ - 信息量可以被看成在学习 <span class="math inline">\(x\)</span> 的值的时候的“惊讶程度”。如果有人告诉我们一个相当不可能的事件发生了，我们收到的信息要多于我们被告知某个很可能发生的事件发生时收到的信息。如果我们知道某件事情一定会发生，那么我们就不会接收到信息。于是，我们对于信息内容的度量将依赖于概率分布<span class="math inline">\(p(x)\)</span> ，因此我们想要寻找一个函数<span class="math inline">\(h(x)\)</span> ，它是概率<span class="math inline">\(p(x)\)</span>的单调递增函数，表达了信息的内容。 <span class="math inline">\(h(.)\)</span> 的形式可以这样寻找：如果我们有两个不相关的事件 x 和 y ，那么我们观察到两个事件同时发生时获得的信息应该等于观察到事件各自发生时获得的信息之和，即 <span class="math inline">\(h(x)+h(y)=h(x,y)\)</span> 。两个不相关事件是统计独立的，因此<span class="math inline">\(p(x)p(y)=p(x,y)\)</span>。根据这两个关系，很容易看出<span class="math inline">\(h(.)\)</span>一定与<span class="math inline">\(p(.)\)</span> 的对数有关。因此，我们有： <span class="math display">\[h(x)=-\log p(x)\]</span> 其中，负号确保了信息一定是正数或者是零。注意，低概率事件<span class="math inline">\(x\)</span> 对应于高的信息量。 - 现在假设一个发送者想传输一个<strong>随机变量</strong>的值给接收者。这个过程中，他们传输的<strong>平均信息量</strong>通可以通过求上式关于概率分布 p(x) 的期望得到。这个期望值就是熵Entropy： <span class="math display">\[H[x]=-\sum_x p(x)\log p(x)\]</span> - 它是这个随机变量的平均信息量。 ## KL散度的性质 1. <span class="math inline">\(D_{KL}(p||q)&gt;=0\)</span>， 当且仅当<span class="math inline">\(p(x)=q(x)\)</span>时取等号 2. 不满足对称性，即<span class="math inline">\(D_KL(p||q)\neq D_KL(q||p)\)</span></p></blockquote><h1 id="讨论">讨论</h1><ul><li>KL散度是不对称的。因此不能作为一个距离度量，在使用时往往有一些问题。</li><li>那么就可以用<span class="math inline">\(\alpha\)</span>-散度。KL散度是它的一个特殊化。根据这个，还能算出一个对称的Hellinger距离，它的平方根是一个合法的距离度量</li><li>还可以推广到F散度：把KL散度公式中的<span class="math inline">\(\log\)</span>函数替换为任意的函数f，只要f满足这两个条件：<ol type="1"><li>f是一个凸函数</li><li><span class="math inline">\(f(1)=0\)</span> 此时F散度的表达式为： <span class="math display">\[  D_f(p\|q)=\int q(X)f(\frac{p(X)}{q(X)})dX\]</span> 当<span class="math inline">\(f(X)=X\log X\)</span>时，就是KL散度了。</li></ol></li><li>Bregman散度：这是从另一个角度来思考“距离”。最常见的均方欧氏距离，推广到任意维度的函数之间的距离，同样只是需要一个凸函数就能表达了。这个凸函数的取值，可以表示一大片不同的散度，都属于Bregman散度的特例</li><li>Wasserstein距离。这是用来解决一个问题的：如果两个分布离得太远，完全没有重叠，那么KL散度的值会失去意义。这在深度学习中意味着这一点梯度为0——梯度消失！ Wasserstein距离可以解决这种问题，也叫做Earth-Mover（推土机）距离：当我们希望把一堆土推移成另一堆土的形状和位置，推土代价定义为<strong>移动土的量*土移动的距离</strong>，这个代价就是两个分布的Wasserstein距离。 Wessertein距离相比KL散度和JS散度的<strong>优势</strong>在于：即使两个分布的支撑集没有重叠或者重叠非常少，仍然能反映两个分布的远近。WGAN就是Wasserstein距离比较经典的应用之一。 # 信息的压缩</li></ul><ol type="1"><li>假如我们有一组样本，每个样本分别有不同的值。可以直接记下每个样本的信息。</li><li>也可以用这个样本的分布来表示同样的信息量。（每个取值的概率）</li><li>还可以用一个已知的分布来表示这个分布（比如均匀分布、二项分布、正态分布），只需要记下具体分布的参数。</li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;References: &lt;a href=&quot;https://zhuanlan.zhihu.com/p/45131536&quot; class=&quot;uri&quot;&gt;https://zhuanlan.zhihu.com/p/45131536&lt;/a&gt; &lt;a href=&quot;https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/&quot; class=&quot;uri&quot;&gt;https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/&lt;/a&gt; https://www.jiqizhixin.com/articles/2018-05-29-2 # 含义 - 一句话：KL散度可以用来&lt;strong&gt;衡量两个分布之间的差异/匹配程度&lt;/strong&gt;。但它并不是一个真正的度量或者距离，因为它不具有对称性。 - 广义的散度指的是一类运算，它将矢量空间上的一个矢量场对应到一个标量场上，通俗的讲，就是输入一组矢量，返回一个标量。 - 在统计学意义上来说，KL散度可以用来衡量两个分布之间的差异程度。若两者差异越小，KL散度越小，反之亦反。当两分布一致时，其KL散度为0。正是因为其可以衡量两个分布之间的差异，所以在VAE、EM、GAN中均有使用到KL散度。 - 在信息论中，其可理解为编码系统对信息进行编码时所需要的平均附加信息量。 # 定义 &lt;img src=&quot;https://s2.loli.net/2024/04/12/yDOmFUz2IMvjCbh.png&quot;&gt; ### 理解熵 - 熵是用来表示信息量。 - 首先，我们考虑一个离散的随机变量 &lt;span class=&quot;math inline&quot;&gt;\(x\)&lt;/span&gt; 。当我们观察到这个变量的一个具体值的时候，我们接收到了多少信息呢？ - 信息量可以被看成在学习 &lt;span class=&quot;math inline&quot;&gt;\(x\)&lt;/span&gt; 的值的时候的“惊讶程度”。如果有人告诉我们一个相当不可能的事件发生了，我们收到的信息要多于我们被告知某个很可能发生的事件发生时收到的信息。如果我们知道某件事情一定会发生，那么我们就不会接收到信息。于是，我们对于信息内容的度量将依赖于概率分布&lt;span class=&quot;math inline&quot;&gt;\(p(x)\)&lt;/span&gt; ，因此我们想要寻找一个函数&lt;span class=&quot;math inline&quot;&gt;\(h(x)\)&lt;/span&gt; ，它是概率&lt;span class=&quot;math inline&quot;&gt;\(p(x)\)&lt;/span&gt;的单调递增函数，表达了信息的内容。 &lt;span class=&quot;math inline&quot;&gt;\(h(.)\)&lt;/span&gt; 的形式可以这样寻找：如果我们有两个不相关的事件 x 和 y ，那么我们观察到两个事件同时发生时获得的信息应该等于观察到事件各自发生时获得的信息之和，即 &lt;span class=&quot;math inline&quot;&gt;\(h(x)+h(y)=h(x,y)\)&lt;/span&gt; 。两个不相关事件是统计独立的，因此&lt;span class=&quot;math inline&quot;&gt;\(p(x)p(y)=p(x,y)\)&lt;/span&gt;。根据这两个关系，很容易看出&lt;span class=&quot;math inline&quot;&gt;\(h(.)\)&lt;/span&gt;一定与&lt;span class=&quot;math inline&quot;&gt;\(p(.)\)&lt;/span&gt; 的对数有关。因此，我们有： &lt;span class=&quot;math display&quot;&gt;\[
+h(x)=-\log p(x)
+\]&lt;/span&gt; 其中，负号确保了信息一定是正数或者是零。注意，低概率事件&lt;span class=&quot;math inline&quot;&gt;\(x\)&lt;/span&gt; 对应于高的信息量。 - 现在假设一个发送者想传输一个&lt;strong&gt;随机变量&lt;/strong&gt;的值给接收者。这个过程中，他们传输的&lt;strong&gt;平均信息量&lt;/strong&gt;通可以通过求上式关于概率分布 p(x) 的期望得到。这个期望值就是熵Entropy： &lt;span class=&quot;math display&quot;&gt;\[
+H[x]=-\sum_x p(x)\log p(x)
+\]&lt;/span&gt; - 它是这个随机变量的平均信息量。 ## KL散度的性质 1. &lt;span class=&quot;math inline&quot;&gt;\(D_{KL}(p||q)&amp;gt;=0\)&lt;/span&gt;， 当且仅当&lt;span class=&quot;math inline&quot;&gt;\(p(x)=q(x)\)&lt;/span&gt;时取等号 2. 不满足对称性，即&lt;span class=&quot;math inline&quot;&gt;\(D_KL(p||q)\neq D_KL(q||p)\)&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;讨论&quot;&gt;讨论&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;KL散度是不对称的。因此不能作为一个距离度量，在使用时往往有一些问题。&lt;/li&gt;
+&lt;li&gt;那么就可以用&lt;span class=&quot;math inline&quot;&gt;\(\alpha\)&lt;/span&gt;-散度。KL散度是它的一个特殊化。根据这个，还能算出一个对称的Hellinger距离，它的平方根是一个合法的距离度量&lt;/li&gt;
+&lt;li&gt;还可以推广到F散度：把KL散度公式中的&lt;span class=&quot;math inline&quot;&gt;\(\log\)&lt;/span&gt;函数替换为任意的函数f，只要f满足这两个条件：
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;f是一个凸函数&lt;/li&gt;
+&lt;li&gt;&lt;span class=&quot;math inline&quot;&gt;\(f(1)=0\)&lt;/span&gt; 此时F散度的表达式为： &lt;span class=&quot;math display&quot;&gt;\[
+  D_f(p\|q)=\int q(X)f(\frac{p(X)}{q(X)})dX
+\]&lt;/span&gt; 当&lt;span class=&quot;math inline&quot;&gt;\(f(X)=X\log X\)&lt;/span&gt;时，就是KL散度了。&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;Bregman散度：这是从另一个角度来思考“距离”。最常见的均方欧氏距离，推广到任意维度的函数之间的距离，同样只是需要一个凸函数就能表达了。这个凸函数的取值，可以表示一大片不同的散度，都属于Bregman散度的特例&lt;/li&gt;
+&lt;li&gt;Wasserstein距离。这是用来解决一个问题的：如果两个分布离得太远，完全没有重叠，那么KL散度的值会失去意义。这在深度学习中意味着这一点梯度为0——梯度消失！ Wasserstein距离可以解决这种问题，也叫做Earth-Mover（推土机）距离：当我们希望把一堆土推移成另一堆土的形状和位置，推土代价定义为&lt;strong&gt;移动土的量*土移动的距离&lt;/strong&gt;，这个代价就是两个分布的Wasserstein距离。 Wessertein距离相比KL散度和JS散度的&lt;strong&gt;优势&lt;/strong&gt;在于：即使两个分布的支撑集没有重叠或者重叠非常少，仍然能反映两个分布的远近。WGAN就是Wasserstein距离比较经典的应用之一。 # 信息的压缩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;假如我们有一组样本，每个样本分别有不同的值。可以直接记下每个样本的信息。&lt;/li&gt;
+&lt;li&gt;也可以用这个样本的分布来表示同样的信息量。（每个取值的概率）&lt;/li&gt;
+&lt;li&gt;还可以用一个已知的分布来表示这个分布（比如均匀分布、二项分布、正态分布），只需要记下具体分布的参数。&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="CV" scheme="https://jyzhu.top/blog/tags/CV/"/>
     
   </entry>
   
@@ -511,84 +621,6 @@ P=K[R\ \ \ t]
     <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
     <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>The difference between RNN&#39;s output and h_n</title>
-    <link href="https://jyzhu.top/blog/The-difference-between-RNN-s-output-and-h-n/"/>
-    <id>https://jyzhu.top/blog/The-difference-between-RNN-s-output-and-h-n/</id>
-    <published>2022-10-22T08:56:44.000Z</published>
-    <updated>2022-10-22T09:12:01.123Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Reference: <a href="https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm" class="uri">https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm</a></p></blockquote><p>I was so confused when doing a homework on implementing the Luong Attention, because it tells that the decoder is a RNN, which takes <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(s_{t-1}\)</span> as input, and outputs <span class="math inline">\(s_t\)</span>, i.e., <span class="math inline">\(s_t = RNN(y_{t-1}, s_{t-1})\)</span>.</p><p>But the pytorch implementation of RNN is: <span class="math inline">\(outputs, hidden\_last = RNN(inputs, hidden\_init)\)</span>, which takes in a sequence of elements, computes in serials, and outputs a sequence also.</p><p>I was confused about what is the <span class="math inline">\(s_t\)</span>. Is it the <span class="math inline">\(outputs\)</span>, or the <span class="math inline">\(hidden\_states\)</span>?</p><p>This is the very helpful picture:</p><p><img src="https://i.stack.imgur.com/SjnTl.png" /></p><p>The <span class="math inline">\(output\)</span> here is the <span class="math inline">\(hidden\_states\)</span> of the last layer among all elements in the sequence (time steps), while the <span class="math inline">\(h_n,c_n = hidden\_last\)</span> is the <span class="math inline">\(hidden\_states\)</span> of the last time step among all layers.</p><p>The former is the <span class="math inline">\(H\)</span>, hidden state collection, which can be used in subsequent calculations, like attentions or scores; and the latter is the hidden state that can be directly used in the next iteration.</p>]]></content>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Reference: &lt;a href=&quot;https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm&quot; class=&quot;uri&quot;&gt;https://stackoverflow.com/questions/48302810/whats-the-difference-between-hidden-and-output-in-pytorch-lstm&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I was so confused when doing a homework on implementing the Luong Attention, because it tells that the decoder is a RNN, which takes &lt;span class=&quot;math inline&quot;&gt;\(y_{t-1}\)&lt;/span&gt; and &lt;span class=&quot;math inline&quot;&gt;\(s_{t-1}\)&lt;/span&gt; as input, and outputs &lt;span class=&quot;math inline&quot;&gt;\(s_t\)&lt;/span&gt;, i.e., &lt;span class=&quot;math inline&quot;&gt;\(s_t = RNN(y_{t-1}, s_{t-1})\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;But the pytorch implementation of RNN is: &lt;span class=&quot;math inline&quot;&gt;\(outputs, hidden\_last = RNN(inputs, hidden\_init)\)&lt;/span&gt;, which takes in a sequence of elements, computes in serials, and outputs a sequence also.&lt;/p&gt;
-&lt;p&gt;I was confused about what is the &lt;span class=&quot;math inline&quot;&gt;\(s_t\)&lt;/span&gt;. Is it the &lt;span class=&quot;math inline&quot;&gt;\(outputs\)&lt;/span&gt;, or the &lt;span class=&quot;math inline&quot;&gt;\(hidden\_states\)&lt;/span&gt;?&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Deep Learning" scheme="https://jyzhu.top/blog/tags/Deep-Learning/"/>
-    
-    <category term="Neural Network" scheme="https://jyzhu.top/blog/tags/Neural-Network/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Reading 3D Photography using Context-aware Layered Depth Inpainting</title>
-    <link href="https://jyzhu.top/blog/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/"/>
-    <id>https://jyzhu.top/blog/Reading-3D-Photography-using-Context-aware-Layered-Depth-Inpainting/</id>
-    <published>2022-10-07T00:35:43.000Z</published>
-    <updated>2022-10-22T09:15:26.167Z</updated>
-    
-    <content type="html"><![CDATA[<p>论文地址：<a href="https://shihmengli.github.io/3D-Photo-Inpainting" class="uri">https://shihmengli.github.io/3D-Photo-Inpainting</a></p><p>作者：<a href="https://shihmengli.github.io/">Meng-Li Shih</a>, <a href="https://lemonatsu.github.io/">Shih-Yang Su</a>, <a href="https://johanneskopf.de/">Johannes Kopf</a>, <a href="https://filebox.ece.vt.edu/~jbhuang/">Jia-Bin Huang</a></p><p>发表： CVPR2020</p><p>链接： <a href="https://github.com/vt-vl-lab/3d-photo-inpainting" class="uri">https://github.com/vt-vl-lab/3d-photo-inpainting</a></p><hr /><h2 id="why">Why：</h2><p>之前的照片3D化的方法，会在视角变动后出现的新像素区域 填充很模糊的背景；这个方法主要是用inpainting的方法提高新背景生成的效果</p><figure><img src="https://s2.loli.net/2022/10/22/dfjuy9vNrBak1oP.png" alt="image-20221007084129382" /><figcaption>image-20221007084129382</figcaption></figure><h2 id="what">What：</h2><ol type="1"><li>任务是3D photography，图像3D化，把一张2D+深度信息的RGB-D图像转化成3D风格的图像。</li><li>现在的多镜头智能手机拍的照片都能提供深度信息。没有的话，也能用其他模型预测深度。</li><li>用分层深度图像（Layered Depth Image）来表示图像：能显式地表示像素点之间的连通性。和普通的2D图像相比，可以把像素点分成多层来表示，同一个坐标处可以有重合的不同层次的像素点。</li><li>提出一个基于学习的 inpainting 方法填充重叠区域的像素，让3D图像视角变化的时候出现的新背景效果很好。</li></ol><h2 id="how">How：</h2><p>是一个很清晰的流程：</p><ol type="1"><li><p>输入为单张RGB-D图像。D为depth，一般多镜头智能手机拍摄的照片都能提供深度信息；没有的话就用其他模型预测深度，比如MegaDepth, MiDas, and Kinect depth sensor</p></li><li><p>将输入图像转化成分层深度图像（Layered Depth Image）。LDI中的每个像素点保存颜色和深度信息，以及上下左右四个方向的邻居像素点。同一个坐标处可以有重合的不同深度的像素点。</p></li><li><p>图像预处理：检测深度不连贯的边缘</p><figure><img src="https://s2.loli.net/2022/10/22/6tjCgUHTpVyIAFN.png" alt="image-20221007090910332" /><figcaption>image-20221007090910332</figcaption></figure><p>用filter把深度边缘过滤得更锐利，然后清理一些不连贯的边缘，最后根据连通性划分不同的深度边（如图2 （f）中，不同颜色表示不同深度边）。</p></li><li><p>对于每一个深度边，把LDI图中的像素点切割开，并在背景层扩展一些像素点，对扩展区域进行生成</p><figure><img src="https://s2.loli.net/2022/10/22/Ap62PxdYEDKzBkJ.png" alt="image-20221007091217942" /><figcaption>image-20221007091217942</figcaption></figure><ol type="1"><li><p>找到一个深度边，把两层的像素点切割开</p></li><li><p>对于背景层，用flood-fill like算法迭代地选取一定的已知区域作为context region，以及扩展一定的未知区域作为synthesis region</p></li><li><p>利用已知context region 生成未知synthesis region 的深度和颜色：采用基于学习的inpainting方法</p><figure><img src="https://s2.loli.net/2022/10/22/h8uGZm4XAEcL5SP.png" alt="image-20221007091716266" /><figcaption>image-20221007091716266</figcaption></figure><p>这个方法中，最关键的就是在预测color和depth之前，先预测了一下depth edges，然后把这个edges信息加进去，可以更好地预测color和depth。</p></li><li><p>将生成完毕的像素融合回LDI图像</p></li></ol></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;论文地址：&lt;a href=&quot;https://shihmengli.github.io/3D-Photo-Inpainting&quot; class=&quot;uri&quot;&gt;https://shihmengli.github.io/3D-Photo-Inpainting&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;作者：&lt;a href=&quot;https://shihmengli.github.io/&quot;&gt;Meng-Li Shih&lt;/a&gt;, &lt;a href=&quot;https://lemonatsu.github.io/&quot;&gt;Shih-Yang Su&lt;/a&gt;, &lt;a href=&quot;https://johanneskopf.de/&quot;&gt;Johannes Kopf&lt;/a&gt;, &lt;a href=&quot;https://filebox.ece.vt.edu/~jbhuang/&quot;&gt;Jia-Bin Huang&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;发表： CVPR2020&lt;/p&gt;
-&lt;p&gt;链接： &lt;a href=&quot;https://github.com/vt-vl-lab/3d-photo-inpainting&quot; class=&quot;uri&quot;&gt;https://github.com/vt-vl-lab/3d-photo-inpainting&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="3DCV" scheme="https://jyzhu.top/blog/tags/3DCV/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Reading SmoothNet: A Plug-and-Play Network for Refining Human Poses in Videos</title>
-    <link href="https://jyzhu.top/blog/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/"/>
-    <id>https://jyzhu.top/blog/Reading-SmoothNet-A-Plug-and-Play-Network-for-Refining-Human-Poses-in-Videos/</id>
-    <published>2022-09-09T06:25:03.000Z</published>
-    <updated>2022-10-22T09:16:13.032Z</updated>
-    
-    <content type="html"><![CDATA[<p>论文地址：https://arxiv.org/abs/2112.13715</p><p>作者：<a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Zeng%2C+A">Ailing Zeng</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Yang%2C+L">Lei Yang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Ju%2C+X">Xuan Ju</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Li%2C+J">Jiefeng Li</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Wang%2C+J">Jianyi Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Xu%2C+Q">Qiang Xu</a></p><p>发表： ECCV 2022</p><p>链接： <a href="https://github.com/cure-lab/SmoothNet" class="uri">https://github.com/cure-lab/SmoothNet</a></p><hr /><blockquote><p>如果你去做这个任务，会怎么做？作者做的方法和你想的有什么差异？</p></blockquote><h2 id="why">Why：</h2><ol type="1"><li>从视频估计人体姿势时，抖动是个问题</li><li>除了轻微抖动以外，有一些long- term抖动，还有因为重叠、姿势少见等原因造成的估测困难</li></ol><h2 id="what">What：</h2><figure><img src="https://s2.loli.net/2022/10/22/fRIB2t9hw8na6my.png" alt="image-20220909143919787" /><figcaption>image-20220909143919787</figcaption></figure><ol type="1"><li>一个仅基于时序的精炼网络，以其他网络的姿势估计结果作为输入。</li><li>有监督的</li><li>采用滑动窗口，基于TCN</li><li>并不是常见的那种基于学习的方法，即采用时间-空间模型来同时优化逐帧的准确率和时序的平滑性。这个方法通过学习每一个关节在长时间范围的运动特征（而不是关节之间的关系），来自然地建模身体运动中的平滑特征。</li><li>由于它仅仅需要时序信息，所以可以泛化到很多种任务上，包括2D和3D的姿势估计、body recovery等</li></ol><h2 id="how">How：</h2><ol type="1"><li><p>根据持续时长，将抖动归类为sudden jitter和long- term jitter两种。为了解决long- term的抖动问题，现有那些方法都不大行。</p><p>根据程度，又可以将抖动分为小抖动和大抖动。小抖动一般由于不可避免的误差，或者标注上的误差；大抖动则是由于图像质量差、姿势少、重叠严重等。</p><figure><img src="https://s2.loli.net/2022/10/22/pNa7bcVqzi9lGZw.png" alt="image-20220909143902334" /><figcaption>image-20220909143902334</figcaption></figure></li><li><p>将误差归类为相邻帧之间的抖动造成的误差（jitter error）和模型估计结果与真实结果之间的偏差（bias error）这两种。现有那些方法并没有将这两类误差解耦</p></li><li><p>提出了basic smoothnet和正经smoothnet。</p><ol type="1"><li><figure><img src="https://s2.loli.net/2022/10/22/Zf6lpahbHrRG7kF.png" alt="image-20220909154626864" /><figcaption>image-20220909154626864</figcaption></figure><p>Basic smoothnet，FCN是backbone。通过长度为T的滑窗，每次传入T帧图像，包含C个channels。</p><figure><img src="https://s2.loli.net/2022/10/22/hRcX2MCx8SnHZfz.png" alt="image-20220909155504588" /><figcaption>image-20220909155504588</figcaption></figure><p>权重<span class="math inline">\(w_t^l\)</span>和偏差<span class="math inline">\(b^l\)</span>是第<span class="math inline">\(t_{th}\)</span>帧的，并且在不同的channel之间是共享的。</p></li><li><figure><img src="https://s2.loli.net/2022/10/22/uCJgF8M6tG5S1PB.png" alt="image-20220909155701901" /><figcaption>image-20220909155701901</figcaption></figure><p>完整的motion- aware smoothnet就是加上了速度和加速度两个模块。</p><p>因为jitter的一个衡量方式就是加速度，所以把加速度直观地显示在模型中是一个很显然的方式。给定预测出的姿势<span class="math inline">\(\hat Y\)</span>，速度就是两帧之间相减，得到 <span class="math display">\[\hat V_{i,t} = \hat Y_{i,t} − \hat Y_{i,t−1}\]</span> 加速度就是速度之间的差： <span class="math display">\[\hat A_{i,t} = \hat V_{i,t} − \hat V_{i,t−1}\]</span></p></li></ol></li><li><p>loss就是两个：</p><ol type="1"><li><p>ground truth pose和估计pose之间的误差： <span class="math display">\[L_{pose} = \frac{1}{T\times C} \sum_{t=0}^T \sum_{i=0}^C |\hat G_{i,t} − Y_{i,t}|,\]</span></p></li><li><p>ground truth 加速度和估计加速度之间的误差： <span class="math display">\[L_{acc} = \frac{1}{(T-2)\times C} \sum_{t=0}^T \sum_{i=0}^C |\hat G&#39;&#39;_{i,t} − A_{i,t}|,\]</span></p></li></ol></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;论文地址：https://arxiv.org/abs/2112.13715&lt;/p&gt;
-&lt;p&gt;作者：&lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Zeng%2C+A&quot;&gt;Ailing Zeng&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Yang%2C+L&quot;&gt;Lei Yang&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Ju%2C+X&quot;&gt;Xuan Ju&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Li%2C+J&quot;&gt;Jiefeng Li&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Wang%2C+J&quot;&gt;Jianyi Wang&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/search/cs?searchtype=author&amp;amp;query=Xu%2C+Q&quot;&gt;Qiang Xu&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;发表： ECCV 2022&lt;/p&gt;
-&lt;p&gt;链接： &lt;a href=&quot;https://github.com/cure-lab/SmoothNet&quot; class=&quot;uri&quot;&gt;https://github.com/cure-lab/SmoothNet&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
     
   </entry>
   
