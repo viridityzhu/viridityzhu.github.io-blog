@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
@@ -24,18 +24,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
-<meta name="description" content="References: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;45131536 https:&#x2F;&#x2F;hsinjhao.github.io&#x2F;2019&#x2F;05&#x2F;22&#x2F;KL-DivergenceIntroduction&#x2F; https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2018-05-29-2 # 含义 - 一句话：KL散度可以用来衡量两个分布之间的差异&#x2F;匹配程度">
+<meta name="description" content="References: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;45131536 https:&#x2F;&#x2F;hsinjhao.github.io&#x2F;2019&#x2F;05&#x2F;22&#x2F;KL-DivergenceIntroduction&#x2F; https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2018-05-29-2  含义  一句话：KL散度可以用来衡量两个分布之间的差异&#x2F;匹配程度。但">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KL散度 （Kullback-Leibler Divergence，相对熵）">
 <meta property="og:url" content="https://jyzhu.top/blog/KL%E6%95%A3%E5%BA%A6-%EF%BC%88Kullback-Leibler-Divergence,%E7%9B%B8%E5%AF%B9%E7%86%B5%EF%BC%89/index.html">
 <meta property="og:site_name" content="Tianke Youke">
-<meta property="og:description" content="References: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;45131536 https:&#x2F;&#x2F;hsinjhao.github.io&#x2F;2019&#x2F;05&#x2F;22&#x2F;KL-DivergenceIntroduction&#x2F; https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2018-05-29-2 # 含义 - 一句话：KL散度可以用来衡量两个分布之间的差异&#x2F;匹配程度">
+<meta property="og:description" content="References: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;45131536 https:&#x2F;&#x2F;hsinjhao.github.io&#x2F;2019&#x2F;05&#x2F;22&#x2F;KL-DivergenceIntroduction&#x2F; https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2018-05-29-2  含义  一句话：KL散度可以用来衡量两个分布之间的差异&#x2F;匹配程度。但">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/04/12/yDOmFUz2IMvjCbh.png">
 <meta property="article:published_time" content="2023-10-11T20:04:11.000Z">
-<meta property="article:modified_time" content="2024-04-11T20:07:54.408Z">
+<meta property="article:modified_time" content="2024-04-12T12:59:11.287Z">
 <meta property="article:author" content="Jiayin Zhu">
-<meta property="article:tag" content="CV">
+<meta property="article:tag" content="Computer Vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2024/04/12/yDOmFUz2IMvjCbh.png">
 
@@ -101,7 +101,7 @@
         <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
         <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">85</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">84</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">182</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -159,7 +159,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">讨论</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AB%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">含义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E7%86%B5"><span class="nav-number">2.0.1.</span> <span class="nav-text">理解熵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%9A%84%E5%8E%8B%E7%BC%A9"><span class="nav-number">4.</span> <span class="nav-text">信息的压缩</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -183,7 +183,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">84</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -329,12 +329,33 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>References: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45131536" class="uri">https://zhuanlan.zhihu.com/p/45131536</a> <a target="_blank" rel="noopener" href="https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/" class="uri">https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/</a> https://www.jiqizhixin.com/articles/2018-05-29-2 # 含义 - 一句话：KL散度可以用来<strong>衡量两个分布之间的差异/匹配程度</strong>。但它并不是一个真正的度量或者距离，因为它不具有对称性。 - 广义的散度指的是一类运算，它将矢量空间上的一个矢量场对应到一个标量场上，通俗的讲，就是输入一组矢量，返回一个标量。 - 在统计学意义上来说，KL散度可以用来衡量两个分布之间的差异程度。若两者差异越小，KL散度越小，反之亦反。当两分布一致时，其KL散度为0。正是因为其可以衡量两个分布之间的差异，所以在VAE、EM、GAN中均有使用到KL散度。 - 在信息论中，其可理解为编码系统对信息进行编码时所需要的平均附加信息量。 # 定义 <img src="https://s2.loli.net/2024/04/12/yDOmFUz2IMvjCbh.png" /> ### 理解熵 - 熵是用来表示信息量。 - 首先，我们考虑一个离散的随机变量 <span class="math inline">\(x\)</span> 。当我们观察到这个变量的一个具体值的时候，我们接收到了多少信息呢？ - 信息量可以被看成在学习 <span class="math inline">\(x\)</span> 的值的时候的“惊讶程度”。如果有人告诉我们一个相当不可能的事件发生了，我们收到的信息要多于我们被告知某个很可能发生的事件发生时收到的信息。如果我们知道某件事情一定会发生，那么我们就不会接收到信息。于是，我们对于信息内容的度量将依赖于概率分布<span class="math inline">\(p(x)\)</span> ，因此我们想要寻找一个函数<span class="math inline">\(h(x)\)</span> ，它是概率<span class="math inline">\(p(x)\)</span>的单调递增函数，表达了信息的内容。 <span class="math inline">\(h(.)\)</span> 的形式可以这样寻找：如果我们有两个不相关的事件 x 和 y ，那么我们观察到两个事件同时发生时获得的信息应该等于观察到事件各自发生时获得的信息之和，即 <span class="math inline">\(h(x)+h(y)=h(x,y)\)</span> 。两个不相关事件是统计独立的，因此<span class="math inline">\(p(x)p(y)=p(x,y)\)</span>。根据这两个关系，很容易看出<span class="math inline">\(h(.)\)</span>一定与<span class="math inline">\(p(.)\)</span> 的对数有关。因此，我们有： <span class="math display">\[
-h(x)=-\log p(x)
-\]</span> 其中，负号确保了信息一定是正数或者是零。注意，低概率事件<span class="math inline">\(x\)</span> 对应于高的信息量。 - 现在假设一个发送者想传输一个<strong>随机变量</strong>的值给接收者。这个过程中，他们传输的<strong>平均信息量</strong>通可以通过求上式关于概率分布 p(x) 的期望得到。这个期望值就是熵Entropy： <span class="math display">\[
-H[x]=-\sum_x p(x)\log p(x)
-\]</span> - 它是这个随机变量的平均信息量。 ## KL散度的性质 1. <span class="math inline">\(D_{KL}(p||q)&gt;=0\)</span>， 当且仅当<span class="math inline">\(p(x)=q(x)\)</span>时取等号 2. 不满足对称性，即<span class="math inline">\(D_KL(p||q)\neq D_KL(q||p)\)</span></p>
+<p>References: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45131536" class="uri">https://zhuanlan.zhihu.com/p/45131536</a> <a target="_blank" rel="noopener" href="https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/" class="uri">https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/</a> https://www.jiqizhixin.com/articles/2018-05-29-2</p>
 </blockquote>
+<h1 id="含义">含义</h1>
+<ul>
+<li>一句话：KL散度可以用来<strong>衡量两个分布之间的差异/匹配程度</strong>。但它并不是一个真正的度量或者距离，因为它不具有对称性。</li>
+<li>广义的散度指的是一类运算，它将矢量空间上的一个矢量场对应到一个标量场上，通俗的讲，就是输入一组矢量，返回一个标量。</li>
+<li>在统计学意义上来说，KL散度可以用来衡量两个分布之间的差异程度。若两者差异越小，KL散度越小，反之亦反。当两分布一致时，其KL散度为0。正是因为其可以衡量两个分布之间的差异，所以在VAE、EM、GAN中均有使用到KL散度。</li>
+<li>在信息论中，其可理解为编码系统对信息进行编码时所需要的平均附加信息量。</li>
+</ul>
+<h1 id="定义">定义</h1>
+<p><img src="https://s2.loli.net/2024/04/12/yDOmFUz2IMvjCbh.png" /></p>
+<h3 id="理解熵">理解熵</h3>
+<ul>
+<li>熵是用来表示信息量。</li>
+<li>首先，我们考虑一个离散的随机变量 <span class="math inline">\(x\)</span> 。当我们观察到这个变量的一个具体值的时候，我们接收到了多少信息呢？</li>
+<li>信息量可以被看成在学习 <span class="math inline">\(x\)</span> 的值的时候的“惊讶程度”。如果有人告诉我们一个相当不可能的事件发生了，我们收到的信息要多于我们被告知某个很可能发生的事件发生时收到的信息。如果我们知道某件事情一定会发生，那么我们就不会接收到信息。于是，我们对于信息内容的度量将依赖于概率分布<span class="math inline">\(p(x)\)</span> ，因此我们想要寻找一个函数<span class="math inline">\(h(x)\)</span> ，它是概率<span class="math inline">\(p(x)\)</span>的单调递增函数，表达了信息的内容。 <span class="math inline">\(h(.)\)</span> 的形式可以这样寻找：如果我们有两个不相关的事件 x 和 y ，那么我们观察到两个事件同时发生时获得的信息应该等于观察到事件各自发生时获得的信息之和，即 <span class="math inline">\(h(x)+h(y)=h(x,y)\)</span> 。两个不相关事件是统计独立的，因此<span class="math inline">\(p(x)p(y)=p(x,y)\)</span>。根据这两个关系，很容易看出<span class="math inline">\(h(.)\)</span>一定与<span class="math inline">\(p(.)\)</span> 的对数有关。因此，我们有： <span class="math display">\[
+ h(x)=-\log p(x)
+\]</span> 其中，负号确保了信息一定是正数或者是零。注意，低概率事件<span class="math inline">\(x\)</span> 对应于高的信息量。</li>
+<li>现在假设一个发送者想传输一个<strong>随机变量</strong>的值给接收者。这个过程中，他们传输的<strong>平均信息量</strong>通可以通过求上式关于概率分布 p(x) 的期望得到。这个期望值就是熵Entropy： <span class="math display">\[
+  H[x]=-\sum_x p(x)\log p(x)
+\]</span></li>
+<li>它是这个随机变量的平均信息量。 ## KL散度的性质</li>
+</ul>
+<ol type="1">
+<li><span class="math inline">\(D_{KL}(p||q)&gt;=0\)</span>， 当且仅当<span class="math inline">\(p(x)=q(x)\)</span>时取等号</li>
+<li>不满足对称性，即<span class="math inline">\(D_KL(p||q)\neq D_KL(q||p)\)</span></li>
+</ol>
 <h1 id="讨论">讨论</h1>
 <ul>
 <li>KL散度是不对称的。因此不能作为一个距离度量，在使用时往往有一些问题。</li>
@@ -347,8 +368,9 @@ H[x]=-\sum_x p(x)\log p(x)
 \]</span> 当<span class="math inline">\(f(X)=X\log X\)</span>时，就是KL散度了。</li>
 </ol></li>
 <li>Bregman散度：这是从另一个角度来思考“距离”。最常见的均方欧氏距离，推广到任意维度的函数之间的距离，同样只是需要一个凸函数就能表达了。这个凸函数的取值，可以表示一大片不同的散度，都属于Bregman散度的特例</li>
-<li>Wasserstein距离。这是用来解决一个问题的：如果两个分布离得太远，完全没有重叠，那么KL散度的值会失去意义。这在深度学习中意味着这一点梯度为0——梯度消失！ Wasserstein距离可以解决这种问题，也叫做Earth-Mover（推土机）距离：当我们希望把一堆土推移成另一堆土的形状和位置，推土代价定义为<strong>移动土的量*土移动的距离</strong>，这个代价就是两个分布的Wasserstein距离。 Wessertein距离相比KL散度和JS散度的<strong>优势</strong>在于：即使两个分布的支撑集没有重叠或者重叠非常少，仍然能反映两个分布的远近。WGAN就是Wasserstein距离比较经典的应用之一。 # 信息的压缩</li>
+<li>Wasserstein距离。这是用来解决一个问题的：如果两个分布离得太远，完全没有重叠，那么KL散度的值会失去意义。这在深度学习中意味着这一点梯度为0——梯度消失！ Wasserstein距离可以解决这种问题，也叫做Earth-Mover（推土机）距离：当我们希望把一堆土推移成另一堆土的形状和位置，推土代价定义为<strong>移动土的量*土移动的距离</strong>，这个代价就是两个分布的Wasserstein距离。 Wessertein距离相比KL散度和JS散度的<strong>优势</strong>在于：即使两个分布的支撑集没有重叠或者重叠非常少，仍然能反映两个分布的远近。WGAN就是Wasserstein距离比较经典的应用之一。</li>
 </ul>
+<h1 id="信息的压缩">信息的压缩</h1>
 <ol type="1">
 <li>假如我们有一组样本，每个样本分别有不同的值。可以直接记下每个样本的信息。</li>
 <li>也可以用这个样本的分布来表示同样的信息量。（每个取值的概率）</li>
@@ -361,6 +383,24 @@ H[x]=-\sum_x p(x)\log p(x)
     
     
       
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Introduction-to-NeRF/" rel="bookmark">Introduction to NeRF</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Learning-NeRF/" rel="bookmark">Learning NeRF</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Manipulate-Neural-Fields/" rel="bookmark">Manipulate Neural Fields</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/NeRF-Differentiable-Forward-Maps/" rel="bookmark">NeRF Differentiable Forward Maps</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/NeRF-Hybrid-representations/" rel="bookmark">NeRF Hybrid representations</a></div>
+    </li>
+  </ul>
 
 
     <footer class="post-footer">
@@ -402,7 +442,7 @@ H[x]=-\sum_x p(x)\log p(x)
 </div>
 
           <div class="post-tags">
-              <a href="/blog/tags/CV/" rel="tag"># CV</a>
+              <a href="/blog/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
           </div>
 
         

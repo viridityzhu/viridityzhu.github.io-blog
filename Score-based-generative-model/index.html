@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
@@ -24,17 +24,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
-<meta name="description" content="references: https:&#x2F;&#x2F;yang-song.net&#x2F;blog&#x2F;2021&#x2F;score&#x2F;https:&#x2F;&#x2F;deeplearning.neuromatch.io&#x2F;tutorials&#x2F;W2D4_GenerativeModels&#x2F;student&#x2F;W2D4_Tutorial2.html# https:&#x2F;&#x2F;lilianweng.github.io&#x2F;posts&#x2F;2021-07-11-diffusi">
+<meta name="description" content="Score-based models v.s. diffusion models  references: https:&#x2F;&#x2F;yang-song.net&#x2F;blog&#x2F;2021&#x2F;score&#x2F;https:&#x2F;&#x2F;deeplearning.neuromatch.io&#x2F;tutorials&#x2F;W2D4_GenerativeModels&#x2F;student&#x2F;W2D4_Tutorial2.html# https:&#x2F;&#x2F;lili">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Score-based generative model">
 <meta property="og:url" content="https://jyzhu.top/blog/Score-based-generative-model/index.html">
 <meta property="og:site_name" content="Tianke Youke">
-<meta property="og:description" content="references: https:&#x2F;&#x2F;yang-song.net&#x2F;blog&#x2F;2021&#x2F;score&#x2F;https:&#x2F;&#x2F;deeplearning.neuromatch.io&#x2F;tutorials&#x2F;W2D4_GenerativeModels&#x2F;student&#x2F;W2D4_Tutorial2.html# https:&#x2F;&#x2F;lilianweng.github.io&#x2F;posts&#x2F;2021-07-11-diffusi">
+<meta property="og:description" content="Score-based models v.s. diffusion models  references: https:&#x2F;&#x2F;yang-song.net&#x2F;blog&#x2F;2021&#x2F;score&#x2F;https:&#x2F;&#x2F;deeplearning.neuromatch.io&#x2F;tutorials&#x2F;W2D4_GenerativeModels&#x2F;student&#x2F;W2D4_Tutorial2.html# https:&#x2F;&#x2F;lili">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/04/12/rGvERP3W1gXV964.png">
 <meta property="og:image" content="https://s2.loli.net/2024/04/12/6cuXBCoHShsMiaO.png">
 <meta property="article:published_time" content="2024-04-09T20:08:34.000Z">
-<meta property="article:modified_time" content="2024-04-11T20:10:24.922Z">
+<meta property="article:modified_time" content="2024-04-12T12:58:03.542Z">
 <meta property="article:author" content="Jiayin Zhu">
 <meta property="article:tag" content="generative model">
 <meta property="article:tag" content="diffusion model">
@@ -103,7 +103,7 @@
         <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
         <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">85</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">84</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">182</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -161,7 +161,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#diffusion-models"><span class="nav-number">1.</span> <span class="nav-text">diffusion models</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#score-based-models-v.s.-diffusion-models"><span class="nav-number">1.</span> <span class="nav-text">Score-based models v.s. diffusion models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#score-function"><span class="nav-number">2.</span> <span class="nav-text">Score function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3-noise-%E4%BB%80%E4%B9%88%E4%BA%8B"><span class="nav-number">3.</span> <span class="nav-text">关 noise 什么事？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#diffusion-models"><span class="nav-number">4.</span> <span class="nav-text">diffusion models</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -185,7 +185,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">84</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -312,7 +312,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">字数:</span>
-      <span>2.1k</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -330,17 +330,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <blockquote>
-<p>references: <a target="_blank" rel="noopener" href="https://yang-song.net/blog/2021/score/" class="uri">https://yang-song.net/blog/2021/score/</a><a target="_blank" rel="noopener" href="https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#" class="uri">https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#</a> https://lilianweng.github.io/posts/2021-07-11-diffusion-models/ # Score-based models v.s. diffusion models - 一开始两者独立发展，所以有不同的理论依据和术语 - 最后两者殊途同归：得到一样的模型 # Score function 1. 生成模型可以归类为两类： 1. 显式的，基于likelihood的模型，比如autoregressive，normalizing flow，VAE。这些方法通过近似最大似然来建模概率密度分布。问题是，为了计算likelihood，需要一个normalizing constant这个量，它要么是未知的，要么要想尽办法通过其他的限制来估计或者消除。所以这类模型比较复杂。 2. 隐式的，直接建模一个概率分布的sample process，而不是概率分布本身。比如GAN。但是它需要对抗学习，这比较不稳定，而且可能有模式坍塌的问题。 2. Score function和第一类相关，它也是建模likelihood——但不是它本身，而是跟它相关的一个量，即 Stein score function。这样的一个神奇好处是，可以直接消除normalizing constant这个量。 <img src="https://s2.loli.net/2024/04/12/rGvERP3W1gXV964.png" /> <em>（图中，等高线表示一个概率分布，箭头表示它的分数场。score-based model就是建模这些分数场)</em> 3. 具体一点来说： 1. 假设给定一个数据集 <span class="math inline">\({x_1,x_2,...,x_N}\)</span>，每个数据都是从一个未知的数据分布 <span class="math inline">\(p(x)\)</span> 采样。我们用一个生成模型来生成新的数据，这些数据都是从这个分布中采样的 2. 我们要想办法表示这个概率分布。前面说的基于likelihood的模型是这么做的：直接建模这个概率密度函数： <span class="math display">\[
-p_\theta(x)=\frac{e^{-f_\theta(x)}}{Z_\theta}
-\]</span> 其中这个 <span class="math inline">\(Z_\theta&gt;0\)</span> 就是依赖于 <span class="math inline">\(\theta\)</span> 的那个normalizing constant了。 这个 <span class="math inline">\(p_\theta(x)\)</span> 训练的目标函数就是最大log-likelihood： <span class="math display">\[
-\max_\theta\sum^N_{i=1}\log p_\theta(x_i)
-\]</span> 3. 前面说了，问题就是 <span class="math inline">\(Z_\theta\)</span> 很难估计。为了避开估计它，我们的神经网络不再直接估计概率分布，而是估计它的分数（概率密度函数的log的梯度）： <span class="math display">\[
-s_\theta(x)=\nabla_x\log p(x)=-\nabla_x f_\theta(x)-\nabla_x\log Z_\theta = -\nabla_x f_\theta(x)
-\]</span> 去掉了 <span class="math inline">\(Z_\theta\)</span>！ 4. 训练的目标函数是 <strong>Fisher divergence</strong>： <span class="math display">\[
-\mathbb E_{p(x)}[\|\nabla_x\log p(x)-s_\theta(x)\|^2_2]
-\]</span> 5. 现在的问题就是，上式中的 <span class="math inline">\(\nabla_x\log p(x)\)</span>未知。但是很好解决，一种叫<strong>score matching</strong>的方法可以直接最小化 <strong>Fisher divergence</strong>，不需要知道真实的score。 6. 最后的问题就是得到了这个 score function 之后，怎么从中采样新的数据了。<strong>Langevin dynamics</strong> 提出了一种迭代式的采样方法，就是和diffusion的步骤一模一样的。相当于从空间中任意一个位置初始化，然后顺着score function往高概率密度的方向优化，足够多的步骤之后就到了峰值处。 # 关 noise 什么事？</p>
+        <h1 id="score-based-models-v.s.-diffusion-models">Score-based models v.s. diffusion models</h1>
+<blockquote>
+<p>references: <a target="_blank" rel="noopener" href="https://yang-song.net/blog/2021/score/" class="uri">https://yang-song.net/blog/2021/score/</a><a target="_blank" rel="noopener" href="https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#" class="uri">https://deeplearning.neuromatch.io/tutorials/W2D4_GenerativeModels/student/W2D4_Tutorial2.html#</a> https://lilianweng.github.io/posts/2021-07-11-diffusion-models/</p>
 </blockquote>
+<ul>
+<li>一开始两者独立发展，所以有不同的理论依据和术语</li>
+<li>最后两者殊途同归：得到一样的模型</li>
+</ul>
+<h1 id="score-function">Score function</h1>
+<ol type="1">
+<li>生成模型可以归类为两类：
+<ol type="1">
+<li>显式的，基于likelihood的模型，比如autoregressive，normalizing flow，VAE。这些方法通过近似最大似然来建模概率密度分布。问题是，为了计算likelihood，需要一个normalizing constant这个量，它要么是未知的，要么要想尽办法通过其他的限制来估计或者消除。所以这类模型比较复杂。</li>
+<li>隐式的，直接建模一个概率分布的sample process，而不是概率分布本身。比如GAN。但是它需要对抗学习，这比较不稳定，而且可能有模式坍塌的问题。</li>
+</ol></li>
+<li>Score function和第一类相关，它也是建模likelihood——但不是它本身，而是跟它相关的一个量，即 Stein score function。这样的一个神奇好处是，可以直接消除normalizing constant这个量。 <img src="https://s2.loli.net/2024/04/12/rGvERP3W1gXV964.png" /> <em>（图中，等高线表示一个概率分布，箭头表示它的分数场。score-based model就是建模这些分数场)</em></li>
+<li>具体一点来说：
+<ol type="1">
+<li>假设给定一个数据集 <span class="math inline">\({x_1,x_2,...,x_N}\)</span>，每个数据都是从一个未知的数据分布 <span class="math inline">\(p(x)\)</span> 采样。我们用一个生成模型来生成新的数据，这些数据都是从这个分布中采样的</li>
+<li>我们要想办法表示这个概率分布。前面说的基于likelihood的模型是这么做的：直接建模这个概率密度函数： <span class="math display">\[
+ p_\theta(x)=\frac{e^{-f_\theta(x)}}{Z_\theta}
+ \]</span> 其中这个 <span class="math inline">\(Z_\theta&gt;0\)</span> 就是依赖于 <span class="math inline">\(\theta\)</span> 的那个normalizing constant了。 这个 <span class="math inline">\(p_\theta(x)\)</span> 训练的目标函数就是最大log-likelihood： <span class="math display">\[
+  \max_\theta\sum^N_{i=1}\log p_\theta(x_i)
+ \]</span></li>
+<li>前面说了，问题就是 <span class="math inline">\(Z_\theta\)</span> 很难估计。为了避开估计它，我们的神经网络不再直接估计概率分布，而是估计它的分数（概率密度函数的log的梯度）： <span class="math display">\[
+s_\theta(x)=\nabla_x\log p(x)=-\nabla_x f_\theta(x)-\nabla_x\log Z_\theta = -\nabla_x f_\theta(x)
+\]</span> 去掉了 <span class="math inline">\(Z_\theta\)</span>！</li>
+<li>训练的目标函数是 <strong>Fisher divergence</strong>： <span class="math display">\[
+ \mathbb E_{p(x)}[\|\nabla_x\log p(x)-s_\theta(x)\|^2_2]
+ \]</span></li>
+<li>现在的问题就是，上式中的 <span class="math inline">\(\nabla_x\log p(x)\)</span>未知。但是很好解决，一种叫<strong>score matching</strong>的方法可以直接最小化 <strong>Fisher divergence</strong>，不需要知道真实的score。</li>
+<li>最后的问题就是得到了这个 score function 之后，怎么从中采样新的数据了。<strong>Langevin dynamics</strong> 提出了一种迭代式的采样方法，就是和diffusion的步骤一模一样的。相当于从空间中任意一个位置初始化，然后顺着score function往高概率密度的方向优化，足够多的步骤之后就到了峰值处。</li>
+</ol></li>
+</ol>
+<h1 id="关-noise-什么事">关 noise 什么事？</h1>
 <p>是这样的，前面提到的方法已经讲清楚了神经网络建模和目标函数。但是假如直接拿着数据集（比如图像）让网络学习的话，效果并不好。因为这个score function在低概率密度的区域样本很少，学得也很不好。</p>
 <p><img src="https://s2.loli.net/2024/04/12/6cuXBCoHShsMiaO.png" /></p>
 <p>为了解决这个问题，我们才往数据中加 noise，在被噪声扰动后的数据集上训练网络。这些扰动后的数据点极大地扩充了数据集，最主要的是能填充那些低概率密度的分布区域。</p>
