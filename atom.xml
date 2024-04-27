@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2024-04-12T13:08:47.664Z</updated>
+  <updated>2024-04-27T11:01:20.966Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Borges and AI 读后感</title>
+    <link href="https://jyzhu.top/blog/Reading-Borges-and-AI/"/>
+    <id>https://jyzhu.top/blog/Reading-Borges-and-AI/</id>
+    <published>2024-04-27T10:57:45.000Z</published>
+    <updated>2024-04-27T11:01:20.966Z</updated>
+    
+    <content type="html"><![CDATA[<p>论文地址：<a href="https://arxiv.org/abs/2310.01425" class="uri">https://arxiv.org/abs/2310.01425</a></p><p>作者：<a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Bottou,+L">Léon Bottou</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Schölkopf,+B">Bernhard Schölkopf</a></p><p>发表： Arxiv</p><hr /><p>首先我们可以用博尔赫斯的“小径分叉的花园”的隐喻，来类比大语言模型。人们做出一个选择的时候，所付出的代价是放弃了其他所有可能的选择。那如果把所有可能的选择完全考虑进来，就能得到一个充满无数可能性分叉的花园。这个花园，就可以类比“完美语言模型”。它包含了所有可能的人类语言的组合。当它在聊天框输出一串文字的时候，就像是从分叉的小径中选择其中一条一样，或者是人类做出一个选择的时候一样。未被选择的词语构成了其他的分叉。“语言模型”这个全包的概念，是完美的，包含了所有语言的可能性。</p><p>实际上，“完美语言模型”就像一本预言书，里面包含了所有我们想要听到的话、可能听到的话。唯一能影响它输出的内容的，就是和它展开对话的那个人。我们用prompt作为引子来引导语言模型的生成，这其实就是对无限的可能性施加限制，prompt完全决定了语言模型的输出。</p><p>我们可以先从“幻觉”这个所谓的问题讨论起。其实这不是“幻觉”，而是一种“虚构”，是从人类语言中所有有可能的分叉中，适当地挑选出可能性高的那些，借用了一些合理的逻辑，虚构了另一套合理的故事。“完美的语言模型”，倒不如说是一个“虚构小说机器”。</p><p>一类人认为有一些大逆不道的话永远不该存在，所以要求审查LLM；更多的另一类人是希望LLM真的像智能一样为人服务、创造价值，所以要在必要的场合说必要的话。两者为了各自的目的，都希望对LLM这种本身不包含任何是非对错评判偏差的“完美语言模型”进行剪枝，去掉不想要的部分。所用的手段就是用人工精挑细选的语料来微调，或者叫human feedback。</p><p>实际上这种审查有很多的问题。最大的问题是，有了“虚构小说机器”之后，它对我们人类文化的影响比想象中大，我们会依赖它来塑造我们的知识和对未来的想象，因此它会影响整个人类的文化。当来到这个层次后，“审查”，或者说“净化”，就变得危险了，因为谁都想把自己的那一套强加在LLM之上，可是谁的标准才是真的标准呢，或者我们真的能有真正的“净化”标准吗？</p><p>“在未来，几乎每个人都使用语言模型来丰富他们的思维，对语言模型所写内容的控制权将成为对我们所思考内容的控制权。如此强大的力量能存在而不被滥用吗？</p><p>“有些人担心小说机器是一种无所不知的人工智能，可能会比我们活得更久；然而，更黑暗的诱惑是让我们的思想屈服于这个现代的皮提亚，不受真理和意图的影响，但却可以被他人操纵。如果我们一直把小说机器误认为是可以减轻我们思考负担的人工智能，那么语言模型无休止的喋喋不休会让我们像苦苦挣扎的图书馆员一样疯狂。然而，作为小说机器，它们的故事可以丰富我们的生活，帮助我们重温过去，了解现在，甚至瞥见未来。”</p><p>作者最后说，人们发明的这种“机器”，不仅能写故事，而且可以写故事的所有变体，这是人类历史上一个重要的里程碑，堪比印刷机的发明。或者，甚至可以比作早在印刷或书写被发明之前的，在洞穴壁画之前就出现的，一种塑造人类的艺术：讲故事的艺术。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;论文地址：&lt;a href=&quot;https://arxiv.org/abs/2310.01425&quot; class=&quot;uri&quot;&gt;https://arxiv.org/abs/2310.01425&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作者：&lt;a href=&quot;https://arxiv.org/sea</summary>
+      
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="Literature" scheme="https://jyzhu.top/blog/tags/Literature/"/>
+    
+    <category term="AI" scheme="https://jyzhu.top/blog/tags/AI/"/>
+    
+  </entry>
   
   <entry>
     <title>Score-based generative model</title>
@@ -520,33 +547,6 @@
       
       
     <summary type="html">&lt;p&gt;I am currently burying myself into the sea of NeRF. I plan to archive my learning notes here. I am still a beginner, so the notes absolut</summary>
-      
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Prior based reconstruction of neural fields</title>
-    <link href="https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/"/>
-    <id>https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/</id>
-    <published>2023-01-12T09:33:39.000Z</published>
-    <updated>2023-01-12T10:13:12.867Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="prior-based-reconstruction-of-neural-fields">2.4. Prior-based reconstruction of neural fields</h2><p>Sounds like a one-shot task: instead of fitting and optimizing a neural field each for one scene; let's learn a prior distribution of neural field. Then, given a specific scene, it adjusts the neural field in just one forward.</p><figure><img src="https://s2.loli.net/2023/01/12/rMOwKRJBuedFm1n.png" alt="image-20221211234430727" /><figcaption>image-20221211234430727</figcaption></figure><h3 id="how-does-the-latent-code-look-like">How does the latent code look like?</h3><figure><img src="https://s2.loli.net/2023/01/12/A41EOlYCBXrUxto.png" alt="image-20221211234923290" /><figcaption>image-20221211234923290</figcaption></figure><ul><li>Global: not local. A small latent code represents a neural field<ul><li>main limitation: can only represent very simple (single) object. coz if you have multiple objects in a scene, the degree of freedom grows non-linearly.</li><li><strong>How about giving the natural language descriptions as conditions???</strong></li></ul></li><li>Local: you get different latent codes considering the locality where you are. So, you have a prior 3D data structure to store the latent codes.<ul><li>3D point clouds -&gt; grids -&gt; triplanes interpolation</li></ul></li></ul><blockquote><p>Convolutional Occupancy Networks</p></blockquote><h3 id="autodecoder-instead-of-encoder-decoder">Autodecoder instead of Encoder-decoder</h3><figure><img src="https://s2.loli.net/2023/01/12/zr2GnpBXeZDJUqa.png" alt="image-20221212005012783" /><figcaption>image-20221212005012783</figcaption></figure><ul><li><p>Encoder is a 2D CNN structure.</p></li><li><p>But while using autodecoder, the backpropogate through the forward map (i.e., the neural renderer) will give the 3D structural information to the latent codes directly. <span class="math display">\[\text{latent code }\hat z=\arg \min_z \|\text{Render(}\Phi)-g.t.\|\]</span> <img src="https://s2.loli.net/2023/01/12/FQjMgibmNtIP4ca.png" alt="image-20221212004946040" /></p></li></ul><p><strong>Instead of trying to build the encoder, sometimes just use the backpropogation through the forward map is helpful.</strong></p><h3 id="light-field-networks----dont-need-to-render-anymore">Light field networks -- Don't need to render anymore</h3><figure><img src="https://s2.loli.net/2023/01/12/FVP15fmBYz8rEoe.png" alt="image-20221212005908926" /><figcaption>image-20221212005908926</figcaption></figure><p>Instead of learning a NeRF that you use a neural renderer to generate all points along a ray; you can learn a network to directly give you a color along a ray. So you do not use a 3d coordinate as the query, instead, use a ray.</p><p>But this do not work in complicated task yet.</p><figure><img src="https://s2.loli.net/2023/01/12/mAFx6pzqaIuUMin.png" alt="image-20221212010316991" /><figcaption>image-20221212010316991</figcaption></figure><h3 id="outlook">Outlook</h3><ul><li>You don't need to use 600 images of a scene to reconstruct it. Synthesis images?</li><li>Open minds: other ways to skip the expensive forward map? (e.g., the light field)</li><li>Understanding the scene like humans do: disentangle different objects</li><li>Local conditioning methods? Regular grids are easy to tackle with, but it's harder for point clouds / factorized representations</li><li>Transformers: seems like local conditioning</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;prior-based-reconstruction-of-neu</summary>
       
     
     
