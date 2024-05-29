@@ -23,19 +23,6 @@
     
     
     <entry>
-      <title></title>
-      <link href="/blog/hello%20i%20try%20to%20use%20this%20keyboard/"/>
-      <url>/blog/hello%20i%20try%20to%20use%20this%20keyboard/</url>
-      
-        <content type="html"><![CDATA[<p>hello i try to use this keyboard.</p><p>it sounds ok.</p><p>but it is really slight</p><p>i mean i cannot type in a strong way otherwise it will be i don't know.</p><p>it sounds ok and feels ok to me</p><p>well all the keys are correct no?</p><p>qwertyuiop[];'zxcvbnm,./A</p><p>The right shift is just right to me</p><p>then I have the arrow keys</p><p>it is good</p><p>then there're several useful commonly used function keys</p><p>such as delete home end pgup pgdn</p><p>这个键盘打字挺开心说真的</p><p>还可以的就是打字好像不是特别好</p><p>我是说我自己打字不是很好</p><p>不过还行</p><p>不知道在说什么</p><p>没事</p><p>不重要</p><p>准备读一下论文？</p><p>angela让读的</p><p>这个噼里啪啦的声音 但是说实话真的在认真打字工作的时候并不会注意到它</p><p>不过一旦注意到还是很开心的</p><p>hello 老婆你好我是小霖，为了让你的输入法认识我，我决定多打几遍小霖小霖是小霖，嘿嘿。弟弟在外面怎么突然没声音了咧，妈妈咋突然不说话了？话说既然永远都玩不到四个人一起玩的游戏，你是不是把你的手柄可以拿回来了因为不想把你的手柄弄脏了</p><p>那我等你现在去拿 不可以远程吗</p><p>哭哭哭哭、、、、、、、、</p><p>很糟糕、、、、、、、、</p><p>哭哭哭哭哭哭、、、、、、 算了！</p><p>看狼姐吧！</p><p>​ 就是就是计算机加思索 你你你你你您寄几啊就是你的苏你你你你你你你好我是朱珈印你是谁你是小霖我的小霖宝</p><p>哈哈哈哈咕咕咕咕嘻嘻写成</p><p>我多打几个不同的字</p><p>但是我有点不知道说什么</p><p>哈哈哈哈</p><p>床前明月光</p><p>疑是地上霜</p><p>举头望明月</p><p>低头思故乡</p><p>飞流直下三千尺</p><p>疑似银河落九天</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Borges and AI 读后感</title>
       <link href="/blog/Reading-Borges-and-AI/"/>
       <url>/blog/Reading-Borges-and-AI/</url>
@@ -400,60 +387,6 @@
     
     
     <entry>
-      <title>Learning NeRF</title>
-      <link href="/blog/Learning-NeRF/"/>
-      <url>/blog/Learning-NeRF/</url>
-      
-        <content type="html"><![CDATA[<h1 id="learning-nerf">Learning NeRF</h1><p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="reading-list">Reading List</h2><h3 id="classical">Classical</h3><ul><li><p>Mildenhall <em>et al.</em> introduced NeRF at ECCV 2020 in the now seminal <a href="https://www.matthewtancik.com/nerf">Neural Radiance Field paper</a>.</p><p>This is done by storing the density and radiance in a neural volumetric scene representation using MLPs and then rendering the volume to create new images.</p></li><li><p><a href="https://m-niemeyer.github.io/project-pages/giraffe/index.html">GIRAFFE</a>: Compositional Generative Neural Feature Fields</p></li></ul><h3 id="survey">Survey</h3><ul><li><a href="https://arxiv.org/abs/2004.03805">Apr 2020 - State of the Art on Neural Rendering</a></li></ul><h3 id="cvpr">2021CVPR</h3><p>2021年CVPR还有许多相关的精彩工作发表。例如，提升网络的泛化性：</p><ul><li><a href="https://alexyu.net/pixelnerf/">pixelNeRF</a>：将每个像素的特征向量而非像素本身作为输入，允许网络在不同场景的多视图图像上进行训练，学习场景先验，然后测试时直接接收一个或几个视图为输入合成新视图。</li><li><a href="https://ibrnet.github.io/">IBRNet</a>：学习一个适用于多种场景的通用视图插值函数，从而不用为每个新的场景都新学习一个模型才能渲染；且网络结构上用了另一个时髦的东西 Transformer。</li><li><a href="https://apchenstu.github.io/mvsnerf/">MVSNeRF</a>：训练一个具有泛化性能的先验网络，在推理的时候只用3张输入图片就重建一个新的场景。</li></ul><p>针对动态场景的NeRF:</p><ul><li><a href="https://nerfies.github.io/">Nerfies</a>：多使用了一个多层感知机来拟合形变的SE(3) field，从而建模帧间场景形变。Nerfies: Deformable Neural Radiance Fields</li><li><a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a>：多使用了一个多层感知机来拟合场景形变的displacement。</li><li><a href="https://link.zhihu.com/?target=http%3A//www.cs.cornell.edu/~zl548/NSFF/">Neural Scene Flow Fields</a>：多提出了一个scene flow fields来描述时序的场景形变。</li></ul><p>其他创新点：</p><ul><li><a href="https://kai-46.github.io/PhySG-website/">PhySG</a>：用球状高斯函数模拟BRDF（高级着色的上古神器）和环境光照，针对更复杂的光照环境，能处理非朗伯表面的反射。</li><li><a href="https://nex-mpi.github.io/">NeX</a>：用MPI（Multi-Plane Image ）代替NeRF的RGBσ作为网络的输出。</li></ul><h3 id="cvpr-1">2022 CVPR</h3><p><a href="https://ajayj.com/dreamfields">Zero-Shot Text-Guided Object Generation with <strong>Dream Fields</strong></a></p><h2 id="useful-references"><strong>Useful References:</strong></h2><blockquote><p><a href="https://markboss.me/post/nerf_at_eccv22/?continueFlag=55ed0f6189bcd6ca987e08764bcbe945">NeRF at ECCV22 - Mark Boss</a></p><p><a href="https://markboss.me/post/nerf_at_neurips22/">NeRF at NeurIPS 2022 - Mark Boss</a></p><p><a href="https://dellaert.github.io/NeRF22/">NeRF at CVPR 2022 - Frank Dellaert</a></p><p><a href="https://youtu.be/PeRRp1cFuH4">CVPR 2022 Tutorial on Neural Fields in Computer Vision</a></p></blockquote><p>Bigger to learn:</p><ul><li>[ ] Above NeRF: neural rendering</li><li>[ ] Related theories in graphics and computer vision</li><li>[ ] NeRF的一作Ben Mildenhall在SIGGRAPH 2021 Course <a href="https://www.youtube.com/watch%3Fv%3Dotly9jcZ0Jg">Advances in Neural Rendering</a>中从概率的角度推导了NeRF的体渲染公式。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Notes </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Computer Vision </tag>
-            
-            <tag> NeRF </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Manipulate Neural Fields</title>
-      <link href="/blog/Manipulate-Neural-Fields/"/>
-      <url>/blog/Manipulate-Neural-Fields/</url>
-      
-        <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="manipulate-neural-fields">2.5. Manipulate Neural Fields</h2><p>Neural fields is ready to be a prime representation, similar as point clouds or meshes, that is able to be manipulated.</p><figure><img src="https://s2.loli.net/2023/01/12/okLGyeFmMvifhZW.png" alt="image-20221212211525928" /><figcaption>image-20221212211525928</figcaption></figure><p>You can either edit the input coordinates, or edit the parameters <span class="math inline">\(\theta\)</span>.</p><p>On the other axis, you can edit through an explicit geometry, or an implicit neural fields.</p><figure><img src="https://s2.loli.net/2023/01/12/S7HWcQPh1FtdJaw.png" alt="image-20221212213802209" /><figcaption>image-20221212213802209</figcaption></figure><p>The following examples 落在不同的象限。</p><h3 id="editing-the-input-via-explicit-geometry-left-up">Editing the input via Explicit geometry (left-up)</h3><ul><li><p>You can represent each object using a separated neural field (local frame), and then compose them together in different ways.</p></li><li><p>If you want to manipulate not only spatially, but also <strong>temporaly</strong>, it is also possible. You can add a time coordinate as the input of the neural field network, and transform the time input.</p></li><li><p>You can also manipulate (especially human body) via <strong>skeleton</strong>.</p><figure><img src="https://s2.loli.net/2023/01/12/y4bGulHpfOwWkqN.png" alt="image-20221212212838893" /><figcaption>image-20221212212838893</figcaption></figure><ul><li><p><strong>Beyond human</strong>, we can also first estimate different moving parts of an object, to form some skeleton structure, and then do the same.</p><figure><img src="https://s2.loli.net/2023/01/12/SBzGy3rnUaqLFI8.png" alt="Noguchi etal, CVPR22" /><figcaption>Noguchi etal, CVPR22</figcaption></figure></li></ul></li><li><p>Beyond rigid, we can also manipulate via <strong>mesh</strong>. coz we have plenty of manipulation tools on mesh. The deformation on mesh can be re-mapped as the deformation on the input coordinate</p><figure><img src="https://s2.loli.net/2023/01/12/UbFu74iCQ15mK3B.png" alt="image-20221212213601773" /><figcaption>image-20221212213601773</figcaption></figure></li></ul><h3 id="editing-the-input-via-neural-flow-fields-left-down">Editing the input via Neural Flow Fields (left-down)</h3><figure><img src="https://s2.loli.net/2023/01/12/zxFElDIuSnPioJ7.png" alt="image-20230104183222294" /><figcaption>image-20230104183222294</figcaption></figure><p>We use the <span class="math inline">\(f_{i\rightarrow j}\)</span> to edit the <span class="math inline">\(r_{i\rightarrow j}\)</span> to represent one ray into another one.</p><p>We need to define the consistency here, so that the network can learn through forward and backward:</p><figure><img src="https://s2.loli.net/2023/01/12/VS1K3rQxHXYPRIg.png" alt="image-20230104183453487" /><figcaption>image-20230104183453487</figcaption></figure><h3 id="editing-network-parameters-via-explicit-geometry-right-up">Editing network parameters via Explicit geometry (right-up)</h3><p>The knowledge is already in the network. So instead of editing the inputs, we can directly edit the network parameters for generating new things.</p><figure><img src="https://s2.loli.net/2023/01/12/w2XEyYn5qbh41OB.png" alt="image-20230104185014312" /><figcaption>image-20230104185014312</figcaption></figure><ul><li>This proposed solution makes use of an encoder. The encoder learns to represent the rotated input as a high-dimensional latent code Z, with the same rotation R, in 3-dim space. The the following network use the latent code to generate the <span class="math inline">\(f_\theta\)</span></li></ul><figure><img src="https://s2.loli.net/2023/01/12/ruER6MJPpljSZiX.png" alt="image-20230104185544623" /><figcaption>image-20230104185544623</figcaption></figure><ul><li>In this work, the key idea is to map the high-resolutional object and the similar but lower resolutional object into the same latent space. Then, you can easily manipulate the lower resolutional object, and it should also affect the higher resolutional one. Then, the shared latent space are put into the following neural field network, which outputs high resolutional results.</li></ul><figure><img src="https://s2.loli.net/2023/01/12/HL61itcqsIaEThX.png" alt="image-20230104202425695" /><figcaption>image-20230104202425695</figcaption></figure><figure><img src="https://s2.loli.net/2023/01/12/y7eCcKDmdUY4VOu.png" alt="image-20230104202625346" /><figcaption>image-20230104202625346</figcaption></figure><ul><li>This work (Yang et al. NeurlPS'21) about shape editing is &quot;super important&quot; but the speaker does not have enough time... Basically it shows that the tools that we use to manipulate a mesh can also be used on a neural field, where we can keep some of the network parameters to make sure the basic shape of the object the same, and then the magical thing is the &quot;curvature manipulation&quot; item. Given the neural field is differentiable, this can be achieved.</li></ul><figure><img src="https://s2.loli.net/2023/01/12/2lTvenQixfRm8Po.png" alt="image-20230104203311551" /><figcaption>image-20230104203311551</figcaption></figure><ul><li>Obeying the points (a.k.a generalization). It makes sure the manipulation done on the input points are reconstructed.</li></ul><h3 id="editing-network-parameters-via-neural-fields-right-down">Editing network parameters via Neural Fields (right-down)</h3><figure><img src="https://s2.loli.net/2023/01/12/5Ohb7ExW4osc1n2.png" alt="image-20230104204330741" /><figcaption>image-20230104204330741</figcaption></figure><ul><li>This work constructs a reasonable latent space of the object, then do interpolation of different objects.</li><li>Beyond geometry, we can also manipulate <strong>color</strong></li></ul><figure><img src="https://s2.loli.net/2023/01/12/vM1QwkT4BJqGNIR.png" alt="image-20230104204738067" /><figcaption>image-20230104204738067</figcaption></figure><p>It decomposes the network into shape and color networks, and we can edit each independently.</p><figure><img src="https://s2.loli.net/2023/01/12/38HNsE9GnF1pydQ.png" alt="image-20230104204937204" /><figcaption>image-20230104204937204</figcaption></figure><ul><li>This is the stylization work. It mainly depends on a different loss function, which does not search for the exact feature of the vgg, but somehow the nearest neighbor.</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Notes </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Computer Vision </tag>
-            
-            <tag> NeRF </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>NeRF Differentiable Forward Maps</title>
       <link href="/blog/NeRF-Differentiable-Forward-Maps/"/>
       <url>/blog/NeRF-Differentiable-Forward-Maps/</url>
@@ -508,6 +441,33 @@
     
     
     <entry>
+      <title>Learning NeRF</title>
+      <link href="/blog/Learning-NeRF/"/>
+      <url>/blog/Learning-NeRF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="learning-nerf">Learning NeRF</h1><p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="reading-list">Reading List</h2><h3 id="classical">Classical</h3><ul><li><p>Mildenhall <em>et al.</em> introduced NeRF at ECCV 2020 in the now seminal <a href="https://www.matthewtancik.com/nerf">Neural Radiance Field paper</a>.</p><p>This is done by storing the density and radiance in a neural volumetric scene representation using MLPs and then rendering the volume to create new images.</p></li><li><p><a href="https://m-niemeyer.github.io/project-pages/giraffe/index.html">GIRAFFE</a>: Compositional Generative Neural Feature Fields</p></li></ul><h3 id="survey">Survey</h3><ul><li><a href="https://arxiv.org/abs/2004.03805">Apr 2020 - State of the Art on Neural Rendering</a></li></ul><h3 id="cvpr">2021CVPR</h3><p>2021年CVPR还有许多相关的精彩工作发表。例如，提升网络的泛化性：</p><ul><li><a href="https://alexyu.net/pixelnerf/">pixelNeRF</a>：将每个像素的特征向量而非像素本身作为输入，允许网络在不同场景的多视图图像上进行训练，学习场景先验，然后测试时直接接收一个或几个视图为输入合成新视图。</li><li><a href="https://ibrnet.github.io/">IBRNet</a>：学习一个适用于多种场景的通用视图插值函数，从而不用为每个新的场景都新学习一个模型才能渲染；且网络结构上用了另一个时髦的东西 Transformer。</li><li><a href="https://apchenstu.github.io/mvsnerf/">MVSNeRF</a>：训练一个具有泛化性能的先验网络，在推理的时候只用3张输入图片就重建一个新的场景。</li></ul><p>针对动态场景的NeRF:</p><ul><li><a href="https://nerfies.github.io/">Nerfies</a>：多使用了一个多层感知机来拟合形变的SE(3) field，从而建模帧间场景形变。Nerfies: Deformable Neural Radiance Fields</li><li><a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a>：多使用了一个多层感知机来拟合场景形变的displacement。</li><li><a href="https://link.zhihu.com/?target=http%3A//www.cs.cornell.edu/~zl548/NSFF/">Neural Scene Flow Fields</a>：多提出了一个scene flow fields来描述时序的场景形变。</li></ul><p>其他创新点：</p><ul><li><a href="https://kai-46.github.io/PhySG-website/">PhySG</a>：用球状高斯函数模拟BRDF（高级着色的上古神器）和环境光照，针对更复杂的光照环境，能处理非朗伯表面的反射。</li><li><a href="https://nex-mpi.github.io/">NeX</a>：用MPI（Multi-Plane Image ）代替NeRF的RGBσ作为网络的输出。</li></ul><h3 id="cvpr-1">2022 CVPR</h3><p><a href="https://ajayj.com/dreamfields">Zero-Shot Text-Guided Object Generation with <strong>Dream Fields</strong></a></p><h2 id="useful-references"><strong>Useful References:</strong></h2><blockquote><p><a href="https://markboss.me/post/nerf_at_eccv22/?continueFlag=55ed0f6189bcd6ca987e08764bcbe945">NeRF at ECCV22 - Mark Boss</a></p><p><a href="https://markboss.me/post/nerf_at_neurips22/">NeRF at NeurIPS 2022 - Mark Boss</a></p><p><a href="https://dellaert.github.io/NeRF22/">NeRF at CVPR 2022 - Frank Dellaert</a></p><p><a href="https://youtu.be/PeRRp1cFuH4">CVPR 2022 Tutorial on Neural Fields in Computer Vision</a></p></blockquote><p>Bigger to learn:</p><ul><li>[ ] Above NeRF: neural rendering</li><li>[ ] Related theories in graphics and computer vision</li><li>[ ] NeRF的一作Ben Mildenhall在SIGGRAPH 2021 Course <a href="https://www.youtube.com/watch%3Fv%3Dotly9jcZ0Jg">Advances in Neural Rendering</a>中从概率的角度推导了NeRF的体渲染公式。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> NeRF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>NeRF Network Architecture</title>
       <link href="/blog/NeRF-Network-Architecture/"/>
       <url>/blog/NeRF-Network-Architecture/</url>
@@ -535,11 +495,11 @@
     
     
     <entry>
-      <title>NeRF Notebook</title>
-      <link href="/blog/NeRF-Notebook/"/>
-      <url>/blog/NeRF-Notebook/</url>
+      <title>Manipulate Neural Fields</title>
+      <link href="/blog/Manipulate-Neural-Fields/"/>
+      <url>/blog/Manipulate-Neural-Fields/</url>
       
-        <content type="html"><![CDATA[<p>I am currently burying myself into the sea of NeRF. I plan to archive my learning notes here. I am still a beginner, so the notes absolutely contain errors, and are not finished yet.</p><h1 id="contents">Contents</h1><p><a href="https://jyzhu.top/Learning-NeRF/">Learning NeRF</a>: Reading list, learning references, and plans</p><p><strong>Notes of CVPR22' Tutorial:</strong></p><p><a href="https://jyzhu.top/Introduction-to-NeRF/">1. Introduction to NeRF</a>: What is NeRF and its features</p><p>2. Techniques</p><p>​ <a href="https://jyzhu.top/NeRF-Network-Architecture/">2.1. Network Architecture</a></p><p>​ <a href="https://jyzhu.top/NeRF-Hybrid-representations/">2.2. Hybrid representations</a></p><p>​ <a href="https://jyzhu.top/NeRF-Differentiable-Forward-Maps/">2.3. Differentiable Forward Maps</a></p><p>​ <a href="https://jyzhu.top/Prior-based-reconstruction-of-neural-fields/">2.4. Prior-based reconstruction of neural fields</a></p><p>​ <a href="https://jyzhu.top/Manipulate-Neural-Fields/">2.5. Manipulate Neural Fields</a></p><p>3. Applications</p><p><em>TBC</em></p><p><strong>Notes of paper reading</strong>:</p><p><a href="https://jyzhu.top/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/">Reading NeuMan: Neural Human Radiance Field from a Single Video</a></p>]]></content>
+        <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="manipulate-neural-fields">2.5. Manipulate Neural Fields</h2><p>Neural fields is ready to be a prime representation, similar as point clouds or meshes, that is able to be manipulated.</p><figure><img src="https://s2.loli.net/2023/01/12/okLGyeFmMvifhZW.png" alt="image-20221212211525928" /><figcaption>image-20221212211525928</figcaption></figure><p>You can either edit the input coordinates, or edit the parameters <span class="math inline">\(\theta\)</span>.</p><p>On the other axis, you can edit through an explicit geometry, or an implicit neural fields.</p><figure><img src="https://s2.loli.net/2023/01/12/S7HWcQPh1FtdJaw.png" alt="image-20221212213802209" /><figcaption>image-20221212213802209</figcaption></figure><p>The following examples 落在不同的象限。</p><h3 id="editing-the-input-via-explicit-geometry-left-up">Editing the input via Explicit geometry (left-up)</h3><ul><li><p>You can represent each object using a separated neural field (local frame), and then compose them together in different ways.</p></li><li><p>If you want to manipulate not only spatially, but also <strong>temporaly</strong>, it is also possible. You can add a time coordinate as the input of the neural field network, and transform the time input.</p></li><li><p>You can also manipulate (especially human body) via <strong>skeleton</strong>.</p><figure><img src="https://s2.loli.net/2023/01/12/y4bGulHpfOwWkqN.png" alt="image-20221212212838893" /><figcaption>image-20221212212838893</figcaption></figure><ul><li><p><strong>Beyond human</strong>, we can also first estimate different moving parts of an object, to form some skeleton structure, and then do the same.</p><figure><img src="https://s2.loli.net/2023/01/12/SBzGy3rnUaqLFI8.png" alt="Noguchi etal, CVPR22" /><figcaption>Noguchi etal, CVPR22</figcaption></figure></li></ul></li><li><p>Beyond rigid, we can also manipulate via <strong>mesh</strong>. coz we have plenty of manipulation tools on mesh. The deformation on mesh can be re-mapped as the deformation on the input coordinate</p><figure><img src="https://s2.loli.net/2023/01/12/UbFu74iCQ15mK3B.png" alt="image-20221212213601773" /><figcaption>image-20221212213601773</figcaption></figure></li></ul><h3 id="editing-the-input-via-neural-flow-fields-left-down">Editing the input via Neural Flow Fields (left-down)</h3><figure><img src="https://s2.loli.net/2023/01/12/zxFElDIuSnPioJ7.png" alt="image-20230104183222294" /><figcaption>image-20230104183222294</figcaption></figure><p>We use the <span class="math inline">\(f_{i\rightarrow j}\)</span> to edit the <span class="math inline">\(r_{i\rightarrow j}\)</span> to represent one ray into another one.</p><p>We need to define the consistency here, so that the network can learn through forward and backward:</p><figure><img src="https://s2.loli.net/2023/01/12/VS1K3rQxHXYPRIg.png" alt="image-20230104183453487" /><figcaption>image-20230104183453487</figcaption></figure><h3 id="editing-network-parameters-via-explicit-geometry-right-up">Editing network parameters via Explicit geometry (right-up)</h3><p>The knowledge is already in the network. So instead of editing the inputs, we can directly edit the network parameters for generating new things.</p><figure><img src="https://s2.loli.net/2023/01/12/w2XEyYn5qbh41OB.png" alt="image-20230104185014312" /><figcaption>image-20230104185014312</figcaption></figure><ul><li>This proposed solution makes use of an encoder. The encoder learns to represent the rotated input as a high-dimensional latent code Z, with the same rotation R, in 3-dim space. The the following network use the latent code to generate the <span class="math inline">\(f_\theta\)</span></li></ul><figure><img src="https://s2.loli.net/2023/01/12/ruER6MJPpljSZiX.png" alt="image-20230104185544623" /><figcaption>image-20230104185544623</figcaption></figure><ul><li>In this work, the key idea is to map the high-resolutional object and the similar but lower resolutional object into the same latent space. Then, you can easily manipulate the lower resolutional object, and it should also affect the higher resolutional one. Then, the shared latent space are put into the following neural field network, which outputs high resolutional results.</li></ul><figure><img src="https://s2.loli.net/2023/01/12/HL61itcqsIaEThX.png" alt="image-20230104202425695" /><figcaption>image-20230104202425695</figcaption></figure><figure><img src="https://s2.loli.net/2023/01/12/y7eCcKDmdUY4VOu.png" alt="image-20230104202625346" /><figcaption>image-20230104202625346</figcaption></figure><ul><li>This work (Yang et al. NeurlPS'21) about shape editing is &quot;super important&quot; but the speaker does not have enough time... Basically it shows that the tools that we use to manipulate a mesh can also be used on a neural field, where we can keep some of the network parameters to make sure the basic shape of the object the same, and then the magical thing is the &quot;curvature manipulation&quot; item. Given the neural field is differentiable, this can be achieved.</li></ul><figure><img src="https://s2.loli.net/2023/01/12/2lTvenQixfRm8Po.png" alt="image-20230104203311551" /><figcaption>image-20230104203311551</figcaption></figure><ul><li>Obeying the points (a.k.a generalization). It makes sure the manipulation done on the input points are reconstructed.</li></ul><h3 id="editing-network-parameters-via-neural-fields-right-down">Editing network parameters via Neural Fields (right-down)</h3><figure><img src="https://s2.loli.net/2023/01/12/5Ohb7ExW4osc1n2.png" alt="image-20230104204330741" /><figcaption>image-20230104204330741</figcaption></figure><ul><li>This work constructs a reasonable latent space of the object, then do interpolation of different objects.</li><li>Beyond geometry, we can also manipulate <strong>color</strong></li></ul><figure><img src="https://s2.loli.net/2023/01/12/vM1QwkT4BJqGNIR.png" alt="image-20230104204738067" /><figcaption>image-20230104204738067</figcaption></figure><p>It decomposes the network into shape and color networks, and we can edit each independently.</p><figure><img src="https://s2.loli.net/2023/01/12/38HNsE9GnF1pydQ.png" alt="image-20230104204937204" /><figcaption>image-20230104204937204</figcaption></figure><ul><li>This is the stylization work. It mainly depends on a different loss function, which does not search for the exact feature of the vgg, but somehow the nearest neighbor.</li></ul>]]></content>
       
       
       <categories>
@@ -567,6 +527,33 @@
       <url>/blog/Prior-based-reconstruction-of-neural-fields/</url>
       
         <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="prior-based-reconstruction-of-neural-fields">2.4. Prior-based reconstruction of neural fields</h2><p>Sounds like a one-shot task: instead of fitting and optimizing a neural field each for one scene; let's learn a prior distribution of neural field. Then, given a specific scene, it adjusts the neural field in just one forward.</p><figure><img src="https://s2.loli.net/2023/01/12/rMOwKRJBuedFm1n.png" alt="image-20221211234430727" /><figcaption>image-20221211234430727</figcaption></figure><h3 id="how-does-the-latent-code-look-like">How does the latent code look like?</h3><figure><img src="https://s2.loli.net/2023/01/12/A41EOlYCBXrUxto.png" alt="image-20221211234923290" /><figcaption>image-20221211234923290</figcaption></figure><ul><li>Global: not local. A small latent code represents a neural field<ul><li>main limitation: can only represent very simple (single) object. coz if you have multiple objects in a scene, the degree of freedom grows non-linearly.</li><li><strong>How about giving the natural language descriptions as conditions???</strong></li></ul></li><li>Local: you get different latent codes considering the locality where you are. So, you have a prior 3D data structure to store the latent codes.<ul><li>3D point clouds -&gt; grids -&gt; triplanes interpolation</li></ul></li></ul><blockquote><p>Convolutional Occupancy Networks</p></blockquote><h3 id="autodecoder-instead-of-encoder-decoder">Autodecoder instead of Encoder-decoder</h3><figure><img src="https://s2.loli.net/2023/01/12/zr2GnpBXeZDJUqa.png" alt="image-20221212005012783" /><figcaption>image-20221212005012783</figcaption></figure><ul><li><p>Encoder is a 2D CNN structure.</p></li><li><p>But while using autodecoder, the backpropogate through the forward map (i.e., the neural renderer) will give the 3D structural information to the latent codes directly. <span class="math display">\[\text{latent code }\hat z=\arg \min_z \|\text{Render(}\Phi)-g.t.\|\]</span> <img src="https://s2.loli.net/2023/01/12/FQjMgibmNtIP4ca.png" alt="image-20221212004946040" /></p></li></ul><p><strong>Instead of trying to build the encoder, sometimes just use the backpropogation through the forward map is helpful.</strong></p><h3 id="light-field-networks----dont-need-to-render-anymore">Light field networks -- Don't need to render anymore</h3><figure><img src="https://s2.loli.net/2023/01/12/FVP15fmBYz8rEoe.png" alt="image-20221212005908926" /><figcaption>image-20221212005908926</figcaption></figure><p>Instead of learning a NeRF that you use a neural renderer to generate all points along a ray; you can learn a network to directly give you a color along a ray. So you do not use a 3d coordinate as the query, instead, use a ray.</p><p>But this do not work in complicated task yet.</p><figure><img src="https://s2.loli.net/2023/01/12/mAFx6pzqaIuUMin.png" alt="image-20221212010316991" /><figcaption>image-20221212010316991</figcaption></figure><h3 id="outlook">Outlook</h3><ul><li>You don't need to use 600 images of a scene to reconstruct it. Synthesis images?</li><li>Open minds: other ways to skip the expensive forward map? (e.g., the light field)</li><li>Understanding the scene like humans do: disentangle different objects</li><li>Local conditioning methods? Regular grids are easy to tackle with, but it's harder for point clouds / factorized representations</li><li>Transformers: seems like local conditioning</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> NeRF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NeRF Notebook</title>
+      <link href="/blog/NeRF-Notebook/"/>
+      <url>/blog/NeRF-Notebook/</url>
+      
+        <content type="html"><![CDATA[<p>I am currently burying myself into the sea of NeRF. I plan to archive my learning notes here. I am still a beginner, so the notes absolutely contain errors, and are not finished yet.</p><h1 id="contents">Contents</h1><p><a href="https://jyzhu.top/Learning-NeRF/">Learning NeRF</a>: Reading list, learning references, and plans</p><p><strong>Notes of CVPR22' Tutorial:</strong></p><p><a href="https://jyzhu.top/Introduction-to-NeRF/">1. Introduction to NeRF</a>: What is NeRF and its features</p><p>2. Techniques</p><p>​ <a href="https://jyzhu.top/NeRF-Network-Architecture/">2.1. Network Architecture</a></p><p>​ <a href="https://jyzhu.top/NeRF-Hybrid-representations/">2.2. Hybrid representations</a></p><p>​ <a href="https://jyzhu.top/NeRF-Differentiable-Forward-Maps/">2.3. Differentiable Forward Maps</a></p><p>​ <a href="https://jyzhu.top/Prior-based-reconstruction-of-neural-fields/">2.4. Prior-based reconstruction of neural fields</a></p><p>​ <a href="https://jyzhu.top/Manipulate-Neural-Fields/">2.5. Manipulate Neural Fields</a></p><p>3. Applications</p><p><em>TBC</em></p><p><strong>Notes of paper reading</strong>:</p><p><a href="https://jyzhu.top/Reading-NeuMan-Neural-Human-Radiance-Field-from-a-Single-Video/">Reading NeuMan: Neural Human Radiance Field from a Single Video</a></p>]]></content>
       
       
       <categories>
