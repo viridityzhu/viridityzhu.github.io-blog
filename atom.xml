@@ -6,7 +6,7 @@
   <link href="https://jyzhu.top/blog/atom.xml" rel="self"/>
   
   <link href="https://jyzhu.top/blog/"/>
-  <updated>2024-05-31T09:26:45.224Z</updated>
+  <updated>2024-05-31T09:32:48.249Z</updated>
   <id>https://jyzhu.top/blog/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Where is my moveable feast</title>
+    <link href="https://jyzhu.top/blog/where-are-my-memories/"/>
+    <id>https://jyzhu.top/blog/where-are-my-memories/</id>
+    <published>2024-05-31T09:30:32.000Z</published>
+    <updated>2024-05-31T09:32:48.249Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久没记录。比如说，再读海明威的《流动的盛宴》的时候，是在去了一趟欧洲之后。看到了那种传统欧洲小城的构造，沿河而建，一条一条的路通往河边，河上每座桥基本都有冠名的雕塑，河边几条街道外就是大广场和大教堂。</p><p>见过这种之后，再读这本书，对一百年前（吗？）的巴黎就有感觉了。海明威说他去新开的咖啡店喝奶油咖啡充饥，我就想到海德堡临河T字路口那家咖啡店了。人来人往的，桌子也不多，但是在这种涌动的拥挤的环境里，那家店竟然能有安静的氛围。不知道会不会贵，所以没去。不过这么个路过瞥了一眼的咖啡店竟然就成了记忆的锚点了。还是应该多记录一些见闻，这几年有很多新鲜的见闻，都空存在语言以及任何媒介之外了。</p><p>Where are my memories? Where is my moveable feast?</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;很久没记录。比如说，再读海明威的《流动的盛宴》的时候，是在去了一趟欧洲之后。看到了那种传统欧洲小城的构造，沿河而建，一条一条的路通往河边，河上每座桥基本都有冠名的雕塑，河边几条街道外就是大广场和大教堂。&lt;/p&gt;
+&lt;p&gt;见过这种之后，再读这本书，对一百年前（吗？）的巴黎就有感</summary>
+      
+    
+    
+    
+    <category term="thoughts" scheme="https://jyzhu.top/blog/categories/thoughts/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>look at my new keyboard!!</title>
@@ -442,6 +465,34 @@ P=K[R&#92; &#92; &#92; t]
   </entry>
   
   <entry>
+    <title>Introduction to NeRF</title>
+    <link href="https://jyzhu.top/blog/Introduction-to-NeRF/"/>
+    <id>https://jyzhu.top/blog/Introduction-to-NeRF/</id>
+    <published>2023-01-12T09:33:39.000Z</published>
+    <updated>2023-07-28T10:41:26.239Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h1 id="introduction-to-nerf">1. Introduction to NeRF</h1><h2 id="what-is-nerf">What is NeRF</h2><blockquote><p>Reference: Original NeRF paper; an online ariticle</p></blockquote><p>在已知视角下对场景进行一系列的捕获 (包括拍摄到的图像，以及每张图像对应的内外参)，合成新视角下的图像。</p><p>NeRF 想做这样一件事，不需要中间三维重建的过程，仅根据位姿内参和图像，直接合成新视角下的图像。为此 NeRF 引入了辐射场的概念，这在图形学中是非常重要的概念，在此我们给出渲染方程的定义：</p><p><embed src="https://pic1.zhimg.com/80/v2-1a80de23a422688b739f36828affb8ec_1440w.webp" /></p><p><embed src="https://pic4.zhimg.com/80/v2-c469e4968a3e6cf8ec7a81f816de4f87_1440w.webp" /></p><p>那么辐射和颜色是什么关系呢？简单讲就是，光就是电磁辐射，或者说是振荡的电磁场，光又有波长和频率，<span class="math inline">\(波长\times 频率=光速\)</span>，光的颜色是由频率决定的，大多数光是不可见的，人眼可见的光谱称为可见光谱，对应的频率就是我们认为的颜色：</p><p><embed src="https://pic1.zhimg.com/80/v2-381aa740f21b7eba1f896fd98dcc1308_1440w.webp" /></p><p><embed src="https://pic1.zhimg.com/80/v2-51bd3710b9f891c4c44fde12545e4fd4_1440w.webp" /></p><h3 id="implementation">Implementation</h3><h4 id="mlp-structure">MLP Structure</h4><ol type="1"><li>The net is constrained to be multi-view consistent by restricting the predicting of <span class="math inline">\(\sigma\)</span> to be independent of viewing direction</li><li>While the color <span class="math inline">\(\bold c\)</span> depends on both viewing direction and in-scene coordinate.</li></ol><p>How is this implemented?</p><p>The MLP is designed to be two-stages:</p><ol type="1"><li><span class="math inline">\(F_{\theta_1}(\bold x) = (\sigma, \text{&lt;256 dim features&gt;})\)</span></li><li><span class="math inline">\(F_{\theta_2}(\text{&lt;256 dim features&gt;}, \bold d)=\bold c\)</span></li></ol><h4 id="novel-view-synthesis">Novel view synthesis</h4><p>For each pixel, sample points along the camera ray through this pixel;</p><p>For each sampling point, compute local color and density;</p><p>Use volume rendering, an integral along the camera ray through pixels is used: <span class="math display">\[C(\bold r)=\int_{t_1}^{t_2} T(t)\cdot \sigma (\bold r(t))\cdot \bold c(\bold r(t),\bold d)\cdot dt \\T(t)=\exp (-\int_{t_1}^t \sigma(\bold r(u))\cdot du)\]</span> We can get the color C of the pixel.</p><p>This can be implemented by sampling approaches.</p><p>Now everything can be approximated: <span class="math display">\[\hat C(\bold r)=\sum_{i=1}^N \alpha_iT_i\bold c_i \\T_i=\exp (-\sum_{j=1}^{i-1}\sigma_i\delta_j) \\\alpha_i=1-\exp(\sigma_i\delta_i)\\\delta_i=\text{distance between sampling point i and i+1}\]</span></p><ul><li>Loss is just L2 on color of the pixels:</li></ul><p><span class="math display">\[L=\sum_{r\in R}\| \hat C(\bold r)-C_{gt}(\bold r)\|^2_2\]</span></p><h4 id="depth-regularization">Depth regularization</h4><p>Similar to the above formulas, expected depth can also be calculated, and can be used to regularize the depth smoothness.</p><h4 id="positional-encoding">Positional encoding</h4><p>It is required to greatly improve the fine detail results.</p><p>There are many other positional encoding techs, including trainable parametric, integral, and hierarchical variants</p><h3 id="sdf---signed-distance-function">SDF - Signed Distance Function</h3><p>SDF是一种计算图形学中定义距离的函数。SDF定义了空间中的点到隐式曲面的距离，该点在曲面内外决定了其SDF的正负性。</p><p>相较于其他像点云（point cloud）、体素（voxel）、面云（mesh）那样的经典3D模型表示方法，SDF有固定的数学方程，更关注物体的表面信息，具有可控的计算成本。</p><h2 id="features-of-nerf">Features of NeRF</h2><ul><li>Representation can be discrete or continuous. but the discrete representation will be a big one if you have more dimensions, e.g., 3 dim.<ul><li>Actually the Plenoxels try to use 3D grids to store the fields. Fast, however, too much memory.</li></ul></li><li>Neural Field has advantages:<ol type="1"><li>Compactness 紧致:</li><li>Regularization: nn itself as inductive bias makes it easy to learn</li><li>Domain Agonostic: cheap to add a dimension</li></ol></li><li>also problems<ul><li>Editability / Manipulability</li><li>Computational Complexity</li><li>Spectral Bias</li></ul></li></ul><h2 id="problem-formulation">Problem Formulation</h2><ul><li>Input: multiview images</li><li>Output: 3D Geometry and appearance</li><li>Objective:</li></ul><p><span class="math display">\[\arg \min_x\|y-F(x)\|+\lambda P(x)\]</span></p><p>y is multiview images, F is forward mapping, x is the desired 3D reconstruction.</p><p>F can be differentiable, then you can supervise this.</p><ul><li>nn本身就是某种constraints，你就不需要加太多handicraft constraints</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;introduction-to-nerf&quot;&gt;1. Introduction to NeRF&lt;/h1&gt;
+&lt;h2 id=&quot;what-is-nerf&quot;&gt;What is NeRF&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference: Original NeRF paper; an online ariticle&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
+    
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Learning NeRF</title>
     <link href="https://jyzhu.top/blog/Learning-NeRF/"/>
     <id>https://jyzhu.top/blog/Learning-NeRF/</id>
@@ -455,6 +506,34 @@ P=K[R&#92; &#92; &#92; t]
 &lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;reading-list&quot;&gt;Reading List&lt;/h2&gt;
 &lt;h3 id=&quot;classical&quot;&gt;Classical&lt;/h3&gt;</summary>
+    
+    
+    
+    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
+    
+    
+    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
+    
+    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Manipulate Neural Fields</title>
+    <link href="https://jyzhu.top/blog/Manipulate-Neural-Fields/"/>
+    <id>https://jyzhu.top/blog/Manipulate-Neural-Fields/</id>
+    <published>2023-01-12T09:33:39.000Z</published>
+    <updated>2023-01-12T10:11:38.197Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="manipulate-neural-fields">2.5. Manipulate Neural Fields</h2><p>Neural fields is ready to be a prime representation, similar as point clouds or meshes, that is able to be manipulated.</p><figure><img src="https://s2.loli.net/2023/01/12/okLGyeFmMvifhZW.png" alt="image-20221212211525928" /><figcaption>image-20221212211525928</figcaption></figure><p>You can either edit the input coordinates, or edit the parameters <span class="math inline">\(\theta\)</span>.</p><p>On the other axis, you can edit through an explicit geometry, or an implicit neural fields.</p><figure><img src="https://s2.loli.net/2023/01/12/S7HWcQPh1FtdJaw.png" alt="image-20221212213802209" /><figcaption>image-20221212213802209</figcaption></figure><p>The following examples 落在不同的象限。</p><h3 id="editing-the-input-via-explicit-geometry-left-up">Editing the input via Explicit geometry (left-up)</h3><ul><li><p>You can represent each object using a separated neural field (local frame), and then compose them together in different ways.</p></li><li><p>If you want to manipulate not only spatially, but also <strong>temporaly</strong>, it is also possible. You can add a time coordinate as the input of the neural field network, and transform the time input.</p></li><li><p>You can also manipulate (especially human body) via <strong>skeleton</strong>.</p><figure><img src="https://s2.loli.net/2023/01/12/y4bGulHpfOwWkqN.png" alt="image-20221212212838893" /><figcaption>image-20221212212838893</figcaption></figure><ul><li><p><strong>Beyond human</strong>, we can also first estimate different moving parts of an object, to form some skeleton structure, and then do the same.</p><figure><img src="https://s2.loli.net/2023/01/12/SBzGy3rnUaqLFI8.png" alt="Noguchi etal, CVPR22" /><figcaption>Noguchi etal, CVPR22</figcaption></figure></li></ul></li><li><p>Beyond rigid, we can also manipulate via <strong>mesh</strong>. coz we have plenty of manipulation tools on mesh. The deformation on mesh can be re-mapped as the deformation on the input coordinate</p><figure><img src="https://s2.loli.net/2023/01/12/UbFu74iCQ15mK3B.png" alt="image-20221212213601773" /><figcaption>image-20221212213601773</figcaption></figure></li></ul><h3 id="editing-the-input-via-neural-flow-fields-left-down">Editing the input via Neural Flow Fields (left-down)</h3><figure><img src="https://s2.loli.net/2023/01/12/zxFElDIuSnPioJ7.png" alt="image-20230104183222294" /><figcaption>image-20230104183222294</figcaption></figure><p>We use the <span class="math inline">\(f_{i\rightarrow j}\)</span> to edit the <span class="math inline">\(r_{i\rightarrow j}\)</span> to represent one ray into another one.</p><p>We need to define the consistency here, so that the network can learn through forward and backward:</p><figure><img src="https://s2.loli.net/2023/01/12/VS1K3rQxHXYPRIg.png" alt="image-20230104183453487" /><figcaption>image-20230104183453487</figcaption></figure><h3 id="editing-network-parameters-via-explicit-geometry-right-up">Editing network parameters via Explicit geometry (right-up)</h3><p>The knowledge is already in the network. So instead of editing the inputs, we can directly edit the network parameters for generating new things.</p><figure><img src="https://s2.loli.net/2023/01/12/w2XEyYn5qbh41OB.png" alt="image-20230104185014312" /><figcaption>image-20230104185014312</figcaption></figure><ul><li>This proposed solution makes use of an encoder. The encoder learns to represent the rotated input as a high-dimensional latent code Z, with the same rotation R, in 3-dim space. The the following network use the latent code to generate the <span class="math inline">\(f_\theta\)</span></li></ul><figure><img src="https://s2.loli.net/2023/01/12/ruER6MJPpljSZiX.png" alt="image-20230104185544623" /><figcaption>image-20230104185544623</figcaption></figure><ul><li>In this work, the key idea is to map the high-resolutional object and the similar but lower resolutional object into the same latent space. Then, you can easily manipulate the lower resolutional object, and it should also affect the higher resolutional one. Then, the shared latent space are put into the following neural field network, which outputs high resolutional results.</li></ul><figure><img src="https://s2.loli.net/2023/01/12/HL61itcqsIaEThX.png" alt="image-20230104202425695" /><figcaption>image-20230104202425695</figcaption></figure><figure><img src="https://s2.loli.net/2023/01/12/y7eCcKDmdUY4VOu.png" alt="image-20230104202625346" /><figcaption>image-20230104202625346</figcaption></figure><ul><li>This work (Yang et al. NeurlPS'21) about shape editing is &quot;super important&quot; but the speaker does not have enough time... Basically it shows that the tools that we use to manipulate a mesh can also be used on a neural field, where we can keep some of the network parameters to make sure the basic shape of the object the same, and then the magical thing is the &quot;curvature manipulation&quot; item. Given the neural field is differentiable, this can be achieved.</li></ul><figure><img src="https://s2.loli.net/2023/01/12/2lTvenQixfRm8Po.png" alt="image-20230104203311551" /><figcaption>image-20230104203311551</figcaption></figure><ul><li>Obeying the points (a.k.a generalization). It makes sure the manipulation done on the input points are reconstructed.</li></ul><h3 id="editing-network-parameters-via-neural-fields-right-down">Editing network parameters via Neural Fields (right-down)</h3><figure><img src="https://s2.loli.net/2023/01/12/5Ohb7ExW4osc1n2.png" alt="image-20230104204330741" /><figcaption>image-20230104204330741</figcaption></figure><ul><li>This work constructs a reasonable latent space of the object, then do interpolation of different objects.</li><li>Beyond geometry, we can also manipulate <strong>color</strong></li></ul><figure><img src="https://s2.loli.net/2023/01/12/vM1QwkT4BJqGNIR.png" alt="image-20230104204738067" /><figcaption>image-20230104204738067</figcaption></figure><p>It decomposes the network into shape and color networks, and we can edit each independently.</p><figure><img src="https://s2.loli.net/2023/01/12/38HNsE9GnF1pydQ.png" alt="image-20230104204937204" /><figcaption>image-20230104204937204</figcaption></figure><ul><li>This is the stylization work. It mainly depends on a different loss function, which does not search for the exact feature of the vgg, but somehow the nearest neighbor.</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;manipulate-neural-fields&quot;&gt;2.5. Manipulate Neural Fields&lt;/h2&gt;
+&lt;p&gt;Neural fields is ready to be a prime representation, similar as point clouds or meshes, that is able to be manipulated.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://s2.loli.net/2023/01/12/okLGyeFmMvifhZW.png&quot; alt=&quot;image-20221212211525928&quot;&gt;&lt;figcaption&gt;image-20221212211525928&lt;/figcaption&gt;
+&lt;/figure&gt;</summary>
     
     
     
@@ -510,88 +589,6 @@ P=K[R&#92; &#92; &#92; t]
 &lt;h3 id=&quot;tradeoffs-of-choosing-a-proper-representation&quot;&gt;Tradeoffs of choosing a proper representation&lt;/h3&gt;
 &lt;figure&gt;
 &lt;img src=&quot;https://s2.loli.net/2023/01/12/NyvS91xlLJA8KWR.png&quot; alt=&quot;image-20221208172055153&quot;&gt;&lt;figcaption&gt;image-20221208172055153&lt;/figcaption&gt;
-&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NeRF Network Architecture</title>
-    <link href="https://jyzhu.top/blog/NeRF-Network-Architecture/"/>
-    <id>https://jyzhu.top/blog/NeRF-Network-Architecture/</id>
-    <published>2023-01-12T09:33:39.000Z</published>
-    <updated>2023-01-12T10:14:07.993Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="network-architecture">2.1. Network Architecture</h2><h3 id="input-encoding">1. Input Encoding</h3><p>Similar as NLP, they use position encodings. Like Sinusoid functions. I also remember an encoding method which takes into consider of the 光线的散射</p><h3 id="activation-functions">2. Activation functions</h3><p>ReLU is not perfect for this task. Because it 不能解决对高阶导有constraints的函数。</p><p>SIREN is a replacement.</p><h3 id="symmetry-invariance-equivariance">3. Symmetry, Invariance &amp; Equivariance</h3><figure><img src="https://s2.loli.net/2023/01/12/tynBhWCulMINrU3.png" alt="image-20221205193423558" /><figcaption>image-20221205193423558</figcaption></figure><figure><img src="https://s2.loli.net/2023/01/12/Rjx5h2kfY34JZct.png" alt="image-20221205193614341" /><figcaption>image-20221205193614341</figcaption></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;network-architecture&quot;&gt;2.1. Network Architecture&lt;/h2&gt;
-&lt;h3 id=&quot;input-encoding&quot;&gt;1. Input Encoding&lt;/h3&gt;
-&lt;p&gt;Similar as NLP, they use position encodings. Like Sinusoid functions. I also remember an encoding method which takes into consider of the 光线的散射&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Introduction to NeRF</title>
-    <link href="https://jyzhu.top/blog/Introduction-to-NeRF/"/>
-    <id>https://jyzhu.top/blog/Introduction-to-NeRF/</id>
-    <published>2023-01-12T09:33:39.000Z</published>
-    <updated>2023-07-28T10:41:26.239Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h1 id="introduction-to-nerf">1. Introduction to NeRF</h1><h2 id="what-is-nerf">What is NeRF</h2><blockquote><p>Reference: Original NeRF paper; an online ariticle</p></blockquote><p>在已知视角下对场景进行一系列的捕获 (包括拍摄到的图像，以及每张图像对应的内外参)，合成新视角下的图像。</p><p>NeRF 想做这样一件事，不需要中间三维重建的过程，仅根据位姿内参和图像，直接合成新视角下的图像。为此 NeRF 引入了辐射场的概念，这在图形学中是非常重要的概念，在此我们给出渲染方程的定义：</p><p><embed src="https://pic1.zhimg.com/80/v2-1a80de23a422688b739f36828affb8ec_1440w.webp" /></p><p><embed src="https://pic4.zhimg.com/80/v2-c469e4968a3e6cf8ec7a81f816de4f87_1440w.webp" /></p><p>那么辐射和颜色是什么关系呢？简单讲就是，光就是电磁辐射，或者说是振荡的电磁场，光又有波长和频率，<span class="math inline">\(波长\times 频率=光速\)</span>，光的颜色是由频率决定的，大多数光是不可见的，人眼可见的光谱称为可见光谱，对应的频率就是我们认为的颜色：</p><p><embed src="https://pic1.zhimg.com/80/v2-381aa740f21b7eba1f896fd98dcc1308_1440w.webp" /></p><p><embed src="https://pic1.zhimg.com/80/v2-51bd3710b9f891c4c44fde12545e4fd4_1440w.webp" /></p><h3 id="implementation">Implementation</h3><h4 id="mlp-structure">MLP Structure</h4><ol type="1"><li>The net is constrained to be multi-view consistent by restricting the predicting of <span class="math inline">\(\sigma\)</span> to be independent of viewing direction</li><li>While the color <span class="math inline">\(\bold c\)</span> depends on both viewing direction and in-scene coordinate.</li></ol><p>How is this implemented?</p><p>The MLP is designed to be two-stages:</p><ol type="1"><li><span class="math inline">\(F_{\theta_1}(\bold x) = (\sigma, \text{&lt;256 dim features&gt;})\)</span></li><li><span class="math inline">\(F_{\theta_2}(\text{&lt;256 dim features&gt;}, \bold d)=\bold c\)</span></li></ol><h4 id="novel-view-synthesis">Novel view synthesis</h4><p>For each pixel, sample points along the camera ray through this pixel;</p><p>For each sampling point, compute local color and density;</p><p>Use volume rendering, an integral along the camera ray through pixels is used: <span class="math display">\[C(\bold r)=\int_{t_1}^{t_2} T(t)\cdot \sigma (\bold r(t))\cdot \bold c(\bold r(t),\bold d)\cdot dt \\T(t)=\exp (-\int_{t_1}^t \sigma(\bold r(u))\cdot du)\]</span> We can get the color C of the pixel.</p><p>This can be implemented by sampling approaches.</p><p>Now everything can be approximated: <span class="math display">\[\hat C(\bold r)=\sum_{i=1}^N \alpha_iT_i\bold c_i \\T_i=\exp (-\sum_{j=1}^{i-1}\sigma_i\delta_j) \\\alpha_i=1-\exp(\sigma_i\delta_i)\\\delta_i=\text{distance between sampling point i and i+1}\]</span></p><ul><li>Loss is just L2 on color of the pixels:</li></ul><p><span class="math display">\[L=\sum_{r\in R}\| \hat C(\bold r)-C_{gt}(\bold r)\|^2_2\]</span></p><h4 id="depth-regularization">Depth regularization</h4><p>Similar to the above formulas, expected depth can also be calculated, and can be used to regularize the depth smoothness.</p><h4 id="positional-encoding">Positional encoding</h4><p>It is required to greatly improve the fine detail results.</p><p>There are many other positional encoding techs, including trainable parametric, integral, and hierarchical variants</p><h3 id="sdf---signed-distance-function">SDF - Signed Distance Function</h3><p>SDF是一种计算图形学中定义距离的函数。SDF定义了空间中的点到隐式曲面的距离，该点在曲面内外决定了其SDF的正负性。</p><p>相较于其他像点云（point cloud）、体素（voxel）、面云（mesh）那样的经典3D模型表示方法，SDF有固定的数学方程，更关注物体的表面信息，具有可控的计算成本。</p><h2 id="features-of-nerf">Features of NeRF</h2><ul><li>Representation can be discrete or continuous. but the discrete representation will be a big one if you have more dimensions, e.g., 3 dim.<ul><li>Actually the Plenoxels try to use 3D grids to store the fields. Fast, however, too much memory.</li></ul></li><li>Neural Field has advantages:<ol type="1"><li>Compactness 紧致:</li><li>Regularization: nn itself as inductive bias makes it easy to learn</li><li>Domain Agonostic: cheap to add a dimension</li></ol></li><li>also problems<ul><li>Editability / Manipulability</li><li>Computational Complexity</li><li>Spectral Bias</li></ul></li></ul><h2 id="problem-formulation">Problem Formulation</h2><ul><li>Input: multiview images</li><li>Output: 3D Geometry and appearance</li><li>Objective:</li></ul><p><span class="math display">\[\arg \min_x\|y-F(x)\|+\lambda P(x)\]</span></p><p>y is multiview images, F is forward mapping, x is the desired 3D reconstruction.</p><p>F can be differentiable, then you can supervise this.</p><ul><li>nn本身就是某种constraints，你就不需要加太多handicraft constraints</li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
-&lt;h1 id=&quot;introduction-to-nerf&quot;&gt;1. Introduction to NeRF&lt;/h1&gt;
-&lt;h2 id=&quot;what-is-nerf&quot;&gt;What is NeRF&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Reference: Original NeRF paper; an online ariticle&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="Computer Notes" scheme="https://jyzhu.top/blog/categories/Computer-Notes/"/>
-    
-    
-    <category term="Computer Vision" scheme="https://jyzhu.top/blog/tags/Computer-Vision/"/>
-    
-    <category term="NeRF" scheme="https://jyzhu.top/blog/tags/NeRF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Prior based reconstruction of neural fields</title>
-    <link href="https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/"/>
-    <id>https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/</id>
-    <published>2023-01-12T09:33:39.000Z</published>
-    <updated>2023-01-12T10:13:12.867Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p><h2 id="prior-based-reconstruction-of-neural-fields">2.4. Prior-based reconstruction of neural fields</h2><p>Sounds like a one-shot task: instead of fitting and optimizing a neural field each for one scene; let's learn a prior distribution of neural field. Then, given a specific scene, it adjusts the neural field in just one forward.</p><figure><img src="https://s2.loli.net/2023/01/12/rMOwKRJBuedFm1n.png" alt="image-20221211234430727" /><figcaption>image-20221211234430727</figcaption></figure><h3 id="how-does-the-latent-code-look-like">How does the latent code look like?</h3><figure><img src="https://s2.loli.net/2023/01/12/A41EOlYCBXrUxto.png" alt="image-20221211234923290" /><figcaption>image-20221211234923290</figcaption></figure><ul><li>Global: not local. A small latent code represents a neural field<ul><li>main limitation: can only represent very simple (single) object. coz if you have multiple objects in a scene, the degree of freedom grows non-linearly.</li><li><strong>How about giving the natural language descriptions as conditions???</strong></li></ul></li><li>Local: you get different latent codes considering the locality where you are. So, you have a prior 3D data structure to store the latent codes.<ul><li>3D point clouds -&gt; grids -&gt; triplanes interpolation</li></ul></li></ul><blockquote><p>Convolutional Occupancy Networks</p></blockquote><h3 id="autodecoder-instead-of-encoder-decoder">Autodecoder instead of Encoder-decoder</h3><figure><img src="https://s2.loli.net/2023/01/12/zr2GnpBXeZDJUqa.png" alt="image-20221212005012783" /><figcaption>image-20221212005012783</figcaption></figure><ul><li><p>Encoder is a 2D CNN structure.</p></li><li><p>But while using autodecoder, the backpropogate through the forward map (i.e., the neural renderer) will give the 3D structural information to the latent codes directly. <span class="math display">\[\text{latent code }\hat z=\arg \min_z \|\text{Render(}\Phi)-g.t.\|\]</span> <img src="https://s2.loli.net/2023/01/12/FQjMgibmNtIP4ca.png" alt="image-20221212004946040" /></p></li></ul><p><strong>Instead of trying to build the encoder, sometimes just use the backpropogation through the forward map is helpful.</strong></p><h3 id="light-field-networks----dont-need-to-render-anymore">Light field networks -- Don't need to render anymore</h3><figure><img src="https://s2.loli.net/2023/01/12/FVP15fmBYz8rEoe.png" alt="image-20221212005908926" /><figcaption>image-20221212005908926</figcaption></figure><p>Instead of learning a NeRF that you use a neural renderer to generate all points along a ray; you can learn a network to directly give you a color along a ray. So you do not use a 3d coordinate as the query, instead, use a ray.</p><p>But this do not work in complicated task yet.</p><figure><img src="https://s2.loli.net/2023/01/12/mAFx6pzqaIuUMin.png" alt="image-20221212010316991" /><figcaption>image-20221212010316991</figcaption></figure><h3 id="outlook">Outlook</h3><ul><li>You don't need to use 600 images of a scene to reconstruct it. Synthesis images?</li><li>Open minds: other ways to skip the expensive forward map? (e.g., the light field)</li><li>Understanding the scene like humans do: disentangle different objects</li><li>Local conditioning methods? Regular grids are easy to tackle with, but it's harder for point clouds / factorized representations</li><li>Transformers: seems like local conditioning</li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;This is part of &lt;a href=&quot;https://jyzhu.top/NeRF-Notebook/&quot;&gt;my journey of learning NeRF&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;prior-based-reconstruction-of-neural-fields&quot;&gt;2.4. Prior-based reconstruction of neural fields&lt;/h2&gt;
-&lt;p&gt;Sounds like a one-shot task: instead of fitting and optimizing a neural field each for one scene; let&#39;s learn a prior distribution of neural field. Then, given a specific scene, it adjusts the neural field in just one forward.&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&quot;https://s2.loli.net/2023/01/12/rMOwKRJBuedFm1n.png&quot; alt=&quot;image-20221211234430727&quot;&gt;&lt;figcaption&gt;image-20221211234430727&lt;/figcaption&gt;
 &lt;/figure&gt;</summary>
     
     

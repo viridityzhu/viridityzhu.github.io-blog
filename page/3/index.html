@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
         <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
         <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">85</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">184</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>日期<span class="badge">185</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -166,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -239,7 +239,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Manipulate-Neural-Fields/">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/NeRF-Network-Architecture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -252,7 +252,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/Manipulate-Neural-Fields/" class="post-title-link" itemprop="url">Manipulate Neural Fields</a>
+          <a href="/blog/NeRF-Network-Architecture/" class="post-title-link" itemprop="url">NeRF Network Architecture</a>
         </h2>
 
         <div class="post-meta-container">
@@ -276,7 +276,7 @@
     </span>
 
   
-    <span id="/blog/Manipulate-Neural-Fields/" class="post-meta-item leancloud_visitors" data-flag-title="Manipulate Neural Fields" title="阅读量">
+    <span id="/blog/NeRF-Network-Architecture/" class="post-meta-item leancloud_visitors" data-flag-title="NeRF Network Architecture" title="阅读量">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -291,8 +291,8 @@
     </span>
     <span class="post-meta-item-text">Valine:</span>
   
-    <a title="valine" href="/blog/Manipulate-Neural-Fields/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/blog/Manipulate-Neural-Fields/" itemprop="commentCount"></span>
+    <a title="valine" href="/blog/NeRF-Network-Architecture/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/NeRF-Network-Architecture/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -303,14 +303,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">字数:</span>
-      <span>3.1k</span>
+      <span>381</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>1 分钟</span>
     </span>
 </div>
 
@@ -322,14 +322,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p>
-<h2 id="manipulate-neural-fields">2.5. Manipulate Neural Fields</h2>
-<p>Neural fields is ready to be a prime representation, similar as point clouds or meshes, that is able to be manipulated.</p>
-<figure>
-<img src="https://s2.loli.net/2023/01/12/okLGyeFmMvifhZW.png" alt="image-20221212211525928"><figcaption>image-20221212211525928</figcaption>
-</figure>
+<h2 id="network-architecture">2.1. Network Architecture</h2>
+<h3 id="input-encoding">1. Input Encoding</h3>
+<p>Similar as NLP, they use position encodings. Like Sinusoid functions. I also remember an encoding method which takes into consider of the 光线的散射</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/Manipulate-Neural-Fields/#more" rel="contents">
+              <a class="btn" href="/blog/NeRF-Network-Architecture/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -449,6 +447,127 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/NeRF-Notebook/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Prior-based-reconstruction-of-neural-fields/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/Prior-based-reconstruction-of-neural-fields/" class="post-title-link" itemprop="url">Prior based reconstruction of neural fields</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表</span>
+
+      <time title="创建时间:2023-01-12 17:33:39" itemprop="dateCreated datePublished" datetime="2023-01-12T17:33:39+08:00">2023-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/Prior-based-reconstruction-of-neural-fields/" class="post-meta-item leancloud_visitors" data-flag-title="Prior based reconstruction of neural fields" title="阅读量">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读量:</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine:</span>
+  
+    <a title="valine" href="/blog/Prior-based-reconstruction-of-neural-fields/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/Prior-based-reconstruction-of-neural-fields/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">字数:</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>This is part of <a href="https://jyzhu.top/NeRF-Notebook/">my journey of learning NeRF</a>.</p>
+<h2 id="prior-based-reconstruction-of-neural-fields">2.4. Prior-based reconstruction of neural fields</h2>
+<p>Sounds like a one-shot task: instead of fitting and optimizing a neural field each for one scene; let's learn a prior distribution of neural field. Then, given a specific scene, it adjusts the neural field in just one forward.</p>
+<figure>
+<img src="https://s2.loli.net/2023/01/12/rMOwKRJBuedFm1n.png" alt="image-20221211234430727"><figcaption>image-20221211234430727</figcaption>
+</figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/Prior-based-reconstruction-of-neural-fields/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1298,125 +1417,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Reading-Few-shot-Video-to-Video-Synthesis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Jiayin Zhu">
-      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianke Youke">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" class="post-title-link" itemprop="url">Reading Few-shot Video-to-Video Synthesis</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表</span>
-
-      <time title="创建时间:2022-05-13 16:49:57" itemprop="dateCreated datePublished" datetime="2022-05-13T16:49:57+08:00">2022-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" class="post-meta-item leancloud_visitors" data-flag-title="Reading Few-shot Video-to-Video Synthesis" title="阅读量">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读量:</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Valine:</span>
-  
-    <a title="valine" href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/blog/Reading-Few-shot-Video-to-Video-Synthesis/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">字数:</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>论文地址：http://arxiv.org/abs/1910.12713</p>
-<p>作者：<a target="_blank" rel="noopener" href="https://tcwang0509.github.io/">Ting-Chun Wang</a>, <a target="_blank" rel="noopener" href="http://mingyuliu.net/">Ming-Yu Liu</a>, Andrew Tao, <a target="_blank" rel="noopener" href="https://liuguilin1225.github.io/">Guilin Liu</a>, <a target="_blank" rel="noopener" href="http://jankautz.com/">Jan Kautz</a>, <a target="_blank" rel="noopener" href="http://catanzaro.name/">Bryan Catanzaro</a></p>
-<p>发表： NeurIPS 2019</p>
-<p>Project： https://nvlabs.github.io/few-shot-vid2vid</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/Reading-Few-shot-Video-to-Video-Synthesis/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/19/">19</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1459,7 +1459,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="网站总字数">261k</span>
+    <span title="网站总字数">262k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
