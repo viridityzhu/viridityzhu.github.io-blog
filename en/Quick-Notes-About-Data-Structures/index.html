@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/blog/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<meta name="description" content="In IT5003, I am studying data structures and algorithms. The language we learn with is Python. So I take notes about what I learned, and how to use them in Python. I struct my notes based on data stru">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Structures and Their ADTs">
+<meta property="og:url" content="https://jyzhu.top/blog/en/Quick-Notes-About-Data-Structures/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="In IT5003, I am studying data structures and algorithms. The language we learn with is Python. So I take notes about what I learned, and how to use them in Python. I struct my notes based on data stru">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-03T12:05:53.000Z">
+<meta property="article:modified_time" content="2021-12-04T00:52:01.951Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Notebook">
+<meta property="article:tag" content="Data Structure">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jyzhu.top/blog/en/Quick-Notes-About-Data-Structures/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jyzhu.top/blog/Quick-Notes-About-Data-Structures/","path":"en/Quick-Notes-About-Data-Structures/","title":"Data Structures and Their ADTs"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Data Structures and Their ADTs | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/blog/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A sanctuary for secreting and rushing at night.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-notes"><a href="/blog/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/blog/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">85</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">185</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linear-data-structures"><span class="nav-number">1.</span> <span class="nav-text">Linear Data Structures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#array"><span class="nav-number">1.1.</span> <span class="nav-text">Array:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linked-list"><span class="nav-number">1.2.</span> <span class="nav-text">Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-adt"><span class="nav-number">1.2.1.</span> <span class="nav-text">Stack ADT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue-adt"><span class="nav-number">1.2.2.</span> <span class="nav-text">Queue ADT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque-adt"><span class="nav-number">1.2.3.</span> <span class="nav-text">Deque ADT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#non-linear-data-structures"><span class="nav-number">2.</span> <span class="nav-text">Non-Linear Data Structures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-heap"><span class="nav-number">2.1.</span> <span class="nav-text">Binary Heap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash-table"><span class="nav-number">2.2.</span> <span class="nav-text">Hash Table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-search-tree"><span class="nav-number">2.3.</span> <span class="nav-text">Binary Search Tree</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#graph"><span class="nav-number">3.</span> <span class="nav-text">Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#concepts"><span class="nav-number">3.1.</span> <span class="nav-text">Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ways-to-store-a-graph"><span class="nav-number">3.2.</span> <span class="nav-text">Ways to store a graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfs-bfs"><span class="nav-number">3.3.</span> <span class="nav-text">DFS &amp; BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#applications"><span class="nav-number">3.3.1.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-python"><span class="nav-number">3.3.2.</span> <span class="nav-text">In Python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sssp"><span class="nav-number">3.4.</span> <span class="nav-text">SSSP</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com.sg/citations?user=S8ozWfsAAAAJ" title="GoogleScholar → https:&#x2F;&#x2F;scholar.google.com.sg&#x2F;citations?user&#x3D;S8ozWfsAAAAJ" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script> -->
+<script type='text/javascript' id='clustrmaps'
+    src='//cdn.clustrmaps.com/map_v2.js?cl=c1c1c1&w=a&t=tt&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=484848&ct=f9f9f9&cmo=3acc3a&cmn=600073'></script>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Quick-Notes-About-Data-Structures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Data Structures and Their ADTs
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-03 20:05:53" itemprop="dateCreated datePublished" datetime="2021-11-03T20:05:53+08:00">2021-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/en/Quick-Notes-About-Data-Structures/" class="post-meta-item leancloud_visitors" data-flag-title="Data Structures and Their ADTs" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine: </span>
+  
+    <a title="valine" href="/blog/en/Quick-Notes-About-Data-Structures/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/en/Quick-Notes-About-Data-Structures/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>19k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>18 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>In IT5003, I am studying data structures and algorithms. The language we learn with is Python. So I take notes about what I learned, and how to use them in Python. I struct my notes based on data structures, and all the ADTs that are implemented by the data structures are discussed within. I focus on their usage, key design, and sometimes problems. In the future maybe I will append all the implementation codes.</p>
+<hr />
+<ul>
+<li>ADT: Abstract data type, from the point of view of a user, defined by its behavior.</li>
+<li>Data Structure: from the point of view of an implementer, concrete representations of data.</li>
+</ul>
+<h1 id="linear-data-structures">Linear Data Structures</h1>
+<h2 id="array">Array:</h2>
+<blockquote>
+<p>Continuous space to store fix-sized elems.</p>
+</blockquote>
+<p>I often confuse array with list... Now I need to clarify that an <strong>array</strong> is a data structure, which is one of the implementations of the <strong>List ADT</strong>.</p>
+<p><strong>Key design</strong>:</p>
+<p>Methods:</p>
+<ul>
+<li>==Get ith==: O(1) obviously at A[i]</li>
+<li>==Insert(i)==: O(n) worst/average, coz need to shift left; O(1) if insert at tail</li>
+<li>==Remove(i)==: Just similar as insert, need to shift right.</li>
+<li>==Search n==: Still similar. O(n) worst/average found at tail; O(1) if found immediately at head</li>
+</ul>
+<p><strong>Usage</strong>: Make a <strong>List ADT</strong>. Store ordered things continually, we can <strong>insert</strong> into a specific position, <strong>get</strong> ith element, of course also <strong>search</strong>, and <strong>remove</strong></p>
+<p><strong>Problem</strong>: Insert and remove are <strong>O(n)</strong> coz it needs to shift everything behind to make the position empty/not empty. Also, it requires <strong>consecutive</strong> and <strong>fixed</strong>(can be overcome) space to store, sometimes may be not that flexible.</p>
+<p><strong>In python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># It is PYTHON who let me confuse the 2!! coz in python, an array is just called a list...</span></span><br></pre></td></tr></table></figure>
+<h2 id="linked-list">Linked List</h2>
+<blockquote>
+<p>non-continous space, not fixed-size. Each vertex contains value and a pointer pointing next vertex.</p>
+</blockquote>
+<p><strong>Usage</strong>: Make a <strong>List ADT</strong> again. Compared with an array, it doesn't need to be consecutive and fixed-size, and it can <strong>insert</strong>/<strong>remove</strong> from <strong>head</strong> very efficiently, in <strong>O(1)</strong>. But most importantly, it can make <strong>Stack/Queue/Deque ADT</strong>, because it is <strong>resizeable</strong>.</p>
+<p><strong>Key Design</strong>: I think just need to clarify its attributes and methods:</p>
+<ul>
+<li>Attributes:
+<ul>
+<li>Value</li>
+<li>Next -- Singly LL</li>
+<li>(Previous -- Doubly LL)</li>
+</ul></li>
+<li>Methods:
+<ul>
+<li>==Get ith==: Unfortunately it becomes <strong>O(n)</strong> compared with array, coz it needs to go from the head pointer.</li>
+<li>==Insert==: Insert at the head only need <strong>O(1)</strong> (at tail also O(1) if it is doubly linked); but on average, also <strong>O(n)</strong>, coz should go from head :(</li>
+<li>==Remove==: Just similar as insert. (ps: coz need to search the prev node)</li>
+<li>==Search n==: Obviously O(1) best and <strong>O(n)</strong> worst/avg, same as Array</li>
+</ul></li>
+</ul>
+<h3 id="stack-adt">Stack <strong>ADT</strong></h3>
+<blockquote>
+<p>Like book stack.</p>
+</blockquote>
+<p><strong>Usage</strong>: <strong>LIFO</strong>(last-in-first-out), so you can both <strong>pop</strong> and <strong>push</strong> from head. (Errrr, impacted by python, I always think of it as a tail).</p>
+<p><strong>In python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># just use a list!! and regard the tail as the head.</span></span><br><span class="line">stack = []</span><br><span class="line">stack.append(<span class="number">1</span>)</span><br><span class="line">lastElem = stack.pop() <span class="comment"># by default, pop at -1, i.e. the last one</span></span><br></pre></td></tr></table></figure>
+<h3 id="queue-adt">Queue <strong>ADT</strong></h3>
+<blockquote>
+<p>Like queue in reality.</p>
+</blockquote>
+<p><strong>Usage</strong>: <strong>FIFO</strong>(first-in-first-out), so <strong>push</strong> at the tail and <strong>pop</strong> from head, it is perfectly implemented by a <strong>linked list</strong> (with tail pointer), to make both operations <strong>O(1)</strong>.</p>
+<p><strong>In python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="comment"># coz queue is a subset of deque, so a deque can be a queue, haha</span></span><br><span class="line">q = deque()</span><br><span class="line">q.append()</span><br><span class="line">q.popleft()</span><br></pre></td></tr></table></figure>
+<h3 id="deque-adt">Deque <strong>ADT</strong></h3>
+<blockquote>
+<p>Queue + double head</p>
+</blockquote>
+<p><strong>Usage</strong>: Double-ended queue. Both <strong>pop</strong> &amp; <strong>push</strong> from both <strong>head</strong> &amp; <strong>tail</strong>. Perfectly implemented by a <strong>doubly linked list</strong>, with all operations <strong>O(1)</strong>.</p>
+<p><strong>In python</strong>: Look at Queue.</p>
+<h1 id="non-linear-data-structures">Non-Linear Data Structures</h1>
+<h2 id="binary-heap">Binary Heap</h2>
+<blockquote>
+<p><strong>Complete Binary Tree</strong>: Every level fully filled + last level as far left as possible</p>
+<p>+ <strong>Binary Max Heap property</strong>: Parent greater than children</p>
+</blockquote>
+<p><strong>Usage</strong>:</p>
+<p>Used for implementing a <strong>Priority Queue ADT.</strong> When to use PQ? When you need to maintain some ordered elements, and frequently fetch the Max/Min ones.</p>
+<p><strong>Key Design</strong>: A binary heap is firstly a <strong>binary tree</strong>, and then it is ruled as a <strong>Min heap</strong> -- every parent node should be smaller than its 2 children. The direct way of implementing the binary heap is to use Tree class, with attributes Value, LeftChild and RightChild. However, it is more convenient if we just simply use an <strong>array</strong>. Just need to think of this:</p>
+<ul>
+<li>For a parent at kth position, its left child is at <span class="math inline">\(k * 2\)</span>, and right child is k * 2 + 1.</li>
+<li>For a child at kth position, its parent is at k//2.</li>
+<li>For a condensed binary tree, everything can be mapped into an also condensed list.</li>
+</ul>
+<p>5 standard Binary (Max) Heap operations:</p>
+<ol type="1">
+<li>==<strong>Insert(v)</strong>== in O(log <strong>N</strong>): Firstly insert as the last leaf. Then <strong>bubble up</strong> -- obviously, swap from the bottom to the up.</li>
+<li>==<strong>ExtractMax()</strong>== in O(log <strong>N</strong>): just get the root element; then the important thing is what you should do after popping out the root element -- you need to maintain the heap. So, pick the last leaf to the root, then <strong>bubble down</strong> -- i.e. swap the parent with the bigger child up to down, till all fine.</li>
+<li>(==<strong>Create(A)</strong>== - O(<strong>N</strong> log <strong>N</strong>) version: Simply insert (that is, by calling <strong>Insert(v)</strong> operation) all <strong>N</strong> integers of the input array into an initially empty Binary Max Heap one by one.)</li>
+<li>==<strong>Create(A)</strong>== - O(<strong>N</strong>) version: (make a list of unsorted elements become a heap): best is <strong>O(n)</strong>, with bubble up the leaves.</li>
+<li>==<strong>HeapSort()</strong>== - in O(<strong>N</strong> log <strong>N)</strong>: Simply call the O(log <strong>N</strong>) <strong>ExtractMax()</strong> operation <strong>N</strong> times.</li>
+</ol>
+<p><strong>Extra</strong>: Heapsort is not <strong>cache friendly</strong>. Because the computer will predict that you'll read the array in sequence, so it will cache the following elems. Quicksort takes this advantage. Mergesort not.</p>
+<p><strong>In python</strong></p>
+<p>Implementation: don't use it, just for understanding</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">binary_heap</span>:</span>  <span class="comment"># implementation that has no duplicate</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># the underlying data structure, we will ignore index 0</span></span><br><span class="line">        self.A = [<span class="literal">None</span>]</span><br><span class="line">    <span class="comment"># three helper navigation function, all O(1)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parent</span>(<span class="params">self, i</span>):</span> <span class="keyword">return</span> i // <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">left</span>(<span class="params">self, i</span>):</span> <span class="keyword">return</span> i * <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">right</span>(<span class="params">self, i</span>):</span> <span class="keyword">return</span> i * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shift_up</span>(<span class="params">self, i</span>):</span>  <span class="comment"># O(log n)</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span>  <span class="comment"># at root, do nothing</span></span><br><span class="line">        <span class="keyword">if</span> self.A[i] &gt; self.A[self.parent(i)]:  <span class="comment"># violate property with parent</span></span><br><span class="line">            self.A[i], self.A[self.parent(i)] = self.A[self.parent(i)], self.A[</span><br><span class="line">                i]  <span class="comment"># swap upwards</span></span><br><span class="line">            <span class="comment"># recurse, at most O(log n) steps back to the root</span></span><br><span class="line">            self.shift_up(self.parent(i))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">self, x</span>):</span>  <span class="comment"># O(log n)</span></span><br><span class="line">        <span class="comment"># append to the back of Python list, the only possible insertion point,</span></span><br><span class="line">        <span class="comment"># O(1)</span></span><br><span class="line">        self.A.append(x)</span><br><span class="line">        self.shift_up(<span class="built_in">len</span>(self.A) - <span class="number">1</span>)  <span class="comment"># shift upwards, O(log n) at worst</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shift_down</span>(<span class="params">self, i</span>):</span>  <span class="comment"># O(log n)</span></span><br><span class="line">        swap_id = i</span><br><span class="line">        <span class="comment"># compare with left child, if exists</span></span><br><span class="line">        <span class="keyword">if</span> self.left(i) &lt; <span class="built_in">len</span>(self.A) <span class="keyword">and</span> self.A[i] &lt; self.A[self.left(i)]:</span><br><span class="line">            swap_id = self.left(i)</span><br><span class="line">        <span class="comment"># compare with right child, if exists</span></span><br><span class="line">        <span class="keyword">if</span> self.right(i) &lt; <span class="built_in">len</span>(self.A) <span class="keyword">and</span> self.A[swap_id] &lt; self.A[self.right(i)]:</span><br><span class="line">            swap_id = self.right(i)</span><br><span class="line">        <span class="keyword">if</span> swap_id != i:  <span class="comment"># need to swap with the larger of the two children</span></span><br><span class="line">            <span class="comment"># swap downwards with the larger of the two children</span></span><br><span class="line">            self.A[i], self.A[swap_id] = self.A[swap_id], self.A[i]</span><br><span class="line">            <span class="comment"># recurse, at most O(log n) steps to one of the bottom-most leaf</span></span><br><span class="line">            self.shift_down(swap_id)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">extract_max</span>(<span class="params">self</span>):</span>  <span class="comment"># O(log n)</span></span><br><span class="line">        <span class="keyword">if</span> self.is_empty():</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        taken = self.A[<span class="number">1</span>]  <span class="comment"># this is the maximum value, O(1)</span></span><br><span class="line">        <span class="comment"># swap with the last existing leaf, O(1)</span></span><br><span class="line">        self.A[<span class="number">1</span>], self.A[-<span class="number">1</span>] = self.A[-<span class="number">1</span>], self.A[<span class="number">1</span>]</span><br><span class="line">        self.A.pop()  <span class="comment"># reduce list size by one, O(1)</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.is_empty():</span><br><span class="line">            <span class="comment"># fix heap property downwards, O(log n) at worst</span></span><br><span class="line">            self.shift_down(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> taken  <span class="comment"># return the maximum value, O(1)</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_max</span>(<span class="params">self</span>):</span>  <span class="comment"># O(1)</span></span><br><span class="line">        <span class="keyword">return</span> self.A[<span class="number">1</span>]  <span class="comment"># this is the root</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_empty</span>(<span class="params">self</span>):</span>  <span class="comment"># O(1)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.A) == <span class="number">1</span>  <span class="comment"># when A = [None] only</span></span><br></pre></td></tr></table></figure>
+<p>Use the library:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> heappop, heappush, heapify</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> PriorityQueue <span class="comment"># implemented based on the heapq, a thread safe version</span></span><br><span class="line"></span><br><span class="line">pq_heapq = [] <span class="comment"># this is a MIN heap, to get a max heap, we negate all numbers</span></span><br><span class="line">heappush(pq_heapq, -<span class="number">5</span>)  <span class="comment"># insert negation</span></span><br><span class="line">heappop(pq_heapq)</span><br></pre></td></tr></table></figure>
+<h2 id="hash-table">Hash Table</h2>
+<blockquote>
+<p>Hashing is an algorithm (via a hash function) that maps large data sets of variable length into smaller Integer data sets of a fixed length. Hash Table is a data structure to map key to values (also called Table or Map ADT).</p>
+</blockquote>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>You want a <strong>Table ADT</strong> that can store things, and you can <strong>input</strong> and <strong>search</strong> in <strong>O(1)</strong> (also <strong>delete</strong>)</li>
+<li>Actually it's not necessarily the things are integers, they can be anything, even strings. And you can even use (key, value) pair, to store anything additionally in the value part.</li>
+</ul>
+<p><strong>Key design</strong>: Use a <strong>hash</strong> function to map <strong>n</strong> keys in a list with length <strong>m</strong>; then the complexity of search(v)/remove(v) is <strong>O(n/m)</strong> (Search v in the list with avg length n/m). You should design the hash function and also the length m.</p>
+<ul>
+<li>Hash function:
+<ul>
+<li><p>For integers: <strong>modulo</strong> operation is the best practice. Just let <code>h(v) = v % M</code>. O(1).</p></li>
+<li><p>For strings: (normally strings only contains 26 letters) <code>for char in string: sum = sum * 26 + char % 26</code>. This is like Base-26, so every English letter matters.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hash_function</span><span class="params">(string v)</span> </span>&#123; <span class="comment">// assumption 1: v uses [&#x27;A&#x27;..&#x27;Z&#x27;] only</span></span><br><span class="line">  <span class="keyword">int</span> sum = <span class="number">0</span>;                <span class="comment">// assumption 2: v is a short string</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; c : v) <span class="comment">// for each character c in v</span></span><br><span class="line">    sum = ((sum * <span class="number">26</span>) % M + (c - <span class="string">&#x27;A&#x27;</span> + <span class="number">1</span>)) % M; <span class="comment">// M is table size</span></span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><ol type="1">
+<li>never modulo a constant, modulo the size of table;</li>
+<li>never use a funtion that is not uniform, like sqrt;</li>
+<li>never random</li>
+</ol></li>
+</ul></li>
+<li>Length m:
+<ul>
+<li>Based on experiences, it should be a <strong>prime</strong>, to make the least collisions; and should be around n, to make O(n/m) a constant.</li>
+</ul></li>
+<li>Solve collision: i.e., two or more keys have the same hash value.
+<ul>
+<li><strong>Seperate Chaining</strong> (Not move): Use Doubly Linked List (or just simply python list): if 2 keys are in the same position, just add the 2nd one at the last of the list.</li>
+<li>Opening Address (Move away):
+<ul>
+<li>linear search another position</li>
+<li>non-linear search for another position</li>
+<li>rehash for another position</li>
+</ul></li>
+<li>People are debating which is better, but my teacher Steven believes SC is better.</li>
+</ul></li>
+<li>With these 3 operations, it is a good <strong>Table ADT</strong> (implemented by SC):
+<ul>
+<li>==Search(v)==: Just check if v in A[h(v)] list. O(<span class="math inline">\(\alpha\)</span>). <span class="math inline">\(\alpha = n/m\)</span> is the avg length of each chain. If <strong>m</strong> is set properly, the <span class="math inline">\(\alpha\)</span> is then very small, thus it is O(1).</li>
+<li>==Remove(v)==: also, coz need to search it at first. Just delete v in A[h(v)] list</li>
+<li>==insert(v)==: O(1). Just append v in A[h(v)] list</li>
+</ul></li>
+</ul>
+<p><strong>May be problems:</strong></p>
+<ul>
+<li>The space occupation of the hash table should be always a little bit larger than the original elements, coz it is very possible for the hash table to contain empty positions</li>
+<li>What if the keys are duplicated? By default, we don't want it duplicated. But I believe there are potential ways to deal with duplicated keys</li>
+</ul>
+<p><strong>In python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># just use dictionary!!!</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">d = defaultdict(<span class="built_in">list</span>)</span><br><span class="line">k, v = <span class="string">&#x27;zjy&#x27;</span>, <span class="number">518</span></span><br><span class="line">d[k].append(v) <span class="comment"># No need to initialize `if k not in d: d[k] = []` then</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">M = <span class="number">13</span> <span class="comment"># table size, best to be prime</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hash_table</span>:</span>  <span class="comment"># mimic Python dict()</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.underlying_table = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(M)]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hash_function</span>(<span class="params">self, v</span>):</span>  <span class="comment"># for string v</span></span><br><span class="line">        <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> v:</span><br><span class="line">            <span class="built_in">sum</span> = ((<span class="built_in">sum</span> * <span class="number">26</span>) % M + (<span class="built_in">ord</span>(c) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) + <span class="number">1</span>)) % M</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search</span>(<span class="params">self, key</span>):</span>  <span class="comment"># to emulate mapper[key]</span></span><br><span class="line">        <span class="comment"># O(k), k is the length of this list, but with careful setup, k can be</span></span><br><span class="line">        <span class="comment"># O(1)</span></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> self.underlying_table[self.hash_function(key)]:</span><br><span class="line">            <span class="keyword">if</span> k == key:  <span class="comment"># if there is an existing key</span></span><br><span class="line">                <span class="keyword">return</span> v  <span class="comment"># return this satellite data</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="comment"># get the reference of the row</span></span><br><span class="line">        row = self.underlying_table[self.hash_function(key)]</span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> row:</span><br><span class="line">            <span class="keyword">if</span> k == key:</span><br><span class="line">                row.remove((k, v))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># we do nothing if key is not actually found</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">self, key, value</span>):</span>  <span class="comment"># to emulate mapper[key] = value</span></span><br><span class="line">        <span class="keyword">if</span> self.search(key):</span><br><span class="line">            self.remove(key)</span><br><span class="line">        self.underlying_table[self.hash_function(key)].append(</span><br><span class="line">            (key, value))  <span class="comment"># just append at the back</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_empty</span>(<span class="params">self</span>):</span></span><br><span class="line">        total = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            total += <span class="built_in">len</span>(self.underlying_table[i])</span><br><span class="line">        <span class="keyword">return</span> total == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2 id="binary-search-tree">Binary Search Tree</h2>
+<blockquote>
+<p>A Binary Search Tree (BST) is a binary tree in which each vertex has only up to 2 children that satisfies <strong>BST property</strong>:</p>
+<p>All vertices in the left subtree of a vertex must hold a value smaller than its own; all vertices in the right subtree of a vertex must hold a value larger than its own.</p>
+</blockquote>
+<p><strong>Usage</strong>: Another way to implement <strong>Table ADT</strong>. This way, compared with hash table, it is slightly slower, with all operations <strong>O(logn)</strong>. However, it can do additional things: keep keys in table <strong>ordered</strong>.</p>
+<p><strong>Key Design</strong>: A <strong>binary tree</strong>, for every node, everything on the left is smaller than it; on the right, bigger. (not only for the direct children, but also for everything below).</p>
+<p>Basically, BST as an implementation of <strong>Table ADT</strong>, should also have the 3 <strong>operations</strong>: (All <strong>O(log n)</strong>)</p>
+<ul>
+<li>==Search(v)==</li>
+<li>==Remove(v)==</li>
+<li>==insert(v)==</li>
+</ul>
+<p>Besides, it is excellent because it has other special operations:</p>
+<ol type="1">
+<li>Query operations (the BST structure remains unchanged):
+<ol type="1">
+<li>Search(v): O(h), h is the height of the tree (h is log N on average, but can be N). Just binary search from root down.</li>
+<li>==Predecessor(v)== (and similarly ==Successor(v)==), both also O(h). (details below)</li>
+<li>==Inorder Traversal==, then elems are sorted. O(n)</li>
+</ol></li>
+<li>Update operations (the BST structure may likely change):
+<ol type="1">
+<li>Insert(v), O(h), find the place and add it.</li>
+<li>Remove(v), O(h). Worst case is that v has 2 children, then need to fisrtly search(v) in O(h), then find its successor in another O(h), then replace it by its successor, and rememer to delete the duplicated successor.</li>
+<li>==Create BST==.</li>
+</ol></li>
+</ol>
+<p>Successor后继：</p>
+<ol type="1">
+<li>If v has a right subtree, should be the <strong>minimum of the right</strong></li>
+<li>If no right subtree, go traverse ancestors, till <strong>the first ancestor that is greater</strong> than v</li>
+<li>Otherwise, none.</li>
+</ol>
+<p>Presuccesor:</p>
+<ol type="1">
+<li>If has a left subtree, should be the maximum of the left</li>
+<li>If not, should be the first ancestor that is smaller</li>
+<li>Or none.</li>
+</ol>
+<p><strong>Question</strong>: How many structurally different BSTs can you form with <strong>n distinct</strong> elements?</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16004723/number-of-binary-search-trees-over-n-distinct-elements">Solution with Catalan number</a></p>
+<p><a target="_blank" rel="noopener" href="http://techieme.in/count-binary-search-trees/">Solution that's more understandable</a> <span class="math display">\[
+Catalan_n = C_{2n}^n \div (n+1)
+\]</span></p>
+<p><strong>In python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># No implemented library for binary tree</span></span><br><span class="line"><span class="comment"># If you need sorting, use `.sort()`</span></span><br><span class="line"><span class="comment"># If you need priority queue, use heapq as binary heap</span></span><br><span class="line"><span class="comment"># If you need table, use dictionary</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BSTVertex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, key</span>):</span>  <span class="comment"># set as &#x27;public&#x27; for easier coding</span></span><br><span class="line">        self.key = key</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__root = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__insert</span>(<span class="params">self, T, v</span>):</span>                     <span class="comment"># private version of insert</span></span><br><span class="line">        <span class="keyword">if</span> T == <span class="literal">None</span>:                             <span class="comment"># insertion point is found</span></span><br><span class="line">            T = BSTVertex(v)</span><br><span class="line">        <span class="keyword">elif</span> T.key &lt; v:                           <span class="comment"># search to the right</span></span><br><span class="line">            T.right = self.__insert(T.right, v)</span><br><span class="line">        <span class="keyword">else</span>:                                     <span class="comment"># search to the left</span></span><br><span class="line">            T.left = self.__insert(T.left, v)</span><br><span class="line">        <span class="keyword">return</span> T                                  <span class="comment"># return the updated BST</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inorder</span>(<span class="params">self, T</span>):</span>                       <span class="comment"># private version of inorder</span></span><br><span class="line">        <span class="keyword">if</span> T == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        self.__inorder(T.left)                    <span class="comment"># recursively go to the left</span></span><br><span class="line">        <span class="built_in">print</span>(T.key, end=<span class="string">&#x27; &#x27;</span>)                     <span class="comment"># visit this BST node</span></span><br><span class="line">        self.__inorder(T.right)                   <span class="comment"># recursively go to the right</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__search</span>(<span class="params">self, T, v</span>):</span>                     <span class="comment"># private version of search</span></span><br><span class="line">        <span class="keyword">if</span> T == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> T                              <span class="comment"># not found</span></span><br><span class="line">        <span class="keyword">elif</span> T.key == v:</span><br><span class="line">            <span class="keyword">return</span> T                              <span class="comment"># found</span></span><br><span class="line">        <span class="keyword">elif</span> T.key &lt; v:</span><br><span class="line">            <span class="keyword">return</span> self.__search(T.right, v)      <span class="comment"># search to the right</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.__search(T.left, v)       <span class="comment"># search to the left</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">self, v</span>):</span></span><br><span class="line">        self.__root = self.__insert(self.__root, v)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inorder</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__inorder(self.__root)</span><br><span class="line">        <span class="built_in">print</span>()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search</span>(<span class="params">self, v</span>):</span></span><br><span class="line">        res = self.__search(self.__root, v)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span> <span class="keyword">if</span> res == <span class="literal">None</span> <span class="keyword">else</span> res.key</span><br></pre></td></tr></table></figure>
+<h1 id="graph">Graph</h1>
+<h2 id="concepts">Concepts</h2>
+<ul>
+<li>Vertex</li>
+<li>Edge</li>
+<li>Path</li>
+<li>Directed/ Undirected</li>
+<li>Weighted/Unweighted</li>
+<li>Acyclic: No circle.</li>
+<li>Connected</li>
+</ul>
+<p>Special Graphs</p>
+<ul>
+<li>Tree: only <strong>one unique path</strong> between 2 vertices. <strong>E = V - 1</strong>, always. Acyclic. Minimal edges to keep a graph connected.</li>
+<li>Complete: <strong>E = V*(V-1)/2</strong> edges (or <strong>E</strong> = O(<strong>V2</strong>)). Most dense graph</li>
+<li>Bipatite: can be divided into 2 sets where there is no edge between members of the same set.</li>
+<li>DAG</li>
+</ul>
+<h2 id="ways-to-store-a-graph">Ways to store a graph</h2>
+<ol type="1">
+<li>Adjacency Matrix: Column and row are both vertices. Space complexity <strong>O(V<sup>2</sup>)</strong>
+<ol type="1">
+<li>Usage: Frequently update the weights of edges; Checking the existence of edge (u, v). Both <strong>O(1).</strong></li>
+<li>Drawbacks: <strong>O(v)</strong> when fetch neighbors. not good when many vertices; Space complexity high.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">AM = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(V)] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(V)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(V):</span><br><span class="line">    AM[i] = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, (fh.readline().strip().split())))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Neighbors of vertex 0:&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(V):                             <span class="comment"># O(|V|)</span></span><br><span class="line">    <span class="keyword">if</span> AM[<span class="number">0</span>][j]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Edge 0-&#123;:d&#125; (weight = &#123;:d&#125;)&#x27;</span>.<span class="built_in">format</span>(j, AM[<span class="number">0</span>][j]))</span><br></pre></td></tr></table></figure></li>
+<li>Adjacency List: Column is vertices, then use linked lists to store their neighbors. Space complexity <strong>O(V + E)</strong>
+<ol type="1">
+<li>Usage: Commonly. Frequently fetch neighbors of vertices. <strong>O(k)</strong>, k is # nbrs. Fastest.</li>
+<li>Drawbacks: Need to search for Existence of Edge (u, v), O(k).</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">AL = defaultdict(<span class="built_in">list</span>)  <span class="comment"># initalize AL</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(V):</span><br><span class="line">    line = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, (fh.readline().strip().split())))</span><br><span class="line">    total_neighbours = <span class="built_in">int</span>(line[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(line), <span class="number">2</span>):</span><br><span class="line">        v, w = <span class="built_in">int</span>(line[j]), <span class="built_in">int</span>(line[j + <span class="number">1</span>])</span><br><span class="line">        AL[i].append((v - <span class="number">1</span>, w))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Neighbors of vertex 0:&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> v_w <span class="keyword">in</span> AL[<span class="number">0</span>]:</span><br><span class="line">    <span class="comment"># AL[0] contains the required information</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Edge 0-&#123;:d&#125; (weight = &#123;:d&#125;)&#x27;</span>.<span class="built_in">format</span>(v_w[<span class="number">0</span>], v_w[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure></li>
+<li>Edge List: Column is edges, then store pairs (vertex1, vertex2, weight). Space complexity <strong>O(E)</strong>
+<ol type="1">
+<li>Usage: Need to <strong>sort</strong> edges in terms of weights</li>
+<li>Drawbacks: Need to scan the whole thing when fetch neighbors / search existence of edge(u,v). O(E)</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">E = <span class="built_in">int</span>(fh.readline())</span><br><span class="line">edge_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(E):</span><br><span class="line">    u, v, w = <span class="built_in">map</span>(<span class="built_in">int</span>, fh.readline().split())</span><br><span class="line">    edge_list.append((w, u, v))</span><br><span class="line"></span><br><span class="line"><span class="comment"># build a heap</span></span><br><span class="line">heapq.heapify(edge_list)</span><br><span class="line"></span><br><span class="line"><span class="comment"># edges sorted by weight (smallest-&gt;largest)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(E):</span><br><span class="line">    edge = heapq.heappop(edge_list)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;weight: &#123;:d&#125; (&#123;:d&#125;-&#123;:d&#125;)&#x27;</span>.<span class="built_in">format</span>(edge[<span class="number">0</span>], edge[<span class="number">1</span>], edge[<span class="number">2</span>]))</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="dfs-bfs">DFS &amp; BFS</h2>
+<p>Both <strong>O(V + E)</strong> if the graph is implemented using Adjency List, coz we need to visit k nbrs of each v in O(k).</p>
+<p>DFS:</p>
+<ol type="1">
+<li><p>Recursion to do the visit children - visit me - loop.</p></li>
+<li><p>Avoiding Cycle: Use an array <code>status[v]</code> of size V to remember whether a vertex is visited.</p></li>
+<li><p>Remeber the path: Use an array <code>parent[v]</code> of size V to remember the successor of v.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printPath</span>(<span class="params">u</span>):</span></span><br><span class="line">    <span class="keyword">if</span> p[u] == -<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(u), end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    printPath(p[u])</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot; &#123;&#125;&quot;</span>.<span class="built_in">format</span>(u), end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>BFS:</p>
+<ol type="1">
+<li>Use a FIFO deque to do the visit all children loop.</li>
+<li>Avoiding Cycle: Use an array <code>status[v]</code> of size V to remember whether a vertex is visited.</li>
+<li>Visualgo said no need to track back?</li>
+</ol>
+<h3 id="applications">Applications</h3>
+<ol type="1">
+<li><p>Reachability test: DFS/BFS, then check <code>status[v]</code></p></li>
+<li><p>Actually printing the traversal path: DFS/BFS, then backtrack the <code>parent</code> array</p></li>
+<li><p>Identifying/Counting/Labeling Connected Components (CCs) of undirected graphs: DFS/BFS, make use of the <code>status</code></p></li>
+<li><p>Detecting if a graph is cyclic: modify DFS's <code>status</code> array to track:</p>
+<ol type="1">
+<li><p><strong>unvisited</strong>: same as earlier, DFS has not reach vertex <strong>u</strong> before,</p></li>
+<li><p><strong>explored</strong>: partially visited. DFS has visited vertex <strong>u</strong>, but at least one neighbor of vertex <strong>u</strong> has not been visited yet (DFS will go depth-first to that neighbor first),</p></li>
+<li><p><strong>visited</strong>: now <strong>stronger</strong> definition: all neighbors of vertex <strong>u</strong> have also been visited and DFS is about to backtrack from vertex <strong>u</strong> to vertex <strong>p[u]</strong>.</p>
+<p>Then, if encounter <strong>status[y] = explored</strong>, then it is a cycle.</p></li>
+</ol></li>
+<li><p>Topological Sort (only on DAGs),</p>
+<ol type="1">
+<li><p>The DFS version requires just <strong>one additional line</strong> compared to the normal DFS and is basically the <strong>post-order</strong> traversal of the graph.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">i</span>):</span></span><br><span class="line">    visited[i] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> j, w <span class="keyword">in</span> al[i]:</span><br><span class="line">        <span class="keyword">if</span> visited[j]:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        dfs(j)</span><br><span class="line">    topoOrder.append(i) <span class="comment"># add topoOrder</span></span><br><span class="line">    </span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">vertices = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line">al = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">    v1, v2, w = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    al[v2].append((v1, w))</span><br><span class="line"></span><br><span class="line"><span class="comment"># toposort</span></span><br><span class="line">topoOrder = []</span><br><span class="line">visited = [<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):  <span class="comment"># 0-based</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[i]:</span><br><span class="line">        dfs(i)</span><br><span class="line"></span><br><span class="line">topoOrder.reverse()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> topoOrder:</span><br><span class="line">    <span class="keyword">for</span> j, w <span class="keyword">in</span> al[i]:</span><br><span class="line">        vertices[j] += vertices[i] * w</span><br><span class="line"><span class="built_in">print</span>(*vertices)</span><br></pre></td></tr></table></figure></li>
+<li><p>The BFS version is based on the idea of vertices <strong>without incoming edge</strong> and is also called as Kahn's algorithm.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line">in_degree = [<span class="number">0</span>] * V</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> al:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> al[i]:</span><br><span class="line">        in_degree[j] += i <span class="comment"># cal in degree</span></span><br><span class="line">        </span><br><span class="line">q = deque() <span class="comment"># a queue of vertices with indegree 0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(V):</span><br><span class="line">    <span class="keyword">if</span> in_degree[i] == <span class="number">0</span>:</span><br><span class="line">        q.append(i) <span class="comment"># enqueue all v with indegree 0</span></span><br><span class="line">        </span><br><span class="line">cnt = <span class="number">0</span> <span class="comment"># cnt of visited vertices</span></span><br><span class="line">topoOrder = []</span><br><span class="line"><span class="keyword">while</span> q:</span><br><span class="line">    u = q.popleft()</span><br><span class="line">    topoOrder.append(u)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> al[u]:</span><br><span class="line">        in_degree[i] -= <span class="number">1</span> <span class="comment"># when reach, indegree - 1</span></span><br><span class="line">        <span class="keyword">if</span> in_degree[i] == <span class="number">0</span>: q.append(i) <span class="comment"># now can be put into topo</span></span><br><span class="line">    cnt += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> cnt &lt; V: </span><br><span class="line">  	<span class="built_in">print</span>(<span class="string">&#x27;Cycle!&#x27;</span>) <span class="comment"># Why? Coz if cnt &lt; V, means some vertices still have indegree and thus not put into the queue. The remaining edges are the cycle.</span></span><br><span class="line"><span class="keyword">else</span>: </span><br><span class="line">  	<span class="built_in">print</span>(*topoOrder)</span><br></pre></td></tr></table></figure></li>
+</ol></li>
+</ol>
+<h3 id="in-python">In Python</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for dfs, define a function dfs(), and remember to add the iteration limitation</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">i</span>):</span></span><br><span class="line">    visited[i] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> al[i]:</span><br><span class="line">        <span class="keyword">if</span> visited[j]: <span class="keyword">continue</span></span><br><span class="line">        dfs(j)</span><br><span class="line">        </span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">al = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">visited = [<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">    a, b = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    a, b = a-<span class="number">1</span>, b-<span class="number">1</span> <span class="comment"># convert to 0-based</span></span><br><span class="line">    al[a].append(b)</span><br><span class="line">    al[b].append(a)</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br><span class="line">flag = <span class="literal">True</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> visited[i]:</span><br><span class="line">        <span class="built_in">print</span>(i + <span class="number">1</span>) <span class="comment"># 1-based</span></span><br><span class="line">        flag = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> flag: <span class="built_in">print</span>(<span class="string">&#x27;Connected&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for bfs, remember to use deque and popleft()</span></span><br><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> heappush, heappop</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> inf</span><br><span class="line"></span><br><span class="line">INF = inf</span><br><span class="line">dist = [INF <span class="keyword">for</span> u <span class="keyword">in</span> <span class="built_in">range</span>(V)]</span><br><span class="line">dist[s] = <span class="number">0</span></span><br><span class="line">q = deque()</span><br><span class="line">q.append(s)</span><br><span class="line">p = [-<span class="number">1</span> <span class="keyword">for</span> u <span class="keyword">in</span> <span class="built_in">range</span>(V)]              <span class="comment"># parent</span></span><br><span class="line"></span><br><span class="line">layer = -<span class="number">1</span>                              <span class="comment"># for output printing</span></span><br><span class="line">isBipartite = <span class="literal">True</span>                      <span class="comment"># additional feature</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (q):</span><br><span class="line">    u = q.popleft()</span><br><span class="line">    <span class="keyword">if</span> (dist[u] != layer):  <span class="comment"># new layer now</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;\nLayer &#123;&#125;: &quot;</span>.<span class="built_in">format</span>(dist[u]), end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    layer = dist[u]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;visit &#123;&#125;, &quot;</span>.<span class="built_in">format</span>(u), end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> v, w <span class="keyword">in</span> AL[u]:                    <span class="comment"># w ignored</span></span><br><span class="line">        <span class="keyword">if</span> dist[v] == INF:</span><br><span class="line">            dist[v] = dist[u] + <span class="number">1</span>         <span class="comment"># dist[v] != INF now</span></span><br><span class="line">            p[v] = u                      <span class="comment"># parent of v is u</span></span><br><span class="line">            q.append(v)                   <span class="comment"># for next iteration</span></span><br><span class="line">        <span class="keyword">elif</span> dist[v] % <span class="number">2</span> == dist[u] % <span class="number">2</span>:  <span class="comment"># in the same set</span></span><br><span class="line">            isBipartite = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<h2 id="sssp">SSSP</h2>
+<ul>
+<li>BFS for unweighted or constant weighted graph</li>
+<li>Modified Dijkstra's Algorithm for weighted. (It is just the Uniform Cost Best Search). <strong>O((V+E) log V).</strong> It uses a Priority Queue via binary heap to maintain the search order. And this modified means a <strong>Lazy Update</strong> tech: leave the outdated ones in the PQ, and only check valid when meet them.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> heappush, heappop</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> inf</span><br><span class="line"></span><br><span class="line">INF = inf</span><br><span class="line"></span><br><span class="line">V, E, s = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>.split())</span><br><span class="line">AL = [[] <span class="keyword">for</span> u <span class="keyword">in</span> <span class="built_in">range</span>(V)]</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(E):</span><br><span class="line">    u, v, w = <span class="built_in">map</span>(<span class="built_in">int</span>, f.readline().split(<span class="string">&quot; &quot;</span>))</span><br><span class="line">    AL[u].append((v, w))                     <span class="comment"># directed graph</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># (Modified) Dijkstra&#x27;s routine</span></span><br><span class="line">dist = [INF <span class="keyword">for</span> u <span class="keyword">in</span> <span class="built_in">range</span>(V)]</span><br><span class="line">dist[s] = <span class="number">0</span></span><br><span class="line">pq = []</span><br><span class="line">heappush(pq, (<span class="number">0</span>, s))  <span class="comment"># 长这样：（vertex， dist）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sort the pairs by non-decreasing distance from s</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">len</span>(pq) &gt; <span class="number">0</span>):</span><br><span class="line">    d, u = heappop(pq)                  <span class="comment"># shortest unvisited u</span></span><br><span class="line">    <span class="keyword">if</span> (d &gt; dist[u]):</span><br><span class="line">        <span class="keyword">continue</span>                        <span class="comment"># *** a very important check. Lazy Update here</span></span><br><span class="line">    <span class="keyword">for</span> v, w <span class="keyword">in</span> AL[u]:                  <span class="comment"># all edges from u</span></span><br><span class="line">        <span class="keyword">if</span> (dist[u] + w &gt;= dist[v]):</span><br><span class="line">            <span class="keyword">continue</span>                    <span class="comment"># *** not improving, skip</span></span><br><span class="line">        dist[v] = dist[u] + w           <span class="comment"># relax operation</span></span><br><span class="line">        heappush(pq, (dist[v], v))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> u <span class="keyword">in</span> <span class="built_in">range</span>(V):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;SSSP(&#123;&#125;, &#123;&#125;) = &#123;&#125;&quot;</span>.<span class="built_in">format</span>(s, u, dist[u]))</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Quick-Notes-About-Data-Structures/" rel="bookmark">Data Structures and Their ADTs</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/C-Language-Notebook/" rel="bookmark">C Language Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Java-Notebook/" rel="bookmark">Java Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Python Notebook/" rel="bookmark">Python Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/SQL-Notebook/" rel="bookmark">SQL Notebook</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/blog/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/Notebook/" rel="tag"># Notebook</a>
+              <a href="/blog/tags/Data-Structure/" rel="tag"># Data Structure</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/Some-notes-on-Searching-and-Sorting/" rel="prev" title="Some notes on Searching and Sorting">
+                  <i class="fa fa-chevron-left"></i> Some notes on Searching and Sorting
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/Houses-with-open-doors/" rel="next" title="Houses with open doors">
+                  Houses with open doors <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>English</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="Select language">
+      
+        <option value="zh-CN" data-href="/blog/Quick-Notes-About-Data-Structures/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/blog/en/Quick-Notes-About-Data-Structures/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">262k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">3:58</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/blog/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"Feel free!","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/blog/en/Quick-Notes-About-Data-Structures/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>

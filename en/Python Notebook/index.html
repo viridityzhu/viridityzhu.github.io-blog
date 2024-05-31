@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/blog/images/favicon-16x16.png" color="#222">
+  <meta name="google-site-verification" content="K3y4o5NSJ9eVzz8TCQgPtVHIJuRbuu1Ajq_EBHJyeL0">
+  <meta name="msvalidate.01" content="0C0CC354F1706E8CC56204E595D7E3B6">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jyzhu.top","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.8.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/blog/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<meta name="description" content="look think cover write check  目录 [TOC] #串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Notebook">
+<meta property="og:url" content="https://jyzhu.top/blog/en/Python%20Notebook/index.html">
+<meta property="og:site_name" content="Tianke Youke">
+<meta property="og:description" content="look think cover write check  目录 [TOC] #串">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes1.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes2.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes3.png">
+<meta property="og:image" content="http://files.jb51.net/file_images/article/201606/20160612150005.jpg">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes4.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes5.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes6.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes7.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes78png.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes9.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes10.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes11.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes12.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes13.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes14.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes15.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes16.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes17.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/pyNotes18.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/css1.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/css2.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/css3.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/scrapy_architecture_02.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/v2-8c591d54457bb033812a2b0364011e9c_1200x500.jpg">
+<meta property="og:image" content="https://jyzhu.top/Users/jiayinzhu/Desktop/笔记/放图/屏幕快照%202019-02-17%20下午3.07.13.png">
+<meta property="og:image" content="https://jyzhu.top/mydocs/pics/image-20191122235116830.png">
+<meta property="article:published_time" content="2019-03-10T16:21:22.000Z">
+<meta property="article:modified_time" content="2021-10-12T16:53:33.187Z">
+<meta property="article:author" content="Jiayin Zhu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Notebook">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jyzhu.top/mydocs/pics/pyNotes1.png">
+
+
+<link rel="canonical" href="https://jyzhu.top/blog/en/Python%20Notebook/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jyzhu.top/blog/Python%20Notebook/","path":"en/Python Notebook/","title":"Python Notebook"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python Notebook | Tianke Youke</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/blog/atom.xml" title="Tianke Youke" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tianke Youke</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">A sanctuary for secreting and rushing at night.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-notes"><a href="/blog/categories/Computer-Notes/" rel="section"><i class="fa fa-book fa-fw"></i>笔记</a></li>
+        <li class="menu-item menu-item-thoughts"><a href="/blog/categories/thoughts/" rel="section"><i class="fas fa-exclamation fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-poems"><a href="/blog/categories/poems/" rel="section"><i class="fas fa-cocktail fa-fw"></i>诗</a></li>
+        <li class="menu-item menu-item-books"><a href="/blog/books/" rel="section"><i class="fas fa-book-open fa-fw"></i>读书</a></li>
+        <li class="menu-item menu-item-movies"><a href="/blog/movies/" rel="section"><i class="fa fa-film fa-fw"></i>电影</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">85</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">185</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BF%9D%E7%95%99%E5%AD%97"><span class="nav-number">2.</span> <span class="nav-text">33个保留字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">2.0.1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.0.1.1.0.1.</span> <span class="nav-text">可变对象与不可变对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%BF%85%E9%A1%BB%E6%8C%87%E5%90%91%E4%B8%8D%E5%8F%98%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.0.1.1.0.2.</span> <span class="nav-text">默认参数必须指向不变对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">变量作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0"><span class="nav-number">2.0.1.2.1.</span> <span class="nav-text">闭包函数(嵌套函数)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">递归函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">2.0.2.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%9B%9B%E4%B8%AA%E7%89%B9%E6%80%A7"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">类的四个特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">鸭子类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">装饰器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF%E7%99%BD%E7%9B%92"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">类的继承（白盒）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#turtle%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">Turtle库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#random%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">random库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">数据处理的常用语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#str"><span class="nav-number">4.1.</span> <span class="nav-text">str</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ord-transform-str-into-ascii-chr-contrast"><span class="nav-number">5.</span> <span class="nav-text">ord() transform str into ascii chr() contrast</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">time库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="nav-number">7.</span> <span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#os%E6%A8%A1%E5%9D%97-%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="nav-number">7.1.</span> <span class="nav-text">os模块 处理文件和目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#glob%E6%A8%A1%E5%9D%97-%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E6%9F%A5%E6%89%BE"><span class="nav-number">7.2.</span> <span class="nav-text">GLOB模块 文件路径查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pil%E5%BA%93"><span class="nav-number">7.3.</span> <span class="nav-text">pil库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">文档格式转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#csv"><span class="nav-number">8.1.</span> <span class="nav-text">CSV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number">8.2.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json"><span class="nav-number">8.3.</span> <span class="nav-text">Json</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#requests%E5%BA%93"><span class="nav-number">9.</span> <span class="nav-text">requests库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#beautifulsoup%E5%BA%93"><span class="nav-number">9.1.</span> <span class="nav-text">BeautifulSoup库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#prettify"><span class="nav-number">9.1.1.</span> <span class="nav-text">prettify</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%A0%87%E8%AE%B0"><span class="nav-number">9.1.2.</span> <span class="nav-text">信息标记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95"><span class="nav-number">9.1.2.1.</span> <span class="nav-text">信息提取方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">10.1.</span> <span class="nav-text">操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re%E5%BA%93%E7%9A%84%E5%8A%9F%E8%83%BD%E5%87%BD%E6%95%B0"><span class="nav-number">10.2.</span> <span class="nav-text">re库的功能函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%A0%87%E8%AE%B0"><span class="nav-number">10.2.0.0.1.</span> <span class="nav-text">控制标记：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E5%B1%9E%E6%80%A7"><span class="nav-number">10.2.0.0.2.</span> <span class="nav-text">重要属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%96%B9%E6%B3%95"><span class="nav-number">10.2.0.0.3.</span> <span class="nav-text">重要方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">10.3.</span> <span class="nav-text">re的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E7%B1%BB%E5%9E%8B"><span class="nav-number">10.3.1.</span> <span class="nav-text">表示类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D%E5%92%8C%E6%9C%80%E5%B0%8F%E5%8C%B9%E9%85%8D"><span class="nav-number">10.3.2.</span> <span class="nav-text">贪婪匹配和最小匹配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">多进程与多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#multiprocessing.pool"><span class="nav-number">12.1.</span> <span class="nav-text">multiprocessing.Pool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multip.queue"><span class="nav-number">12.2.</span> <span class="nav-text">multip.Queue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debug"><span class="nav-number">13.</span> <span class="nav-text">debug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">13.0.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#io"><span class="nav-number">13.0.2.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">13.0.3.</span> <span class="nav-text">数据结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xpath"><span class="nav-number">14.</span> <span class="nav-text">XPath</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#css%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">15.</span> <span class="nav-text">CSS选择器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scrapy"><span class="nav-number">16.</span> <span class="nav-text">Scrapy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#command-line"><span class="nav-number">16.1.</span> <span class="nav-text">command line</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-kits"><span class="nav-number">16.2.</span> <span class="nav-text">main kits</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">16.2.0.1.</span> <span class="nav-text">属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">16.2.0.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%B1%BB"><span class="nav-number">16.2.0.3.</span> <span class="nav-text">子类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selecter%E7%B1%BB"><span class="nav-number">16.2.1.</span> <span class="nav-text">Selecter类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#item%E7%B1%BB"><span class="nav-number">16.2.2.</span> <span class="nav-text">Item类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#item-pipeline%E7%B1%BB"><span class="nav-number">16.2.3.</span> <span class="nav-text">Item Pipeline类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feed-exports%E7%B1%BB"><span class="nav-number">16.2.4.</span> <span class="nav-text">Feed Exports类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-object"><span class="nav-number">16.3.</span> <span class="nav-text">main object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#requestsobject"><span class="nav-number">16.3.1.</span> <span class="nav-text">Requestsobject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response%E5%AF%B9%E8%B1%A1"><span class="nav-number">16.3.2.</span> <span class="nav-text">Response对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inner-service"><span class="nav-number">16.4.</span> <span class="nav-text">inner service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#logging"><span class="nav-number">16.4.1.</span> <span class="nav-text">logging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stats-collector"><span class="nav-number">16.4.2.</span> <span class="nav-text">Stats Collector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sending-email"><span class="nav-number">16.4.3.</span> <span class="nav-text">Sending Email</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#architecture"><span class="nav-number">16.4.4.</span> <span class="nav-text">Architecture</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87"><span class="nav-number">16.5.</span> <span class="nav-text">下载图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proxy"><span class="nav-number">16.6.</span> <span class="nav-text">proxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selenium"><span class="nav-number">16.7.</span> <span class="nav-text">selenium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">16.7.1.</span> <span class="nav-text">常用属性和方法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapyd"><span class="nav-number">16.8.</span> <span class="nav-text">scrapyd</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlite3"><span class="nav-number">17.</span> <span class="nav-text">SQLite3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#machine-learning"><span class="nav-number">18.</span> <span class="nav-text">Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#classify"><span class="nav-number">18.1.</span> <span class="nav-text">classify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn"><span class="nav-number">18.2.</span> <span class="nav-text">scikit-learn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-regression"><span class="nav-number">18.2.1.</span> <span class="nav-text">Linear Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#naive-bayes"><span class="nav-number">18.2.2.</span> <span class="nav-text">Naive Bayes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-nearest-neighbors"><span class="nav-number">18.2.3.</span> <span class="nav-text">K-Nearest Neighbors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-means"><span class="nav-number">18.2.4.</span> <span class="nav-text">K-Means</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#validating-the-model"><span class="nav-number">18.2.5.</span> <span class="nav-text">Validating the Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#training-sets-and-test-sets"><span class="nav-number">18.2.6.</span> <span class="nav-text">Training Sets and Test Sets</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matplotlib"><span class="nav-number">19.</span> <span class="nav-text">Matplotlib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pyplot"><span class="nav-number">19.0.1.</span> <span class="nav-text">Pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#plot"><span class="nav-number">19.0.1.1.</span> <span class="nav-text">Plot</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pandas"><span class="nav-number">20.</span> <span class="nav-text">Pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-structure"><span class="nav-number">20.1.</span> <span class="nav-text">data structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#series"><span class="nav-number">20.1.1.</span> <span class="nav-text">1. Series</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataframe"><span class="nav-number">20.1.2.</span> <span class="nav-text">2. DataFrame</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection"><span class="nav-number">20.2.</span> <span class="nav-text">Selection</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiayin Zhu</p>
+  <div class="site-description" itemprop="description">温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/viridityzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;viridityzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhuj.yin@gmail.com" title="E-Mail → mailto:zhuj.yin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5243842610" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5243842610" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/jiayinz" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;jiayinz" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com.sg/citations?user=S8ozWfsAAAAJ" title="GoogleScholar → https:&#x2F;&#x2F;scholar.google.com.sg&#x2F;citations?user&#x3D;S8ozWfsAAAAJ" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i></a>
+      </span>
+  </div>
+
+
+<p></p>
+<p>Visitor Map</p>
+<div>
+<!--   <script type="text/javascript" id="clstr_globe" src="/js/clustrmaps.js?d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg"></script> -->
+<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=f9f9f9&w=a&t=n&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=383838&cmo=825bc4&cmn=9acd32&ct=f4f4f4'></script> -->
+<script type='text/javascript' id='clustrmaps'
+    src='//cdn.clustrmaps.com/map_v2.js?cl=c1c1c1&w=a&t=tt&d=gWCOZyJlHF_Sc1eqXROD53yLLxxfC2y7Ytvw9JUfmFg&co=484848&ct=f9f9f9&cmo=3acc3a&cmn=600073'></script>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jyzhu.top/blog/Python%20Notebook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Jiayin Zhu">
+      <meta itemprop="description" content="温柔而狂野地，<br>我被折断，我的躯体四散；<br>尽管如此，<br>我要的不是岸，我要海浪翻卷。<br><br>厚重而高大的，<br>我被阻断，我的灵魂茫然；<br>尽管如此，<br>我要的不是墙，我要热烈而肆虐的自由。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianke Youke">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python Notebook
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-03-11 00:21:22" itemprop="dateCreated datePublished" datetime="2019-03-11T00:21:22+08:00">2019-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Computer-Notes/" itemprop="url" rel="index"><span itemprop="name">Computer Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/blog/en/Python%20Notebook/" class="post-meta-item leancloud_visitors" data-flag-title="Python Notebook" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine: </span>
+  
+    <a title="valine" href="/blog/en/Python%20Notebook/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/en/Python%20Notebook/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>26k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>23 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>look</p>
+<p>think</p>
+<p>cover</p>
+<p>write</p>
+<p>check</p>
+</blockquote>
+<h1 id="目录">目录</h1>
+<p>[TOC]</p>
+<p>#串</p>
+<p>IPO</p>
+<pre><code>P：算法 是核心
+
+    流程图：
+
+        顺序
+
+        选择 if elif
+
+        循环 while/ for
+
+    切割/重用：
+
+        function:
+
+            def, return
+
+            传参，局部参数
+
+            缺点：无记忆
+
+        class：
+
+            三段：类名，data，method
+
+            动作：instance实例化→
+
+                对象：
+
+                    不存类的method和data，但有自己的data。两段：对象名，data</code></pre>
+<h1 id="个保留字">33个保留字</h1>
+<p>False假 def定义函数 if如果函数 raise</p>
+<p>None del import调用 return返回</p>
+<p>True真 elif或如果 in在里面 try尝试函数</p>
+<p>and条件和 else否则 is while循环</p>
+<p>as except不然 lambda简单的匿名函数 with</p>
+<p>assert finally最后执行 nonlocal非本地 yield</p>
+<p>break终止 for循环 not反</p>
+<p>class类 from从 or或</p>
+<p>continue global全局函数 pass空函数</p>
+<p>###控制流语句if while for</p>
+<p>1.if-elif-else语句</p>
+<pre><code>if 判断1：
+
+    如果判断1为真，就执行这个
+
+elif 判断2：
+
+    如果判断1为假，就会执行elif 如果判断2为真，就执行这个
+
+else：
+
+    如果前面全为假，就会执行这个
+
+    tip：要有冒号。else后面不用再判断了</code></pre>
+<p>2.while-else语句</p>
+<pre><code>while 判断：
+
+    如果判断为真，就做这个 做啊做啊做 
+
+    到某时候令判断=假
+
+else：
+
+    判断为假，就执行这个</code></pre>
+<p>3.for-in循环语句</p>
+<pre><code>for 数 in range（最小的数，最大的数，步长）：
+
+    数从最小的数一直变到最大的数（但不包含最大的数！！），每取一个值执行一次这一块
+
+else：
+
+    for结束后执行这个</code></pre>
+<p>4.break</p>
+<pre><code>跳过最内层循环（包括else的内容）</code></pre>
+<p>5.continue</p>
+<pre><code>跳过这一次循环中的剩余语句而直接开始下一轮新的循环</code></pre>
+<h3 id="函数">函数</h3>
+<pre><code>def 函数名（变量1，变量2=1）：
+
+    这里就是函数的内容了。函数其实就是可以随时调用的程序段，比如len（）就是内建函数
+
+    若不写变量2，它会默认为1
+
+nonlocal 变量
+
+global 变量</code></pre>
+<h4 id="参数传递">参数传递</h4>
+<p>虚实结合，拷贝</p>
+<h6 id="可变对象与不可变对象">可变对象与不可变对象</h6>
+<p>类型属于对象，变量没有类型</p>
+<p>a=2</p>
+<p>2是整数型，是对象；a是变量，没有类型，是对象的引用</p>
+<p>可变：list dict</p>
+<p>list里的list是指针，list里放的全是指针</p>
+<p>a=[1,2]</p>
+<p>b=a</p>
+<p>则指向同一个list对象，而list是可变对象，所以改b也变a</p>
+<p>浅拷贝b=a[:]，能拷贝一层，第二层还是指向同一个对象</p>
+<p>a=[1,[2,3]]</p>
+<p>a=2</p>
+<p>b=a</p>
+<p>则指向同一个int对象，而int是不可变对象，若b=3，是改变b的指向，则a不变</p>
+<h6 id="默认参数必须指向不变对象">默认参数必须指向不变对象</h6>
+<blockquote>
+<p>函数在定义的时候，默认参数<code>lang</code>的值就已经声明了，即空的 <code>[]</code>,也就是说 <code>默认参数</code> 指向对象 <code>[]</code>,在多次调用默认参数的情况下，就改变了<code>默认参数</code>指向对象的数据，<code>默认参数</code> 指向对象的数据变了，下次再调用时，默认参数已经变了，即不再是你希望的空的<code>[]</code></p>
+</blockquote>
+<p>(4,) 一个数字的tuple</p>
+<p>eval()</p>
+<pre><code>到数值</code></pre>
+<p>pow（x，y）</p>
+<pre><code>x^y</code></pre>
+<h4 id="变量作用域">变量作用域</h4>
+<p>local-&gt;enclosing-&gt;global-&gt;built-in</p>
+<h5 id="闭包函数嵌套函数">闭包函数(嵌套函数)</h5>
+<p>函数内套函数，内函数会用到外函数的变量，外函数返回内函数的引用</p>
+<p>特征：外函数的变量由于会被用到而不会被轻易释放</p>
+<p>注意：每次调用外函数都会创建一个新的内函数的实例对象，但是闭包变量却只有同一个</p>
+<p>用途：装饰器：取执行时间；校验输入</p>
+<p>js中用闭包实现面向对象</p>
+<p>内部变量修改全局变量，用global</p>
+<p>但不建议，因为函数的目的就是封装隔离；若需要使用global变量，请使用形参传参</p>
+<p>nonlocal 关键字声明 一个变量， 表示这个变量不是局部变量空间的变量，需要向上一层变量空间找这个变量。</p>
+<p>函数可以当变量赋值</p>
+<p>函数可以当参数传递</p>
+<h4 id="递归函数">递归函数</h4>
+<p>内部调用自身</p>
+<p>必须有基例，也就是有if</p>
+<p>写来简单但执行效果差</p>
+<p>习惯：</p>
+<p>函数名用小写字母加下划线，</p>
+<p>大写字母用在类中</p>
+<p>函数之间加空行</p>
+<h3 id="类">类</h3>
+<p>类名首字母大写的驼峰命名法；函数名用动宾短语，全小写，_连接</p>
+<p>类之间空两行</p>
+<p>attribute属性 是变量</p>
+<p>method方法 是函数</p>
+<p>继承有副作用</p>
+<p>类是模板，对象是类的实例instance</p>
+<h4 id="类的四个特性">类的四个特性</h4>
+<p>抽象</p>
+<p>封装 信息隐藏 提供接口</p>
+<p>继承 在类的基础上定义新类，抽象性降低，实现多态</p>
+<p>鸭子类型的多态</p>
+<h4 id="鸭子类型">鸭子类型：</h4>
+<p>鸭子测试：当一只鸟走起来像鸭子，游泳像鸭子，叫起来像鸭子，那这只鸟就可以称为鸭子</p>
+<p>在python中，一个对象有效的语义，不取决于继承的接口，而取决于它本身的data和method</p>
+<p>只要有这个方法我就调用，管你是个啥</p>
+<p>靠精确的文档和try/except处理异常</p>
+<h4 id="装饰器">装饰器</h4>
+<p><span class="citation" data-cites="classmethod">@classmethod</span> cls 用类名调用，而不是对象</p>
+<p><span class="citation" data-cites="staticmethod">@staticmethod</span> 静态方法，不关注对象和对象内部属性</p>
+<p>像访问属性一样调用方法，方法就像属性了 下跟一个跟属性同名的函数</p>
+<p><span class="citation" data-cites="property">@property</span> 只读</p>
+<pre><code>def age(self,a)：     if xxx: return &quot;don&#39;t!!&quot;   else:  self.__age=a</code></pre>
+<p><span class="citation" data-cites="方法名.setter">@方法名.setter</span>：可写</p>
+<p><span class="citation" data-cites="方法名.deleter">@方法名.deleter</span>: 可删除</p>
+<p>也可用property函数来把已经定义好的setter、deleter等绑定给变量</p>
+<p>id（）查看内存地址</p>
+<p><code>__dict__</code>查看类和对象的内部参数</p>
+<p>不允许看到对象里面的东西？</p>
+<p>dict对象的时候看不到类里的attribute</p>
+<p>dict类的时候看不到method里的变量</p>
+<p>magic method 内部留的</p>
+<p><code>__str__</code></p>
+<p><code>__add__</code></p>
+<p>a=3</p>
+<p>isinstance（a,int） 判断是否某类型 这个好啊</p>
+<p>不提倡用这个判断某对象是否某类（自定义的） 而是直接调用 用try/except处理异常</p>
+<h4 id="类的继承白盒">类的继承（白盒）</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Developer</span>(<span class="params">Employee</span>):</span>	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">,,,,</span>):</span> 		<span class="built_in">super</span>().__init__(,,,) </span><br></pre></td></tr></table></figure>
+<p>支持但不建议用多重继承</p>
+<p>3.x版本从深度优先变为广度优先。先从父代所有类找，再从父代的父代找</p>
+<p>多用聚合/组合（黑盒）</p>
+<p>类中传进一个新类，则删它无涉</p>
+<p>在类的内部新生成一个类，则前者删，后者也无</p>
+<p>types模块</p>
+<p>def prt():</p>
+<pre><code>pass</code></pre>
+<p>e1.prt=types.MethodType(prt,e1)</p>
+<p>不许用。</p>
+<p>__私有变量 方法，不可访问</p>
+<p>但可以绕过去，君子约定😑</p>
+<h2 id="turtle库">Turtle库</h2>
+<p>函数：</p>
+<p>setup（width，height，startx，starty）</p>
+<p>penup（）or pu</p>
+<p>pendown（）or pd</p>
+<p>pensize（）</p>
+<p>pencolor（）</p>
+<p>fd（）or forward</p>
+<p>seth（）or setheading</p>
+<p>circle（radius，extent=None）</p>
+<p>##一些赋值上的点</p>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes1.png" alt="屏幕快照 2018-03-22 上午11.04.39" /><figcaption>屏幕快照 2018-03-22 上午11.04.39</figcaption>
+</figure>
+<p>a='s'</p>
+<p>b=['p','a']</p>
+<p>c='m'</p>
+<p>*<strong>b是列表</strong></p>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes2.png" alt="屏幕快照 2018-03-22 上午11.04.31" /><figcaption>屏幕快照 2018-03-22 上午11.04.31</figcaption>
+</figure>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes3.png" alt="屏幕快照 2018-03-22 上午11.04.23" /><figcaption>屏幕快照 2018-03-22 上午11.04.23</figcaption>
+</figure>
+<p>spam='s'</p>
+<p>ham='h'</p>
+<hr />
+<p>1 in [0,1] == True: False</p>
+<p>因为它等于</p>
+<p>1 in [0,1] and [0,1] == True</p>
+<p>后者错了</p>
+<p>str.split:use the comma to divide the str and return a list, useful.</p>
+<p>range(a,b)is from a to b-1 !!!! so ugly.</p>
+<h1 id="random库">random库</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>( random.randint(<span class="number">1</span>,<span class="number">10</span>) )        <span class="comment"># 产生 1 到 10 的一个整数型随机数  print( random.random() )             # 产生 0 到 1 之间的随机浮点数print( random.uniform(1.1,5.4) )     # 产生  1.1 到 5.4 之间的随机浮点数，区间可以不是整数print( random.choice(&#x27;tomorrow&#x27;) )   # 从序列中随机选取一个元素print( random.randrange(1,100,2) )   # 生成从1到100的间隔为2的随机整数a=[1,3,5,6,7]                # 将序列a中的元素顺序打乱random.shuffle(a)</span></span><br></pre></td></tr></table></figure>
+<h1 id="数据处理的常用语句">数据处理的常用语句</h1>
+<h2 id="str">str</h2>
+<p>str.isnumeric()当所有都是数字，返回True</p>
+<p>str.split(sep=None) 分割 按sep分割，返回列表。默认sep为空格</p>
+<p>str.replace(old,new[,count]) 替换并返回副本</p>
+<p>str.join(i)将i中元素连接，用str分隔</p>
+<h1 id="ord-transform-str-into-ascii-chr-contrast">ord() transform str into ascii chr() contrast</h1>
+<p>print('aaa'.center(50,'-'))在某长度中居中显示</p>
+<h1 id="time库">time库</h1>
+<p>time.clock()计时开始、结束并返回时间差</p>
+<p>即覆盖输出 棒呆</p>
+<p>==<strong>神tm字母可以直接比大小</strong>==</p>
+<h1 id="文件读写">文件读写</h1>
+<p><code>with open('hahaha.txt','r') as f:</code></p>
+<h2 id="os模块-处理文件和目录">os模块 处理文件和目录</h2>
+<p>shutil更高级的</p>
+<h2 id="glob模块-文件路径查找">GLOB模块 文件路径查找</h2>
+<p>glob.glob('')</p>
+<p><code>*</code>匹配多个字符</p>
+<p><code>?</code>匹配单个字符</p>
+<p>[0~9]</p>
+<p><em>eyed3 修改mp3文件标签</em></p>
+<p>import xxx as x</p>
+<h2 id="pil库">pil库</h2>
+<h1 id="文档格式转换">文档格式转换</h1>
+<h2 id="csv">CSV</h2>
+<p>程序之间转移表格数据</p>
+<p>纯文本</p>
+<h2 id="html">HTML</h2>
+<h2 id="json">Json</h2>
+<p>爬取的地址: https://api.douban.com/v2/book/isbn/+isbn</p>
+<p>豆瓣 根据isbn得图书信息</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;    <span class="attr">&quot;rating&quot;</span>:	    		&#123;       <span class="attr">&quot;max&quot;</span>:<span class="number">10</span>,       <span class="attr">&quot;numRaters&quot;</span>:<span class="number">1204</span>,       <span class="attr">&quot;average&quot;</span>:<span class="string">&quot;9.1&quot;</span>,       <span class="attr">&quot;min&quot;</span>:<span class="number">0</span>   		&#125;,    <span class="attr">&quot;subtitle&quot;</span>:<span class="string">&quot;&quot;</span>,    <span class="attr">&quot;author&quot;</span>:[<span class="string">&quot;[法]米兰·昆德拉&quot;</span>],    <span class="attr">&quot;pubdate&quot;</span>:<span class="string">&quot;2014-6&quot;</span>,    <span class="attr">&quot;tags&quot;</span>:    	[            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">239</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;米兰·昆德拉&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;米兰·昆德拉&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">167</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;哲学&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;哲学&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">153</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;米兰・昆德拉&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;米兰・昆德拉&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">147</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;小说&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;小说&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">145</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;外国文学&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;外国文学&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">119</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;爱情&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;爱情&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">98</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;捷克&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;捷克&quot;</span>&#125;,            &#123;<span class="attr">&quot;count&quot;</span>:<span class="number">93</span>,             <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;人生&quot;</span>,             <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;人生&quot;</span>&#125;        ],    		  	 <span class="attr">&quot;origin_title&quot;</span>:<span class="string">&quot;&quot;</span>,    		<span class="attr">&quot;image&quot;</span>:<span class="string">&quot;https://img1.doubanio.com\/view\/subject\/m\/public\/s27471968.jpg&quot;</span>,    <span class="attr">&quot;binding&quot;</span>:<span class="string">&quot;精装&quot;</span>,    <span class="attr">&quot;translator&quot;</span>:[<span class="string">&quot;许钧&quot;</span>],    <span class="attr">&quot;catalog&quot;</span>:<span class="string">&quot;第一部 轻与重\n第二部 灵与肉\n第三部 不解之词\n第四部 灵与肉\n第五部 轻与重\n第六部 伟大的进军\n第七部 卡列宁的微笑\n大写的牧歌与小写的牧歌 弗朗索瓦·里卡尔&quot;</span>,    <span class="attr">&quot;pages&quot;</span>:<span class="string">&quot;427&quot;</span>,    <span class="attr">&quot;images&quot;</span>:&#123;<span class="attr">&quot;small&quot;</span>:<span class="string">&quot;https://img1.doubanio.com\/view\/subject\/s\/public\/s27471968.jpg&quot;</span>,<span class="attr">&quot;large&quot;</span>:<span class="string">&quot;https://img1.doubanio.com\/view\/subject\/l\/public\/s27471968.jpg&quot;</span>,<span class="attr">&quot;medium&quot;</span>:<span class="string">&quot;https://img1.doubanio.com\/view\/subject\/m\/public\/s27471968.jpg&quot;</span>&#125;,    <span class="attr">&quot;alt&quot;</span>:<span class="string">&quot;https:\/\/book.douban.com\/subject\/25900384\/&quot;</span>,    <span class="attr">&quot;id&quot;</span>:<span class="string">&quot;25900384&quot;</span>,    <span class="attr">&quot;publisher&quot;</span>:<span class="string">&quot;上海译文出版社&quot;</span>,    <span class="attr">&quot;isbn10&quot;</span>:<span class="string">&quot;7532766632&quot;</span>,    <span class="attr">&quot;isbn13&quot;</span>:<span class="string">&quot;9787532766635&quot;</span>,    <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;不能承受的生命之轻&quot;</span>,    <span class="attr">&quot;url&quot;</span>:<span class="string">&quot;https:\/\/api.douban.com\/v2\/book\/25900384&quot;</span>,    <span class="attr">&quot;alt_title&quot;</span>:<span class="string">&quot;&quot;</span>,    <span class="attr">&quot;author_intro&quot;</span>:<span class="string">&quot;&quot;</span>,    <span class="attr">&quot;summary&quot;</span>:<span class="string">&quot;《不能承受的生命之轻》是米兰·昆德拉最负盛名的作品。小说描写了托马斯与特丽莎、萨丽娜之间的感情生活。但它不是一个男人和两个女人的三角性爱故事，它是一部哲理小说，小说从“永恒轮回”的讨论开始，把读者带入了对一系列问题的思考中，比如轻与重、灵与肉。\n《不能承受的生命之轻》是一部意象繁复的书，其中装载了多种涵义：被政治化了的社会内涵的揭示、人性考察、个人命运在特定历史与政治语境下的呈现，以及对两性关系本质上的探索等。昆德拉将这些元素糅合在一起，写成一部非同凡响的小说——其中既有隐喻式的哲学思考，也有人的悲欢离合的生命历程的展现。&quot;</span>,    <span class="attr">&quot;series&quot;</span>:    	&#123;<span class="attr">&quot;id&quot;</span>:<span class="string">&quot;24318&quot;</span>,         <span class="attr">&quot;title&quot;</span>:<span class="string">&quot;米兰·昆德拉作品全新系列&quot;</span>&#125;,    <span class="attr">&quot;price&quot;</span>:<span class="string">&quot;46.00元&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>http://mall.baicizhan.com/ws/search?w=apple</p>
+<p>百词斩 单词信息</p>
+<p>https://api.douban.com/v2/book/isbn/9787532766635,9787508618852,9787540225353</p>
+<p>re 正则表达式 极其强大 有点复杂</p>
+<p>可以通过 <strong>name</strong> 属性获取命名空间的名字：</p>
+<figure>
+<img src="http://files.jb51.net/file_images/article/201606/20160612150005.jpg" alt="img" /><figcaption>img</figcaption>
+</figure>
+<p>主文件的命名空间是叫做 '<strong>main</strong>'，而模块的命名空间就是模块名</p>
+<h1 id="requests库">requests库</h1>
+<p><img src="https://jyzhu.top/mydocs/pics/pyNotes4.png" alt="幕快照 2018-05-16 下午10.17.0" /><img src="https://jyzhu.top/mydocs/pics/pyNotes5.png" alt="幕快照 2018-05-16 下午10.22.2" /><img src="https://jyzhu.top/mydocs/pics/pyNotes6.png" alt="幕快照 2018-05-16 下午10.27.5" /></p>
+<p>put、post一个字符串，自动放到'data'key下</p>
+<p>放几个键值对，自动放到'form'（表单）下</p>
+<p>patch比put节省带宽，put必须把整个字段写完整，patch只用写需<img src="https://jyzhu.top/mydocs/pics/pyNotes7.png" alt="幕快照 2018-05-18 下午6.03.5" /><img src="https://jyzhu.top/mydocs/pics/pyNotes78png.png" alt="幕快照 2018-05-18 下午6.16.1" /><img src="https://jyzhu.top/mydocs/pics/pyNotes9.png" alt="幕快照 2018-05-18 下午6.24.3" /><img src="https://jyzhu.top/mydocs/pics/pyNotes10.png" alt="幕快照 2018-05-18 下午6.26.1" /><img src="https://jyzhu.top/mydocs/pics/pyNotes11.png" alt="幕快照 2018-05-18 下午6.27.0" /><img src="https://jyzhu.top/mydocs/pics/pyNotes12.png" alt="幕快照 2018-05-18 下午6.31.4" /><img src="https://jyzhu.top/mydocs/pics/pyNotes13.png" alt="幕快照 2018-05-18 下午6.35.1" /><img src="https://jyzhu.top/mydocs/pics/pyNotes14.png" alt="幕快照 2018-05-18 下午6.35.3" />上图中一处错误:</p>
+<p>post是不删除的情况下新增</p>
+<p>r=requests.get('http://product.dangdang.com/20357456.html')</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; r.encoding</span><br><span class="line">&gt;&gt; <span class="string">&#x27;GBK&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; r.status_code</span><br><span class="line">&gt;&gt; <span class="number">200</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; r.headers</span><br><span class="line">&gt;&gt; &#123;<span class="string">&#x27;Server&#x27;</span>: <span class="string">&#x27;nginx&#x27;</span>, <span class="string">&#x27;Date&#x27;</span>: <span class="string">&#x27;Thu, 19 Jul 2018 09:30:49 GMT&#x27;</span>, <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/html; charset=GBK&#x27;</span>, <span class="string">&#x27;Transfer-Encoding&#x27;</span>: <span class="string">&#x27;chunked&#x27;</span>, <span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>, <span class="string">&#x27;Set-Cookie&#x27;</span>: <span class="string">&#x27;producthistoryid=20357456; expires=Fri, 19-Jul-2019 09:30:49 GMT; Max-Age=31536000; path=/; domain=.dangdang.com&#x27;</span>, <span class="string">&#x27;Dd-Loc&#x27;</span>: <span class="string">&#x27;7439338628981511792&#x27;</span>, <span class="string">&#x27;Hit-Cache&#x27;</span>: <span class="string">&#x27;false&#x27;</span>, <span class="string">&#x27;Content-Encoding&#x27;</span>: <span class="string">&#x27;gzip&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; r.request.headers <span class="comment">#获知头部信息</span></span><br><span class="line">&gt;&gt; &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;python-requests/2.18.4&#x27;</span>, <span class="string">&#x27;Accept-Encoding&#x27;</span>: <span class="string">&#x27;gzip, deflate&#x27;</span>, <span class="string">&#x27;Accept&#x27;</span>: <span class="string">&#x27;*/*&#x27;</span>, <span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">&gt;/<span class="comment">#要伪装一个浏览器</span></span><br><span class="line"></span><br><span class="line">&gt;kv=&#123;<span class="string">&#x27;uesr-agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0&#x27;</span>&#125;</span><br><span class="line">&gt;url=<span class="string">&#x27;http://product.dangdang.com/20357456.html&#x27;</span></span><br><span class="line">&gt;r=requests.get(url,headers=kv)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes15.png" alt="屏幕快照 2018-07-19 下午6.19.34" /><figcaption>屏幕快照 2018-07-19 下午6.19.34</figcaption>
+</figure>
+<h2 id="beautifulsoup库">BeautifulSoup库</h2>
+<p>可以把html文件输入进来，并且自己整理成好看的格式</p>
+<p><strong>soup.select('.xxx')</strong>直接nmdcss选择器！！！</p>
+<p>from bs4 import BeautifulSoup</p>
+<p><em>大小写敏感，BeautifulSoup是一个类</em></p>
+<p><strong>html文档=标签树=BeautifulSoup类</strong></p>
+<p>soup=BeautifulSoup(demo,'html.parser')</p>
+<p>解析所有标签格式的源代码</p>
+<p><strong>html.parser是自带的html格式的解析器，此外还可以pip一些别的解析器</strong></p>
+<p>以下是可以用BeautifulSoup.xx来引用的元素：</p>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes16.png" alt="屏幕快照 2018-07-29 上午11.58.21" /><figcaption>屏幕快照 2018-07-29 上午11.58.21</figcaption>
+</figure>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes17.png" alt="屏幕快照 2018-07-29 上午11.59.09" /><figcaption>屏幕快照 2018-07-29 上午11.59.09</figcaption>
+</figure>
+<p>如果有多个相同标签，如多个<code>&lt;p&gt;</code>，只能引用第一个</p>
+<p>还可以用soup.a.parent 找标签的父级标签</p>
+<p>soup.a.attrs标签属性</p>
+<p>soup.a.attrs['class'] 具体某属性</p>
+<p>soup.a.name标签名</p>
+<p>soup.a.string文字内容 text可以跨越多个标签层次，直接打出里面的文字</p>
+<p><em>这里如果有注释的话，也会直接出来，而没有注释的提示，要区分的话就看type</em></p>
+<p>###html内容遍历</p>
+<ol type="1">
+<li>上行: .parent .parents(用于遍历)</li>
+<li>下行:contents(儿子标签，返回列表) children（用于遍历，每次返回一个标签） descendants（所有次级节点？）</li>
+<li>平行:next_sibling previous_sibling next_siblings previous_siblings</li>
+</ol>
+<p>用于遍历的是迭代类型，只能用在for循环中</p>
+<p>只有同一个父亲底下的才是平行关系</p>
+<h3 id="prettify">prettify</h3>
+<p><strong>bs4将任何文件转换成utf-8</strong></p>
+<h3 id="信息标记">信息标记</h3>
+<p>让信息具有结构</p>
+<p>三种标记形式：</p>
+<ol type="1">
+<li>xml（基于html的通用标记表达形式）繁琐</li>
+<li>json：有类型的键值对，都有双引号；多值用[,]表示；键值对可嵌套，用{}。适合程序</li>
+<li>YAML：键值对，无双引号；所属关系用缩进表达；用-表达并列；|表示整块数据；#是注释。适合阅读</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">key : valuekey :</span> <span class="comment">#comment-value1-value2key :	subkey : value</span></span><br></pre></td></tr></table></figure>
+<h4 id="信息提取方法">信息提取方法</h4>
+<ol type="1">
+<li>标签解析器</li>
+<li>直接搜索</li>
+<li>结合</li>
+</ol>
+<p><strong>find_all()：</strong></p>
+<p>bs4中有find_all(‘a’) 对标签名字的检索 ，返回所有标签的列表 如果是true 则显示所有标签名</p>
+<p>find_all(name,attribute,是否搜索所有子孙=true，string)</p>
+<p>还可以用正则表达式搜索不完全名字</p>
+<p>可以用<code>标签()</code>代替<code>标签.find_all()</code>因为太常用了</p>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/pyNotes18.png" alt="屏幕快照 2018-09-27 上午9.54.07" /><figcaption>屏幕快照 2018-09-27 上午9.54.07</figcaption>
+</figure>
+<p><strong>中文输出对齐问题</strong></p>
+<p>用中文空格chr（12288）来填充</p>
+<h1 id="正则表达式">正则表达式</h1>
+<p>通用的字符串表达框架</p>
+<p>在字符串的范围内表达「简洁」与「特征」</p>
+<h2 id="操作符">操作符</h2>
+<table>
+<thead>
+<tr class="header">
+<th>操作符</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.</td>
+<td>单个字符</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>[]</td>
+<td>字符集，给出单个字符的取值范围</td>
+<td>[abc]表示a、b、c，[a-z]表示a到z单个字符</td>
+</tr>
+<tr class="odd">
+<td>[^]</td>
+<td>非，给出单个字符的排除范围</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>*</td>
+<td>前一个字符0或多次扩展</td>
+<td>py*:p</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>前一个字符1或多次扩展</td>
+<td>py+：py</td>
+</tr>
+<tr class="even">
+<td>?</td>
+<td>前一个字符0或1次</td>
+<td>py?：p</td>
+</tr>
+<tr class="odd">
+<td>|</td>
+<td>左右表达式的任意一个</td>
+<td>abc|def：abc或def</td>
+</tr>
+<tr class="even">
+<td>{m}</td>
+<td>前一个字符m次扩展</td>
+<td>py{2}t:pyyt</td>
+</tr>
+<tr class="odd">
+<td>{m,n}</td>
+<td>前一个字符m至n次扩展(包括n)</td>
+<td>py{1,2}thon:python</td>
+</tr>
+<tr class="even">
+<td>^</td>
+<td>匹配字符串的开头</td>
+<td>^py:字符串开头有py</td>
+</tr>
+<tr class="odd">
+<td>$</td>
+<td>匹配字符串结尾</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>()</td>
+<td>分组，内部只能用|</td>
+<td>（py）(py|yp)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>数字，即[0-9]</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>单个字符，即[A-Za-z0-9]以及下划线</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>^[A-Za-z]+$</code> 由26个字母组成的字符串</p>
+<p><code>^-?\d+$</code> 整数</p>
+<p><code>^[0-9]*[1-9][0-9]*$</code> 正整数（必须要有1以上）</p>
+<p><code>[1-9]\d&#123;5&#125;</code> 中国境内邮政编码</p>
+<p><code>[\u4e00-\u9fa5]</code>所有中文</p>
+<p><code>\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;</code>国内电话号码</p>
+<p><code>( ([1-9]?\d|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5]).)&#123;3&#125;([0-9]&#123;1,2&#125;|1[0-9]&#123;1,2&#125;|2[0-4][0-9]|25[0-5])</code></p>
+<p>IP地址</p>
+<h2 id="re库的功能函数">re库的功能函数</h2>
+<p>###re.search(正则表达式，string，flags=0 控制标记)</p>
+<p>在字符串中搜索匹配的第一个位置，返回match对象</p>
+<h5 id="控制标记">控制标记：</h5>
+<p>re.I (IGNORECASE)忽视大小写</p>
+<p>re.M (MULTILINE) ^可以将每一行当做开头</p>
+<p>re.S（DOTALL） .可以匹配所有字符</p>
+<p>###re.match(正则表达式，string，flags=0 控制标记)</p>
+<p>从起始位置起匹配正则表达式，返回match对象</p>
+<p>###re.findall(正则表达式，string，flags=0)</p>
+<p>列表类型返回全部能匹配的串</p>
+<p>###re.split(正则表达式，string，maxsplit=0最大分割数，flags=0)</p>
+<p>将字符串按匹配结果进行分割（匹配的部分去掉并作为分割之处），返回列表类型</p>
+<p>###re.finditer(pattern，string，flags=0)</p>
+<p>返回字符串匹配结果的迭代类型，每个迭代元素是match对象</p>
+<p>###re.sub(pattern，repl，string，count=0，flags=0)</p>
+<p>repl：用来替换的字符串</p>
+<p>count：最大替换次数</p>
+<p>在字符串中替换所有匹配正则表达式的子串，返回替换后的字符串</p>
+<p>###pat=re.compile(pattern,flags=0)</p>
+<p>将正则表达式从字符串编译成对象</p>
+<p>###match对象</p>
+<p>可以用if match： 判断是否匹配</p>
+<p>match.group(0)第一个匹配的元素</p>
+<h5 id="重要属性">重要属性</h5>
+<p>.string 用来匹配的原文本</p>
+<p>.re 匹配时用的pattern（是compile之后的）</p>
+<p>.pos 开始搜索文本的位置</p>
+<p>.endpos 结束搜索文本的位置</p>
+<h5 id="重要方法">重要方法</h5>
+<p>.group(0) 获得字符串</p>
+<p>.start() 匹配字符串在原字符串的开始位置</p>
+<p>.end() 结束位置</p>
+<p>.span() 返回(.start(),.end())</p>
+<h2 id="re的用法">re的用法</h2>
+<ol type="1">
+<li>一次性操作可以用函数式用法，match=re.search('xx','xx')</li>
+<li>编译后的多次操作用面向对象用法，pat=re.compile(r'pattern') match=pat.search('string')</li>
+</ol>
+<h3 id="表示类型">表示类型</h3>
+<p>raw string原生字符串类型 r‘text‘：不包含转义符，这样斜杠就是斜杠，比较方便</p>
+<h3 id="贪婪匹配和最小匹配">贪婪匹配和最小匹配</h3>
+<p>默认采用<strong>贪婪匹配</strong>方式，从多个匹配的子串中返回最长的那个</p>
+<p>例如，<code>match=re.search(r'PY.*N','PYANBNCNDN')</code>(PY开头，N结尾)</p>
+<p>会得到'PYANBNCNDN'</p>
+<p>如果想用<strong>最小匹配</strong>，只要加个?，即'PY.*?N'</p>
+<p>最小匹配操作符：*? +? ?? {m,n}?</p>
+<h1 id="序列化">序列化</h1>
+<p>序列化：将数据转成文本存到文件中，方便下次取用</p>
+<p>方法：模块cPickle or pickle</p>
+<p>pickle.dumps(dictA)='xxxxxxx' 将dictA转换成文本</p>
+<p>pickle.dump(dictA,fileF) 将dictA转换成文本并且直接存储进fileF</p>
+<p>反序列化：loads or load</p>
+<p>还是序列化成json比较好</p>
+<h1 id="多进程与多线程">多进程与多线程</h1>
+<p>根本区别：进程是操作系统资源分配的基本单位，而线程是任务调度和执行的基本单位</p>
+<p>在开销方面：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
+<p>所处环境：在操作系统中能同时运行多个进程（程序）；而在同一个进程（程序）中有多个线程同时执行（通过CPU调度，在每个时间片中只有一个线程执行）</p>
+<p>内存分配方面：系统在运行的时候会为每个进程分配不同的内存空间；而对线程而言，除了CPU外，系统不会为线程分配内存（线程所使用的资源来自其所属进程的资源），线程组之间只能共享资源。</p>
+<p>包含关系：没有线程的进程可以看做是单线程的，如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
+<p>多线程的优点：</p>
+<ol type="1">
+<li>把运行时间长的任务放到后台去处理</li>
+<li>用户界面可以做进度条来显示处理的进度</li>
+<li>加快程序速度</li>
+<li>在一些需要等待的任务实现上很有用，释放珍贵资源，如内存占用</li>
+</ol>
+<h2 id="multiprocessing.pool">multiprocessing.Pool</h2>
+<p>用multiprocessing库的Pool类可以创建多进程，</p>
+<p><code>p=Pool(processes=3)</code>创建3个进程</p>
+<p><code>p.apply_async(runTask, args=(i,))</code>让进程执行runTask，args是输入的变量们，i是第i个进程</p>
+<p><code>os.getpid()</code>可获得当前进程的id</p>
+<p><code>p.close()</code>进程结束 <code>p.join()</code>进程间同步 这俩好像最后都得写</p>
+<h2 id="multip.queue">multip.Queue</h2>
+<p>用Queue类实现多进程间的通讯</p>
+<p>在一开始用<code>q=Queue()</code>创建Queue类，并且传递给各进程</p>
+<p>然后在进程中用<code>q.put(url)</code> <code>q.get()</code>读和写东西进去</p>
+<p>它俩有两个参数 blocked和timeout 我没看懂</p>
+<h1 id="debug">debug</h1>
+<p>磨刀不误砍柴工</p>
+<p>###调试</p>
+<p>####输出</p>
+<p>print</p>
+<p>assert断言 条件，“不符合条件时抛出的错误”</p>
+<p>assertpy 第三方库</p>
+<p>可用参数关闭</p>
+<p>logging库 可以输出到email、其他文件 等</p>
+<p>####文本调试工具</p>
+<p>PDB 内置库 pdb.set_trace()然后在这儿随便调变量</p>
+<p>IPDB jupyter中</p>
+<p>PUDB 可视化全屏调试工具</p>
+<p>####图形调试工具</p>
+<p>idle</p>
+<p>pycharm</p>
+<p>微软的一个</p>
+<h3 id="测试">测试</h3>
+<p>单元测试</p>
+<p>unitest标准库，pytest第三方库特别火</p>
+<p>mock</p>
+<p>假对象</p>
+<p>FAKER库模拟数据</p>
+<p>Vue.js是js的一个库</p>
+<p>UI框架</p>
+<p>echart 百度给的</p>
+<p>动态爬虫</p>
+<p>数据处理相关库</p>
+<p>Numpy 基于NDarray数据类型</p>
+<p>pandas 基于series和dataframe数据类型</p>
+<p>scipy高级的机器学习库 很多子模块</p>
+<p>matplotlib 画图 但有点丑</p>
+<p>tushare 财经数据接口库 返回的绝大部分数据是pandas的dataframe类型</p>
+<p>vpython</p>
+<h3 id="io">IO</h3>
+<p>input() 括号里别乱加东西</p>
+<p>eval() 把引号去掉</p>
+<p>ls=input().split() 默认以空格分割</p>
+<p>a=ls[0]</p>
+<p>b=ls[1]</p>
+<p>print('a is {}'.format(* **))</p>
+<h3 id="数据结构">数据结构</h3>
+<p>####基本类型：int float str 都是只读的</p>
+<p>强制转换 int()</p>
+<p>str.split() strip slice ...都是返回一个copy</p>
+<p>####复合类型：list (tuple) set dict</p>
+<p>可改 只读 无序无重</p>
+<p>list s[::step] 尽可能多掌握 index</p>
+<p>for i in ls:</p>
+<pre><code>j=ls.index(i) 拿到元素的下标if i in ls[j+1:] …….</code></pre>
+<p>tuple: a,b,c (a,b,c) (2,) 只读</p>
+<p>dict:{'key':'value'}</p>
+<p>list.sort 内部排序 排完还是它本身</p>
+<p>sorted(__,key=lambda x:x[0])返回新的</p>
+<p>####if elif else while for</p>
+<p>s2=s for s in ss if s&gt;2</p>
+<p>####函数</p>
+<p>def fname(a,b=20,*,**):</p>
+<pre><code>return a,b,c</code></pre>
+<p>语言简单，难在算法！</p>
+<h1 id="xpath">XPath</h1>
+<table>
+<thead>
+<tr class="header">
+<th>表达式</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>nodename</td>
+<td>选取此节点的所有子节点</td>
+<td>classroom</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>从根节点选取</td>
+<td>/classroom</td>
+</tr>
+<tr class="odd">
+<td>//</td>
+<td>选择任意位置的某个节点</td>
+<td>//student</td>
+</tr>
+<tr class="even">
+<td>.</td>
+<td>选取当前节点</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>..</td>
+<td>选取当前的父节点</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>@</td>
+<td>选取属性</td>
+<td>//<span class="citation" data-cites="name">@name</span></td>
+</tr>
+</tbody>
+</table>
+<p>谓语：用来选取某个特定节点</p>
+<p>用法：方括号</p>
+<ol type="1">
+<li>第n个元素 [n]</li>
+<li>最后一个 [last()]</li>
+<li>倒数第二个[last()-1]</li>
+<li>前两个[position()&lt;3]</li>
+<li>拥有属性name的所有student元素 //student<span class="citation" data-cites="name">[@name]</span></li>
+<li>拥有属性name为Zhu的所有student元素 //student<span class="citation" data-cites="name">[@name='Zhu']</span></li>
+</ol>
+<p>通配符：<code>*</code> 任意元素</p>
+<p>多条路径：<code>|</code></p>
+<p><code>//div/ul[@class='show']</code></p>
+<p><code>string(.)</code></p>
+<h1 id="css选择器">CSS选择器</h1>
+<p><code>::attr(href)</code>选择href属性</p>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/css1.png" alt="css1" /><figcaption>css1</figcaption>
+</figure>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/css2.png" alt="css2" /><figcaption>css2</figcaption>
+</figure>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/css3.png" alt="css3" /><figcaption>css3</figcaption>
+</figure>
+<p><code>div:contains(&quot;str&quot;)</code>文本包含了str的div</p>
+<h1 id="scrapy">Scrapy</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapyclass </span><br><span class="line">StackOverflowSpider(scrapy.Spider):    </span><br><span class="line">  name = <span class="string">&quot;stackoverflow&quot;</span>    </span><br><span class="line">  start_urls = [<span class="string">&quot;http://stackoverflow.com/questions?sort=votes&quot;</span>]    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">start_requests</span>(<span class="params">self</span>):</span>   <span class="comment"># by this we can create start urls     </span></span><br><span class="line">    reqs = []        </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">200</span>):            </span><br><span class="line">      req = scrapy.Request(<span class="string">&#x27;url&#x27;</span>+<span class="built_in">str</span>(i))            </span><br><span class="line">      reqs.append(req)        </span><br><span class="line">      <span class="keyword">return</span> reqs        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span>        </span><br><span class="line">      <span class="keyword">for</span> href <span class="keyword">in</span> response.css(<span class="string">&#x27;.question-summary h3 a::attr(href)&#x27;</span>):            </span><br><span class="line">        full_url = response.urljoin(href.extract())            </span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(full_url, callback=self.parse_question)    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_question</span>(<span class="params">self, response</span>):</span>        </span><br><span class="line">        <span class="keyword">yield</span>&#123; <span class="string">&#x27;title&#x27;</span>: response.css(<span class="string">&#x27;h1 a::text&#x27;</span>).extract()[<span class="number">0</span>],            <span class="string">&#x27;votes&#x27;</span>: response.css(<span class="string">&#x27;.question .vote-count-post::text&#x27;</span>).extract()[<span class="number">0</span>],            <span class="string">&#x27;body&#x27;</span>: response.css(<span class="string">&#x27;.question post-text&#x27;</span>).extract()[<span class="number">0</span>],            <span class="string">&#x27;tags&#x27;</span>: response.css(<span class="string">&#x27;.question .post-tag::text&#x27;</span>).extract(),            <span class="string">&#x27;link&#x27;</span>: response.url,    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>scrapy runspider somefile.py -o xx.csv</code></p>
+<p><code>start_urls</code>作为初始链接，并默认把<code>parse()</code>作为回调函数</p>
+<p>在parse中用css选择器获得目标url，并注册<code>parse_question()</code>作为目标url的回调函数</p>
+<h2 id="command-line">command line</h2>
+<p><code>scrapy crawl xxxspider -s JOBDIR=job1</code></p>
+<p>可以让任务随时中断又恢复，按ctrl+c就中断，下次再点开这个就继续</p>
+<p><code>--help</code> <code>version</code> <code>version -v</code></p>
+<p><code>startproject xxx</code>创建一个工程，包括创建一系列文件结构</p>
+<p><code>genspider xxx xxx.com</code>general spider在一个工程中创建一个爬虫，可产生多个爬虫，名字不同</p>
+<p><code>list</code>查看本工程中有哪些spider</p>
+<p><code>view url</code>用浏览器查看当前爬下来的网页</p>
+<p><code>parse url</code>解析，用工程中写好的parse来解析url</p>
+<p><strong><code>shell</code>首先执行<code>scrapy shell url</code>进入，然后常用的是<code>response</code>对象，用<code>response.css('h a::text').extract()</code>直接看到东西有没有</strong></p>
+<p><code>runspider</code>运行一个自包含的爬虫 不用这个，用<code>crawl</code></p>
+<p><code>bench</code>基准测试，看scrapy有否安装成功</p>
+<h2 id="main-kits">main kits</h2>
+<p>###<code>Spider</code>类</p>
+<p>定义了爬取、追踪、提取网站数据的全过程</p>
+<h4 id="属性">属性：</h4>
+<p>name、allowed_domains、start_urls、</p>
+<p>custom_settings个性化设置，会覆盖全局<code>settings.py</code>中的设置</p>
+<p>crawler抓取器，spider会绑定在上面</p>
+<p>settings配置实例，包含project中所有配置变量</p>
+<p>logging日志实例</p>
+<h4 id="方法">方法</h4>
+<p>from_crawler() 创建spiders</p>
+<p>start_requests（） 生成初始requests</p>
+<p>make_requests_from_url(url) 根据url生成一个request</p>
+<p>parse(response)解析网页内容</p>
+<p>self.logger.info('xxx')记录日志</p>
+<p>closed(reason) 关闭spider时使用</p>
+<h4 id="子类">子类</h4>
+<p>CrawlSpider XMLFeedSpider CSVFeedSpider SitemapSpider</p>
+<h3 id="selecter类"><code>Selecter</code>类</h3>
+<p><code>extract_first(default='not found')</code>可以解决没找到值而终止循环的问题</p>
+<h3 id="item类"><code>Item</code>类</h3>
+<p>完整定义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapyclass Product(scrapy.Item):    </span><br><span class="line">  name = scrapy.Field()    </span><br><span class="line">  stock = scrapy.Field()    </span><br><span class="line">  last_updated = scrapy.Field(serializer=<span class="built_in">str</span>)</span><br><span class="line">  <span class="comment">#don&#x27;t worry, we will learn this latter.</span></span><br></pre></td></tr></table></figure>
+<h3 id="item-pipeline类"><code>Item Pipeline</code>类</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy.exceptions </span><br><span class="line"><span class="keyword">import</span> DropItemclass </span><br><span class="line">PricePipeline(Object):    vat_factor=<span class="number">1.5</span>    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self,item,spider</span>):</span><span class="comment"># necessary        </span></span><br><span class="line">    <span class="keyword">if</span> item[<span class="string">&#x27;price&#x27;</span>]:            </span><br><span class="line">      <span class="keyword">if</span> item[<span class="string">&#x27;price_excludes_vat&#x27;</span>]:                </span><br><span class="line">        item[<span class="string">&#x27;price&#x27;</span>]*=self.vat_factor            </span><br><span class="line">        <span class="keyword">return</span> item       </span><br><span class="line">      <span class="keyword">else</span>:            </span><br><span class="line">        <span class="keyword">return</span> DropItem(<span class="string">&#x27;Missing price in &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(item))        	</span><br><span class="line">      <span class="comment"># 触发一个异常            </span></span><br><span class="line">      <span class="class"><span class="keyword">class</span> <span class="title">DuplicatesPipeline</span>(<span class="params"><span class="built_in">object</span></span>):</span>    </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span>        </span><br><span class="line">          self.ids_seen=<span class="built_in">set</span>()    </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self,item,spider</span>):</span>        </span><br><span class="line">          <span class="keyword">if</span> item[<span class="string">&#x27;id&#x27;</span>] <span class="keyword">in</span> self.ids_seen:            </span><br><span class="line">            <span class="keyword">raise</span> DropItem(<span class="string">&#x27;Duplicate item found:&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(item))        </span><br><span class="line">          <span class="keyword">else</span>      self.ids_seen.add(item[<span class="string">&#x27;id&#x27;</span>])        	</span><br><span class="line">          <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+<p>启用Item Pipeline：在settings中设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;    <span class="string">&#x27;myproject.pipelines.PricePipeline&#x27;</span>: <span class="number">300</span>,    <span class="string">&#x27;myproject.pipelines.DuplicatesPipeline&#x27;</span>: <span class="number">800</span>    <span class="comment"># pipeline ： 优先级(0~1000，小的先)&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="feed-exports类"><code>Feed Exports</code>类</h3>
+<p>保存为csv：</p>
+<p>writeToCsv.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv   <span class="keyword">from</span> PROJECT_NAME <span class="keyword">import</span> settings   <span class="class"><span class="keyword">class</span> <span class="title">WriteToCsv</span>(<span class="params"><span class="built_in">object</span></span>):</span>        <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span>            writer = csv.writer(<span class="built_in">open</span>(settings.csv_file_path, <span class="string">&#x27;a&#x27;</span>), lineterminator=<span class="string">&#x27;\n&#x27;</span>)       		writer.writerow([item[key] <span class="keyword">for</span> key <span class="keyword">in</span> item.keys()])            <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+<p>settings.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123; <span class="string">&#x27;project.pipelines_path.writeToCsv.WriteToCsv&#x27;</span> : A_NUMBER_HIGHER_THAN_ALL_OTHER_PIPELINES&#125;   csv_file_path = PATH_TO_CSV</span><br></pre></td></tr></table></figure>
+<h2 id="main-object">main object</h2>
+<h3 id="requestsobject"><code>Requests</code>object</h3>
+<p>class scrapy.http.Requests(url,[callback,method='GET',headers,body,cookies,meta,encoding='utf-8',priority=0,don't_filter=False,errback])</p>
+<p>copy（） 返回一个和原requests一模一样的</p>
+<p>replace（） 返回一个可以自己定制的</p>
+<p><code>return scrapy.Request(url,meta=&#123;'theitem': item&#125;)</code></p>
+<p><code>item = response.meta['theitem']</code></p>
+<p>可以在两个parse 函数中传递item对象</p>
+<p>重要子类：FormRequest 用来实现登录 参数：url,[formdata]</p>
+<p>登录的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapyclass LoginSpider(scrapy.spider):    name = <span class="string">&#x27;xxx&#x27;</span>    start_urls = [<span class="string">&#x27;xxx&#x27;</span>]        <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self,response</span>):</span>        <span class="keyword">return</span> scrapy.FormRequest.from_response(            response,            formdata=&#123;<span class="string">&#x27;username&#x27;</span>:<span class="string">&#x27;xxx&#x27;</span>,<span class="string">&#x27;password&#x27;</span>:<span class="string">&#x27;xxx&#x27;</span>&#125;,            callback=self.after_login        )        <span class="function"><span class="keyword">def</span> <span class="title">after_login</span>(<span class="params">self,response</span>):</span>        <span class="comment">#check login succeed before going on        if &#x27;authontication failed&#x27; in response.body:            self.logger.error(&#x27;Login failed&#x27;)            return        #continue....</span></span><br></pre></td></tr></table></figure>
+<h3 id="response对象"><code>Response</code>对象</h3>
+<p>一般不实例化，只是使用，是Request返回的一个对象</p>
+<p>urljoin（url）一般从网页中抽取的都是相对链接，用这个生成绝对链接</p>
+<h2 id="inner-service">inner service</h2>
+<h3 id="logging">logging</h3>
+<p><code>import logging</code></p>
+<p><code>logging.warning('xxx')</code></p>
+<p><code>logging.log(logging.WARNING,'xxx')</code></p>
+<p>但在scrapy中，scrapy.Spider类已经内置了logger类，而MySpider又会继承它，所以直接用<code>self.logger.info('xxx')</code>就行</p>
+<p>还可以在settings中配置logger，主要有<code>LOG_FILE</code>确定log文件，这个一设置，就会产生日志文件了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">divs=response.css(<span class="string">&#x27;xxx&#x27;</span>)<span class="keyword">if</span> <span class="keyword">not</span> divs:	self.logger.info(<span class="string">&#x27;Page error. &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(url))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:    item[<span class="string">&#x27;xx&#x27;</span>]=xxx;<span class="keyword">except</span> Exception,e:    <span class="built_in">print</span>(<span class="string">&#x27;Error:&#x27;</span>,e)</span><br></pre></td></tr></table></figure>
+<h3 id="stats-collector">Stats Collector</h3>
+<h3 id="sending-email">Sending Email</h3>
+<p>import:<code>from scrapy.mail import Mailsender</code></p>
+<p>start:<code>mailer=MailSender(host,from,user,password,port)</code>or<code>mailer=MailSender.from_settings(settings)</code></p>
+<p>use:<code>mailer.send(to=['xxx@163.com'],subject='xxx',body='xxx',cc=['xx@a.com'])</code></p>
+<p>settings:<code>MAIL_FROM MAIL_HOST MAIL_PORT MAIL_USER MAIL_PASS MAIL_TLS MAIL_SSL</code></p>
+<h3 id="architecture">Architecture</h3>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/scrapy_architecture_02.png" alt="scrapy_architecture_02" /><figcaption>scrapy_architecture_02</figcaption>
+</figure>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/v2-8c591d54457bb033812a2b0364011e9c_1200x500.jpg" alt="v2-8c591d54457bb033812a2b0364011e9c_1200x500" /><figcaption>v2-8c591d54457bb033812a2b0364011e9c_1200x500</figcaption>
+</figure>
+<h2 id="下载图片">下载图片</h2>
+<p>使用内置的pipeline。在settings中写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;<span class="string">&#x27;scrapy.pipelines.images.ImagePipeline&#x27;</span>:<span class="number">1</span>&#125;IMAGES_URLS_FIELD = <span class="string">&#x27;xxx&#x27;</span> <span class="comment"># the name of the image&#x27;s url field in the itemIMAGES_STORE = r&#x27;.&#x27; # 存储在当前路径</span></span><br></pre></td></tr></table></figure>
+<h2 id="proxy">proxy</h2>
+<ol type="1">
+<li><p>爬取西刺网站上的ip列表，存到csv文件中</p></li>
+<li><p>一个proxy.py文件~实现对ip的获取和检查</p></li>
+<li><p>将meta中的proxy填充好，并且在settings中添加proxy相关的middleware，就可以使用了</p></li>
+</ol>
+<p>http: 4 https: 5 {'http': [['110.52.235.222', '9999', 'HTTP'], ['27.155.84.233', '8081', 'HTTP'], ['121.61.2.154', '9999', 'HTTP'], ['116.209.57.232', '9999', 'HTTP']], 'https': [['121.61.2.185', '9999', 'HTTPS'], ['121.61.0.33', '9999', 'HTTPS'], ['110.52.235.154', '9999', 'HTTPS'], ['111.77.197.133', '9999', 'HTTPS'], ['221.224.136.211', '35101', 'HTTPS']]}</p>
+<h2 id="selenium">selenium</h2>
+<p><code>from selenium import webdriver</code></p>
+<p><code>driver=webdriver.Chrome()</code></p>
+<p><code>driver.get(url)</code></p>
+<p><code>driver.page_source</code></p>
+<h3 id="常用属性和方法">常用属性和方法：</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>find_element_by_id # ID</li>
+<li>find_elements_by_class_name # class</li>
+<li>find_elements_by_tag_name # 标签名</li>
+<li>find_elements_by_name # name</li>
+<li>find_elements_by_link_text # a标签中的text查找（精确匹配）</li>
+<li>find_elements_by_partial_link_text #a标签中的text查找（部分匹配即可）</li>
+<li>find_elements_by_css_selector # css选择器查找</li>
+<li>find_elements_by_xpath # find_elements_by_xpath(&quot;//input&quot;)，请翻阅文档</li>
+</ol>
+<h2 id="scrapyd">scrapyd</h2>
+<p>command line:<code>scrapyd</code> to execute it.</p>
+<p>###部署</p>
+<p>upload a spider: cd into the local</p>
+<p>配置服务器和项目信息, 需要编辑scrapy.cfg文件，添加如下内容</p>
+<p>[deploy:主机名]url=http://localhost:6800/</p>
+<p>可以用<code>scrapyd-deploy -l</code>列出所有可用主机target</p>
+<p><code>scrapyd-deploy target主机地址 -p 工程名</code></p>
+<blockquote>
+<p>我们也可以把项目信息写入到配置文件中，部署时就不用指定项目信息，编辑scrapy.cfg文件，添加项目信息</p>
+<p>[deploy:server-douban]url=http://localhost:6800/project=douban-movies</p>
+<p>下次部署可以直接执行</p>
+<p>$ scrapyd-deploy</p>
+</blockquote>
+<p>###调度</p>
+<p>调度工具：curl</p>
+<p>shedule api:<code>curl http://localhost:6800/schedule.json -d project=xxx -d spider=somespider</code></p>
+<p>cancel api:<code>curl http://localhost:6800/cancel.json -d project=xxx -d job=之前的任务的id</code></p>
+<p>list:<code>curl http://129.28.28.203/listprojects.json</code></p>
+<p>curl http://129.28.28.203:6800/schedule.json -d project=zhihu -d spider=topicfollower</p>
+<p>curl http://129.28.28.203:6800/delproject.json -d project=zhihu</p>
+<h1 id="sqlite3">SQLite3</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3conn = sqlite3.connect(<span class="string">&#x27;myquotes.db&#x27;</span>)curr = conn.cursor()curr.execute(<span class="string">&quot;&quot;&quot;create table quotes_tb(                title text,                author text,                tag text                )&quot;&quot;&quot;</span>)curr.execute(<span class="string">&quot;&quot;&quot;insert into quote_tb values(                xxx,zhu,notag                )&quot;&quot;&quot;</span>)conn.commit()conn.close()</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/Users/jiayinzhu/Desktop/笔记/放图/屏幕快照%202019-02-17%20下午3.07.13.png" alt="屏幕快照 2019-02-17 下午3.07.13" /><figcaption>屏幕快照 2019-02-17 下午3.07.13</figcaption>
+</figure>
+<p>use sqlite3 in scrapy pipelines:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3class SavetoSQLitePipeline(<span class="built_in">object</span>):    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span>        self.create_connection()        self.create_table()            <span class="function"><span class="keyword">def</span> <span class="title">create_connection</span>(<span class="params">self</span>):</span>        self.conn=sqlite3.connect(<span class="string">&#x27;mydatabase.db&#x27;</span>)        self.curr=self.conn.cursor()            <span class="function"><span class="keyword">def</span> <span class="title">create_table</span>(<span class="params">self</span>):</span>        self.curr.execute(<span class="string">&quot;&quot;&quot;drop table if exists my_tb&quot;&quot;&quot;</span>)        self.curr.execute(<span class="string">&quot;&quot;&quot;create table my_tb(                            aaa text,                            bbb text,                            ccc text                            )&quot;&quot;&quot;</span>)            <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self,item,spider</span>):</span>        self.store_db(item)        <span class="built_in">print</span>(<span class="string">&#x27;Pipeline :&#x27;</span>+item[<span class="string">&#x27;title&#x27;</span>])        <span class="keyword">return</span> item        <span class="function"><span class="keyword">def</span> <span class="title">store_db</span>(<span class="params">self,item</span>):</span>        self.curr.execute(<span class="string">&quot;&quot;&quot;insert into my_tb values(?,?,?)&quot;&quot;&quot;</span>.(                        item[<span class="string">&#x27;aaa&#x27;</span>],                        item[<span class="string">&#x27;bbb&#x27;</span>],                        item[<span class="string">&#x27;ccc&#x27;</span>]                        ))        self.conn.commit()</span><br></pre></td></tr></table></figure>
+<h1 id="machine-learning">Machine Learning</h1>
+<h2 id="classify">classify</h2>
+<ul>
+<li><strong>Supervised Learning</strong>: data is labeled and the program learns to predict the output from the input data
+<ul>
+<li><strong>Regression</strong> : predict a continuous-valued output.</li>
+<li><strong>Classification</strong>: predict a discrete number of values.</li>
+</ul></li>
+<li><strong>Unsupervised Learning</strong>: data is unlabeled and the program learns to recognize the inherent structure in the input data
+<ul>
+<li><strong>Clustering</strong> is a common unsupervised machine learning approach that finds patterns and structures in unlabeled data by grouping them into clusters.</li>
+</ul></li>
+</ul>
+<h2 id="scikit-learn">scikit-learn</h2>
+<p><a target="_blank" rel="noopener" href="http://scikit-learn.org/stable/">Scikit-learn</a> is a library in Python that provides many unsupervised and supervised learning algorithms. It's built upon some of the technology you might already be familiar with, like NumPy, pandas, and Matplotlib!</p>
+<p>As you build robust Machine Learning programs, it's helpful to have all the <code>sklearn</code>commands all in one place in case you forget.</p>
+<h3 id="linear-regression">Linear Regression</h3>
+<p><strong>Import and create the model:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegressionyour_model = LinearRegression()</span><br></pre></td></tr></table></figure>
+<p><strong>Fit:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_model.fit(x_training_data, y_training_data)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>.coef_</code>: contains the coefficients</li>
+<li><code>.intercept_</code>: contains the intercept</li>
+</ul>
+<p><strong>Predict:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">predictions = your_model.predict(your_x_data)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>.score()</code>: returns the coefficient of determination R²</li>
+</ul>
+<hr />
+<h3 id="naive-bayes">Naive Bayes</h3>
+<p><strong>Import and create the model:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNByour_model = MultinomialNB()</span><br></pre></td></tr></table></figure>
+<p><strong>Fit:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_model.fit(x_training_data, y_training_data)</span><br></pre></td></tr></table></figure>
+<p><strong>Predict:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Returns a list of predicted classes - one prediction for every data pointpredictions = your_model.predict(your_x_data)# For every data point, returns a list of probabilities of each classprobabilities = your_model.predict_proba(your_x_data)</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="k-nearest-neighbors">K-Nearest Neighbors</h3>
+<p><strong>Import and create the model:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neigbors <span class="keyword">import</span> KNeighborsClassifieryour_model = KNeighborsClassifier()</span><br></pre></td></tr></table></figure>
+<p><strong>Fit:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_model.fit(x_training_data, y_training_data)</span><br></pre></td></tr></table></figure>
+<p><strong>Predict:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Returns a list of predicted classes - one prediction for every data pointpredictions = your_model.predict(your_x_data)# For every data point, returns a list of probabilities of each classprobabilities = your_model.predict_proba(your_x_data)</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="k-means">K-Means</h3>
+<p><strong>Import and create the model:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeansyour_model = KMeans(n_clusters=<span class="number">4</span>, init=<span class="string">&#x27;random&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>n_clusters</code>: number of clusters to form and number of centroids to generate</li>
+<li><code>init</code>: method for initialization
+<ul>
+<li><code>k-means++</code>: K-Means++ [default]</li>
+<li><code>random</code>: K-Means</li>
+</ul></li>
+<li><code>random_state</code>: the seed used by the random number generator [optional]</li>
+</ul>
+<p><strong>Fit:</strong></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_model.fit(x_training_data)</span><br></pre></td></tr></table></figure>
+<p><strong>Predict:</strong></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">predictions = your_model.predict(your_x_data)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="validating-the-model">Validating the Model</h3>
+<p><strong>Import and print accuracy, recall, precision, and F1 score:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, recall_score, precision_score, f1_scoreprint(accuracy_score(true_labels, guesses))<span class="built_in">print</span>(recall_score(true_labels, guesses))<span class="built_in">print</span>(precision_score(true_labels, guesses))<span class="built_in">print</span>(f1_score(true_labels, guesses))</span><br></pre></td></tr></table></figure>
+<p><strong>Import and print the confusion matrix:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrixprint(confusion_matrix(true_labels, guesses))</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="training-sets-and-test-sets">Training Sets and Test Sets</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_splitx_train, x_test, y_train, y_test = train_test_split(x, y, train_size=<span class="number">0.8</span>, test_size=<span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>train_size</code>: the proportion of the dataset to include in the train split</li>
+<li><code>test_size</code>: the proportion of the dataset to include in the test split</li>
+<li><code>random_state</code>: the seed used by the random number generator [optional]</li>
+</ul>
+<h1 id="matplotlib"><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/introductory/usage.html">Matplotlib</a></h1>
+<p>##Objects</p>
+<p><code>Figure</code>:一张布，可以放很多张图</p>
+<p><code>Axes</code>: 一张图，表示一个数据关系，可以放很多个坐标轴</p>
+<p><code>Axis</code>: 一个坐标轴</p>
+<p><code>Artist</code>: 所有可见的东西，包括前面那些，还有文字、标签等等。不能在Axes之间共享</p>
+<p>##Input</p>
+<p>input type: <code>np.array</code> or <code>np.ma.masked_array</code></p>
+<p>to convert a <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>pandas.DataFrame</code></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = pandas.DataFrame(np.random.rand(4,5), columns = list(&#x27;abcde&#x27;))a_asarray = a.values</span><br></pre></td></tr></table></figure>
+<p>and to convert a <code>np.matrix</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = np.matrix([[1,2],[3,4]])b_asarray = np.asarray(b)</span><br></pre></td></tr></table></figure>
+<p>##Backends</p>
+<p>If your script depends on a specific backend you can use the <a target="_blank" rel="noopener" href="https://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.use"><code>use()</code></a> function:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import matplotlibmatplotlib.use(&#x27;PS&#x27;)   # generate postscript output by default</span><br></pre></td></tr></table></figure>
+<p>If you use the <a target="_blank" rel="noopener" href="https://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.use"><code>use()</code></a> function, this must be done before importing <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot"><code>matplotlib.pyplot</code></a>.</p>
+<p>###matplotlib renderers:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Renderer</th>
+<th>Filetypes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-agg">AGG</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-png">png</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-raster-graphics">raster graphics</a> -- high quality images using the <a target="_blank" rel="noopener" href="http://antigrain.com/">Anti-Grain Geometry</a> engine</td>
+</tr>
+<tr class="even">
+<td>PS</td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-ps">ps</a> <a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-eps">eps</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-vector-graphics">vector graphics</a> -- <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/PostScript">Postscript</a> output</td>
+</tr>
+<tr class="odd">
+<td>PDF</td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-pdf">pdf</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-vector-graphics">vector graphics</a> -- <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Portable_Document_Format">Portable Document Format</a></td>
+</tr>
+<tr class="even">
+<td>SVG</td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-svg">svg</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-vector-graphics">vector graphics</a> -- <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">Scalable Vector Graphics</a></td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-cairo">Cairo</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-png">png</a> <a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-ps">ps</a> <a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-pdf">pdf</a> <a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-svg">svg</a></td>
+<td><a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-raster-graphics">raster graphics</a> and <a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-vector-graphics">vector graphics</a> -- using the <a target="_blank" rel="noopener" href="https://www.cairographics.org/">Cairo graphics</a> library</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 89%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Backend</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>TkAgg</td>
+<td>Agg rendering to a <a target="_blank" rel="noopener" href="https://matplotlib.org/glossary/index.html#term-tk">Tk</a> canvas (requires <a target="_blank" rel="noopener" href="https://wiki.python.org/moin/TkInter">TkInter</a>). This backend can be activated in IPython with <code>%matplotlib tk</code>.</td>
+</tr>
+<tr class="even">
+<td>nbAgg</td>
+<td>Embed an interactive figure in a Jupyter classic notebook. This backend can be enabled in Jupyter notebooks via <code>%matplotlib notebook</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pyplot">Pyplot</h3>
+<h4 id="plot">Plot</h4>
+<p>versitile</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+<p>默认输入是y，x会从0开始，自己长。折线图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>])</span><br></pre></td></tr></table></figure>
+<p>x-y</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>], <span class="string">&#x27;ro&#x27;</span>)plt.axis([<span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">20</span>])</span><br></pre></td></tr></table></figure>
+<p>第三个参数是可选的格式配置参数，默认是'b-' Blue line；现在的'ro'是Red Circle</p>
+<p>axis指定x轴范围和y</p>
+<h1 id="pandas">Pandas</h1>
+<h2 id="data-structure">data structure</h2>
+<h3 id="series">1. Series</h3>
+<p><code>s=pd.Series([1,2,3,4],index=['a','b','c','d']</code></p>
+<p>一维，带标签，可以装任何类型数据。可以用列表转换，也可以重新指定索引s.index()</p>
+<h3 id="dataframe">2. DataFrame</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d=&#123;<span class="string">&#x27;a&#x27;</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],   <span class="string">&#x27;b&#x27;</span>:[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],   <span class="string">&#x27;c&#x27;</span>:[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]&#125;df=pd.DataFrame(d,columns=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p>二维。可以用字典转换.f.columns()</p>
+<h2 id="selection">Selection</h2>
+<figure>
+<img src="https://jyzhu.top/mydocs/pics/image-20191122235116830.png" alt="image-20191122235116830" /><figcaption>image-20191122235116830</figcaption>
+</figure>
+<p>列名选择</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">selected_cols = [<span class="string">&#x27;2010&#x27;</span>, <span class="string">&#x27;2011&#x27;</span>, <span class="string">&#x27;2012&#x27;</span>]date_df = df[selected_cols]</span><br></pre></td></tr></table></figure>
+<p>:robot:</p>
+<p>Happy Coding!</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Python Notebook/" rel="bookmark">Python Notebook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/A-Little-Django-Notes/" rel="bookmark">A Little Django Notes</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Function-Decorator-Map-Filter-Reduce-in-Python/" rel="bookmark">Function Decorator, Map/Filter/Reduce in Python</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Iterable-Sequences-in-Python/" rel="bookmark">Iterable/Sequences in Python</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/blog/Pytorch-Notes/" rel="bookmark">Pytorch Quick Notes</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/blog/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/people/jiayinz">
+          <span class="icon">
+            <i class="fab fa-zhihu"></i>
+          </span>
+
+          <span class="label">Zhihu</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/viridityzhu">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/Python/" rel="tag"># Python</a>
+              <a href="/blog/tags/Notebook/" rel="tag"># Notebook</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/SQL-Notebook/" rel="prev" title="SQL Notebook">
+                  <i class="fa fa-chevron-left"></i> SQL Notebook
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/my-spring/" rel="next" title="我的春天">
+                  我的春天 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>English</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="Select language">
+      
+        <option value="zh-CN" data-href="/blog/Python%20Notebook/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/blog/en/Python%20Notebook/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayin Zhu</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">262k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">3:58</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","app_key":"uexWsXddCqHicPng8NOVKkcN","server_url":"https://efla0qg1.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/blog/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"efLA0qg1Vu8kMjj7e1SC6evd-gzGzoHsz","appKey":"uexWsXddCqHicPng8NOVKkcN","serverURLs":"https://efla0qg1.lc-cn-n1-shared.com","placeholder":"Feel free!","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":true,"enableQQ":false,"requiredFields":[],"shortname":"valine","el":"#valine-comments","path":"/blog/en/Python%20Notebook/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+</body>
+</html>
